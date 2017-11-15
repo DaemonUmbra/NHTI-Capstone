@@ -2,61 +2,78 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMotor))]
+[RequireComponent(typeof(AbilityManager))]
+[RequireComponent(typeof(PlayerShoot))]
 public class PlayerController : MonoBehaviour {
+    
+    [SerializeField]
+    GameObject playerFloor;
+    [SerializeField]
+    float jumpCooldown;
+    float lastJumpTime;
 
-    public float MovementSpeed;
-    public float JumpHeight;
+    // Local components
+    PlayerMotor motor;
+    PlayerShoot pShoot;
+    //AbilityManager abilityManager;
 
-    public bool HasJumped;
-
-    [HideInInspector]
-    public Rigidbody RB;
-
-	// Use this for initialization
+    bool isGrounded;
+    
 	void Start () {
-        RB = GetComponent<Rigidbody>();
-        HasJumped = false;
+        motor = GetComponent<PlayerMotor>();
+        pShoot = GetComponent<PlayerShoot>();
+        lastJumpTime = Time.time - jumpCooldown;
+        
+        if (playerFloor == null)
+            playerFloor = GameObject.Find("Floor");
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        MovementInput();
-        Jump();
-        Fire();
+        // Get movement input
+        Vector3 velocity = Vector3.zero;
+        velocity.x = Input.GetAxis("Horizontal") * transform.right.x;
+        velocity.z = Input.GetAxis("Vertical") * transform.forward.z;
+
+        motor.SetVelocity(velocity); // Apply velocity
+
+        // Check for jump
+        float jump = Input.GetAxis("Jump");
+        if (jump != 0)
+            TryJump();
+
+        // Check for shooting
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if(pShoot.shoot != null)
+                pShoot.shoot();
+        }
+            
 	}
 
-    void MovementInput ()
+    private void TryJump()
     {
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * MovementSpeed;
-        var y = Input.GetAxis("Vertical") * Time.deltaTime * MovementSpeed;
-
-        transform.Translate(x, 0, y);
-    }
-
-    void Jump()
-    {
-        if(Input.GetKeyDown(KeyCode.Space) && HasJumped == false)
+        if (Time.time-lastJumpTime >= jumpCooldown && isGrounded)
         {
-            Debug.Log("Jump");
-            HasJumped = true;
-            RB.AddForce(0, JumpHeight, 0);
-        }
-    }
-
-    void Fire()
-    {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Debug.Log("Fire");
+            Debug.Log("jump!");
+            lastJumpTime = Time.time;
+            motor.Jump();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Floor")
+        if(collision.gameObject == playerFloor)
         {
-            HasJumped = false;
+            isGrounded = true;
         }
-
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject == playerFloor)
+        {
+            isGrounded = false;
+        }
+    }
+    
 }
