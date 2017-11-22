@@ -6,19 +6,19 @@ using UnityEngine;
 public class AbilityManager : MonoBehaviour {
 
     // Keyed list of abilities by name
-    Dictionary<string, Ability> Abilities;
+    Dictionary<string, BaseAbility> Abilities;
 
 	// Use this for initialization
 	void Start () {
-        Abilities = new Dictionary<string, Ability>();
+        Abilities = new Dictionary<string, BaseAbility>();
         
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        // Call Ability Updates for owned abilities
-		foreach (Ability a in Abilities.Values)
+        // Call BaseAbility Updates for owned abilities
+		foreach (BaseAbility a in Abilities.Values)
         {
             if (a.IsActive)
             {
@@ -28,18 +28,18 @@ public class AbilityManager : MonoBehaviour {
 	}
 
     // Check if the player has an ability
-    public bool HasAbility<T>() where T : Ability
+    public bool HasAbility<T>() where T : BaseAbility
     {
         return GetComponent<T>() != null;
     }
-    public bool HasAbility(Ability ability)
+    public bool HasAbility(BaseAbility ability)
     {
         return GetComponent(ability.GetType()) != null;
     }
     public bool HasAbility(string name)
     {
         // Get ability from dictionary
-        Ability target = Abilities[name];
+        BaseAbility target = Abilities[name];
 
         if(target)
         {
@@ -52,23 +52,23 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Add ability
-    public void AddAbility<T>() where T : Ability
+    public void AddAbility<T>() where T : BaseAbility
     {
         // Make sure the ability isn't already there
         if (gameObject.GetComponent<T>() == null)
         {
             // Add ability to player and register it
-            Ability ability = gameObject.AddComponent<T>();
+            BaseAbility ability = gameObject.AddComponent<T>();
             RegisterAbility(ability);
         }
     }
-    public void AddAbility(Ability ability)
+    public void AddAbility(BaseAbility ability)
     {
         // Make sure the ability isn't already there
         if (gameObject.GetComponent(ability.GetType()) == null)
         {
             // Add ability to player and register it
-            Ability newAbility = (Ability)gameObject.AddComponent(ability.GetType());
+            BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ability.GetType());
             Debug.Log("Ability added: " + newAbility.GetName);
             RegisterAbility(newAbility);
         }
@@ -79,10 +79,10 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Remove ability
-    public void RemoveAbility<T>() where T : Ability
+    public void RemoveAbility<T>() where T : BaseAbility
     {
         // Get ability
-        Ability ability = gameObject.GetComponent<T>();
+        BaseAbility ability = gameObject.GetComponent<T>();
         if (ability)
         {
             // Unregister ability and destroy it
@@ -90,10 +90,10 @@ public class AbilityManager : MonoBehaviour {
             Destroy(ability);
         }
     }
-    public void RemoveAbility(Ability ability)
+    public void RemoveAbility(BaseAbility ability)
     {
         // Get ability
-        Ability newAbility = (Ability)gameObject.GetComponent(ability.GetType());
+        BaseAbility newAbility = (BaseAbility)gameObject.GetComponent(ability.GetType());
         if (newAbility)
         {
             // Unregister ability and destroy it
@@ -108,7 +108,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Register ability
-    public void RegisterAbility(Ability ability)
+    public void RegisterAbility(BaseAbility ability)
     {
         // Run function for when the ability is added
         ability.OnAbilityAdd();
@@ -118,7 +118,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Unregister ability
-    public void UnregisterAbility(Ability ability)
+    public void UnregisterAbility(BaseAbility ability)
     {
         string aName = ability.GetName;
         // Run function for when the ability is added

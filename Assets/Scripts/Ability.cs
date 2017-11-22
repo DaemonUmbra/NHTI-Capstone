@@ -6,7 +6,7 @@ using UnityEngine;
 /// Base class for all abilities/powerups. 
 /// Abilities should be derived from either ActiveAbility or PassiveAbility
 /// </summary>
-public abstract class Ability : MonoBehaviour {
+public abstract class BaseAbility : MonoBehaviour {
 
     [SerializeField]
     protected string Name = "New Ability";
@@ -18,7 +18,8 @@ public abstract class Ability : MonoBehaviour {
     #region Abstract Methods
 
     /// <summary>
-    /// Called when abilities are added to a player
+    /// Called when abilities are added to a player.
+    /// Make sure to set the ability name string!
     /// </summary>
     public abstract void OnAbilityAdd();
     /// <summary>

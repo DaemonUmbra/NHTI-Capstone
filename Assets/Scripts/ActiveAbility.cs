@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ActiveAbility : Ability {
+public abstract class ActiveAbility : BaseAbility {
     
     /// <summary>
-    /// Ability cooldown in seconds
+    /// BaseAbility cooldown in seconds
     /// </summary>
     [SerializeField]
     protected float Cooldown;
