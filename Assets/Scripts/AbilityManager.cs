@@ -107,7 +107,7 @@ public class AbilityManager : MonoBehaviour {
         }
     }
 
-    // Register an ability
+    // Register ability
     public void RegisterAbility(Ability ability)
     {
         // Run function for when the ability is added
@@ -117,7 +117,7 @@ public class AbilityManager : MonoBehaviour {
         Debug.Log(ability.GetName);
     }
 
-    // Unregister an ability
+    // Unregister ability
     public void UnregisterAbility(Ability ability)
     {
         string aName = ability.GetName;

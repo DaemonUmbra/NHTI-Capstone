@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Base class for all abilities/powerups. 
+/// Abilities should be derived from either ActiveAbility or PassiveAbility
+/// </summary>
 public abstract class Ability : MonoBehaviour {
 
+    [SerializeField]
     protected string Name = "New Ability";
+    public string GetName { get { return Name; } }
+    [SerializeField]
     protected bool active = true;
+
+
+    #region Abstract Methods
 
     /// <summary>
     /// Called when abilities are added to a player
@@ -25,10 +34,14 @@ public abstract class Ability : MonoBehaviour {
         active = true;
     }
 
+    #endregion
+
     // Access name
-    public string GetName { get { return Name; } }
+    
     // Access active status
     public bool IsActive { get { return active; } }
+
+
 
 
 }
