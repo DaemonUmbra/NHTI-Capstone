@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_Growth : Ability
+    public class Powerup_Growth : BaseAbility
     {
         private Vector3 OriginalScale;
         public float GrowthFactor = 2;

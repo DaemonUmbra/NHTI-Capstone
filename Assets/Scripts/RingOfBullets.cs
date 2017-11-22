@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class RingOfBullets : Ability {
+public class RingOfBullets : ActiveAbility {
 
-    int BulletCount = 300;
+    // Number of bullets to shoot out
+    int BulletCount = 30;
     PlayerShoot pShoot;
 
     public override void OnAbilityAdd()
@@ -20,7 +21,7 @@ public class RingOfBullets : Ability {
         if (pShoot)
         {
             Debug.Log("Ring Shoot Added to Shoot Delegate");
-            pShoot.shoot += OnShoot;
+            pShoot.shoot += Activate;
         }
     }
     public override void OnUpdate()
@@ -32,14 +33,14 @@ public class RingOfBullets : Ability {
         // Remove shoot delegate
         if (pShoot)
         {
-            pShoot.shoot -= OnShoot;
+            pShoot.shoot -= Activate;
         }
         pShoot = null;
 
         // Call base function
         base.OnAbilityRemove();
     }
-    public void OnShoot()
+    public override void Activate()
     {
         Debug.Log("Trying to Shoot a Ring!");
         List<GameObject> bullets = new List<GameObject>();
