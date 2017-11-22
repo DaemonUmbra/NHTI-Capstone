@@ -44,11 +44,6 @@ public class PlayerController : MonoBehaviour {
         motor.SetVelocity(velocity); // Apply velocity
 
         // Check for jump
-        //float jump = Input.GetAxis("Jump");
-        //if (jump != 0)
-        //{
-        //    TryJump();
-        //}
         if(Input.GetKeyDown(KeyCode.Space))
         {
             TryJump();
@@ -65,8 +60,7 @@ public class PlayerController : MonoBehaviour {
 
     private void TryJump()
     {
-        //if (Time.time-lastJumpTime >= jumpCooldown && isGrounded)
-        if (jumpCount < maxJumpCount && Time.time - lastJumpTime >= jumpCooldown)
+        if (jumpCount < maxJumpCount)
         {
             Debug.Log("jump!");
             lastJumpTime = Time.time;
