@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,5 +67,33 @@ public class AbilityManager : MonoBehaviour {
         ability.OnAbilityRemove();
         // Remove ability from dictionary
         Abilities.Remove(aName);
+    }
+
+    public bool HasAbility(Ability ability)
+    {
+        return GetComponent(ability.GetType()) != null;
+    }
+
+    public void AddAbility(Ability ability)
+    {
+        // Make sure the ability isn't already there
+        if (gameObject.GetComponent(ability.GetType()) == null)
+        {
+            // Add ability to player and register it
+            Ability newAbility = (Ability)gameObject.AddComponent(ability.GetType());
+            RegisterAbility(newAbility);
+        }
+    }
+
+    public void RemoveAbility(Ability ability)
+    {
+        // Get ability
+        Ability newAbility = (Ability)gameObject.GetComponent(ability.GetType());
+        if (newAbility)
+        {
+            // Unregister ability and destroy it
+            UnregisterAbility(ability);
+            Destroy(ability);
+        }
     }
 }
