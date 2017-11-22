@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Powerups      //Ian MacKenzie
 {
 
-    public class Powerup_AddJump : Ability
+    public class Powerup_AddJump : PassiveAbility
     {
 
         // Use this for initialization
@@ -33,6 +33,11 @@ namespace Powerups      //Ian MacKenzie
         {
             
             //player.maxJumps--;
+        }
+
+        public override void OnUpdate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

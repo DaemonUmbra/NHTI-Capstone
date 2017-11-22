@@ -126,6 +126,9 @@ public class AbilityManager : MonoBehaviour {
         // Remove ability from dictionary
         Abilities.Remove(aName);
     }
-    
-    
+
+    public Dictionary<string,BaseAbility> ListAbilities()
+    {
+        return Abilities;
+    }
 }

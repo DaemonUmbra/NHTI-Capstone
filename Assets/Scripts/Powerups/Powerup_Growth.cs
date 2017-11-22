@@ -6,6 +6,7 @@ namespace Powerups
 {
     public class Powerup_Growth : BaseAbility
     {
+        protected new string Name = "Growth";
         private Vector3 OriginalScale;
         public float GrowthFactor = 2;
         public override void OnAbilityAdd()

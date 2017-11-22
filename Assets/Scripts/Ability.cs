@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,8 +42,6 @@ public abstract class BaseAbility : MonoBehaviour {
     
     // Access active status
     public bool IsActive { get { return active; } }
-
-
 
 
 }

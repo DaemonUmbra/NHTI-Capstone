@@ -29,7 +29,7 @@ public class PowerupDebugger_Editor : Editor {
             //for each of them
             foreach (Type type in Types)
             {
-                if(type.Namespace == "Powerups" && type.IsSubclassOf(typeof(Ability)))
+                if(type.Namespace == "Powerups" && type.IsSubclassOf(typeof(BaseAbility)))
                 {
                     AvailablePowerupStrings.Add(type.Name);
                     AbilityDict.Add(type.Name, type);
@@ -46,7 +46,7 @@ public class PowerupDebugger_Editor : Editor {
                     SelectedPlayerPowerupIndex = 0;
                 }
                 //and for each powerup the Player has
-                foreach (KeyValuePair<string, Ability> entry in debugger.Player.ListAbilities())
+                foreach (KeyValuePair<string, BaseAbility> entry in debugger.Player.ListAbilities())
                 {
                     //add its name to the list
                     PlayerPowerupStrings.Add(entry.Key);
@@ -112,8 +112,8 @@ public class PowerupDebugger_Editor : Editor {
         }
     }
 
-    private Ability ConvertToAbility(Type selectedPowerup)
+    private BaseAbility ConvertToAbility(Type selectedPowerup)
     {
-        return Activator.CreateInstance(selectedPowerup) as Ability;
+        return Activator.CreateInstance(selectedPowerup) as BaseAbility;
     }
 }

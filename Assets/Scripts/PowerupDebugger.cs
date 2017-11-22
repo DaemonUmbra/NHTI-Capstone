@@ -9,7 +9,7 @@ public class PowerupDebugger : MonoBehaviour {
     [HideInInspector]
     public Type SelectedPowerup;
     [HideInInspector]
-    public Ability SelectedPlayerPowerup;
+    public BaseAbility SelectedPlayerPowerup;
 	// Use this for initialization
 	void Start () {
 		
@@ -19,7 +19,7 @@ public class PowerupDebugger : MonoBehaviour {
 	void Update () {
 		
 	}
-    public void AddAbility(Ability ability)
+    public void AddAbility(BaseAbility ability)
     {
         if (Player)
         {
@@ -29,7 +29,7 @@ public class PowerupDebugger : MonoBehaviour {
             }
         }
     }
-    public void RemoveAbility(Ability ability)
+    public void RemoveAbility(BaseAbility ability)
     {
         if (Player)
         {
