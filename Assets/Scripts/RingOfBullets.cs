@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class RingOfBullets : Ability {
 
-    int BulletCount = 300;
+    // Number of bullets to shoot out
+    int BulletCount = 30;
     PlayerShoot pShoot;
 
     public override void OnAbilityAdd()
