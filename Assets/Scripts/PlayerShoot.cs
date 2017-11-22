@@ -37,6 +37,30 @@ public class PlayerShoot : MonoBehaviour {
                 aManager.RemoveAbility<RingOfBullets>();
             }
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            AbilityManager aManager = GetComponent<AbilityManager>();
+            
+            if (aManager.HasAbility<SingleShot>())
+            {
+                aManager.RemoveAbility<SingleShot>();
+            }
+            if (aManager.HasAbility<RingOfBullets>())
+            {
+                aManager.RemoveAbility<RingOfBullets>();
+            }
+
+            if (aManager.HasAbility<Snipe>())
+            {
+                aManager.RemoveAbility<Snipe>();
+                aManager.AddAbility<SingleShot>();
+            }
+            else
+            {
+                aManager.AddAbility<Snipe>();
+            }
+            
+        }
     }
 
 
