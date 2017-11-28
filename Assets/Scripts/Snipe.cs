@@ -17,7 +17,7 @@ Information
   */
 ///summary
 
-public class Snipe : Ability
+public class Snipe : BaseAbility
 {
     float abilityTime;
     bool onCooldown = false, CurrentlyActive = false;
