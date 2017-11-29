@@ -61,7 +61,9 @@ public class PlayerShoot : MonoBehaviour {
                     aManager.RemoveAbility<RingOfBullets>();
                 }
             }
+
             
+
         }
     }
 

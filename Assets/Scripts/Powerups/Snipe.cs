@@ -33,7 +33,7 @@ namespace Powerups
             Debug.Log(Name + " Added");
 
             // Add new shoot function to delegate 
-            pShoot = GetComponent<PlayerShoot>();
+            pShoot = GetComponent<PlayerShoot>();                                        
             if (pShoot)
             {
                 Debug.Log("Snipe Added to Shoot Delegate");
