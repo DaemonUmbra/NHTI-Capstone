@@ -15,7 +15,7 @@ public abstract class Effect : MonoBehaviour {
     private float TimeAdded;
 
     /// <summary>
-    /// Increment of 
+    /// Increment of time before tick function is called
     /// </summary>
     [SerializeField]
     protected float TickTime = 1f; //-1 to disable
@@ -42,12 +42,12 @@ public abstract class Effect : MonoBehaviour {
             // If the lifetime is up, remove debuff
             if(Time.time > TimeAdded + Lifetime)
             {
-                RemoveDebuff();
+                RemoveEffect();
             }
         }
     }
 
-    public abstract void RemoveDebuff();
+    public abstract void RemoveEffect();
 
     #endregion
 
