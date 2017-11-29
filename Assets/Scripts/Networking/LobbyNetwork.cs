@@ -9,7 +9,7 @@ public class LobbyNetwork : MonoBehaviour {
         PhotonNetwork.ConnectUsingSettings("0.0.0");
 	}
 
-    private void OnConnectedToServer()
+    private void OnConnectedToMaster()
     {
         PhotonNetwork.playerName = PlayerNetwork.Instance.PlayerName;
         PhotonNetwork.JoinLobby(TypedLobby.Default);
