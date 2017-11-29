@@ -6,11 +6,12 @@ using UnityEngine;
 namespace Powerups
 {
 
-public class RingOfBullets : ActiveAbility {
+    public class RingOfBullets : ActiveAbility
+    {
 
-    // Number of bullets to shoot out
-    int BulletCount = 30;
-    PlayerShoot pShoot;
+        // Number of bullets to shoot out
+        int BulletCount = 30;
+        PlayerShoot pShoot;
 
         public override void OnAbilityAdd()
         {
@@ -23,38 +24,31 @@ public class RingOfBullets : ActiveAbility {
             if (pShoot)
             {
                 Debug.Log("Ring Shoot Added to Shoot Delegate");
-                pShoot.shoot += OnShoot;
+                pShoot.shoot += Activate;
             }
         }
+        // Called every frame
         public override void OnUpdate()
         {
-            Debug.Log("Ring Shoot Added to Shoot Delegate");
-            pShoot.shoot += Activate;
             // Nothing yet
         }
         public override void OnAbilityRemove()
         {
-            pShoot.shoot -= Activate;
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= OnShoot;
+                pShoot.shoot -= Activate;
             }
             pShoot = null;
 
             // Call base function
             base.OnAbilityRemove();
         }
-        public void OnShoot()
+        
+        public override void Activate()
         {
             Debug.Log("Trying to Shoot a Ring!");
             List<GameObject> bullets = new List<GameObject>();
-        base.OnAbilityRemove();
-    }
-    public override void Activate()
-    {
-        Debug.Log("Trying to Shoot a Ring!");
-        List<GameObject> bullets = new List<GameObject>();
             // Spawn a ring of bullets
             for (int i = 0; i < BulletCount; ++i)
             {
