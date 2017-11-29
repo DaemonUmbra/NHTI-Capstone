@@ -49,10 +49,14 @@ public class PowerupDebugger_Editor : Editor {
                 foreach (KeyValuePair<string, BaseAbility> entry in debugger.Player.ListAbilities())
                 {
                     //add its name to the list
-                    PlayerPowerupStrings.Add(entry.Key);
+                    PlayerPowerupStrings.Add(entry.Value.GetName);
                     //and remove it from the list of available powerups
                     AvailablePowerupStrings.Remove(entry.Key);
                 }
+            }
+            else
+            {
+                SelectedPlayerPowerupIndex = -1;
             }
             if(AvailablePowerupStrings.Count > 0)
             {
@@ -63,7 +67,7 @@ public class PowerupDebugger_Editor : Editor {
             }
             else
             {
-                SelectedPlayerPowerupIndex = -1;
+                SelectedPowerupIndex = -1;
             }
             //Show dropdown of powerups that are available to be added
             SelectedPowerupIndex = EditorGUILayout.IntPopup("Powerup to Add", SelectedPowerupIndex, AvailablePowerupStrings.ToArray(), null);
@@ -77,9 +81,23 @@ public class PowerupDebugger_Editor : Editor {
             }
 
             //set the powerup selected for addition
-            debugger.SelectedPowerup = typeDict[AvailablePowerupStrings[SelectedPowerupIndex]];
+            if (SelectedPowerupIndex != -1)
+            {
+                debugger.SelectedPowerup = typeDict[AvailablePowerupStrings[SelectedPowerupIndex]];
+            }
+            else
+            {
+                debugger.SelectedPowerup = null;
+            }
             //Set the powerup selected for removal
-            debugger.SelectedPlayerPowerup = debugger.Player.ListAbilities()[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
+            if (SelectedPlayerPowerupIndex != -1)
+            {
+                debugger.SelectedPlayerPowerup = debugger.Player.ListAbilities()[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
+            }
+            else
+            {
+                debugger.SelectedPlayerPowerup = null;
+            }
         }
         else
         {
