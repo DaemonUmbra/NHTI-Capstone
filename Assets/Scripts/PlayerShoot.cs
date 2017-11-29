@@ -59,11 +59,27 @@ public class PlayerShoot : MonoBehaviour {
                 if (aManager.HasAbility<RingOfBullets>())
                 {
                     aManager.RemoveAbility<RingOfBullets>();
+                    
                 }
+                
             }
 
-            
+        }
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            AbilityManager aManager = GetComponent<AbilityManager>();
+
+            if (aManager.HasAbility<Powerup_ThunderWave>())
+            {
+                aManager.RemoveAbility<Powerup_ThunderWave>();
+                aManager.AddAbility<SingleShot>();
+            }
+            else
+            {
+                aManager.RemoveAbility<SingleShot>();
+                aManager.AddAbility<Powerup_ThunderWave>();
+            }
         }
     }
 
