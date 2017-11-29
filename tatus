@@ -1,0 +1,224 @@
+[33mcommit b5b87c6b17d36a2d8d42403bed730221228c6421[m
+Author: Ian MacKenzie <32595467+Shoebopadoo@users.noreply.github.com>
+Date:   Tue Nov 28 20:26:20 2017 -0500
+
+    Modified Jumps
+    
+    Jumps now reset using the tag system, aswell as vertical velocity is reset right before jumping to stop from having diminished jumps while falling.
+
+[33mcommit 5c0bb2e239bfc05e95cb63733bb861bca43bc5ac[m
+Author: EmberCelicaX <33268735+EmberCelicaX@users.noreply.github.com>
+Date:   Tue Nov 28 18:49:04 2017 -0500
+
+    Test Scene Added
+
+[33mcommit 02f11cce927fabe6da3e80cdf570effa6f93a93e[m
+Author: bnelligan <nelligan81@gmail.com>
+Date:   Tue Nov 28 18:45:13 2017 -0500
+
+    Snipe Inheritance Issue
+    
+    Changed snipe to inherit from BaseAbility instead of Ability
+
+[33mcommit 86c02222d8891fad2ff783a93ccb0c089d874ff5[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 28 18:25:20 2017 -0500
+
+    Corrected template name
+
+[33mcommit f098856be8aaeb0ebb3e8aeffe8c8d0b27ecf35f[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 28 18:22:51 2017 -0500
+
+    Added Folder for Powerup Test Scenes
+
+[33mcommit da463404682ee71866df8ff068c4b39b4e166ef4[m
+Merge: a5e51dd d73c76b
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 21 21:40:45 2017 -0500
+
+    Merge branch 'master' of https://github.com/zikiro/NHTI-Capstone
+
+[33mcommit a5e51dd7fe6a29002fbdf8ae150f0333e552ed88[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 21 21:40:27 2017 -0500
+
+    Fixed issues with merge, will look into preventing this in the future, btu will clean up again if need be
+
+[33mcommit d73c76b6232da31669182404208e9570a42463d6[m
+Author: Ian Cahoon <ianfc26@gmail.com>
+Date:   Tue Nov 21 21:25:42 2017 -0500
+
+    Added Snipe
+    
+    Ability Manager with first Iteration of snipe added
+
+[33mcommit fd43555507657a215a168f81121e1ec4718c9397[m
+Author: NHTI <nhti@conc.students.local>
+Date:   Tue Nov 21 21:24:17 2017 -0500
+
+    the Blockening
+    
+    blocking out the map
+
+[33mcommit d0eea333adb9876cd1cdd7940ea716b4d4ed09b5[m
+Merge: 14bd2d0 360190e
+Author: NHTI <nhti@conc.students.local>
+Date:   Tue Nov 21 21:23:50 2017 -0500
+
+    Merge branch 'master' of https://github.com/zikiro/NHTI-Capstone
+
+[33mcommit 360190eb013d5c82a07bff3ccca131459f7500e6[m
+Merge: 5f50d69 119262b
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 21 21:23:09 2017 -0500
+
+    Merge branch 'master' of https://github.com/zikiro/NHTI-Capstone
+
+[33mcommit 119262b2bf0e8eb9516655e8ea6eee40a8e1bf6d[m
+Merge: 9d7d8c1 bc5adf7
+Author: bnelligan <nelligan81@gmail.com>
+Date:   Tue Nov 21 21:22:23 2017 -0500
+
+    Merge branch 'master' of https://github.com/zikiro/NHTI-Capstone
+
+[33mcommit 9d7d8c117e7b71df4265069293c0a30e7bfb9302[m
+Author: bnelligan <nelligan81@gmail.com>
+Date:   Tue Nov 21 21:22:17 2017 -0500
+
+    Ability to BaseAbility
+    
+    Changed "Ability" to "BaseAbility" to clarify that it is a base class and shouldn't be directly inherited from anymore.
+
+[33mcommit 5f50d69bf7fc8e7accb1c3a3cdc5a346bfb06740[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 21 21:20:02 2017 -0500
+
+    Added a debugger class that will add/remove powerups from a player, it is not perfect
+
+[33mcommit bc5adf74dfe5b39bb8994a55b18e543c10b1b307[m
+Author: Ian MacKenzie <32595467+Shoebopadoo@users.noreply.github.com>
+Date:   Tue Nov 21 21:06:57 2017 -0500
+
+    Small Changes to the jump
+    
+    Cleaning up and doing a final submit for the night
+
+[33mcommit 6f8a3afe809defd4bf33014b101553cec632bdd0[m
+Author: bnelligan <nelligan81@gmail.com>
+Date:   Tue Nov 21 20:48:48 2017 -0500
+
+    Added ActiveAbility and PassiveAbility abstract classes
+    
+    Added some new abstract classes which abilities should now be derived from.
+    
+    ActiveAbility:
+    Contains an abstract method for activating the ability and a float for the cooldown.
+    
+    PassiveAbility:
+    Contains nothing yet. We may later want to specify things a passive ability has that active abilities don't. It's easier to implement this now rather than later when we already have everything set up.
+
+[33mcommit 14af7be639d39a11da70631fba423cfa798b3574[m
+Merge: c333226 d93594d
+Author: Ian MacKenzie <32595467+Shoebopadoo@users.noreply.github.com>
+Date:   Tue Nov 21 20:45:06 2017 -0500
+
+    Merge branch 'master' of https://github.com/zikiro/NHTI-Capstone
+
+[33mcommit c333226b386ff4a11f1934b30663540d0906b75a[m
+Author: Ian MacKenzie <32595467+Shoebopadoo@users.noreply.github.com>
+Date:   Tue Nov 21 20:45:02 2017 -0500
+
+    Changed Jump Counter
+    
+    The Jump now uses a maximum amount of jumps  and  a jump count that resets when the player touches the floor. Now for double Jumping I can just add to that variable.
+
+[33mcommit d56a15053c4f802879783257da3d7d2cbf940068[m
+Author: bnelligan <nelligan81@gmail.com>
+Date:   Tue Nov 21 19:33:04 2017 -0500
+
+    Comments Explaining Ability.cs
+    
+    Added comments to the base Ability script explaining what the methods are for and when to use them. Also added comments and reorganized the AbilityManager.cs a little.
+
+[33mcommit d93594d57bb08ee81da8f410daa73577861abb93[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 21 18:54:17 2017 -0500
+
+    Modified AbilityManager
+
+[33mcommit 641819652ab60bd7e12b1935761ac3d38d671f51[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 21 17:59:00 2017 -0500
+
+    Added Growth Ability and Growth Granter, suggest overhaul of Ability System
+
+[33mcommit ecaee8e8a2e6cea5885eefce80604e69aead74e2[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Wed Nov 15 20:01:58 2017 -0500
+
+    Moved a few things into the Resources folder
+
+[33mcommit 41b69a5a14f2db57688c7b1823376f63472e2052[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Nov 14 21:44:50 2017 -0500
+
+    Added Brendan's Ability System
+
+[33mcommit 657b9c6e7a36e41b6cc638711a4f806e98f8e0cb[m
+Author: Steve <thesteveoninja@gmail.com>
+Date:   Tue Nov 14 21:17:35 2017 -0500
+
+    Basic Player Controller Works (Movement and Jumping at Least)
+
+[33mcommit 3169d6658e060c4d6d69f46b7bc42dc349d260d9[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Thu Nov 2 18:05:40 2017 -0400
+
+    Re-added Working Folder
+
+[33mcommit 8804f12c96ead587aede0f4fcf6f9d56a3783c66[m
+Author: Cobaltmoon <32678490+Cobaltmoon@users.noreply.github.com>
+Date:   Tue Oct 31 20:48:49 2017 -0400
+
+    Added Working Folder
+    
+    Added folder for work-in progress and potentially breaking changes
+
+[33mcommit 14bd2d044a8e6bc9264818070d4f72a99148eb24[m
+Author: Cobaltmoon <32678490+Cobaltmoon@users.noreply.github.com>
+Date:   Tue Oct 31 20:48:49 2017 -0400
+
+    Working
+    
+    Added Working folder
+
+[33mcommit 019ddac03ee99420c2ea56d218120013c9dc72f6[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Oct 31 19:27:13 2017 -0400
+
+    Added Unity Installer and list of packages to install
+
+[33mcommit d0bd7b7500514699fb71e38062675bfbdc4e4a5b[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Oct 31 19:14:18 2017 -0400
+
+    Added Builds Folder, .gitignore will stop any files in this folder from syncing
+
+[33mcommit 8d3ddf180e197f283dfea5a8aef76c057eca5cf4[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Oct 31 19:08:42 2017 -0400
+
+    Added Assets Folder (Darn Git not syncing empty folders)
+
+[33mcommit 2b1d8ce3a15915aa2a89a5e0f379fca05685be7c[m
+Author: DaemonUmbra <daemon.umbra@gmail.com>
+Date:   Tue Oct 31 19:06:55 2017 -0400
+
+    Added Basic Unity Files
+
+[33mcommit 848b5a9c2baa84e542f03ed3325a59ec14aeac9b[m
+Author: zikiro <mrzombiekilla24@yahoo.com>
+Date:   Mon Oct 30 14:28:36 2017 -0400
+
+    Initial commit

@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace Powerups      //Ian MacKenzie
 {
-
+    
     public class Powerup_AddJump : PassiveAbility
     {
+        PlayerController playerController;
 
         // Use this for initialization
         void Start()
         {
-
+           playerController = GetComponent<PlayerController>();
         }
 
         // Update is called once per frame
@@ -26,13 +27,12 @@ namespace Powerups      //Ian MacKenzie
             // someone on the player controller!!!!!.
 
             //Add to the max jumps variable on the player controller
-            //player.maxJumps++;
+            playerController.maxJumpCount++;
         }
 
         public override void OnAbilityRemove()
         {
-            
-            //player.maxJumps--;
+            playerController.maxJumpCount--;
         }
 
         public override void OnUpdate()
