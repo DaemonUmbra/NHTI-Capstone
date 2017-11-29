@@ -50,7 +50,8 @@ public class PlayerShoot : MonoBehaviour {
             {
                 aManager.RemoveAbility<RingOfBullets>();
             }
-            
+    
+            /*
             if (aManager.HasAbility<Snipe>())
             {
                 aManager.RemoveAbility<Snipe>();
@@ -60,7 +61,8 @@ public class PlayerShoot : MonoBehaviour {
             {
                 aManager.AddAbility<Snipe>();
             }
-            
+            */
+
         }
     }
 

@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
-
-	// Use this for initialization
-	void Start ()
+    private void OnCollisionEnter(Collision col)
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
+        if (col.gameObject.tag.Equals("Player"))
+        {
+            GameObject target = col.gameObject;
+            target.GetComponent<Rigidbody>().AddForce(target.transform.position * -.00000000000001f);
+        }
+    }
 }
