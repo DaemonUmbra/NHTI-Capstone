@@ -11,14 +11,14 @@ public abstract class Effect : MonoBehaviour {
     /// Time in seconds before debuff wears off.
     /// </summary>
     [SerializeField]
-    private float Lifetime = 0f; // 0 or negative to last forever
+    protected float Lifetime = 0f; // 0 or negative to last forever
     private float TimeAdded;
 
     /// <summary>
     /// Increment of 
     /// </summary>
     [SerializeField]
-    private float TickTime = 1f; //-1 to disable
+    protected float TickTime = 1f; //-1 to disable
     private float LastTick;
 
     #endregion
