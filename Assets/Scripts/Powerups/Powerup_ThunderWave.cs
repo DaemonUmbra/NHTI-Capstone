@@ -19,6 +19,13 @@ namespace Powerups
         public float hitForce = 500;
         public float hitDistance = 20;
 
+        public Vector3 origin;
+        private Vector3 direction;
+
+        public float sphereRadius = 5;
+        public float maxDistance = 0;
+        public LayerMask layerMask= 1;
+
         #region Abstract Methods
 
         /// <summary>
@@ -36,61 +43,32 @@ namespace Powerups
         /// </summary>
         public override void OnUpdate()
         {
-            explosionPos = transform.position;
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             Vector3 back = transform.TransformDirection(-Vector3.forward);
             Vector3 left = transform.TransformDirection(Vector3.left);
             Vector3 right = transform.TransformDirection(Vector3.right);
-            RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, fwd, out hit, hitDistance))
+            origin = transform.position;
+            direction = Vector3.forward;
+
+            explosionPos = transform.position;
+
+            RaycastHit[] hits = Physics.SphereCastAll(origin, sphereRadius, direction, maxDistance, layerMask);
+            foreach (RaycastHit hit in hits)
             {
-                print("There is something in front of the object!");
-                if (Input.GetMouseButtonDown(0))
+                Debug.Log("I hit :" + hit.transform.name);
+                if (Input.GetMouseButtonDown(1))
                 {
                     if (hit.rigidbody != null)
                     {
-                        hit.rigidbody.AddExplosionForce(force, explosionPos, radius, up);
-
+                        if (hit.transform.gameObject != this.gameObject)
+                        {
+                            hit.rigidbody.AddExplosionForce(force, explosionPos, radius, up);
+                        }
                     }
                 }
             }
-            if (Physics.Raycast(transform.position, back, out hit, hitDistance))
-            {
-                print("There is something behind the object!");
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (hit.rigidbody != null)
-                    {
-                        hit.rigidbody.AddForce(back * hitForce);
 
-                    }
-                }
-            }
-            if (Physics.Raycast(transform.position, right, out hit, hitDistance))
-            {
-                print("There is something right of the object!");
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (hit.rigidbody != null)
-                    {
-                        hit.rigidbody.AddForce(right * hitForce);
-
-                    }
-                }
-            }
-            if (Physics.Raycast(transform.position, left, out hit, hitDistance))
-            {
-                print("There is something left of the object!");
-                if (Input.GetMouseButtonDown(0))
-                {
-                    if (hit.rigidbody != null)
-                    {
-                        hit.rigidbody.AddForce(left * hitForce);
-
-                    }
-                }
-            }
         }
         /// <summary>
         /// Called when an ability is removed from the player
