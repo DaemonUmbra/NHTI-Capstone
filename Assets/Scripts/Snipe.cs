@@ -17,9 +17,9 @@ Information
   */
 ///summary
 
-public class Snipe : Ability
+public class Snipe : ActiveAbility
 {
-    float abilityTime;
+    //private float remainingCD;
     bool onCooldown = false, CurrentlyActive = false;
     PlayerShoot pShoot;
     
@@ -54,10 +54,15 @@ public class Snipe : Ability
         // Call base function
         base.OnAbilityRemove();
     }
+    public override void Activate()
+    {
+        throw new NotImplementedException();
+    }
     public void OnShoot()
     {
         if (onCooldown)
         {
+            Debug.Log("This ability is on cooldown");
             return;
         }
         //Debug.Log("Raycast Shot");
@@ -67,22 +72,27 @@ public class Snipe : Ability
         Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
         Vector3 targetVector = mouseLocation;
 
-        Ray snipeBolt = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit endPoint;
 
-        if (Physics.Raycast(snipeBolt, out endPoint))
+        if (Physics.Raycast(snipeRay, out endPoint))
         {
             Debug.Log(endPoint.transform.gameObject.name);
             targetVector = endPoint.point;
 
         }
-        //Debug.DrawRay(rayOrigin.transform.position, mouseLocation - rayOrigin.transform.position, Color.red, 5.0f);
+        else
+        {
+            Debug.Log("no object was hit");
+        }
 
+        
         StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
     }
     IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
     {
+        StartCoroutine(TriggerCoolDown());
         onCooldown = true;
 
         LineRenderer snipeLaser = Origin.GetComponent<LineRenderer>();
@@ -90,9 +100,15 @@ public class Snipe : Ability
         snipeLaser.SetPosition(1, targetLocation);
 
         snipeLaser.enabled = true;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.2f);
         snipeLaser.enabled = false;
 
+        onCooldown = false;
+    }
+    IEnumerator TriggerCoolDown()
+    {
+        onCooldown = true;
+        yield return new WaitForSeconds(5);
         onCooldown = false;
     }
 
