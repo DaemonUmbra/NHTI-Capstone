@@ -35,6 +35,8 @@ public class PlayerMotor : MonoBehaviour {
     public void Jump()
     {
         Debug.Log("Jump!");
+        Vector3 inverseJump = new Vector3(rb.velocity.x, -rb.velocity.y, rb.velocity.z);
+        rb.AddForce(inverseJump);
         rb.AddForce(Vector3.up * jumpPower);
     }
 }

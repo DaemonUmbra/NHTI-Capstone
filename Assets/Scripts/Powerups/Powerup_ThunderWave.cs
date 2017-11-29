@@ -7,17 +7,17 @@ namespace Powerups
     public class Powerup_ThunderWave : BaseAbility
     {
 
-        [SerializeField]
-        protected new string Name = "Thunder Wave";
-        public string GetName { get { return Name; } }
+        //[SerializeField]
+        //protected new string Name = "Thunder Wave";
+        //public string GetName { get { return Name; } }
         [SerializeField]
         protected bool active = true;
-        public float force;
+        public float force = 500;
         public Vector3 explosionPos;
-        public float radius;
-        public float up;
-        public float hitForce;
-        public float hitDistance;
+        public float radius = 20;
+        public float up = 1;
+        public float hitForce = 500;
+        public float hitDistance = 20;
 
         #region Abstract Methods
 
@@ -27,7 +27,8 @@ namespace Powerups
         /// </summary>
         public override void OnAbilityAdd()
         {
-
+            Name = "Thunder Wave";
+            Debug.Log(Name + " Added");
         }
         /// <summary>
         /// Called by the ability manager on each update step. 

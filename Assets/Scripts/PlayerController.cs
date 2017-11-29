@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    GameObject playerFloor;
+    string groundTag;
     [SerializeField]
     float jumpCooldown;
     float lastJumpTime;
@@ -24,15 +24,12 @@ public class PlayerController : MonoBehaviour {
     PlayerShoot pShoot;
     //AbilityManager abilityManager;
 
-    bool isGrounded;
+    bool isGrounded = false;
     
 	void Start () {
         motor = GetComponent<PlayerMotor>();
         pShoot = GetComponent<PlayerShoot>();
         lastJumpTime = Time.time - jumpCooldown;
-        
-        if (playerFloor == null)
-            playerFloor = GameObject.Find("Floor");
 	}
 	
 	void Update () {
@@ -71,15 +68,17 @@ public class PlayerController : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == playerFloor)
+        print("Collided with Object on layer" + collision.gameObject.layer.ToString());
+        if(collision.collider.gameObject.tag == groundTag)
         {
             isGrounded = true;
             jumpCount = 0;
+            print("Jump Reset");
         }
     }
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject == playerFloor)
+        if(collision.collider.gameObject.tag == groundTag)
         {
             isGrounded = false;
         }

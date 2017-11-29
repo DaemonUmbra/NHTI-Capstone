@@ -42,8 +42,15 @@ public class PlayerShoot : MonoBehaviour {
         {
             AbilityManager aManager = GetComponent<AbilityManager>();
             
-            
-
+            if (aManager.HasAbility<SingleShot>())
+            {
+                aManager.RemoveAbility<SingleShot>();
+            }
+            if (aManager.HasAbility<RingOfBullets>())
+            {
+                aManager.RemoveAbility<RingOfBullets>();
+            }
+            /*
             if (aManager.HasAbility<Snipe>())
             {
                 aManager.RemoveAbility<Snipe>();
@@ -52,18 +59,8 @@ public class PlayerShoot : MonoBehaviour {
             else
             {
                 aManager.AddAbility<Snipe>();
-                if (aManager.HasAbility<SingleShot>())
-                {
-                    aManager.RemoveAbility<SingleShot>();
-                }
-                if (aManager.HasAbility<RingOfBullets>())
-                {
-                    aManager.RemoveAbility<RingOfBullets>();
-                }
             }
-
-            
-
+            */
         }
     }
 
