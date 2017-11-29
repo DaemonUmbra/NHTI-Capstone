@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+<<<<<<< HEAD
+  - Slime
+=======
+  - Floor
+>>>>>>> da1bdf2696b03b4aa5400cf60a85c7260244ae08
   layers:
   - Default
   - TransparentFX

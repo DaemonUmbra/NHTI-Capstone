@@ -9,8 +9,13 @@ using UnityEngine;
 public abstract class DamageType {
 
     // Effects passed to the target
-    List<Effect> OnHitEffects;
+    protected List<Effect> OnHitEffects;
 
+    public DamageType()
+    {
+
+    }
+    
     // Call this function when a player takes damage. Pass in the hit character.
     public virtual void ApplyDamageType(GameObject target)
     {
