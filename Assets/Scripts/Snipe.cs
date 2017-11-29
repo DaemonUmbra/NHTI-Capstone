@@ -19,7 +19,7 @@ Information
 
 namespace Powerups
 {
-    public class Snipe : BaseAbility
+    public class Snipe : ActiveAbility
     {
         //private float remainingCD;
         bool onCooldown = false, CurrentlyActive = false;
@@ -56,6 +56,10 @@ namespace Powerups
             // Call base function
             base.OnAbilityRemove();
         }
+        public override void Activate()
+        {
+            throw new NotImplementedException();
+        }
         public void OnShoot()
         {
             if (onCooldown)
@@ -91,7 +95,6 @@ namespace Powerups
         IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
         {
             StartCoroutine(TriggerCoolDown());
-            onCooldown = true;
 
             LineRenderer snipeLaser = Origin.GetComponent<LineRenderer>();
             snipeLaser.SetPosition(0, Origin.transform.position);
@@ -101,7 +104,6 @@ namespace Powerups
             yield return new WaitForSeconds(.2f);
             snipeLaser.enabled = false;
 
-            onCooldown = false;
         }
         IEnumerator TriggerCoolDown()
         {
