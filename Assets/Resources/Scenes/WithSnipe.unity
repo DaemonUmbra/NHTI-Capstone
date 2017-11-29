@@ -299,7 +299,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: dbbe21218bc90fa4d87c894381ffd126, type: 2}
+  - {fileID: 2100000, guid: e12db843e40c3de4ba4d96672ec7d6fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 1888985493}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -624,8 +624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa669cf9bcd45704a8b4a045f38f8e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFloor: {fileID: 1810609925}
+  groundTag: 
   jumpCooldown: 1
+  maxJumpCount: 2
 --- !u!114 &1888985490
 MonoBehaviour:
   m_ObjectHideFlags: 0
