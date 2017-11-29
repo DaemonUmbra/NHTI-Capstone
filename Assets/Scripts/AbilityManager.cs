@@ -9,7 +9,7 @@ public class AbilityManager : MonoBehaviour {
     Dictionary<string, BaseAbility> Abilities;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         Abilities = new Dictionary<string, BaseAbility>();
         
 	}
