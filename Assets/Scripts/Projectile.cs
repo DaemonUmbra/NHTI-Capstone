@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour {
         rb = gameObject.GetComponent<Rigidbody>();
 
         // Ignore collision with player
-        GameObject player = GameObject.Find("Player");
+        GameObject player = GameObject.Find("BasicPlayer");
         Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
 
        // Debug.Log("Rotation: " + gameObject.transform.rotation);
