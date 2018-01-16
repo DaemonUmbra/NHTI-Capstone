@@ -10,12 +10,16 @@ public abstract class DamageType {
 
     // Effects passed to the target
     protected List<Effect> OnHitEffects;
-
+    string TypeName = "Unamed";
     public DamageType()
     {
 
     }
-    
+    public DamageType(List<Effect> effects)
+    {
+        OnHitEffects = effects;
+    }
+
     // Call this function when a player takes damage. Pass in the hit character.
     public virtual void ApplyDamageType(GameObject target)
     {

@@ -39,4 +39,13 @@ public class PlayerMotor : MonoBehaviour {
         rb.AddForce(inverseJump);
         rb.AddForce(Vector3.up * jumpPower);
     }
+
+    /// <summary>
+    /// Multiplies the speed by a factor
+    /// </summary>
+    /// <param name="factor">Use a decimal for slows</param>
+    public void AdjustSpeed(float factor)
+    {
+
+    }
 }
