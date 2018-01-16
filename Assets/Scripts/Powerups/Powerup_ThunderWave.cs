@@ -10,7 +10,6 @@ namespace Powerups
         //[SerializeField]
         //protected new string Name = "Thunder Wave";
         //public string GetName { get { return Name; } }
-        [SerializeField]
         protected bool active = true;
         public float force = 500;
         public Vector3 explosionPos;

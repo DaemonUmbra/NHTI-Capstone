@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -133,3 +134,4 @@ public class PowerupDebugger_Editor : Editor {
         return Activator.CreateInstance(selectedPowerup) as BaseAbility;
     }
 }
+#endif
