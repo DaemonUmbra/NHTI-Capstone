@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class Effect : MonoBehaviour {
 
     #region Private Variables
-
     /// <summary>
     /// Time in seconds before debuff wears off.
     /// </summary>
@@ -20,12 +19,10 @@ public abstract class Effect : MonoBehaviour {
     [SerializeField]
     protected float TickTime = 1f; //-1 to disable
     private float LastTick;
-
     #endregion
 
 
     #region Overrides
-
     // Called when debuffs are added to a player
     public virtual void ApplyEffect(GameObject target)
     {
@@ -48,12 +45,10 @@ public abstract class Effect : MonoBehaviour {
     }
 
     public abstract void RemoveEffect();
-
     #endregion
 
 
     #region Unity Callbacks
-
     public void Update()
     {
         // Checks for negative tick time which means there is no tick event
@@ -67,6 +62,5 @@ public abstract class Effect : MonoBehaviour {
             OnTick();
         }
     }
-
     #endregion
 }
