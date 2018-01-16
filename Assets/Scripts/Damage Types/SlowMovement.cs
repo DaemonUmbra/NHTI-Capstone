@@ -17,15 +17,24 @@ public class SlowMovement : Effect {
 
     public override void ApplyEffect(GameObject target)
     {
-        PlayerMotor pm = target.GetComponent<PlayerMotor>();
+        base.ApplyEffect(target);   // Call the base first
+
+        // Add this effect to the target
+        SlowMovement effect = target.AddComponent<SlowMovement>();
         
-        
-        base.ApplyEffect(target);
+        PlayerMotor pm = GetComponent<PlayerMotor>();
+        pm.AdjustSpeed(PercentSlow);
+
+        // Copy this version of the effect to the target. Do this last!
+        effect = this;
     }
 
     public override void RemoveEffect()
     {
-        throw new NotImplementedException();
+        // Reverse the adjustment by dividing by the slow percent
+        PlayerMotor pm = GetComponent<PlayerMotor>();
+        pm.AdjustSpeed(1 / PercentSlow); // Inverse of the slow percent
+        Destroy(this); // Delete the game object
     }
     
 
