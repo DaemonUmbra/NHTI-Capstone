@@ -46,6 +46,7 @@ public class PlayerMotor : MonoBehaviour {
     /// <param name="factor">Use a decimal for slows</param>
     public void AdjustSpeed(float factor)
     {
-
+        speed *= factor;
+        Debug.Log("Speed changed by " + factor + "%. New speed: " + speed);
     }
 }

@@ -10,34 +10,49 @@ public abstract class Effect : MonoBehaviour {
     /// Time in seconds before debuff wears off.
     /// </summary>
     [SerializeField]
-    protected float Lifetime = 0f; // 0 or negative to last forever
-    private float TimeAdded;
+    protected float _lifetime = 0f; // 0 or negative to last forever
+    private float _timeAdded;
 
     /// <summary>
     /// Increment of time before tick function is called
     /// </summary>
     [SerializeField]
-    protected float TickTime = 1f; //-1 to disable
-    private float LastTick;
+    protected float _tickTime = 1f; //-1 to disable
+    private float _lastTick;
+
+    /// <summary>
+    /// Is the effect attached to a game object
+    /// </summary>
+    private bool isAttached = false;
+    #endregion
+
+    #region Access Variables
+    public float Lifetime { get { return _lifetime; } }
+    public float TickTime { get { return _tickTime; } }
     #endregion
 
 
     #region Overrides
     // Called when debuffs are added to a player
-    public virtual void ApplyEffect(GameObject target)
+    public abstract void ApplyEffect(GameObject target);
+
+    // Activate the effect so it starts ticking down
+    public virtual void Activate()
     {
-        LastTick = Time.time - TickTime;
-        TimeAdded = Time.time;
+        isAttached = true;
+        _lastTick = Time.time - _tickTime;
+        _timeAdded = Time.time;
     }
 
     // Called every TickTime seconds
     public virtual void OnTick()
     {
+        //Debug.Log("Tick!");
         // Check if it has a lifetime
-        if(Lifetime > 0)
+        if(_lifetime > 0 && isAttached)
         {
             // If the lifetime is up, remove debuff
-            if(Time.time > TimeAdded + Lifetime)
+            if(Time.time > _timeAdded + _lifetime)
             {
                 RemoveEffect();
             }
@@ -52,13 +67,13 @@ public abstract class Effect : MonoBehaviour {
     public void Update()
     {
         // Checks for negative tick time which means there is no tick event
-        if (TickTime < 0)
+        if (_tickTime < 0)
             return;
 
         // Calls OnTick when able
-        if (Time.time > LastTick + TickTime)
+        if (Time.time > _lastTick + _tickTime)
         {
-            LastTick = Time.time;
+            _lastTick = Time.time;
             OnTick();
         }
     }

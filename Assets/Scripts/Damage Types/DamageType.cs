@@ -10,7 +10,8 @@ public abstract class DamageType {
 
     // Effects passed to the target
     protected List<Effect> OnHitEffects;
-    string TypeName = "Unamed";
+    string TypeName = "NO_NAME";
+
     public DamageType()
     {
 

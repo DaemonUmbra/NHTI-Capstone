@@ -5,36 +5,42 @@ using UnityEngine;
 
 public class SlowMovement : Effect {
 
-    private float PercentSlow;
+    private float _percentSlow;
     
     // Default constructor
-    public SlowMovement(float _percentSlow, float _lifetime)
+    public SlowMovement(float percentSlow, float lifetime)
     {
-        PercentSlow = _percentSlow;
-        Lifetime = _lifetime;
+        _percentSlow = percentSlow;
+        _lifetime = lifetime;
+    }
+    // Copy constructor
+    public SlowMovement(SlowMovement jango)
+    {
+        _percentSlow = jango._percentSlow;
+        _lifetime = jango.Lifetime;
+        _tickTime = jango.TickTime;
     }
 
 
     public override void ApplyEffect(GameObject target)
     {
-        base.ApplyEffect(target);   // Call the base first
-
-        // Add this effect to the target
-        SlowMovement effect = target.AddComponent<SlowMovement>();
-        
-        PlayerMotor pm = GetComponent<PlayerMotor>();
-        pm.AdjustSpeed(PercentSlow);
-
-        // Copy this version of the effect to the target. Do this last!
-        effect = this;
+        // Copy this effect to the target
+        SlowMovement slow = target.AddComponent<SlowMovement>();
+        slow = new SlowMovement(this);
+        slow.Activate();
+        // Slow the target
+        PlayerMotor pm = target.GetComponent<PlayerMotor>();
+        pm.AdjustSpeed(slow._percentSlow);
     }
 
     public override void RemoveEffect()
     {
         // Reverse the adjustment by dividing by the slow percent
         PlayerMotor pm = GetComponent<PlayerMotor>();
-        pm.AdjustSpeed(1 / PercentSlow); // Inverse of the slow percent
-        Destroy(this); // Delete the game object
+        float factor = 1 / _percentSlow; // Inverse of the slow percent
+        if(factor < 100)
+            pm.AdjustSpeed(factor);
+        Destroy(this);
     }
     
 
