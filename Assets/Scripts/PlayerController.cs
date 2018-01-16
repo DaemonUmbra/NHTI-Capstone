@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
     float lastJumpTime;
 
     [SerializeField]
-    int maxJumpCount;
+    public int maxJumpCount;
 
     int jumpCount;
 

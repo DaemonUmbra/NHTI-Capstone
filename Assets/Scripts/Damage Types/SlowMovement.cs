@@ -17,13 +17,13 @@ public class SlowMovement : Effect {
 
     public override void ApplyEffect(GameObject target)
     {
-        
         PlayerMotor pm = target.GetComponent<PlayerMotor>();
+        
         
         base.ApplyEffect(target);
     }
 
-    public override void RemoveDebuff()
+    public override void RemoveEffect()
     {
         throw new NotImplementedException();
     }

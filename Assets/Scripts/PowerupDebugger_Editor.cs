@@ -38,65 +38,63 @@ public class PowerupDebugger_Editor : Editor {
             //Get a list of the player's current powerups
             List<string> PlayerPowerupStrings = new List<string>();
             //if they have any
-            if (debugger.Player.ListAbilities().Count > 0) {
-                //do a check for array bounds
-                if(SelectedPlayerPowerupIndex == -1 || SelectedPlayerPowerupIndex >= debugger.Player.ListAbilities().Count)
-                {
-                    //and reset if needed
-                    SelectedPlayerPowerupIndex = 0;
-                }
-                //and for each powerup the Player has
-                foreach (KeyValuePair<string, BaseAbility> entry in debugger.Player.ListAbilities())
-                {
-                    //add its name to the list
-                    PlayerPowerupStrings.Add(entry.Value.GetName);
-                    //and remove it from the list of available powerups
-                    AvailablePowerupStrings.Remove(entry.Key);
-                }
-            }
-            else
+            if (debugger.Player.ListAbilities() != null)
             {
-                SelectedPlayerPowerupIndex = -1;
-            }
-            if(AvailablePowerupStrings.Count > 0)
-            {
-                if(SelectedPowerupIndex == -1 || SelectedPowerupIndex >= AvailablePowerupStrings.Count)
+                if (debugger.Player.ListAbilities().Count > 0)
                 {
-                    SelectedPowerupIndex = 0;
+                    //do a check for array bounds
+                    if (SelectedPlayerPowerupIndex == -1 || SelectedPlayerPowerupIndex >= debugger.Player.ListAbilities().Count)
+                    {
+                        //and reset if needed
+                        SelectedPlayerPowerupIndex = 0;
+                    }
+                    //and for each powerup the Player has
+                    foreach (KeyValuePair<string, BaseAbility> entry in debugger.Player.ListAbilities())
+                    {
+                        //add its name to the list
+                        PlayerPowerupStrings.Add(entry.Value.GetName);
+                        //and remove it from the list of available powerups
+                        AvailablePowerupStrings.Remove(entry.Value.GetType().Name);
+                    }
                 }
-            }
-            else
-            {
-                SelectedPowerupIndex = -1;
-            }
-            //Show dropdown of powerups that are available to be added
-            SelectedPowerupIndex = EditorGUILayout.IntPopup("Powerup to Add", SelectedPowerupIndex, AvailablePowerupStrings.ToArray(), null);
-            //Show dropdown of powerups that are available to be removed
-            SelectedPlayerPowerupIndex = EditorGUILayout.IntPopup("Powerup to Remove", SelectedPlayerPowerupIndex, PlayerPowerupStrings.ToArray(), null);
+                else
+                {
+                    SelectedPlayerPowerupIndex = -1;
+                }
+                if (AvailablePowerupStrings.Count > 0)
+                {
+                    if (SelectedPowerupIndex == -1 || SelectedPowerupIndex >= AvailablePowerupStrings.Count)
+                    {
+                        SelectedPowerupIndex = 0;
+                    }
+                }
+                else
+                {
+                    SelectedPowerupIndex = -1;
+                }
+                //Show dropdown of powerups that are available to be added
+                SelectedPowerupIndex = EditorGUILayout.IntPopup("Powerup to Add", SelectedPowerupIndex, AvailablePowerupStrings.ToArray(), null);
+                //Show dropdown of powerups that are available to be removed
+                SelectedPlayerPowerupIndex = EditorGUILayout.IntPopup("Powerup to Remove", SelectedPlayerPowerupIndex, PlayerPowerupStrings.ToArray(), null);
 
-            Dictionary<string, Type> typeDict = new Dictionary<string, Type>();
-            foreach (Type type in Types)
-            {
-                typeDict.Add(type.Name, type);
-            }
-
-            //set the powerup selected for addition
-            if (SelectedPowerupIndex != -1)
-            {
-                debugger.SelectedPowerup = typeDict[AvailablePowerupStrings[SelectedPowerupIndex]];
-            }
-            else
-            {
-                debugger.SelectedPowerup = null;
-            }
-            //Set the powerup selected for removal
-            if (SelectedPlayerPowerupIndex != -1)
-            {
-                debugger.SelectedPlayerPowerup = debugger.Player.ListAbilities()[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
-            }
-            else
-            {
-                debugger.SelectedPlayerPowerup = null;
+                //set the powerup selected for addition
+                if (SelectedPowerupIndex != -1)
+                {
+                    debugger.SelectedPowerup = AbilityDict[AvailablePowerupStrings[SelectedPowerupIndex]];
+                }
+                else
+                {
+                    debugger.SelectedPowerup = null;
+                }
+                //Set the powerup selected for removal
+                if (SelectedPlayerPowerupIndex != -1)
+                {
+                    debugger.SelectedPlayerPowerup = debugger.Player.ListAbilities()[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
+                }
+                else
+                {
+                    debugger.SelectedPlayerPowerup = null;
+                }
             }
         }
         else

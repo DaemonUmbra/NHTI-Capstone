@@ -2,11 +2,31 @@ fileFormatVersion: 2
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> efbd22d5a2842576fda1883192ad529b6b5e10b5
+>>>>>>> d41b35cb3566165bb313bd4eda2883eb500fbfe3
 guid: b689966cd4bb9af4aaef7176bea2203b
 folderAsset: yes
 timeCreated: 1511912653
 licenseType: Pro
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+guid: ee0b8c1fdf7d2094eb2687f77cc0688d
+folderAsset: yes
+timeCreated: 1511912798
+licenseType: Pro
+=======
+guid: 99de43bddb21b7a4499c8b20f5df07c3
+folderAsset: yes
+timeCreated: 1511912561
+licenseType: Free
+>>>>>>> 5c0bb2e239bfc05e95cb63733bb861bca43bc5ac
+>>>>>>> b25fbad64f9b0b1c0647bdb2edaa311240bf83e4
+=======
 guid: aedf508f97728c0478cb66d538c40479
 folderAsset: yes
 timeCreated: 1511912333
@@ -18,12 +38,16 @@ folderAsset: yes
 timeCreated: 1511912333
 licenseType: Free
 >>>>>>> b44bfd2160ff4453acacde2c022f34f58c12eee2
+<<<<<<< HEAD
 =======
 guid: aedf508f97728c0478cb66d538c40479
 folderAsset: yes
 timeCreated: 1511912333
 licenseType: Free
 >>>>>>> da1bdf2696b03b4aa5400cf60a85c7260244ae08
+=======
+>>>>>>> efbd22d5a2842576fda1883192ad529b6b5e10b5
+>>>>>>> d41b35cb3566165bb313bd4eda2883eb500fbfe3
 DefaultImporter:
   externalObjects: {}
   userData: 
