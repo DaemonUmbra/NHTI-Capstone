@@ -57,7 +57,7 @@ namespace Powerups
             foreach (RaycastHit hit in hits)
             {
                 Debug.Log("I hit :" + hit.transform.name);
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(0))
                 {
                     if (hit.rigidbody != null)
                     {
