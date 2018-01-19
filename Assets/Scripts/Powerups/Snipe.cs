@@ -68,7 +68,7 @@ namespace Powerups
                 return;
             }
             //Debug.Log("Raycast Shot");
-            GameObject rayOrigin = GameObject.Find("Player/Gun"); //Needs to be changed to local player when networked
+            GameObject rayOrigin = GameObject.Find("BasicPlayer/Gun"); //Needs to be changed to local player when networked
             Vector3 mp = Input.mousePosition;
             mp.z = 10;
             Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
