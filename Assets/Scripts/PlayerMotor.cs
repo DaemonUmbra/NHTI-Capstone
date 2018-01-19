@@ -58,17 +58,17 @@ public class PlayerMotor : MonoBehaviour {
         speed *= factor;
         Debug.Log("Speed changed by " + factor + "%. New speed: " + speed);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         onJumpPad = false;
-        if (collision.collider.gameObject.tag == "JumpPad")
+        if (other.gameObject.tag == "JumpPad")
         {
             onJumpPad = true;
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.collider.gameObject.tag == "JumpPad")
+        if (other.gameObject.tag == "JumpPad")
         {
             onJumpPad = false;
         }
