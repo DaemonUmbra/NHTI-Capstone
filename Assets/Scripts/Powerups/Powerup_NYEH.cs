@@ -11,7 +11,7 @@ namespace Powerups
         AudioSource audioSource;
         AudioClip nyeh;
 
-        Powerup_NYEH()
+        public void Awake()
         {
             if (!gameObject.GetComponent<AudioSource>())
             {
@@ -22,19 +22,33 @@ namespace Powerups
             nyeh = Resources.Load("/Sounds/NYEH.wav") as AudioClip;
         }
 
-        public override void Activate()
+        public void OnShoot()
         {
+            Debug.Log("NYEH!");
             audioSource.PlayOneShot(nyeh);
         }
 
         public override void OnAbilityAdd()
         {
-            
+            PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
+            pShoot.shoot += OnShoot;
+        }
+
+        public override void OnAbilityRemove()
+        {
+            base.OnAbilityRemove();
+            PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
+            pShoot.shoot -= OnShoot;
         }
 
         public override void OnUpdate()
         {
             
+        }
+
+        public override void Activate()
+        {
+            throw new NotImplementedException();
         }
     }
 }
