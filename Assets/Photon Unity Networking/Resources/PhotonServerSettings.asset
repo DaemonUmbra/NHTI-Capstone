@@ -8,14 +8,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 706a7afbe5784684fb8374afe511115c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: f184830c-af81-4254-8a4b-32877127ad0f
+  AppID: 
   VoiceAppID: 
   ChatAppID: 
-  HostType: 1
-  PreferredRegion: 1
+  HostType: 0
+  PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -26,14 +26,5 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
-  RpcList:
-  - Chat
-  - DestroyRpc
-  - InstantiateRpc
-  - PickupItemInit
-  - PunPickup
-  - PunPickupSimple
-  - PunRespawn
-  - RequestForPickupItems
-  - RequestForPickupTimes
-  DisableAutoOpenWizard: 1
+  RpcList: []
+  DisableAutoOpenWizard: 0
