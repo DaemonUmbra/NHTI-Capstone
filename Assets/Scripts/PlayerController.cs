@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 
         motor.SetVelocity(velocity); // Apply velocity
 
-        // Check for jump
+        // Check for jump}
         if(Input.GetKeyDown(KeyCode.Space))
         {
             TryJump();

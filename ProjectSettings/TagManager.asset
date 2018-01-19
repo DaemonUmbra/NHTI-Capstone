@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Slime
   - Floor
+  - JumpPad
   layers:
   - Default
   - TransparentFX
