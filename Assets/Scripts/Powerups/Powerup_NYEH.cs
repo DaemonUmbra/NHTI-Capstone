@@ -13,11 +13,12 @@ namespace Powerups
 
         Powerup_NYEH()
         {
-            if(!gameObject.GetComponent<AudioSource>())
+            if (!gameObject.GetComponent<AudioSource>())
             {
                 gameObject.AddComponent<AudioSource>();
             }
             audioSource = gameObject.GetComponent<AudioSource>();
+            audioSource.playOnAwake = false;
             nyeh = Resources.Load("/Sounds/NYEH.wav") as AudioClip;
         }
 
@@ -28,12 +29,12 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnUpdate()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
