@@ -24,6 +24,7 @@ public class PlayerMotor : MonoBehaviour {
         // Change rb velocity to local velocity
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
+
     }
 
     public void SetVelocity(Vector3 _velocity)
@@ -35,8 +36,9 @@ public class PlayerMotor : MonoBehaviour {
     public void Jump()
     {
         Debug.Log("Jump!");
-        Vector3 inverseJump = new Vector3(rb.velocity.x, -rb.velocity.y, rb.velocity.z);
-        rb.AddForce(inverseJump);
+        Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+        rb.velocity = inverseJump;
         rb.AddForce(Vector3.up * jumpPower);
     }
 
