@@ -14,7 +14,7 @@ public abstract class DamageType {
 
     public DamageType()
     {
-
+        OnHitEffects = new List<Effect>();
     }
     public DamageType(List<Effect> effects)
     {

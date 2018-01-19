@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -139,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce38ff887b0995740be638102cea3986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  SelectedPlayerPowerup: {fileID: 0}
 --- !u!4 &381450689
 Transform:
   m_ObjectHideFlags: 0
@@ -489,6 +491,8 @@ GameObject:
   - component: {fileID: 1888985489}
   - component: {fileID: 1888985492}
   - component: {fileID: 1888985493}
+  - component: {fileID: 1888985494}
+  - component: {fileID: 1888985495}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -575,8 +579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa669cf9bcd45704a8b4a045f38f8e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFloor: {fileID: 1810609925}
+  groundTag: 
   jumpCooldown: 1
+  maxJumpCount: 0
 --- !u!114 &1888985490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,3 +633,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1395571010320240, guid: edf5db85053a34c4eb2c36b24fe9f75b, type: 2}
+--- !u!114 &1888985494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888985484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45203cae39637ae4aadcd292ecc95ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1888985495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888985484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793b1e0ef2b4d044bbe69cc75a3995e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
