@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23935844678023648}
   m_Layer: 0
   m_Name: JumpPad
-  m_TagString: Untagged
+  m_TagString: JumpPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1690684188720866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.833, y: 2.64, z: 5.381}
-  m_LocalScale: {x: 0.5, y: 0.25, z: 0.5}
+  m_LocalPosition: {x: 3.5772858, y: 0.909, z: 8.348}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 62a11d26c935ab5408df794a0bd26b1f, type: 2}
+  - {fileID: 2100000, guid: 81906ba1f070b98429ebeaff953b6cfe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

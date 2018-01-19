@@ -9,6 +9,7 @@ public class PlayerMotor : MonoBehaviour {
     private float speed = 10f;
     [SerializeField]
     private float jumpPower = 10f;
+    bool onJumpPad = false;
 
     private Rigidbody rb;
     private Vector3 velocity = Vector3.zero;
@@ -24,6 +25,7 @@ public class PlayerMotor : MonoBehaviour {
         // Change rb velocity to local velocity
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
+
     }
 
     public void SetVelocity(Vector3 _velocity)
@@ -34,10 +36,17 @@ public class PlayerMotor : MonoBehaviour {
 
     public void Jump()
     {
+        float JumpMultiplier = 1f;
+        if (onJumpPad)
+        {
+            JumpMultiplier = 2f;
+            onJumpPad = false;
+        }
         Debug.Log("Jump!");
-        Vector3 inverseJump = new Vector3(rb.velocity.x, -rb.velocity.y, rb.velocity.z);
-        rb.AddForce(inverseJump);
-        rb.AddForce(Vector3.up * jumpPower);
+        Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
+        rb.velocity = inverseJump;
+        rb.AddForce(Vector3.up * jumpPower * JumpMultiplier);
     }
 
     /// <summary>
@@ -48,5 +57,20 @@ public class PlayerMotor : MonoBehaviour {
     {
         speed *= factor;
         Debug.Log("Speed changed by " + factor + "%. New speed: " + speed);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        onJumpPad = false;
+        if (collision.collider.gameObject.tag == "JumpPad")
+        {
+            onJumpPad = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.gameObject.tag == "JumpPad")
+        {
+            onJumpPad = false;
+        }
     }
 }

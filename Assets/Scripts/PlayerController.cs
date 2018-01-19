@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    string groundTag;
+    int groundLayer;
     [SerializeField]
     float jumpCooldown;
     float lastJumpTime;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     public int maxJumpCount;
 
-    int jumpCount;
+    int jumpCount = 0;
 
 
     // Local components
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 
         motor.SetVelocity(velocity); // Apply velocity
 
-        // Check for jump
+        // Check for jump}
         if(Input.GetKeyDown(KeyCode.Space))
         {
             TryJump();
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 
     private void TryJump()
     {
+        Debug.Log("tryjump!");
         if (jumpCount < maxJumpCount)
         {
             Debug.Log("jump!");
@@ -68,8 +69,8 @@ public class PlayerController : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("Collided with Object on layer" + collision.gameObject.layer.ToString());
-        if(collision.collider.gameObject.tag == groundTag)
+        print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
+        if(collision.collider.gameObject.layer == groundLayer)
         {
             isGrounded = true;
             jumpCount = 0;
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour {
     }
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.collider.gameObject.tag == groundTag)
+        if(collision.collider.gameObject.layer == groundLayer)
         {
             isGrounded = false;
         }
