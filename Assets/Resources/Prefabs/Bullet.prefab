@@ -23,7 +23,11 @@ GameObject:
   - component: {fileID: 135316256393173498}
   - component: {fileID: 23417167600040180}
   - component: {fileID: 54213212890359004}
+<<<<<<< HEAD
   - component: {fileID: 114092107048556030}
+=======
+  - component: {fileID: 114202646719548570}
+>>>>>>> bde3b4ee1daa04d2ad79e37b766344aa8cdf8331
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -100,7 +104,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+<<<<<<< HEAD
 --- !u!114 &114092107048556030
+=======
+--- !u!114 &114202646719548570
+>>>>>>> bde3b4ee1daa04d2ad79e37b766344aa8cdf8331
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -112,8 +120,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+<<<<<<< HEAD
   damage: 0
   speed: 3
+=======
+  damage: 5
+  speed: 10
+>>>>>>> bde3b4ee1daa04d2ad79e37b766344aa8cdf8331
   lifetime: 3
 --- !u!135 &135316256393173498
 SphereCollider:

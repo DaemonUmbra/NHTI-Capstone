@@ -13,7 +13,7 @@ namespace Powerups
     /// <para>Power-Up Description:  Player model is larger,  gaining damage boost but same walk speed.</para>
     /// </summary>
     /// 
-    public class Powerup_Growth : BaseAbility
+    public class Powerup_Growth : PassiveAbility
     {
         protected new string Name = "Growth";
         private Vector3 OriginalScale;
