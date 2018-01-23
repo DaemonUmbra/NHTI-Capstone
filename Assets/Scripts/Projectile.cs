@@ -25,10 +25,10 @@ public class Projectile : MonoBehaviour {
         rb = gameObject.GetComponent<Rigidbody>();
 
         // Ignore collision with player
-        GameObject player = GameObject.Find("BasicPlayer");
+        GameObject player = GameObject.Find("Player");
         Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
 
-       // Debug.Log("Rotation: " + gameObject.transform.rotation);
+        // Debug.Log("Rotation: " + gameObject.transform.rotation);
 
         // Apply velocity
         rb.velocity = transform.forward * speed;
