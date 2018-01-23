@@ -490,6 +490,7 @@ GameObject:
   - component: {fileID: 1888985492}
   - component: {fileID: 1888985493}
   - component: {fileID: 1888985495}
+  - component: {fileID: 1888985494}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -616,8 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb30cdcf8eb20fb43bc18dc1716b8319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpPower: 10
 --- !u!114 &1888985493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,6 +629,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1930332314063190, guid: d216057aafb3ae14c8db7f20c67f516f, type: 2}
+--- !u!114 &1888985494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888985484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c513910f723a447b73f3b857fcb619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1888985495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,3 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3afbc757dd27a42997958d0e3b7523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WalkSpeed: 10
+  JumpPower: 10
+  _maxHp: 100
+  _baseDmg: 25

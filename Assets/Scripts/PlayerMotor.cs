@@ -49,15 +49,6 @@ public class PlayerMotor : MonoBehaviour {
         rb.AddForce(Vector3.up * pStats.JumpPower * JumpMultiplier);
     }
 
-    /// <summary>
-    /// Multiplies the speed by a factor
-    /// </summary>
-    /// <param name="factor">Use a decimal for slows</param>
-    public void AdjustSpeed(float factor)
-    {
-        speed *= factor;
-        Debug.Log("Speed changed by " + factor + "%. New speed: " + speed);
-    }
     private void OnTriggerEnter(Collider other)
     {
         onJumpPad = false;

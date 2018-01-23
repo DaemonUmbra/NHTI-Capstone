@@ -5,18 +5,21 @@ using UnityEngine;
 
 public class SlowMovement : Effect {
 
-    private float _percentSlow;
+    /// <summary>
+    /// Amount to slow the player by as a decimal
+    /// </summary>
+    private float _slowAmount;
     
     // Default constructor
-    public SlowMovement(float percentSlow, float lifetime)
+    public SlowMovement(float slowAmount, float lifetime)
     {
-        _percentSlow = percentSlow;
+        _slowAmount = slowAmount;
         _lifetime = lifetime;
     }
     // Copy constructor
     public SlowMovement(SlowMovement jango)
     {
-        _percentSlow = jango._percentSlow;
+        _slowAmount = jango._slowAmount;
         Debug.Log(jango + "cloned.");
         
         _lifetime = jango.Lifetime;
@@ -44,8 +47,8 @@ public class SlowMovement : Effect {
     public override void Activate()
     {
         // Slow the target
-        PlayerMotor pm = Owner.GetComponent<PlayerMotor>();
-        pm.AdjustSpeed(_percentSlow);
+        PlayerStats ps = Owner.GetComponent<PlayerStats>();
+        ps.WalkSpeed *= _slowAmount;
 
         base.Activate();
     }
@@ -53,14 +56,14 @@ public class SlowMovement : Effect {
     public override void RemoveEffect()
     {
         // Reverse effect
-        PlayerMotor pm = Owner.GetComponent<PlayerMotor>();
-        if (pm == null) {
-            Debug.LogError("Motor not found. Unable to remove effect");
+        PlayerStats ps = Owner.GetComponent<PlayerStats>();
+        if (ps == null) {
+            Debug.LogError("Stats script not found. Unable to remove effect");
             return;
         }
-        float factor = 1 / _percentSlow; // Inverse of the slow percent
-        if(factor < 100 && factor > 0.01)
-            pm.AdjustSpeed(factor);
+        float factor = 1 / _slowAmount; // Inverse of the slow percent
+        if (factor < 100 && factor > 0.01)
+            ps.WalkSpeed *= factor;
 
         // Call base to remove effect from player
         base.RemoveEffect();

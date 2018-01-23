@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-    #region Private Variables
+    #region Class Variables
     /// <summary>
     /// List of effects the player is under
     /// </summary>
     private List<Effect> _effects;
     private List<Effect> _expiredEffects;
 
+    // Public Stats
     [SerializeField]
-    private float _baseSpeed = 10f;
-    private float _actualSpeed = 10f;
+    public float WalkSpeed = 10f;
     [SerializeField]
-    private float _jumpPower = 10f;
+    public float JumpPower = 10f;
+
+    // Private stats
     [SerializeField]
     private float _maxHp = 100f;
     private float _currentHp;
@@ -29,10 +31,9 @@ public class PlayerStats : MonoBehaviour {
     #endregion
 
     #region Access Variables
-    public float WalkSpeed { get { return _actualSpeed; } }
-    public float JumpPower { get { return _jumpPower; } }
+    
     public float MaxHp { get { return _maxHp; } }
-    public float CurrentHp { get { return _currentHp; } set { _currentHp = CurrentHp; } }
+    public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
     #endregion
 
@@ -138,10 +139,49 @@ public class PlayerStats : MonoBehaviour {
     /// <summary>
     /// Cause the player to take damage
     /// </summary>
-    /// <param name="source">Source damaging the player</param>
     /// <param name="amount">Amount of damage player will recieve</param>
-    /// <param name="effects">Effects applied to the player</param>
-    public void TakeDamage(GameObject source, float amount, List<Effect> effects)
+    public void TakeDamage(float amount)
+    {
+        if(amount < 0)
+        {
+            Debug.Log("Cannot take negative damage.");
+            return;
+        }
+        // Reduce hp by amount
+        _currentHp -= amount;
+        if (_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+            Die();
+        }
+    }
+    /// <summary>
+    /// Cause the player to take damage from a source
+    /// </summary>
+    /// <param name="source">Source damaging the player, can be null</param>
+    /// <param name="amount">Amount of damage player will recieve</param>
+    public void TakeDamage(GameObject source, float amount)
+    {
+        if (amount < 0)
+        {
+            Debug.Log("Cannot take negative damage.");
+            return;
+        }
+
+        // Reduce hp by amount
+        _currentHp -= amount;
+        if (_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+            Die(source);
+        }
+    }
+    /// <summary>
+    /// Cause the player to take damage with effects
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="effects"></param>
+    public void TakeDamage(float amount, List<Effect> effects)
     {
         if (effects != null)
         {
@@ -152,6 +192,41 @@ public class PlayerStats : MonoBehaviour {
             }
         }
 
+        if (amount < 0)
+        {
+            Debug.Log("Cannot take negative damage.");
+            return;
+        }
+
+        // Reduce hp by amount
+        _currentHp -= amount;
+        if (_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+            Die();
+        }
+    }
+    /// <summary>
+    /// Cause the player to take damage from a source with status effects
+    /// </summary>
+    /// <param name="source">Source damaging the player, can be null</param>
+    /// <param name="amount">Amount of damage player will recieve</param>
+    /// <param name="effects">Effects applied to the player, can be null</param>
+    public void TakeDamage(GameObject source, float amount, List<Effect> effects)
+    {
+        if (effects != null)
+        {
+            // Add effects to player
+            foreach (Effect e in effects)
+            {
+                AddEffect(e);
+            }
+        }
+        if(amount < 0)
+        {
+            Debug.Log("Cannot take negative damage.");
+            return;
+        }
         // Reduce hp by amount
         _currentHp -= amount;
         if(_currentHp <= 0)
@@ -160,10 +235,31 @@ public class PlayerStats : MonoBehaviour {
             Die(source);
         }
     }
+    
+    
+    public void GainHp(float amount)
+    {
+        if(_currentHp + amount > _maxHp)
+        {
+            Debug.Log("Cannot overheal. Hp is max.");
+            _currentHp = _maxHp;
+        }
+        else
+        {
+            _currentHp += amount;
+        }
+    }
     #endregion
 
 
     #region Private Methods
+    private void Die()
+    {
+        Debug.Log(gameObject.name + " has died...");
+
+        // No death logic yet
+        _currentHp = _maxHp; // Resets hp
+    }
     private void Die(GameObject killer)
     {
         if(killer != null)
@@ -174,8 +270,9 @@ public class PlayerStats : MonoBehaviour {
         {
             Debug.Log(gameObject.name + " has died of mysterious causes.");
         }
-        
+
         // No death logic yet
+        _currentHp = _maxHp; // Resets hp
     }
     #endregion
 
