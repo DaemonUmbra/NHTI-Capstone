@@ -33,7 +33,7 @@ public class PowerUp_CombatRegen : PassiveAbility {
         while (Active)
         {
             PS.GainHp(10);
-            yield return new WaitForSecondsRealtime(15);
+            yield return new WaitForSecondsRealtime(20);
         }
     }
 }
