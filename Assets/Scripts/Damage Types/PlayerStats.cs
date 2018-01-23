@@ -12,12 +12,15 @@ public class PlayerStats : MonoBehaviour {
     private List<Effect> _expiredEffects;
 
     [SerializeField]
-    private float _walkSpeed;
+    private float _baseSpeed = 10f;
+    private float _actualSpeed = 10f;
     [SerializeField]
-    private float _maxHp;
+    private float _jumpPower = 10f;
+    [SerializeField]
+    private float _maxHp = 100f;
     private float _currentHp;
     [SerializeField]
-    private float _baseDmg;
+    private float _baseDmg = 10f;
     
     /// <summary>
     /// Effects applied to other player when attacking them
@@ -26,9 +29,10 @@ public class PlayerStats : MonoBehaviour {
     #endregion
 
     #region Access Variables
-    public float WalkSpeed { get { return _walkSpeed; } }
+    public float WalkSpeed { get { return _actualSpeed; } }
+    public float JumpPower { get { return _jumpPower; } }
     public float MaxHp { get { return _maxHp; } }
-    public float CurrentHp { get { return _currentHp; } }
+    public float CurrentHp { get { return _currentHp; } set { _currentHp = CurrentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
     #endregion
 
@@ -38,6 +42,8 @@ public class PlayerStats : MonoBehaviour {
         _effects = new List<Effect>();
         _expiredEffects = new List<Effect>();
         _onHitEffects = new List<Effect>();
+
+        _currentHp = _maxHp;
 	}
 
     // Update is called once per frame

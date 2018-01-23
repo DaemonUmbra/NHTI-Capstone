@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerStats))]
 public class PlayerMotor : MonoBehaviour {
 
-    [SerializeField]
-    private float speed = 10f;
-    [SerializeField]
-    private float jumpPower = 10f;
+    
     bool onJumpPad = false;
 
     private Rigidbody rb;
+    private PlayerStats pStats;
     private Vector3 velocity = Vector3.zero;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+        pStats = GetComponent<PlayerStats>();
     }
 
     // Runs every physics update frame
@@ -31,7 +31,7 @@ public class PlayerMotor : MonoBehaviour {
     public void SetVelocity(Vector3 _velocity)
     {
         // Set local velocity
-        velocity = _velocity * speed;
+        velocity = _velocity * pStats.WalkSpeed;
     }
 
     public void Jump()
@@ -46,7 +46,7 @@ public class PlayerMotor : MonoBehaviour {
         Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.velocity = inverseJump;
-        rb.AddForce(Vector3.up * jumpPower * JumpMultiplier);
+        rb.AddForce(Vector3.up * pStats.JumpPower * JumpMultiplier);
     }
 
     /// <summary>
