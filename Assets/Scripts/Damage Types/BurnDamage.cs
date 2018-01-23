@@ -23,7 +23,7 @@ public class BurnDamage : Effect
     public override void OnTick()
     {
         PlayerStats ps = Owner.GetComponent<PlayerStats>();
-        ps.TakeDamage(null, _burnDamage, null);
+        ps.TakeDamage(_burnDamage);
 
         base.OnTick();
     }
