@@ -64,6 +64,9 @@ public class PlayerShoot : MonoBehaviour {
                 }
                 aManager.AddAbility<Snipe>();
             }
+
+            
+            }
         }
     }
 
@@ -72,4 +75,4 @@ public class PlayerShoot : MonoBehaviour {
 
 
 
-}
+
