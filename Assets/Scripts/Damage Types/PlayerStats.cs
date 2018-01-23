@@ -46,7 +46,6 @@ public class PlayerStats : MonoBehaviour {
 
         _currentHp = _maxHp;
 	}
-
     // Update is called once per frame
     void Update() {
 
@@ -188,7 +187,7 @@ public class PlayerStats : MonoBehaviour {
             // Add effects to player
             foreach (Effect e in effects)
             {
-                AddEffect(e);
+                e.ApplyEffect(gameObject);
             }
         }
 
@@ -219,7 +218,7 @@ public class PlayerStats : MonoBehaviour {
             // Add effects to player
             foreach (Effect e in effects)
             {
-                AddEffect(e);
+                e.ApplyEffect(gameObject);
             }
         }
         if(amount < 0)
@@ -246,7 +245,7 @@ public class PlayerStats : MonoBehaviour {
         }
         if(_currentHp + amount > _maxHp)
         {
-            Debug.Log("Cannot overheal. Hp is max.");
+            Debug.LogWarning("Cannot overheal. Hp is max.");
             _currentHp = _maxHp;
         }
         else
@@ -254,16 +253,33 @@ public class PlayerStats : MonoBehaviour {
             _currentHp += amount;
         }
     }
+
+    /// <summary>
+    /// Inflict your base damage on another player.
+    /// </summary>
+    /// <param name="target">Player to take damage</param>
+    public void DamagePlayer(GameObject target)
+    {
+        PlayerStats tStats = target.GetComponent<PlayerStats>();
+        if(!tStats)
+        {
+            Debug.LogError("Cannot damage " + target.name + ". No playerstats script found.");
+            return;
+        }
+
+        tStats.TakeDamage(gameObject, _baseDmg, _onHitEffects);
+    }
     #endregion
 
 
     #region Private Methods
     private void Die()
     {
-        Debug.Log(gameObject.name + " has died...");
+        Debug.Log(gameObject.name + " has died.");
 
         // No death logic yet
         _currentHp = _maxHp; // Resets hp
+        Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
     private void Die(GameObject killer)
     {
@@ -278,6 +294,7 @@ public class PlayerStats : MonoBehaviour {
 
         // No death logic yet
         _currentHp = _maxHp; // Resets hp
+        Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
     #endregion
 

@@ -11,7 +11,6 @@ public class AbilityManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         Abilities = new Dictionary<string, BaseAbility>();
-        
 	}
 	
 	// Update is called once per frame

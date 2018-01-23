@@ -43,7 +43,7 @@ public abstract class Effect {
 
     #region Overrides
     /// <summary>
-    /// Called to add an effect to a player.
+    /// Called to add an effect to a player. See "Slow Movement" for an example.
     /// </summary>
     /// <param name="target">Player to recieve effect</param>
     public abstract void ApplyEffect(GameObject target);
