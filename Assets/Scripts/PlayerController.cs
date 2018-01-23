@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
 [RequireComponent(typeof(PlayerShoot))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+    public static bool CrowdControlled = false;
 
     [SerializeField]
     int groundLayer;
@@ -25,8 +27,10 @@ public class PlayerController : MonoBehaviour {
     //AbilityManager abilityManager;
 
     bool isGrounded = false;
+    bool debounce = false;
     
-	void Start () {
+	void Start ()
+    {
         motor = GetComponent<PlayerMotor>();
         pShoot = GetComponent<PlayerShoot>();
         lastJumpTime = Time.time - jumpCooldown;
@@ -37,8 +41,15 @@ public class PlayerController : MonoBehaviour {
         Vector3 velocity = Vector3.zero;
         velocity.x = Input.GetAxis("Horizontal") * transform.right.x;
         velocity.z = Input.GetAxis("Vertical") * transform.forward.z;
-
-        motor.SetVelocity(velocity); // Apply velocity
+        if (!CrowdControlled)
+        {
+            motor.SetVelocity(velocity); // Apply velocity
+        }
+        else
+        {
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            StartCoroutine(WearOff());
+        }
 
         // Check for jump}
         if(Input.GetKeyDown(KeyCode.Space))
@@ -54,6 +65,13 @@ public class PlayerController : MonoBehaviour {
         }
             
 	}
+    IEnumerator WearOff()
+    {
+        debounce = true;
+        yield return new WaitForSeconds(1);
+        CrowdControlled = false;
+        debounce = false;
+    }
 
     private void TryJump()
     {
