@@ -11,8 +11,6 @@ public class PowerUp_Blink : ActiveAbility {
 
 	// Use this for initialization
 	void Start () {
-        playercontrol = GetComponent<PlayerController>();
-        BlinkDistance = 30;
 	}
 
     public override void OnAbilityAdd()
@@ -20,6 +18,8 @@ public class PowerUp_Blink : ActiveAbility {
         // Set name
         Name = "Blink";
         Debug.Log(Name + " Added");
+        playercontrol = GetComponent<PlayerController>();
+        BlinkDistance = 30;
     }
 
     public override void OnAbilityRemove()

@@ -2,15 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp_Boost : MonoBehaviour {
+public class PowerUp_Boost : ActiveAbility {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [HideInInspector]
+    public PlayerController PC;
+    public float BoostSpeed;
+
+
+    public override void OnAbilityAdd()
+    {
+        Name = "Boost";
+        Debug.Log(Name + " is added");
+        PC = GetComponent<PlayerController>();
+    }
+
+    public override void OnAbilityRemove()
+    {
+        // Call base function
+        base.OnAbilityRemove();
+    }
+
+    public override void Activate()
+    {
+        transform.Translate(transform.forward * BoostSpeed);
+    }
+
+    public override void OnUpdate()
+    {
+        throw new System.NotImplementedException();
+    }
 }
