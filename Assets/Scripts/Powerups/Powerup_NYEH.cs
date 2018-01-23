@@ -21,10 +21,10 @@ namespace Powerups
             }
             audioSource = gameObject.GetComponent<AudioSource>();
             audioSource.playOnAwake = false;
-            nyeh = Resources.Load("/Sounds/NYEH.wav") as AudioClip;
+            nyeh = Resources.Load("Sounds/NYEH") as AudioClip;
             if (!nyeh)
             {
-                Debug.LogWarning("NYEAH.wav not found in /Resources/Sounds/ folder!");
+                Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
             }
         }
 
