@@ -11,6 +11,8 @@ namespace Powerups
         AudioSource audioSource;
         AudioClip nyeh;
 
+        public float nyehVolume = 0.5f;
+
         public void Awake()
         {
             if (!gameObject.GetComponent<AudioSource>())
@@ -20,12 +22,16 @@ namespace Powerups
             audioSource = gameObject.GetComponent<AudioSource>();
             audioSource.playOnAwake = false;
             nyeh = Resources.Load("/Sounds/NYEH.wav") as AudioClip;
+            if (!nyeh)
+            {
+                Debug.LogWarning("NYEAH.wav not found in /Resources/Sounds/ folder!");
+            }
         }
 
         public void OnShoot()
         {
             Debug.Log("NYEH!");
-            audioSource.PlayOneShot(nyeh);
+            audioSource.PlayOneShot(nyeh, nyehVolume);
         }
 
         public override void OnAbilityAdd()
