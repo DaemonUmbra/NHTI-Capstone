@@ -6,7 +6,6 @@ public class BurnDamage : Effect
 {
     private float _burnDamage;
     public float Damage {get { return _burnDamage; } }
-    //private BurnDamage burnDamage;
 
     public BurnDamage(BurnDamage burnDamage)
     {
