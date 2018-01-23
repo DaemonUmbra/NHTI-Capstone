@@ -6,10 +6,14 @@ public class PlayerStats : MonoBehaviour {
 
     #region Class Variables
     /// <summary>
-    /// List of effects the player is under
+    /// Effects the player is currently under
     /// </summary>
     private List<Effect> _effects;
     private List<Effect> _expiredEffects;
+    /// <summary>
+    /// Effects applied to other players when attacking them
+    /// </summary>
+    private List<Effect> _onHitEffects;
 
     // Public Stats
     [SerializeField]
@@ -17,25 +21,21 @@ public class PlayerStats : MonoBehaviour {
     [SerializeField]
     public float JumpPower = 10f;
 
-    // Private stats
+    // Private stats (access variables below)
     [SerializeField]
     private float _maxHp = 100f;
     private float _currentHp;
     [SerializeField]
     private float _baseDmg = 10f;
-    
-    /// <summary>
-    /// Effects applied to other player when attacking them
-    /// </summary>
-    private List<Effect> _onHitEffects;
     #endregion
 
+
     #region Access Variables
-    
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
     #endregion
+
 
     #region Unity Callbacks
     // Use this for initialization
@@ -144,7 +144,7 @@ public class PlayerStats : MonoBehaviour {
     {
         if(amount < 0)
         {
-            Debug.Log("Cannot take negative damage.");
+            Debug.LogWarning("Cannot take negative damage.");
             return;
         }
         // Reduce hp by amount
@@ -164,7 +164,7 @@ public class PlayerStats : MonoBehaviour {
     {
         if (amount < 0)
         {
-            Debug.Log("Cannot take negative damage.");
+            Debug.LogWarning("Cannot take negative damage.");
             return;
         }
 
@@ -179,8 +179,8 @@ public class PlayerStats : MonoBehaviour {
     /// <summary>
     /// Cause the player to take damage with effects
     /// </summary>
-    /// <param name="amount"></param>
-    /// <param name="effects"></param>
+    /// <param name="amount">Amount of damage player will recieve</param>
+    /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, List<Effect> effects)
     {
         if (effects != null)
@@ -194,7 +194,7 @@ public class PlayerStats : MonoBehaviour {
 
         if (amount < 0)
         {
-            Debug.Log("Cannot take negative damage.");
+            Debug.LogWarning("Cannot take negative damage.");
             return;
         }
 
@@ -224,7 +224,7 @@ public class PlayerStats : MonoBehaviour {
         }
         if(amount < 0)
         {
-            Debug.Log("Cannot take negative damage.");
+            Debug.LogWarning("Cannot take negative damage.");
             return;
         }
         // Reduce hp by amount
@@ -236,9 +236,14 @@ public class PlayerStats : MonoBehaviour {
         }
     }
     
-    
+    // Increase the player's current hp by amount
     public void GainHp(float amount)
     {
+        if(amount < 0)
+        {
+            Debug.LogWarning("Cannot gain negative hp. Use TakeDamage instead.");
+            return;
+        }
         if(_currentHp + amount > _maxHp)
         {
             Debug.Log("Cannot overheal. Hp is max.");

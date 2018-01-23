@@ -11,7 +11,7 @@ public class PlayerMotor : MonoBehaviour {
 
     private Rigidbody rb;
     private PlayerStats pStats;
-    private Vector3 velocity = Vector3.zero;
+    private Vector3 _velocity = Vector3.zero;
 
     // Use this for initialization
     void Start () {
@@ -23,15 +23,15 @@ public class PlayerMotor : MonoBehaviour {
     private void FixedUpdate()
     {
         // Change rb velocity to local velocity
-        velocity.y = rb.velocity.y;
-        rb.velocity = velocity;
+        _velocity.y = rb.velocity.y;
+        rb.velocity = _velocity;
 
     }
 
-    public void SetVelocity(Vector3 _velocity)
+    public void SetVelocity(Vector3 velocity)
     {
         // Set local velocity
-        velocity = _velocity * pStats.WalkSpeed;
+        _velocity = velocity * pStats.WalkSpeed;
     }
 
     public void Jump()
