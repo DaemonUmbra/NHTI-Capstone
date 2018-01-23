@@ -14,11 +14,16 @@ public class PlayerStats : MonoBehaviour {
     private float _maxHp;
     private float _baseDmg;
 
+    /// <summary>
+    /// Effects applied to other player when attacking them
+    /// </summary>
+    private List<Effect> _onHitEffects;
 
 	// Use this for initialization
 	void Start () {
         _effects = new List<Effect>();
         _expiredEffects = new List<Effect>();
+        _onHitEffects = new List<Effect>();
 	}
 	
 	// Update is called once per frame
@@ -62,6 +67,35 @@ public class PlayerStats : MonoBehaviour {
     public void RemoveEffect(Effect effect)
     {
         _expiredEffects.Add(effect);
+    }
+
+    /// <summary>
+    /// Cause the player to take damage
+    /// </summary>
+    /// <param name="source">Source damaging the player</param>
+    /// <param name="amount">Amount of damage player will recieve</param>
+    /// <param name="effects">Effects applied to the player</param>
+    public void TakeDamage(GameObject source, float amount, List<Effect> effects)
+    {
+        // Add effects to player
+        foreach(Effect e in effects)
+        {
+            AddEffect(e);
+        }
+
+        // Reduce hp by amount
+        _currentHp -= amount;
+        if(_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log(gameObject.name + " Has Died!");
+        // No death logic yet
     }
     
 }
