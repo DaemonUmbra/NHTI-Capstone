@@ -21,11 +21,9 @@ public abstract class Effect {
     private float _lastTick;
 
     /// <summary>
-    /// Is the effect attached to a game object
+    /// Is the effect attached to a game object.
     /// </summary>
     private bool isAttached = false;
-
-    
     #endregion
 
     #region Access Variables
@@ -48,7 +46,9 @@ public abstract class Effect {
     /// <param name="target">Player to recieve effect</param>
     public abstract void ApplyEffect(GameObject target);
 
-    // Activate the effect so it starts ticking down
+    /// <summary>
+    /// Activate the ability. Put any "start" code in this override as well.
+    /// </summary>
     public virtual void Activate()
     {
         Debug.Log("Activated");
@@ -90,9 +90,9 @@ public abstract class Effect {
     
     /// <summary>
     /// Called every frame by the affected GameObject. 
-    /// Do most logic in the OnTick function unless it really needs to be done every frame.
+    /// Do "update" logic in the OnTick function override
     /// </summary>
-    public virtual void OnFrame()
+    public void OnFrame()
     {
         // Checks for zero or negative tick time which means there is no tick event
         if (_tickTime < 0)

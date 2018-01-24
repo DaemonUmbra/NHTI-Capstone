@@ -16,7 +16,10 @@ public class SlowMovement : Effect {
         _slowAmount = slowAmount;
         _lifetime = lifetime;
     }
-    // Copy constructor
+    /// <summary>
+    /// Copy constructor, used to copy abilities to a player
+    /// </summary>
+    /// <param name="jango"></param>
     public SlowMovement(SlowMovement jango)
     {
         _slowAmount = jango._slowAmount;
@@ -28,22 +31,32 @@ public class SlowMovement : Effect {
         Debug.Log("Ticktime: " + jango.TickTime + " | " + TickTime);
     }
 
-    
+    /// <summary>
+    /// Copies the effect to a target. Must transfer all values over
+    /// a copy constructor helps with this.
+    /// </summary>
+    /// <param name="target"></param>
     public override void ApplyEffect(GameObject target)
     {
         // Ref the player stat class
         PlayerStats ps = target.GetComponent<PlayerStats>();
         if(!ps)
         {
-            Debug.LogError("No Player Stats class in target: " + target);
+            Debug.LogError("No Player Stats class in target: " + target.name);
             return;
         }
 
-        // Copy this effect to the target
+        // Copy this effect to the target. A copy constructor helps with this
         SlowMovement slow = new SlowMovement(this);
+
+        // The copy is added to the player
         ps.AddEffect(slow);
+        // ps.AddEffect(this) // WRONG will add the original not a copy
     }
 
+    /// <summary>
+    /// Slows the player when the ability is added to a player
+    /// </summary>
     public override void Activate()
     {
         // Slow the target

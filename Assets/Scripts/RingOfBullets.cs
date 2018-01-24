@@ -61,7 +61,7 @@ namespace Powerups
                 Quaternion NewRotation = Quaternion.Euler(0, NewAngle, 0);
                 // Debug.Log("NewRotation: " + NewRotation);
 
-                GameObject b = Instantiate(pShoot.projectile, transform.position, NewRotation);
+                GameObject b = Instantiate(pShoot.projectile, transform.position, NewRotation, transform); // Make sure to set parent
                 bullets.Add(b);
             }
             Debug.Log(bullets);

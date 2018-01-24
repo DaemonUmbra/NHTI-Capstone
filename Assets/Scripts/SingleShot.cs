@@ -21,7 +21,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Single Shot Added to Shoot Delegate");
-                pShoot.shoot += OnShoot;
+                pShoot.shoot += Activate;
             }
         }
 
@@ -35,7 +35,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= OnShoot;
+                pShoot.shoot -= Activate;
             }
             pShoot = null;
 
@@ -43,14 +43,9 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        public void OnShoot()
-        {
-            GameObject _proj = Instantiate(pShoot.projectile, transform.position, transform.rotation, transform);
-        }
-
         public override void Activate()
         {
-            throw new NotImplementedException();
+            GameObject _proj = Instantiate(pShoot.projectile, transform.position, transform.rotation, transform);
         }
     }
 }

@@ -49,11 +49,6 @@ public class PlayerStats : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        // Triggers each effect
-        foreach (Effect e in _effects)
-        {
-            e.OnFrame();
-        }
         // Clean up the expired effects
         foreach (Effect e in _expiredEffects)
         {
@@ -61,11 +56,18 @@ public class PlayerStats : MonoBehaviour {
         }
         _expiredEffects.Clear();
 
+        // Triggers each effect
+        foreach (Effect e in _effects)
+        {
+            e.OnFrame();
+        }
+        
+
 
         // TEST
-        if (Input.GetKeyDown("0"))
+        if (Input.GetKeyDown("e"))
         {
-            TakeDamage(null, 10f, null);
+            TakeDamage(10f);
         }
 	}
     #endregion
@@ -255,7 +257,7 @@ public class PlayerStats : MonoBehaviour {
     }
 
     /// <summary>
-    /// Inflict your base damage on another player.
+    /// Inflict your damage and effects on another player.
     /// </summary>
     /// <param name="target">Player to take damage</param>
     public void DamagePlayer(GameObject target)
