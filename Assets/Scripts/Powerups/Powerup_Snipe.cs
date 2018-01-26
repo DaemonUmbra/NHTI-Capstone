@@ -19,7 +19,7 @@ Information
 
 namespace Powerups
 {
-    public class Snipe : ActiveAbility
+    public class Powerup_Snipe : ActiveAbility
     {
         private float CDstart;
         bool onCooldown = false, CurrentlyActive = false;
