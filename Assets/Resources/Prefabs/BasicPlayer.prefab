@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 114285521313645766}
   - component: {fileID: 114904985064479282}
   - component: {fileID: 65182824773470538}
+  - component: {fileID: 114260810603743842}
   m_Layer: 0
   m_Name: BasicPlayer
   m_TagString: Player
@@ -298,6 +299,21 @@ MonoBehaviour:
   groundLayer: 8
   jumpCooldown: 0
   maxJumpCount: 4
+--- !u!114 &114260810603743842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637758222917410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3afbc757dd27a42997958d0e3b7523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WalkSpeed: 10
+  JumpPower: 10
+  _maxHp: 100
+  _baseDmg: 10
 --- !u!114 &114285521313645766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,8 +348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb30cdcf8eb20fb43bc18dc1716b8319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpPower: 350
 --- !u!120 &120458186678847972
 LineRenderer:
   m_ObjectHideFlags: 1
