@@ -45,7 +45,7 @@ namespace Powerups
 
         public override void Activate()
         {
-            GameObject _proj = Instantiate(pShoot.projectile, transform.position, transform.rotation, transform);
+            GameObject proj = Instantiate(pShoot.projectile, transform.position, transform.rotation, transform);
         }
     }
 }

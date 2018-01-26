@@ -9,7 +9,6 @@ public class PlayerShoot : MonoBehaviour {
     public delegate void Shoot();
     public Shoot shoot;
 
-    [SerializeField]
     public GameObject projectile;
 
 	// Use this for initialization
@@ -32,7 +31,7 @@ public class PlayerShoot : MonoBehaviour {
                 aManager.AddAbility<SingleShot>();
                 aManager.RemoveAbility<Snipe>();
             }
-            if (aManager.HasAbility<SingleShot>())
+            else if (aManager.HasAbility<SingleShot>())
             {
                 aManager.AddAbility<RingOfBullets>();
                 aManager.RemoveAbility<SingleShot>();

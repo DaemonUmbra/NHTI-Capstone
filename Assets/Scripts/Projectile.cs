@@ -11,29 +11,55 @@ public class Projectile : MonoBehaviour {
     Rigidbody rb;
 
     [SerializeField]
-    ProjectileType type;
+    ProjectileType Type;
     [SerializeField]
-    float damage;
+    public float Damage; 
     [SerializeField]
-    float speed;
+    public float Speed = 10f;
     [SerializeField]
-    float lifetime = 3; // Seconds
+    public float Lifetime = 3f; // Seconds
+
+    public GameObject Owner;
+    private PlayerStats ownerStats;
+    public List<Effect> OnHitEffects;
+    
 
     public void Start()
     {
-        // Get rigidbody reference
+        // Set owner to the parent obj
+        Owner = transform.parent.gameObject;
+
+        // Get components
         rb = gameObject.GetComponent<Rigidbody>();
+        ownerStats = Owner.GetComponent<PlayerStats>();
+        OnHitEffects = ownerStats.OnHitEffects;
+        Damage = ownerStats.BaseDamage;
 
-        // Ignore collision with player
-        GameObject player = GameObject.Find("Player");
-        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
-
-        // Debug.Log("Rotation: " + gameObject.transform.rotation);
+        // Ignore collision with owner
+        if (Owner)
+            Physics.IgnoreCollision(Owner.GetComponent<Collider>(), GetComponent<Collider>());
+        else
+            Debug.LogError("Projectile has no owner.");
 
         // Apply velocity
-        rb.velocity = transform.forward * speed;
+        rb.velocity = transform.forward * Speed;
 
-        // Destroy after a set numer of seconds
-        Destroy(gameObject, lifetime);
+        // Destroy after a set number of seconds
+        Destroy(gameObject, Lifetime);
     }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            PlayerStats targetStats = collision.gameObject.GetComponent<PlayerStats>();
+            if(targetStats)
+            {
+                targetStats.TakeDamage(Damage, Owner, OnHitEffects);
+                ownerStats.ReportHit(collision.gameObject);
+                Destroy(this);
+            }
+        }
+    }
+    
 }

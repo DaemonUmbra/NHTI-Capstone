@@ -12,8 +12,11 @@ namespace Powerups
     public class Powerup_MissUnrealistic : PassiveAbility
     {
         //TWEAKABLE
+        [SerializeField]
         private float xChange = -0.5f;
+        [SerializeField]
         private float yChange = 0.5f;
+        [SerializeField]
         private float zChange = -0.5f;
 
         //TWEAKABLE

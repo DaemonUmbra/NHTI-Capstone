@@ -5,14 +5,10 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour {
 
     #region Class Variables
-    /// <summary>
-    /// Effects the player is currently under
-    /// </summary>
+    // Effects the player is currently under
     private List<Effect> _effects;
     private List<Effect> _expiredEffects;
-    /// <summary>
-    /// Effects applied to other players when attacking them
-    /// </summary>
+    // Effects applied to other players when attacking them
     private List<Effect> _onHitEffects;
 
     // Public Stats
@@ -34,6 +30,7 @@ public class PlayerStats : MonoBehaviour {
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
+    public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     #endregion
 
 
@@ -50,9 +47,9 @@ public class PlayerStats : MonoBehaviour {
     void Update() {
 
         // Clean up the expired effects
-        foreach (Effect e in _expiredEffects)
+        for (int i = 0; i < _expiredEffects.Count; ++i)
         {
-            _effects.Remove(e);
+            _effects.Remove(_expiredEffects[i]);
         }
         _expiredEffects.Clear();
 
@@ -65,7 +62,7 @@ public class PlayerStats : MonoBehaviour {
 
 
         // TEST
-        if (Input.GetKeyDown("e"))
+        if (Input.GetKeyDown("q"))
         {
             TakeDamage(10f);
         }
@@ -77,12 +74,12 @@ public class PlayerStats : MonoBehaviour {
     // Add an effect to the player
     public void AddEffect(Effect effect)
     {
-        if(effect.isUnique == true)
+        if(effect.Unique == true)
         {
             bool found = false;
             foreach(Effect e in _effects)
             {
-                if (e.GetType() == effect.GetType())
+                if (e.Name == effect.Name && effect.Name != "")
                 {
                     Debug.LogError("Cannot add effect. Unique effect already exists on player");
                     found = true;
@@ -109,7 +106,7 @@ public class PlayerStats : MonoBehaviour {
     // Add an OnHit effect to the player
     public void AddOnHit(Effect effect)
     {
-        if(effect.isUnique == true)
+        if(effect.Unique == true)
         {
             bool found = false;
             foreach(Effect e in _onHitEffects)
@@ -150,18 +147,20 @@ public class PlayerStats : MonoBehaviour {
         }
         // Reduce hp by amount
         _currentHp -= amount;
+        Debug.Log(gameObject.name + " hp: " + _currentHp);
         if (_currentHp <= 0)
         {
             Debug.Log(gameObject.name + " hp <= 0");
             Die();
         }
     }
+
     /// <summary>
     /// Cause the player to take damage from a source
     /// </summary>
     /// <param name="source">Source damaging the player, can be null</param>
     /// <param name="amount">Amount of damage player will recieve</param>
-    public void TakeDamage(GameObject source, float amount)
+    public void TakeDamage(float amount, GameObject source)
     {
         if (amount < 0)
         {
@@ -177,6 +176,7 @@ public class PlayerStats : MonoBehaviour {
             Die(source);
         }
     }
+   
     /// <summary>
     /// Cause the player to take damage with effects
     /// </summary>
@@ -207,13 +207,14 @@ public class PlayerStats : MonoBehaviour {
             Die();
         }
     }
+   
     /// <summary>
     /// Cause the player to take damage from a source with status effects
     /// </summary>
     /// <param name="source">Source damaging the player, can be null</param>
     /// <param name="amount">Amount of damage player will recieve</param>
     /// <param name="effects">Effects applied to the player, can be null</param>
-    public void TakeDamage(GameObject source, float amount, List<Effect> effects)
+    public void TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
         if (effects != null)
         {
@@ -256,6 +257,12 @@ public class PlayerStats : MonoBehaviour {
         }
     }
 
+    // Can be used later for checking accuracy etc
+    public void ReportHit(GameObject hit)
+    {
+        Debug.Log(hit.name + " was hit by " + gameObject.name);
+    }
+    /*
     /// <summary>
     /// Inflict your damage and effects on another player.
     /// </summary>
@@ -269,8 +276,9 @@ public class PlayerStats : MonoBehaviour {
             return;
         }
 
-        tStats.TakeDamage(gameObject, _baseDmg, _onHitEffects);
+        tStats.TakeDamage(_baseDmg, gameObject, _onHitEffects);
     }
+    */
     #endregion
 
 
