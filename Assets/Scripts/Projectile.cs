@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour {
     [SerializeField]
     float damage;
     [SerializeField]
-    float speed;
+    public float speed;
     [SerializeField]
     float lifetime = 3; // Seconds
 
