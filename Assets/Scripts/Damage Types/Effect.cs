@@ -6,6 +6,10 @@ using UnityEngine;
 public abstract class Effect {
 
     #region Private Variables
+    protected string _name = "";
+    //protected bool _stackable = false;
+    protected bool _unique = false;
+
     /// <summary>
     /// Time in seconds before debuff wears off.
     /// </summary>
@@ -29,14 +33,16 @@ public abstract class Effect {
     #region Access Variables
     public float Lifetime { get { return _lifetime; } }
     public float TickTime { get { return _tickTime; } }
+    public string Name { get { return _name; } }
+    public bool Unique { get { return _unique; } }
+    //public bool Stackable { get { return _stackable; } }
     #endregion
 
     #region Public Variables
     // The owner of the effect
     public GameObject Owner;
 
-    public bool isUnique = false;
-    public bool isStackable = false;
+    
     #endregion
 
     #region Overrides
@@ -73,7 +79,9 @@ public abstract class Effect {
             }
         }
     }
-
+    /// <summary>
+    /// Remove effect from player completely
+    /// </summary>
     public virtual void RemoveEffect()
     {
         // Remove effect from owner collection
@@ -110,16 +118,5 @@ public abstract class Effect {
     }
     #endregion
     
-    // To be implemented as an interface
-    public void AddStack()
-    {
-        // Make sure it is a stackable effect
-        if(!isStackable)
-        {
-            Debug.LogError("Unable to add a stack. The effect is not stackable.");
-            return;
-        }
-        Debug.LogWarning("Stacking Not Implemented Yet");
-        
-    }
+    
 }

@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             StartCoroutine(WearOff());
         }
 

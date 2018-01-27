@@ -23,17 +23,19 @@ public abstract class BaseAbility : MonoBehaviour {
     /// Make sure to set the ability name string!
     /// </summary>
     public abstract void OnAbilityAdd();
+
     /// <summary>
     /// Called by the ability manager on each update step. 
     /// Use this instead of Unity's Update()
     /// </summary>
     public abstract void OnUpdate();
+
     /// <summary>
     /// Called when an ability is removed from the player
     /// </summary>
     public virtual void OnAbilityRemove()
     {
-        active = true;
+        active = false;
     }
 
     #endregion

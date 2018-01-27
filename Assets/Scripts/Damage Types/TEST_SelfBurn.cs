@@ -12,12 +12,15 @@ public class TEST_SelfBurn : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        //burn = new BurnDamage();
+        burn = new BurnDamage(10f, 3f);
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
+		if(Input.GetKeyDown("b"))
+        {
+            burn.ApplyEffect(gameObject);
+        }
 	}
 }

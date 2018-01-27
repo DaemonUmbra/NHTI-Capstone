@@ -10,13 +10,18 @@ public class BurnDamage : Effect
     public BurnDamage(BurnDamage burnDamage)
     {
         _burnDamage = burnDamage.Damage;
-        _tickTime = burnDamage.TickTime;
+        _lifetime = burnDamage.Lifetime;
     }
 
     public BurnDamage(float burnDamage, float lifetime)
     {
         _burnDamage = burnDamage;
         _lifetime = lifetime;
+    }
+    public override void Activate()
+    {
+        _tickTime = 1f;
+        base.Activate();
     }
 
     public override void OnTick()
