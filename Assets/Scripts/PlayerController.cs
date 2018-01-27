@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
         // Check for shooting
         if (Input.GetButtonDown("Fire1"))
         {
-            if(pShoot.shoot != null)
-                pShoot.shoot();
+
+            pShoot.shoot.Invoke();
         }
             
 	}
