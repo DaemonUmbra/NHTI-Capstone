@@ -7,16 +7,19 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerShoot))]
 public class PlayerController : MonoBehaviour
 {
-    public static bool CrowdControlled = false;
+    private bool CrowdControlled = false;
+    private float CCStartTime, duration;
 
     [SerializeField]
-    int groundLayer;
+    private int groundLayer = 8;
     [SerializeField]
     float jumpCooldown;
     float lastJumpTime;
 
     [SerializeField]
     public int maxJumpCount;
+
+    
 
     int jumpCount = 0;
 
@@ -47,8 +50,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            StartCoroutine(WearOff());
+            CCWearOff(Time.time, duration);
+            return;
         }
 
         // Check for jump}
@@ -65,12 +68,13 @@ public class PlayerController : MonoBehaviour
         }
             
 	}
-    IEnumerator WearOff()
+    private void CCWearOff(float currentTime, float CCDuration)
     {
-        debounce = true;
-        yield return new WaitForSeconds(1);
-        CrowdControlled = false;
-        debounce = false;
+        Debug.Log("Crowd Control started: " + CCStartTime + " Current Time: " + currentTime);
+        if (currentTime >= CCStartTime + CCDuration)//static value
+        {
+            CrowdControlled = false;
+        }
     }
 
     private void TryJump()
@@ -93,6 +97,12 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             jumpCount = 0;
             print("Jump Reset");
+        }
+        if (collision.gameObject.tag == "SlimeBall")
+        {
+            CCStartTime = Time.time;
+            duration = 2f;
+            CrowdControlled = true;
         }
     }
     private void OnCollisionExit(Collision collision)

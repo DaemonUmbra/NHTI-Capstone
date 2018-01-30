@@ -3,26 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LobbyCanvas : MonoBehaviour {
-
+    //Finished
     [SerializeField]
     private RoomLayoutGroup _roomLayoutGroup;
-    private RoomLayoutGroup RoomLayoutGroup
+    public RoomLayoutGroup RoomLayoutGroup
     {
         get { return _roomLayoutGroup; }
     }
 
     public void OnClickJoinRoom(string roomName)
     {
+        if (PhotonNetwork.JoinRoom(roomName))
+        {
 
+        } else {
+            print("Join room failed.");
+        }
     }
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

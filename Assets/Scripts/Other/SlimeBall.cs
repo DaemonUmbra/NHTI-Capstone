@@ -12,6 +12,13 @@ public class SlimeBall : MonoBehaviour
     {
         Destroy(gameObject, lifetime);
         rb = gameObject.GetComponent<Rigidbody>();
+
+        Vector3 mp = Input.mousePosition;
+        mp.z = 10;
+        Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
+
+        transform.LookAt(mouseLocation);
+
         rb.velocity = transform.forward * force;
     }
 	
@@ -21,14 +28,4 @@ public class SlimeBall : MonoBehaviour
 		
 	}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Rigidbody playerRB = collision.gameObject.GetComponent<Rigidbody>();
-            //playerRB.AddForce(collision.gameObject.transform.up * 300f);
-            playerRB.AddForce(collision.gameObject.transform.up * 260f);
-            
-        }
-    }
 }

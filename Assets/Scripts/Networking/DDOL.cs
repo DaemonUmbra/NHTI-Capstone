@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DDOL : MonoBehaviour {
 
-	// Use this for initialization
+	//Finished
 	private void Awake () {
         DontDestroyOnLoad(this);
 	}

@@ -15,11 +15,11 @@ namespace Powerups
     /// 
     public class Powerup_Growth : PassiveAbility
     {
-        protected new string Name = "Growth";
         private Vector3 OriginalScale;
         public float GrowthFactor = 2;
         public override void OnAbilityAdd()
         {
+            Name = "Growth";
             OriginalScale = transform.localScale;
             transform.localScale = OriginalScale * GrowthFactor;
         }
