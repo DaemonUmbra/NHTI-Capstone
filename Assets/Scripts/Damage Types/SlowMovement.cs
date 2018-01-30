@@ -109,26 +109,5 @@ public class SlowMovement : Effect {
     }
     #endregion
 
-    /*
-    #region IStackable Implementation
-    public void AddStack()
-    {
-        _stacks++;
-        AddSlow();
-    }
-    public void RemoveStack()
-    {
-        if(_stacks <= 1)
-        {
-            RemoveEffect();
-        }
-        else
-        {
-            _stacks--;
-            ReverseSlow();
-        }
-    }
-    #endregion
-    */
     
 }

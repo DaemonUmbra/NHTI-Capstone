@@ -6,7 +6,7 @@ public class LobbyCanvas : MonoBehaviour {
     //Finished
     [SerializeField]
     private RoomLayoutGroup _roomLayoutGroup;
-    private RoomLayoutGroup RoomLayoutGroup
+    public RoomLayoutGroup RoomLayoutGroup
     {
         get { return _roomLayoutGroup; }
     }
