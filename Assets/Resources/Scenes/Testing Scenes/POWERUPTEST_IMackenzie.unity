@@ -263,6 +263,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &661186519 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1637758222917410, guid: a96f61ba912f5174289783b19a656cec,
+    type: 2}
+  m_PrefabInternal: {fileID: 1705954869}
+--- !u!114 &661186530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 661186519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c16a8385c952941a5ee6d5b3962821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 1
+  Cooldown: 0
+  maxVelocity: 20
 --- !u!1001 &1705954869
 Prefab:
   m_ObjectHideFlags: 0
