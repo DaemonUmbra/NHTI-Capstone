@@ -30,6 +30,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+            Name = "Miss Unrealistic";
             //If we don't have a template set in the editor
             if (!crownOrSashTemplate)
             {

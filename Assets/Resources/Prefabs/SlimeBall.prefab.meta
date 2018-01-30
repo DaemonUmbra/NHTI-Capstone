@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Resources/Prefabs/SlimeBall.prefab.meta
 guid: 804ab8762f48c344ab26f7daacfc6795
 timeCreated: 1517344668
+=======
+guid: be7d7bd74e15d744db40d4384abeb0e7
+timeCreated: 1517341981
+>>>>>>> e520a8c171580f2db3ec67dbb51f6bce8470b608:Assets/Resources/Prefabs/Ledge(long).prefab.meta
 licenseType: Pro
 NativeFormatImporter:
   externalObjects: {}
