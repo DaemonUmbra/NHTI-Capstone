@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomLayoutGroup : MonoBehaviour {
-
+    //Finished
     [SerializeField]
     private GameObject _roomListingPrefab;
     private GameObject RoomListingPrefab
@@ -17,7 +17,7 @@ public class RoomLayoutGroup : MonoBehaviour {
         get { return _roomListingButtons;  }
     }
 
-    private void OnReceiveRoomListUpdate()
+    private void OnReceivedRoomListUpdate()
     {
         RoomInfo[] rooms = PhotonNetwork.GetRoomList();
 
@@ -33,7 +33,7 @@ public class RoomLayoutGroup : MonoBehaviour {
         int index = RoomListingButtons.FindIndex(x => x.RoomName == room.Name);
         if (index == -1)
         {
-            if(room.IsVisible && room.playerCount < room.MaxPlayers)
+            if(room.IsVisible && room.PlayerCount < room.MaxPlayers)
             {
                 GameObject roomListingObj = Instantiate(RoomListingPrefab);
                 roomListingObj.transform.SetParent(transform, false);

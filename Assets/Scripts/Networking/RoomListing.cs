@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 public class RoomListing : MonoBehaviour {
-
+    //Finished
     [SerializeField]
     private Text _roomNameText;
     private Text RoomNameText
@@ -17,7 +17,7 @@ public class RoomListing : MonoBehaviour {
 
 	// Use this for initialization
 	private void Start () {
-        GameObject lobbyCanvasObj = MainCanvaManager.Instance.LobbyCanvas.gameObject;
+        GameObject lobbyCanvasObj = MainCanvasManager.Instance.LobbyCanvas.gameObject;
         if (lobbyCanvasObj == null) { return; }
 
         LobbyCanvas lobbyCanvas = lobbyCanvasObj.GetComponent<LobbyCanvas>();

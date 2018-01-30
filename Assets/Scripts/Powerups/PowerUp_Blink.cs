@@ -8,6 +8,7 @@ public class PowerUp_Blink : ActiveAbility {
     [HideInInspector]
     public PlayerController playercontrol;
     public float BlinkDistance; // For debugging purposes. Once this has been determined, will be set to HideInInspector
+    public bool CoolDown; 
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +20,7 @@ public class PowerUp_Blink : ActiveAbility {
         Name = "Blink";
         Debug.Log(Name + " Added");
         playercontrol = GetComponent<PlayerController>();
-        BlinkDistance = 30;
+        CoolDown = false;
     }
 
     public override void OnAbilityRemove()
@@ -35,6 +36,19 @@ public class PowerUp_Blink : ActiveAbility {
 
     public override void Activate()
     {
-        transform.position += transform.forward * BlinkDistance;
+        if (CoolDown == false)
+        {
+            transform.position += transform.forward * BlinkDistance;
+            CoolDown = true;
+            StartCoroutine(CooldownTimer());
+        }
+
+        
+    }
+
+    IEnumerator CooldownTimer()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        CoolDown = false;
     }
 }
