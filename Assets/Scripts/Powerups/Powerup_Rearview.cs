@@ -18,6 +18,7 @@ namespace Powerups
         new private Camera camera;
         public override void OnAbilityAdd()
         {
+            Name = "Rearview";
             //Created a camera dummy
             cameraDummy = new GameObject
             {

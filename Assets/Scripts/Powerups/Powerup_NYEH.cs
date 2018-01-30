@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Powerups
 {
+    [RequireComponent(typeof(AudioSource))]
     class Powerup_NYEH : ActiveAbility
     {
         AudioSource audioSource;
@@ -13,8 +14,15 @@ namespace Powerups
 
         public float nyehVolume = 0.5f;
 
-        public void Awake()
+        public void OnShoot()
         {
+            Debug.Log("NYEH!");
+            audioSource.PlayOneShot(nyeh, nyehVolume);
+        }
+
+        public override void OnAbilityAdd()
+        {
+            Name = "NYEH!";
             if (!gameObject.GetComponent<AudioSource>())
             {
                 gameObject.AddComponent<AudioSource>();
@@ -26,16 +34,6 @@ namespace Powerups
             {
                 Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
             }
-        }
-
-        public void OnShoot()
-        {
-            Debug.Log("NYEH!");
-            audioSource.PlayOneShot(nyeh, nyehVolume);
-        }
-
-        public override void OnAbilityAdd()
-        {
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
             pShoot.shoot += OnShoot;
         }
@@ -49,11 +47,12 @@ namespace Powerups
 
         public override void OnUpdate()
         {
-            
+            //NYEH! does not tick
         }
 
         public override void Activate()
         {
+            //When is Activate() called again?
             throw new NotImplementedException();
         }
     }
