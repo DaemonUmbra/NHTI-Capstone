@@ -38,9 +38,12 @@ public class PowerUp_Blink : ActiveAbility {
     {
         if (CoolDown == false)
         {
-            transform.position += transform.forward * BlinkDistance;
-            CoolDown = true;
-            StartCoroutine(CooldownTimer());
+            if (Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), BlinkDistance) == false)
+            {
+                transform.position += transform.forward * BlinkDistance;
+                CoolDown = true;
+                StartCoroutine(CooldownTimer());
+            }
         }
 
         
