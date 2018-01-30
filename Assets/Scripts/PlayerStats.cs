@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
+    #region To be removed
+    public readonly PhotonPlayer PhotonPlayer;
+    public int Health;
+    public PlayerStats(PhotonPlayer photonPlayer, int health)
+    {
+        PhotonPlayer = photonPlayer;
+        Health = health;
+    }
+    #endregion
+
     #region Class Variables
     // Effects the player is currently under
     private List<Effect> _effects;

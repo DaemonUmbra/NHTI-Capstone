@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CreateRoom : MonoBehaviour {
-
+    //Finished
     [SerializeField]
     private Text _roomName;
     private Text RoomName
