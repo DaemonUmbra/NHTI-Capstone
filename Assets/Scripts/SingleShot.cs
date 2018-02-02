@@ -47,6 +47,7 @@ namespace Powerups
         {
             GameObject _proj = Instantiate(pShoot.projectile, transform.position, transform.rotation);
             _proj.GetComponent<Rigidbody>().AddForce(_proj.transform.forward * _proj.GetComponent<Projectile>().speed);
+            _proj.GetComponent<Projectile>().IgnorePlayer(transform);
         }
     }
 }

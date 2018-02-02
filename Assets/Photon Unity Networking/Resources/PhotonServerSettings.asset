@@ -26,5 +26,19 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
-  RpcList: []
-  DisableAutoOpenWizard: 0
+  RpcList:
+  - Chat
+  - DestroyRpc
+  - InstantiateRpc
+  - PickupItemInit
+  - PunPickup
+  - PunPickupSimple
+  - PunRespawn
+  - RequestForPickupItems
+  - RequestForPickupTimes
+  - RPC_CreatePlayer
+  - RPC_LoadedGameScene
+  - RPC_LoadGameOthers
+  - RPC_NewHealth
+  - RPC_PerformTaunt
+  DisableAutoOpenWizard: 1

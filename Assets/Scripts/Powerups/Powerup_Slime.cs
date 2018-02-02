@@ -10,6 +10,7 @@ namespace Powerups
         private float CDstart;
         bool onCooldown = false, CurrentlyActive = false;
         PlayerShoot pShoot;
+        float offset = 2;
 
 
         public override void OnAbilityAdd()
@@ -44,26 +45,26 @@ namespace Powerups
         }
         public override void Activate()
         {
+            GameObject ball = Resources.Load("Prefabs/SlimeBall") as GameObject;
+            Instantiate(ball);
             throw new NotImplementedException();
         }
         public void OnShoot()
         {
-            if (onCooldown)
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log(player.name);
+            GameObject ball = Resources.Load("Prefabs/SlimeBall") as GameObject;
+            Instantiate(ball, (player.transform.forward * offset) + player.transform.position, transform.rotation);
+            /*if (onCooldown)
             {
                 Debug.Log("This ability is on cooldown" + "Start Time: " + CDstart);
                 return;
-            }
-            Vector3 mp = Input.mousePosition;
-            mp.z = 10;
-            Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
-            Vector3 targetVector = mouseLocation;
+            }*/
+
         }
-        IEnumerator TriggerCoolDown()
+        private void TriggerCoolDown()
         {
-            onCooldown = true;
             CDstart = Time.fixedTime;
-            yield return new WaitForSeconds(5);
-            onCooldown = false;
         }
 
     }

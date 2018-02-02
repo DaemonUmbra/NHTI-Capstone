@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Slime
   - Floor
   - JumpPad
+  - SlimeBall
+  - Slime
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerStats))]
-public class PlayerMotor : MonoBehaviour {
+public class PlayerMotor : Photon.MonoBehaviour {
 
     
     bool onJumpPad = false;
@@ -14,6 +14,17 @@ public class PlayerMotor : MonoBehaviour {
     private Vector3 _velocity = Vector3.zero;
 
     // Use this for initialization
+
+    private void Awake()
+    {
+        
+
+        if (!photonView.isMine)
+        {
+            enabled = false;
+        }
+    }
+
     void Start () {
         rb = GetComponent<Rigidbody>();
         pStats = GetComponent<PlayerStats>();
