@@ -19,6 +19,7 @@ public class PowerUp_Blink : ActiveAbility {
         // Set name
         Name = "Blink";
         Debug.Log(Name + " Added");
+        Cooldown = 5.0f;
         playercontrol = GetComponent<PlayerController>();
         CoolDown = false;
     }
@@ -51,7 +52,7 @@ public class PowerUp_Blink : ActiveAbility {
 
     IEnumerator CooldownTimer()
     {
-        yield return new WaitForSecondsRealtime(5);
+        yield return new WaitForSecondsRealtime(Cooldown);
         CoolDown = false;
     }
 }
