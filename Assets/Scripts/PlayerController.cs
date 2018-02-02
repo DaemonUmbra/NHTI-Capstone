@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
 [RequireComponent(typeof(PlayerShoot))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Photon.MonoBehaviour
 {
     private bool CrowdControlled = false;
     private float CCStartTime, duration;
@@ -31,8 +31,17 @@ public class PlayerController : MonoBehaviour
 
     bool isGrounded = false;
     bool debounce = false;
-    
-	void Start ()
+
+    private void Awake()
+    {
+       
+
+        if (!photonView.isMine)
+        {
+            enabled = false;
+        }
+    }
+    void Start ()
     {
         motor = GetComponent<PlayerMotor>();
         pShoot = GetComponent<PlayerShoot>();
@@ -113,4 +122,5 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+
 }
