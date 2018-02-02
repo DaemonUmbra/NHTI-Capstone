@@ -33,11 +33,9 @@ namespace Powerups
             Name = "Thunder Wave";
             Debug.Log(Name + " Added");
         }
-        /// <summary>
-        /// Called by the ability manager on each update step. 
-        /// Use this instead of Unity's Update()
-        /// </summary>
-        public override void Activate()
+        
+
+        public override void Activate() // Will need to be activated by something once we decide how players will trigger abilities.
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             Vector3 back = transform.TransformDirection(-Vector3.forward);
