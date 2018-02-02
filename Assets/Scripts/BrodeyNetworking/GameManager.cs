@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace PUNTutorial
 {
@@ -43,11 +44,11 @@ namespace PUNTutorial
         {
             Debug.Log("Joined da Room");
 
-            if (PhotonNetwork.isMasterClient)
-            {
-                PhotonNetwork.LoadLevel("Sandbox" +
-                    "");
-            }
+           // if (PhotonNetwork.isMasterClient)
+           // {
+           //     PhotonNetwork.LoadLevel("Sandbox" +
+           //         "");
+           // }
         }
 
         void OnLevelWasLoaded(int levelNumber)
@@ -55,11 +56,15 @@ namespace PUNTutorial
             if (!PhotonNetwork.inRoom) return;
 
             var spawnPoint = GetRandomSpawnPoint();
-
-            localPlayer = PhotonNetwork.Instantiate(
-                "BasicPlayer",
-                spawnPoint.position,
-                spawnPoint.rotation, 0);
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+            if (sceneName == "Sandbox")
+            {
+                localPlayer = PhotonNetwork.Instantiate(
+                    "BasicPlayer",
+                    spawnPoint.position,
+                    spawnPoint.rotation, 0);
+            }
             
         }
 
