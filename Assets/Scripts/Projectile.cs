@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour {
     Rigidbody rb;
 
     [SerializeField]
+    Transform shooter;
+    [SerializeField]
     ProjectileType type;
     [SerializeField]
     float damage;
@@ -24,9 +26,13 @@ public class Projectile : MonoBehaviour {
         // Get rigidbody reference
         rb = gameObject.GetComponent<Rigidbody>();
 
-        // Ignore collision with player
-        GameObject player = GameObject.Find("Player");
-        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
+        if(!shooter)
+        {
+            Debug.LogWarning("Shooter must be manually set by calling IgnorePlayer on the projectile immediately after instantiation, this is to prevent future issues with multiplayer");
+        }
+        ///Commented out in the interest of future multiplayer
+        //GameObject player = GameObject.Find("Player");
+        //Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
 
         // Debug.Log("Rotation: " + gameObject.transform.rotation);
 
@@ -35,5 +41,12 @@ public class Projectile : MonoBehaviour {
 
         // Destroy after a set numer of seconds
         Destroy(gameObject, lifetime);
+    }
+
+    // Ignore collision with player
+    public void IgnorePlayer(Transform player)
+    {
+        shooter = player;
+        Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
     }
 }

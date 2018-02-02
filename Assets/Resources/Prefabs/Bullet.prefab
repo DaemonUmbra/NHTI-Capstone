@@ -112,13 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-<<<<<<< HEAD
-  damage: 0
-  speed: 80
-=======
   damage: 10
   speed: 20
->>>>>>> e520a8c171580f2db3ec67dbb51f6bce8470b608
   lifetime: 3
 --- !u!135 &135218563817387618
 SphereCollider:
