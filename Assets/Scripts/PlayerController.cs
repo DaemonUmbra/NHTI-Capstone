@@ -31,15 +31,17 @@ public class PlayerController : MonoBehaviour
 
     bool isGrounded = false;
     bool debounce = false;
+
     
-	void Start ()
+
+    void Start ()
     {
         motor = GetComponent<PlayerMotor>();
         pShoot = GetComponent<PlayerShoot>();
         lastJumpTime = Time.time - jumpCooldown;
 	}
-	
-	void Update () {
+    
+    void Update () {
         // Get movement input
         Vector3 velocity = Vector3.zero;
         velocity.x = Input.GetAxis("Horizontal") * transform.right.x;
@@ -50,7 +52,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            CCWearOff(Time.time, duration);
+            CCWearOff(Time.time, duration, false);
             return;
         }
 
@@ -59,23 +61,34 @@ public class PlayerController : MonoBehaviour
         {
             TryJump();
         }
-
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StopMomentum();
+        }
         // Check for shooting
         if (Input.GetButtonDown("Fire1"))
         {
 
             pShoot.shoot.Invoke();
         }
-            
-	}
-    private void CCWearOff(float currentTime, float CCDuration)
+    }
+    void StopMomentum()
     {
-        Debug.Log("Crowd Control started: " + CCStartTime + " Current Time: " + currentTime);
+        motor.SetVelocity(Vector3.zero);
+    }
+    private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
+    {
+        //Debug.Log("Crowd Control started: " + CCStartTime + " Current Time: " + currentTime);
+        if (stopsMomentum)
+        {
+            StopMomentum();
+        }
         if (currentTime >= CCStartTime + CCDuration)//static value
         {
             CrowdControlled = false;
         }
     }
+    
 
     private void TryJump()
     {
@@ -101,8 +114,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "SlimeBall")
         {
             CCStartTime = Time.time;
-            duration = 2f;
+            duration = 1f;
             CrowdControlled = true;
+            CCWearOff(Time.time, duration, true);
         }
     }
     private void OnCollisionExit(Collision collision)
