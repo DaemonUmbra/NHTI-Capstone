@@ -29,10 +29,6 @@ public class PlayerController : Photon.MonoBehaviour
     bool isGrounded = false;
     bool debounce = false;
 
-<<<<<<< HEAD
-    
-
-=======
     private void Awake()
     {
         if (!photonView.isMine)
@@ -40,7 +36,6 @@ public class PlayerController : Photon.MonoBehaviour
             enabled = false;
         }
     }
->>>>>>> aa76c525e830c3fa2e734e3732183ec39859aef7
     void Start ()
     {
         motor = GetComponent<PlayerMotor>();
