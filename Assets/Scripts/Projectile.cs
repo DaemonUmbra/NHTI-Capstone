@@ -6,7 +6,7 @@ using UnityEngine;
 public enum ProjectileType { BULLET, LAZER };
 
 [RequireComponent(typeof(Rigidbody))]
-public class Projectile : MonoBehaviour {
+public class Projectile : Photon.MonoBehaviour {
 
     Rigidbody rb;
 
