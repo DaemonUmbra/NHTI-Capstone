@@ -2,39 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Powerup_FeatherFall : ActiveAbility {
+public class Powerup_FeatherFall : PassiveAbility {
 
-    public float maxVelocity;
+    public float maxSpeed = 5f;
     private Rigidbody rb;
-    public override void Activate()
-    {
-        throw new System.NotImplementedException();
-    }
 
     public override void OnAbilityAdd()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnUpdate()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    // Use this for initialization
-    void Start()
-    {
         rb = gameObject.GetComponent<Rigidbody>();
     }
-
+    
     // Update is called once per frame
-    void Update()
+    public override void OnUpdate()
     {
-        if (rb.velocity.y > maxVelocity && rb.velocity.y < -0.1f)
+        if (rb.velocity.y < -maxSpeed)  // Check that the y vel is less than neg maxSpeed
         {
             Vector3 ogVelocity = rb.velocity;
             
-            Vector3 clamp = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
+            Vector3 clamp = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
             Debug.Log("Da bug Check");
             rb.velocity =  new Vector3(ogVelocity.x, clamp.y, ogVelocity.z);
         }

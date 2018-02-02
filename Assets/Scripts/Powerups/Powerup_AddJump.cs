@@ -12,17 +12,13 @@ namespace Powerups      //Ian MacKenzie
         // Use this for initialization
         void Start()
         {
-           playerController = GetComponent<PlayerController>();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            playerController = GetComponent<PlayerController>();
+            
         }
 
         public override void OnAbilityAdd()     
         {
+            Name = "Add Jump";
             //!!!!!Commented out because I am waiting on the passive and active abilites, and to work with
             // someone on the player controller!!!!!.
 
@@ -37,7 +33,7 @@ namespace Powerups      //Ian MacKenzie
 
         public override void OnUpdate()
         {
-            throw new System.NotImplementedException();
+            // Nothing yet
         }
     }
 }
