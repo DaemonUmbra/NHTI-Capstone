@@ -54,7 +54,7 @@ public class AbilityManager : MonoBehaviour {
     public void AddAbility<T>() where T : BaseAbility
     {
         // Make sure the ability isn't already there
-        if (gameObject.GetComponent<T>() == null)
+        if (!HasAbility<T>())
         {
             // Add ability to player and register it
             BaseAbility ability = gameObject.AddComponent<T>();
@@ -64,7 +64,7 @@ public class AbilityManager : MonoBehaviour {
     public void AddAbility(BaseAbility ability)
     {
         // Make sure the ability isn't already there
-        if (gameObject.GetComponent(ability.GetType()) == null)
+        if (!HasAbility(ability))
         {
             // Add ability to player and register it
             BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ability.GetType());

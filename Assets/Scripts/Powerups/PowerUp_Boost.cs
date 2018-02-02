@@ -12,7 +12,7 @@ public class PowerUp_Boost : ActiveAbility {
     public override void OnAbilityAdd()
     {
         Name = "Boost";
-        Debug.Log(Name + " is added");
+        Debug.Log(Name + "  Added");
         PC = GetComponent<PlayerController>();
     }
 

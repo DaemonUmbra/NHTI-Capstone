@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour {
+public class PlayerStats : Photon.MonoBehaviour {
 
     #region To be removed
     public readonly PhotonPlayer PhotonPlayer;

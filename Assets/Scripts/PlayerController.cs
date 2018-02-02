@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
 [RequireComponent(typeof(PlayerShoot))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Photon.MonoBehaviour
 {
     private bool CrowdControlled = false;
     private float CCStartTime, duration;
@@ -18,12 +18,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public int maxJumpCount;
-
     
-
     int jumpCount = 0;
-
-
+    
     // Local components
     PlayerMotor motor;
     PlayerShoot pShoot;
@@ -32,8 +29,18 @@ public class PlayerController : MonoBehaviour
     bool isGrounded = false;
     bool debounce = false;
 
+<<<<<<< HEAD
     
 
+=======
+    private void Awake()
+    {
+        if (!photonView.isMine)
+        {
+            enabled = false;
+        }
+    }
+>>>>>>> aa76c525e830c3fa2e734e3732183ec39859aef7
     void Start ()
     {
         motor = GetComponent<PlayerMotor>();
@@ -44,8 +51,8 @@ public class PlayerController : MonoBehaviour
     void Update () {
         // Get movement input
         Vector3 velocity = Vector3.zero;
-        velocity.x = Input.GetAxis("Horizontal") * transform.right.x;
-        velocity.z = Input.GetAxis("Vertical") * transform.forward.z;
+        velocity = Input.GetAxis("Horizontal") * transform.right;
+        velocity += Input.GetAxis("Vertical") * transform.forward;
         if (!CrowdControlled)
         {
             motor.SetVelocity(velocity); // Apply velocity
@@ -127,4 +134,5 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+
 }

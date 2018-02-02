@@ -1,16 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_ThunderWave : BaseAbility
+    public class Powerup_ThunderWave : ActiveAbility
     {
-
-        //[SerializeField]
-        //protected new string Name = "Thunder Wave";
-        //public string GetName { get { return Name; } }
-        protected bool active = true;
+        
         public float force = 500;
         public Vector3 explosionPos;
         public float radius = 20;
@@ -40,7 +37,7 @@ namespace Powerups
         /// Called by the ability manager on each update step. 
         /// Use this instead of Unity's Update()
         /// </summary>
-        public override void OnUpdate()
+        public override void Activate()
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             Vector3 back = transform.TransformDirection(-Vector3.forward);
@@ -77,12 +74,14 @@ namespace Powerups
             active = true;
         }
 
+        public override void OnUpdate()
+        {
+            // Nothing yet
+        }
+        
         #endregion
 
-        // Access name
-
-        // Access active status
-        public bool IsActive { get { return active; } }
+        
 
     }
 }
