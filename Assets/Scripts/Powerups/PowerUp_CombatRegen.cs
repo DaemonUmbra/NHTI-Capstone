@@ -12,7 +12,7 @@ public class PowerUp_CombatRegen : PassiveAbility {
     {
         Active = true;
         Name = "Combat Regeneration";
-        Debug.Log(Name + " is Added");
+        Debug.Log(Name + " Added");
         PS = GetComponent<PlayerStats>();
         StartCoroutine(Regen());
     }
@@ -32,7 +32,7 @@ public class PowerUp_CombatRegen : PassiveAbility {
     {
         while (Active)
         {
-            PS.GainHp(10);
+            PS.GainHp(10.0f);
             yield return new WaitForSecondsRealtime(20);
         }
     }
