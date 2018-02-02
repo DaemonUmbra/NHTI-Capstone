@@ -9,32 +9,29 @@ public enum ProjectileType { BULLET, LAZER };
 public class Projectile : Photon.MonoBehaviour {
 
     Rigidbody rb;
-
     [SerializeField]
     Transform shooter;
+    PlayerStats shooterStats;
     [SerializeField]
     ProjectileType type;
-    [SerializeField]
-    float damage;
-    [SerializeField]
+
+    public float damage;
     public float speed;
+
     [SerializeField]
     float lifetime = 3; // Seconds
 
     public void Start()
     {
+        // Set shooterStats if shooter was set in inspector
+        if(shooter)
+        {
+            shooterStats = shooter.GetComponent<PlayerStats>();
+            if(shooterStats == null)
+                Debug.LogError("No player stats found on shooter.");
+        }
         // Get rigidbody reference
         rb = gameObject.GetComponent<Rigidbody>();
-
-        if(!shooter)
-        {
-            Debug.LogWarning("Shooter must be manually set by calling IgnorePlayer on the projectile immediately after instantiation, this is to prevent future issues with multiplayer");
-        }
-        ///Commented out in the interest of future multiplayer
-        //GameObject player = GameObject.Find("Player");
-        //Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
-
-        // Debug.Log("Rotation: " + gameObject.transform.rotation);
 
         // Apply velocity
         rb.velocity = transform.forward * speed;
@@ -47,6 +44,22 @@ public class Projectile : Photon.MonoBehaviour {
     public void IgnorePlayer(Transform player)
     {
         shooter = player;
+        shooterStats = shooter.GetComponent<PlayerStats>();
+        if(shooterStats == null)
+            Debug.LogError("No player stats found on shooter.");
+
         Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject hit = collision.gameObject;
+        PlayerStats hitStats = hit.GetComponent<PlayerStats>();
+
+        if(hitStats)
+        {
+            hitStats.TakeDamage(damage, shooter.gameObject, shooterStats.OnHitEffects);
+            Destroy(gameObject);
+        }
     }
 }

@@ -18,12 +18,9 @@ public class PlayerController : Photon.MonoBehaviour
 
     [SerializeField]
     public int maxJumpCount;
-
     
-
     int jumpCount = 0;
-
-
+    
     // Local components
     PlayerMotor motor;
     PlayerShoot pShoot;
@@ -34,8 +31,6 @@ public class PlayerController : Photon.MonoBehaviour
 
     private void Awake()
     {
-       
-
         if (!photonView.isMine)
         {
             enabled = false;
@@ -51,8 +46,8 @@ public class PlayerController : Photon.MonoBehaviour
 	void Update () {
         // Get movement input
         Vector3 velocity = Vector3.zero;
-        velocity.x = Input.GetAxis("Horizontal") * transform.right.x;
-        velocity.z = Input.GetAxis("Vertical") * transform.forward.z;
+        velocity = Input.GetAxis("Horizontal") * transform.right;
+        velocity += Input.GetAxis("Vertical") * transform.forward;
         if (!CrowdControlled)
         {
             motor.SetVelocity(velocity); // Apply velocity

@@ -17,8 +17,6 @@ public class PlayerMotor : Photon.MonoBehaviour {
 
     private void Awake()
     {
-        
-
         if (!photonView.isMine)
         {
             enabled = false;
