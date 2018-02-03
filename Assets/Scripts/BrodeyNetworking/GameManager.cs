@@ -36,7 +36,7 @@ namespace PUNTutorial
         public void JoinGame()
         {
             RoomOptions ro = new RoomOptions();
-            ro.MaxPlayers = 6;
+            ro.MaxPlayers = 8;
             PhotonNetwork.JoinOrCreateRoom("Default Room", ro, null);
         }
 
@@ -44,11 +44,11 @@ namespace PUNTutorial
         {
             Debug.Log("Joined da Room");
 
-           // if (PhotonNetwork.isMasterClient)
-           // {
-           //     PhotonNetwork.LoadLevel("Sandbox" +
-           //         "");
-           // }
+            if (PhotonNetwork.isMasterClient)
+            {
+                PhotonNetwork.LoadLevel("Sandbox" +
+                    "");
+            }
         }
 
         void OnLevelWasLoaded(int levelNumber)
