@@ -9,7 +9,7 @@ namespace Powerups
     {
 
         PlayerShoot pShoot;
-
+        
         public override void OnAbilityAdd()
         {
             // Set name
@@ -43,10 +43,19 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
+        
         public override void Activate()
+        {
+            PhotonView pv = PhotonView.Get(this);
+            pv.RPC("Shoot", PhotonTargets.All);
+        }
+        [PunRPC]
+        void Shoot()
         {
             GameObject _proj = Instantiate(pShoot.projectile, transform.position, transform.rotation);
             _proj.GetComponent<Projectile>().IgnorePlayer(transform);
         }
+
+
     }
 }

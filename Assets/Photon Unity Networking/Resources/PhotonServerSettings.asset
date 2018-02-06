@@ -41,4 +41,7 @@ MonoBehaviour:
   - RPC_LoadGameOthers
   - RPC_NewHealth
   - RPC_PerformTaunt
+  - Shoot
+  - Activate
+  - Ring
   DisableAutoOpenWizard: 1
