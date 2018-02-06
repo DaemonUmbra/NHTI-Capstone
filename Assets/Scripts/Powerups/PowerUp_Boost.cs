@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Programmer Assigned: Steven Zachary
+ * Power-up: Boost
+ * Description: Grants the player the ability to dash forward. Short-moderate cooldown.
+ */
+
 public class PowerUp_Boost : ActiveAbility {
 
     [HideInInspector]
