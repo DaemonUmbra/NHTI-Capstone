@@ -42,7 +42,7 @@ public class PlayerShoot : MonoBehaviour {
                 aManager.RemoveAbility<RingOfBullets>();
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             AbilityManager aManager = GetComponent<AbilityManager>();
 
@@ -65,7 +65,7 @@ public class PlayerShoot : MonoBehaviour {
             }
 
             
-        }
+        }*/
     }
 }
 

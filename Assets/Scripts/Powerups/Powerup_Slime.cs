@@ -91,6 +91,7 @@ namespace Powerups
             {
                 Debug.Log(endPoint.transform.gameObject.name);
                 GameObject slimepool = Instantiate(slime, endPoint.point, transform.rotation);
+                slimepool.transform.localEulerAngles = Vector3.zero;
                 slimepool.name = "SP";
                 Destroy(slimepool, 7f);
                 Active = true;
