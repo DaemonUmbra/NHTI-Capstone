@@ -6,7 +6,7 @@ using UnityEngine;
 public enum ProjectileType { BULLET, LAZER };
 
 [RequireComponent(typeof(Rigidbody))]
-public class Projectile : Photon.MonoBehaviour {
+public class Projectile : MonoBehaviour {
 
     Rigidbody rb;
     [SerializeField]
@@ -18,11 +18,15 @@ public class Projectile : Photon.MonoBehaviour {
     public float damage;
     public float speed;
 
+    PhotonView pv;
+
     [SerializeField]
     float lifetime = 3; // Seconds
 
     public void Start()
     {
+        
+
         // Set shooterStats if shooter was set in inspector
         if(shooter)
         {
@@ -30,6 +34,14 @@ public class Projectile : Photon.MonoBehaviour {
             if(shooterStats == null)
                 Debug.LogError("No player stats found on shooter.");
         }
+
+        PhotonView pv = PhotonView.Get(this);
+        pv.RPC("Shoot", PhotonTargets.All);
+    }
+
+    [PunRPC]
+    void Shoot()
+    {
         // Get rigidbody reference
         rb = gameObject.GetComponent<Rigidbody>();
 

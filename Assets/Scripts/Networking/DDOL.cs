@@ -21,7 +21,7 @@ public class DDOL : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
 
-        Debug.Log(sceneName);
+       // Debug.Log(sceneName);
         if (sceneName == "BrodeyJoinScene")
         {
             PhotonNetwork.LoadLevel("Sandbox" + "");
