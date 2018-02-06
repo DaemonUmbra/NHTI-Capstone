@@ -47,6 +47,12 @@ namespace Powerups
         
         public override void Activate()
         {
+            PhotonView pv = PhotonView.Get(this);
+            pv.RPC("Ring", PhotonTargets.All);
+        }
+        [PunRPC]
+        void Ring()
+        {
             Debug.Log("Trying to Shoot a Ring!");
             List<GameObject> bullets = new List<GameObject>();
             // Spawn a ring of bullets
