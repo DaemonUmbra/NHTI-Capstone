@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace PUNTutorial
 {
@@ -35,7 +36,7 @@ namespace PUNTutorial
         public void JoinGame()
         {
             RoomOptions ro = new RoomOptions();
-            ro.MaxPlayers = 6;
+            ro.MaxPlayers = 8;
             PhotonNetwork.JoinOrCreateRoom("Default Room", ro, null);
         }
 
@@ -55,11 +56,15 @@ namespace PUNTutorial
             if (!PhotonNetwork.inRoom) return;
 
             var spawnPoint = GetRandomSpawnPoint();
-
-            localPlayer = PhotonNetwork.Instantiate(
-                "BasicPlayer",
-                spawnPoint.position,
-                spawnPoint.rotation, 0);
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+            if (sceneName == "Sandbox")
+            {
+                localPlayer = PhotonNetwork.Instantiate(
+                    "BasicPlayer",
+                    spawnPoint.position,
+                    spawnPoint.rotation, 0);
+            }
             
         }
 
