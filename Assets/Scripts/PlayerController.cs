@@ -16,6 +16,7 @@ public class PlayerController : Photon.MonoBehaviour
     float jumpCooldown;
     float lastJumpTime;
 
+
     [SerializeField]
     public int maxJumpCount;
     
@@ -28,6 +29,12 @@ public class PlayerController : Photon.MonoBehaviour
 
     bool isGrounded = false;
     bool debounce = false;
+
+    /// <summary>
+    /// Inverted movement controls
+    /// </summary>
+    public bool InvertX = false;
+    public bool InvertY = false;
 
     private void Awake()
     {
@@ -45,12 +52,19 @@ public class PlayerController : Photon.MonoBehaviour
     
     void Update () {
         // Get movement input
-        Vector3 velocity = Vector3.zero;
-        velocity = Input.GetAxis("Horizontal") * transform.right;
-        velocity += Input.GetAxis("Vertical") * transform.forward;
+        Vector3 inputVel = Vector3.zero;
+
+        Vector3 xInput = Input.GetAxis("Horizontal") * transform.right;
+        if (InvertX) xInput *= -1;
+        Vector3 yInput = Input.GetAxis("Vertical") * transform.forward;
+        if (InvertY) yInput *= -1;
+
+        inputVel = xInput + yInput;
+        
+        
         if (!CrowdControlled)
         {
-            motor.SetVelocity(velocity); // Apply velocity
+            motor.SetVelocity(inputVel); // Apply velocity
         }
         else
         {

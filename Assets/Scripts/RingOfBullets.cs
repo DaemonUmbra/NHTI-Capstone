@@ -12,7 +12,7 @@ namespace Powerups
         // Number of bullets to shoot out
         int BulletCount = 30;
         PlayerShoot pShoot;
-
+        
         public override void OnAbilityAdd()
         {
             // Set name

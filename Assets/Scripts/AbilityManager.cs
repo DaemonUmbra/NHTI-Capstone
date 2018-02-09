@@ -7,15 +7,20 @@ public class AbilityManager : MonoBehaviour {
 
     // Keyed list of abilities by name
     Dictionary<string, BaseAbility> Abilities;
+    PhotonView _pv;
 
 	// Use this for initialization
 	void Awake () {
+        _pv = GetComponent<PhotonView>();
         Abilities = new Dictionary<string, BaseAbility>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+        _pv.RPC("OnUpdate", PhotonTargets.All);
+
+        /*** SINGLE PLAYER ***
         // Call BaseAbility Updates for owned abilities
 		foreach (BaseAbility a in Abilities.Values)
         {
@@ -23,7 +28,7 @@ public class AbilityManager : MonoBehaviour {
             {
                 a.OnUpdate();
             }
-        }
+        }*/
 	}
 
     // Check if the player has an ability
@@ -111,8 +116,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Register ability
-    [PunRPC]
-    public void RegisterAbility(BaseAbility ability)
+    private void RegisterAbility(BaseAbility ability)
     {
         // Run function for when the ability is added
         ability.OnAbilityAdd();
@@ -122,8 +126,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Unregister ability
-    [PunRPC]
-    public void UnregisterAbility(BaseAbility ability)
+    private void UnregisterAbility(BaseAbility ability)
     {
         string aName = ability.GetName;
         // Run function for when the ability is added
