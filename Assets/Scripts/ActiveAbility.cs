@@ -13,6 +13,7 @@ public abstract class ActiveAbility : BaseAbility {
     /// <summary>
     /// Activate the ability
     /// </summary>
+    [PunRPC]
     public abstract void Activate(); // Check cooldown before activating
 
 
