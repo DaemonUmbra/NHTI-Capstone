@@ -60,4 +60,5 @@ MonoBehaviour:
   - RegisterAbility
   - RemoveAbility
   - UnregisterAbility
+  - Activate
   DisableAutoOpenWizard: 1
