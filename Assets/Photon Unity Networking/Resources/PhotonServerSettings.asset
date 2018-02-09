@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706a7afbe5784684fb8374afe511115c, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: 
+  AppID: f184830c-af81-4254-8a4b-32877127ad0f
   VoiceAppID: 
   ChatAppID: 
-  HostType: 0
-  PreferredRegion: 0
+  HostType: 1
+  PreferredRegion: 1
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -30,6 +30,9 @@ MonoBehaviour:
   - Activate
   - AddAbility
   - Chat
+  - Chat
+  - DestroyRpc
+  - InstantiateRpc
   - Debugger_Remote_AddAbility
   - Debugger_Remote_RemoveAbility
   - DestroyRpc
@@ -56,4 +59,21 @@ MonoBehaviour:
   - RPC_LoadedGameScene
   - RPC_LoadGameOthers
   - Shoot
+  - RequestForPickupItems
+  - RequestForPickupTimes
+  - Ring
+  - RPC_CreatePlayer
+  - RPC_LoadedGameScene
+  - RPC_LoadGameOthers
+  - RPC_NewHealth
+  - RPC_PerformTaunt
+  - Shoot
+  - AddAbility
+  - RegisterAbility
+  - RemoveAbility
+  - UnregisterAbility
+  - Activate
+  - OnAbilityAdd
+  - OnAbilityRemove
+  - OnUpdate
   DisableAutoOpenWizard: 1
