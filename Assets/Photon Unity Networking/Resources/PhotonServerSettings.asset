@@ -30,10 +30,23 @@ MonoBehaviour:
   - Chat
   - DestroyRpc
   - InstantiateRpc
+  - Debugger_Remote_AddAbility
+  - Debugger_Remote_RemoveAbility
+  - DestroyRpc
+  - Growth_AddAbility
+  - Growth_RemoveAbility
+  - InstantiateRpc
+  - Miss_Unrealistic_AddAbility
+  - Miss_Unrealistic_RemoveAbility
+  - NYEH_Activate
+  - NYEH_AddAbility
+  - NYEH_RemoveAbility
   - PickupItemInit
   - PunPickup
   - PunPickupSimple
   - PunRespawn
+  - Rearview_AddAbility
+  - Rearview_RemoveAbility
   - RequestForPickupItems
   - RequestForPickupTimes
   - Ring
@@ -42,12 +55,9 @@ MonoBehaviour:
   - RPC_LoadGameOthers
   - RPC_NewHealth
   - RPC_PerformTaunt
-<<<<<<< HEAD
   - Shoot
-=======
   - AddAbility
   - RegisterAbility
   - RemoveAbility
   - UnregisterAbility
->>>>>>> 25f197ee122d332d1614a8dfc444392fcdbc1d68
   DisableAutoOpenWizard: 1

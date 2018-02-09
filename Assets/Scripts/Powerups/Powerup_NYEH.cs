@@ -14,13 +14,15 @@ namespace Powerups
 
         public float nyehVolume = 0.5f;
 
-        public void OnShoot()
-        {
-            Debug.Log("NYEH!");
-            audioSource.PlayOneShot(nyeh, nyehVolume);
-        }
+        PhotonView pv;
 
         public override void OnAbilityAdd()
+        {
+            pv.RPC("NYEH_AddAbility", PhotonTargets.All);
+        }
+
+        [PunRPC]
+        void NYEH_AddAbility()
         {
             Name = "NYEH!";
             if (!gameObject.GetComponent<AudioSource>())
@@ -35,14 +37,27 @@ namespace Powerups
                 Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
             }
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot += OnShoot;
+            pShoot.shoot += Activate;
+        }
+
+        [PunRPC]
+        void NYEH_RemoveAbility()
+        {
+            base.OnAbilityRemove();
+            PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
+            pShoot.shoot -= Activate;
+        }
+
+        [PunRPC]
+        void NYEH_Activate()
+        {
+            Debug.Log("NYEH!");
+            audioSource.PlayOneShot(nyeh, nyehVolume);
         }
 
         public override void OnAbilityRemove()
         {
-            base.OnAbilityRemove();
-            PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot -= OnShoot;
+            pv.RPC("NYEH_RemoveAbility", PhotonTargets.All);
         }
 
         public override void OnUpdate()
@@ -52,8 +67,7 @@ namespace Powerups
 
         public override void Activate()
         {
-            //When is Activate() called again?
-            throw new NotImplementedException();
+            pv.RPC("NYEH_Activate", PhotonTargets.All);
         }
     }
 }
