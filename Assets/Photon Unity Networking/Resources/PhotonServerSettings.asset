@@ -26,5 +26,34 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
-  RpcList: []
-  DisableAutoOpenWizard: 0
+  RpcList:
+  - Activate
+  - AddAbility
+  - Chat
+  - Debugger_Remote_AddAbility
+  - Debugger_Remote_RemoveAbility
+  - DestroyRpc
+  - Growth_AddAbility
+  - Growth_RemoveAbility
+  - InstantiateRpc
+  - Miss_Unrealistic_AddAbility
+  - Miss_Unrealistic_RemoveAbility
+  - NYEH_Activate
+  - NYEH_AddAbility
+  - NYEH_RemoveAbility
+  - OnAbilityAdd
+  - OnAbilityRemove
+  - OnUpdate
+  - PickupItemInit
+  - PunPickup
+  - PunPickupSimple
+  - PunRespawn
+  - Rearview_AddAbility
+  - Rearview_RemoveAbility
+  - RemoveAbility
+  - RequestForPickupItems
+  - RequestForPickupTimes
+  - RPC_LoadedGameScene
+  - RPC_LoadGameOthers
+  - Shoot
+  DisableAutoOpenWizard: 1

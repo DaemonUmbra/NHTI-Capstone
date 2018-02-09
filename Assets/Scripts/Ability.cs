@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using ExitGames.Client.Photon;
 using UnityEngine;
 
 /// <summary>
@@ -49,16 +48,5 @@ public abstract class BaseAbility : MonoBehaviour {
     // Access active status
     public bool IsActive { get { return active; } }
 
-    public static implicit operator byte[] (BaseAbility ability)
-    {
-        //int index = 0;
-        //List<byte> bytes = new List<byte>();
-        return Protocol.Serialize(ability);
-    }
-
-    public static implicit operator BaseAbility(byte[] bytes)
-    {
-        return (BaseAbility)Protocol.Deserialize(bytes);
-    }
 
 }
