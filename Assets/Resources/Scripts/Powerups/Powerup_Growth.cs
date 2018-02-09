@@ -17,7 +17,6 @@ namespace Powerups
     {
         private Vector3 OriginalScale;
         public float GrowthFactor = 2;
-        public float DmgMod = 5f;
         PhotonView pv;
         public override void OnAbilityAdd()
         {
