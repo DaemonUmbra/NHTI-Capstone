@@ -8,6 +8,7 @@ TagManager:
   - JumpPad
   - SlimeBall
   - Slime
+  - RoomListing
   layers:
   - Default
   - TransparentFX

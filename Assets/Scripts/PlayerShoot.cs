@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour {
+public class PlayerShoot : Photon.MonoBehaviour {
 
     // Shooting delegate
     public delegate void Shoot();
@@ -17,6 +17,8 @@ public class PlayerShoot : MonoBehaviour {
 
         if (aManager)
         {
+            PhotonView pv = GetComponent<PhotonView>();
+            
             aManager.AddAbility<SingleShot>();
         }
 	}

@@ -42,5 +42,12 @@ MonoBehaviour:
   - RPC_LoadGameOthers
   - RPC_NewHealth
   - RPC_PerformTaunt
+<<<<<<< HEAD
   - Shoot
+=======
+  - AddAbility
+  - RegisterAbility
+  - RemoveAbility
+  - UnregisterAbility
+>>>>>>> 25f197ee122d332d1614a8dfc444392fcdbc1d68
   DisableAutoOpenWizard: 1

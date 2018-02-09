@@ -10,6 +10,11 @@ public class RoomListing : MonoBehaviour {
         get { return _roomNameText; }
     }
 
+    public int maxPlayersCount;
+    public int currentPlayersCount;
+    public Text playerCount;
+    public bool status;
+
     public string RoomName { get; private set; }
 
     public bool Updated { get; set; }
@@ -24,7 +29,14 @@ public class RoomListing : MonoBehaviour {
 
         Button button = GetComponent<Button>();
         button.onClick.AddListener(() => lobbyCanvas.OnClickJoinRoom(RoomNameText.text));
+
 	}
+
+    private void Update()
+    {
+        status = Updated;
+        playerCount.text = currentPlayersCount + "/" + maxPlayersCount;
+    }
 
     private void OnDestroy()
     {
