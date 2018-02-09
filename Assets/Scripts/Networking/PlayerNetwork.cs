@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerNetwork : MonoBehaviour {
-    //Health may need updated
+
     public static PlayerNetwork Instance;
     public string PlayerName { get; private set; }
     private PhotonView PhotonView;
@@ -75,6 +75,18 @@ public class PlayerNetwork : MonoBehaviour {
         {
             m_playerCustomProperties["Ping"] = PhotonNetwork.GetPing();
             PhotonNetwork.player.SetCustomProperties(m_playerCustomProperties);
+
+            yield return new WaitForSeconds(5f);
+        }
+
+        yield break;
+    }
+
+    private IEnumerator C_ShowPing()
+    {
+        while (PhotonNetwork.connected)
+        {
+            int ping = (int)PhotonNetwork.player.CustomProperties["Ping"];
 
             yield return new WaitForSeconds(5f);
         }
