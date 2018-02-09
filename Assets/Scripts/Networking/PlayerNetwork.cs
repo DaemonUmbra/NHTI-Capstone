@@ -55,17 +55,17 @@ public class PlayerNetwork : MonoBehaviour {
         PhotonNetwork.LoadLevel(1);
     }
 
-    [PunRPC]
-    private void RPC_LoadedGameScene(PhotonPlayer photonPlayer)
-    {
+    //[PunRPC]
+    //private void RPC_LoadedGameScene(PhotonPlayer photonPlayer)
+    //{
 
-        PlayersInGame++;
-        if (PlayersInGame == PhotonNetwork.playerList.Length)
-        {
-            print("All players are in the game scene.");
-            PhotonView.RPC("RPC_CreatePlayer", PhotonTargets.All);
-        }
-    }
+    //    PlayersInGame++;
+    //    if (PlayersInGame == PhotonNetwork.playerList.Length)
+    //    {
+    //        print("All players are in the game scene.");
+    //        PhotonView.RPC("RPC_CreatePlayer", PhotonTargets.All);
+    //    }
+    //}
 
 
 
