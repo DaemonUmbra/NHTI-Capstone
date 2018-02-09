@@ -49,7 +49,10 @@ public class RoomLayoutGroup : MonoBehaviour {
         {
             RoomListing roomListing = RoomListingButtons[index];
             roomListing.SetRoomNameText(room.Name);
+            roomListing.currentPlayersCount = room.PlayerCount;
+            roomListing.maxPlayersCount = room.MaxPlayers;
             roomListing.Updated = true;
+            Debug.Log(room.Name + ": " + roomListing.currentPlayersCount + "/" + roomListing.maxPlayersCount);
         }
     }
 

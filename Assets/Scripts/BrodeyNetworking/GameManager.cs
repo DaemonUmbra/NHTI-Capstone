@@ -40,17 +40,6 @@ namespace PUNTutorial
             PhotonNetwork.JoinOrCreateRoom("Default Room", ro, null);
         }
 
-        public override void OnJoinedRoom()
-        {
-            Debug.Log("Joined da Room");
-
-            if (PhotonNetwork.isMasterClient)
-            {
-                PhotonNetwork.LoadLevel("Sandbox" +
-                    "");
-            }
-        }
-
         void OnLevelWasLoaded(int levelNumber)
         {
             if (!PhotonNetwork.inRoom) return;

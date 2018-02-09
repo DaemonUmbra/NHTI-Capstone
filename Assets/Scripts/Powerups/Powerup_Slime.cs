@@ -3,6 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+///summary
+ /*
+Developers and Contributors: Ian Cahoon
+    
+Information
+    Name: Slime
+    Type: Active
+    Effect: creates a small puddle of slime that plays can bounce off of
+    Tier: Uncommon
+  */
+///summary
+
 namespace Powerups
 {
     public class Powerup_Slime : ActiveAbility

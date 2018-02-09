@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour {
 
         Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
     }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         GameObject hit = collision.gameObject;

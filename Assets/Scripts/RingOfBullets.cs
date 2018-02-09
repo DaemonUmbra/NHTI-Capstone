@@ -47,12 +47,7 @@ namespace Powerups
         
         public override void Activate()
         {
-            PhotonView pv = PhotonView.Get(this);
-            pv.RPC("Ring", PhotonTargets.All);
-        }
-        [PunRPC]
-        void Ring()
-        {
+
             Debug.Log("Trying to Shoot a Ring!");
             List<GameObject> bullets = new List<GameObject>();
             // Spawn a ring of bullets
@@ -67,11 +62,13 @@ namespace Powerups
                 Quaternion NewRotation = Quaternion.Euler(0, NewAngle, 0);
                 // Debug.Log("NewRotation: " + NewRotation);
 
-                GameObject b = Instantiate(pShoot.projectile, transform.position, NewRotation); // Make sure to set parent
+                GameObject b = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, NewRotation,0); // Make sure to set parent
                 b.GetComponent<Projectile>().IgnorePlayer(transform);
                 bullets.Add(b);
             }
             Debug.Log(bullets);
         }
+
+      
     }
 }
