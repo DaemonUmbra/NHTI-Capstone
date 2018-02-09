@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706a7afbe5784684fb8374afe511115c, type: 3}
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
-  AppID: f184830c-af81-4254-8a4b-32877127ad0f
+  AppID: 
   VoiceAppID: 
   ChatAppID: 
-  HostType: 1
-  PreferredRegion: 1
+  HostType: 0
+  PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -26,51 +26,5 @@ MonoBehaviour:
   PunLogging: 0
   NetworkLogging: 1
   RunInBackground: 1
-  RpcList:
-  - Chat
-  - DestroyRpc
-  - InstantiateRpc
-<<<<<<< HEAD
-=======
-  - Debugger_Remote_AddAbility
-  - Debugger_Remote_RemoveAbility
-  - DestroyRpc
-  - Growth_AddAbility
-  - Growth_RemoveAbility
-  - InstantiateRpc
-  - Miss_Unrealistic_AddAbility
-  - Miss_Unrealistic_RemoveAbility
-  - NYEH_Activate
-  - NYEH_AddAbility
-  - NYEH_RemoveAbility
->>>>>>> eae0a9a89aba9daf4de3f9e2477bf6cf6ff0cb08
-  - PickupItemInit
-  - PunPickup
-  - PunPickupSimple
-  - PunRespawn
-<<<<<<< HEAD
-=======
-  - Rearview_AddAbility
-  - Rearview_RemoveAbility
->>>>>>> eae0a9a89aba9daf4de3f9e2477bf6cf6ff0cb08
-  - RequestForPickupItems
-  - RequestForPickupTimes
-  - Ring
-  - RPC_CreatePlayer
-  - RPC_LoadedGameScene
-  - RPC_LoadGameOthers
-  - RPC_NewHealth
-  - RPC_PerformTaunt
-  - Shoot
-<<<<<<< HEAD
-=======
-  - AddAbility
-  - RegisterAbility
-  - RemoveAbility
-  - UnregisterAbility
-  - Activate
-  - OnAbilityAdd
-  - OnAbilityRemove
-  - OnUpdate
->>>>>>> eae0a9a89aba9daf4de3f9e2477bf6cf6ff0cb08
-  DisableAutoOpenWizard: 1
+  RpcList: []
+  DisableAutoOpenWizard: 0
