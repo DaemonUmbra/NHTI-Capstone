@@ -18,7 +18,7 @@ public class PowerupDebugger : MonoBehaviour {
     PhotonView pv;
 	// Use this for initialization
 	void Start () {
-        pv = PhotonView.Get(this);
+        pv = PhotonView.Get(GameObject.FindGameObjectsWithTag("Player")[0]);
 	}
 
     [PunRPC]
