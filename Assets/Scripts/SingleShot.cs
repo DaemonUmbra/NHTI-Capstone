@@ -42,17 +42,10 @@ namespace Powerups
             // Call base function
             base.OnAbilityRemove();
         }
-
         
         public override void Activate()
         {
-            PhotonView pv = PhotonView.Get(this);
-            pv.RPC("Shoot", PhotonTargets.All);
-        }
-        [PunRPC]
-        void Shoot()
-        {
-            GameObject _proj = Instantiate(pShoot.projectile, transform.position, transform.rotation);
+            GameObject _proj = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, transform.rotation,0);
             _proj.GetComponent<Projectile>().IgnorePlayer(transform);
         }
 

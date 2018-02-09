@@ -28,7 +28,16 @@ namespace Powerups
         public Transform crownOrSashTemplate;
         private Transform crownOrSashInstance;
 
+        PhotonView pv;
+
         public override void OnAbilityAdd()
+        {
+            pv = PhotonView.Get(this);
+            pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);
+        }
+
+        [PunRPC]
+        void Miss_Unrealistic_AddAbility()
         {
             Name = "Miss Unrealistic";
             //If we don't have a template set in the editor
@@ -73,7 +82,8 @@ namespace Powerups
             }
         }
 
-        public override void OnAbilityRemove()
+        [PunRPC]
+        void Miss_Unrealistic_RemoveAbility()
         {
             //Remove the crown
             //FLAW: Due to the way our powerups are handled, simply disabling the crown or sash would be a possible memory leak
@@ -82,6 +92,11 @@ namespace Powerups
             //And undo our changes to the player's scale
             gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x - ActualChanges.x, gameObject.transform.localScale.y - ActualChanges.y, gameObject.transform.localScale.z - ActualChanges.z);
             base.OnAbilityRemove();
+        }
+
+        public override void OnAbilityRemove()
+        {
+            pv.RPC("Miss_Unrealistic_RemoveAbility", PhotonTargets.All);
         }
 
         //This powerup does not need to tick

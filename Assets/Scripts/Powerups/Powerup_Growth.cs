@@ -17,11 +17,25 @@ namespace Powerups
     {
         private Vector3 OriginalScale;
         public float GrowthFactor = 2;
+        PhotonView pv;
         public override void OnAbilityAdd()
+        {
+            pv = PhotonView.Get(this);
+            pv.RPC("Growth_AddAbility", PhotonTargets.All);
+        }
+
+        [PunRPC]
+        void Growth_AddAbility()
         {
             Name = "Growth";
             OriginalScale = transform.localScale;
             transform.localScale = OriginalScale * GrowthFactor;
+        }
+
+        [PunRPC]
+        void Growth_RemoveAbility()
+        {
+            transform.localScale = OriginalScale;
         }
 
         public override void OnUpdate()
@@ -31,8 +45,7 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-
-            transform.localScale = OriginalScale;
+            pv.RPC("Growth_RemoveAbility", PhotonTargets.All);
         }
     }
 }
