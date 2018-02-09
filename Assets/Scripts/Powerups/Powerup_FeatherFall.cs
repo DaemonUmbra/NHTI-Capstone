@@ -10,6 +10,8 @@ public class Powerup_FeatherFall : PassiveAbility {
     public override void OnAbilityAdd()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        // Call base function
+        base.OnAbilityAdd();
     }
     
     // Update is called once per frame
@@ -23,6 +25,8 @@ public class Powerup_FeatherFall : PassiveAbility {
             Debug.Log("Da bug Check");
             rb.velocity =  new Vector3(ogVelocity.x, clamp.y, ogVelocity.z);
         }
+        // Call base function
+        base.OnUpdate();
     }
 }
 

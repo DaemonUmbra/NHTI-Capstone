@@ -36,32 +36,27 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Snipe Added to Shoot Delegate");
-                pShoot.shoot += OnShoot;
+                pShoot.shoot += Activate;
             }
-        }
-        public override void OnUpdate()
-        {
 
+            base.OnAbilityAdd();
         }
+        
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= OnShoot;
+                pShoot.shoot -= Activate;
             }
             pShoot = null;
 
             // Call base function
             base.OnAbilityRemove();
         }
-        public override void Activate()
+        protected override void RPC_Activate()
         {
-            throw new NotImplementedException();
-        }
-        public void OnShoot()
-        {
-            foreach(Transform child in transform)
+            foreach (Transform child in transform)
             {
                 if (child.name == "Gun")
                 {
@@ -74,7 +69,7 @@ namespace Powerups
                 return;
             }
             //Debug.Log("Raycast Shot");
-            
+
             Vector3 mp = Input.mousePosition;
             mp.z = 999;
             Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
@@ -97,7 +92,10 @@ namespace Powerups
 
 
             StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
+
+            base.RPC_Activate();
         }
+        
         IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
         {
 

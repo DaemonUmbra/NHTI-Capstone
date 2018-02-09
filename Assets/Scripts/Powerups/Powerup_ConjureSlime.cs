@@ -23,30 +23,27 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Slime Added to Shoot Delegate");
-                pShoot.shoot += OnShoot;
+                pShoot.shoot += Activate;
             }
-        }
-        public override void OnUpdate()
-        {
 
+            // Call base function
+            base.OnAbilityAdd();
         }
+
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= OnShoot;
+                pShoot.shoot -= Activate;
             }
             pShoot = null;
 
             // Call base function
             base.OnAbilityRemove();
         }
-        public override void Activate()
-        {
-            throw new NotImplementedException();
-        }
-        public void OnShoot()
+
+        protected override void RPC_Activate()
         {
             if (onCooldown)
             {
@@ -75,9 +72,12 @@ namespace Powerups
                 Debug.Log("no object was hit");
             }
 
-
             StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
+
+            // Call base class
+            base.RPC_Activate();
         }
+       
         IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
         {
             StartCoroutine(TriggerCoolDown());

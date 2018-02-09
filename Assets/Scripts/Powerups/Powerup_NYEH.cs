@@ -18,9 +18,27 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
-            pv.RPC("NYEH_AddAbility", PhotonTargets.All);
-        }
+            //*** Handled by base ca pv.RPC("NYEH_AddAbility", PhotonTargets.All);
 
+            Name = "NYEH!";
+            if (!gameObject.GetComponent<AudioSource>())
+            {
+                gameObject.AddComponent<AudioSource>();
+            }
+            audioSource = gameObject.GetComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            nyeh = Resources.Load("Sounds/NYEH") as AudioClip;
+            if (!nyeh)
+            {
+                Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
+            }
+            PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
+            pShoot.shoot += RPC_Activate;
+
+            base.OnAbilityAdd();
+        } 
+
+        /*** Handled by base class
         [PunRPC]
         void NYEH_AddAbility()
         {
@@ -37,7 +55,7 @@ namespace Powerups
                 Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
             }
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot += Activate;
+            pShoot.shoot += RPC_Activate;
         }
 
         [PunRPC]
@@ -45,7 +63,7 @@ namespace Powerups
         {
             base.OnAbilityRemove();
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot -= Activate;
+            pShoot.shoot -= RPC_Activate;
         }
 
         [PunRPC]
@@ -54,20 +72,19 @@ namespace Powerups
             Debug.Log("NYEH!");
             audioSource.PlayOneShot(nyeh, nyehVolume);
         }
+        */
 
         public override void OnAbilityRemove()
         {
-            pv.RPC("NYEH_RemoveAbility", PhotonTargets.All);
+            base.OnAbilityRemove();
+            PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
+            pShoot.shoot -= RPC_Activate;
         }
 
-        public override void OnUpdate()
+        protected override void RPC_Activate()
         {
-            //NYEH! does not tick
-        }
-
-        public override void Activate()
-        {
-            pv.RPC("NYEH_Activate", PhotonTargets.All);
+            Debug.Log("NYEH!");
+            audioSource.PlayOneShot(nyeh, nyehVolume);
         }
     }
 }

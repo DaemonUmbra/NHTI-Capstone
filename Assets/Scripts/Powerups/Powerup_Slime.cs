@@ -36,8 +36,10 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Slime Added to Shoot Delegate");
-                pShoot.shoot += OnShoot;
+                pShoot.shoot += Activate;
             }
+
+            base.OnAbilityAdd();
         }
         public override void OnUpdate()
         {
@@ -56,24 +58,22 @@ namespace Powerups
             {
                 CoolDown(Time.time, duration);
             }
+
+            base.OnUpdate();
         }
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= OnShoot;
+                pShoot.shoot -= Activate;
             }
             pShoot = null;
 
             // Call base function
             base.OnAbilityRemove();
         }
-        public override void Activate()
-        {
-            throw new NotImplementedException();
-        }
-        public void OnShoot()
+        protected override void RPC_Activate()
         {
             if (Active)
             {
@@ -88,7 +88,7 @@ namespace Powerups
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Debug.Log(player.name);
             GameObject slime = Resources.Load("Prefabs/SlimePool") as GameObject;
-            
+
             //Instantiate(slime, (player.transform.forward * offset) + player.transform.position, transform.rotation);
             GameObject rayOrigin = GameObject.Find("BasicPlayer/Gun"); //Needs to be changed to local player when networked
             Vector3 mp = Input.mousePosition;
@@ -108,8 +108,10 @@ namespace Powerups
                 Destroy(slimepool, 7f);
                 Active = true;
             }
-            
+
+            base.RPC_Activate();
         }
+       
         private void CoolDown(float currentTime, float duration)
         {
             if (currentTime >= CDstart + duration)

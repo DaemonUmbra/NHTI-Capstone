@@ -23,16 +23,44 @@ namespace Powerups
         PhotonView pv;
         public override void OnAbilityAdd()
         {
+            /*
             pv = PhotonView.Get(this);
 
             pv.RPC("Rearview_AddAbility", PhotonTargets.All);
+            */
+
+            Name = "Rearview";
+            //Created a camera dummy
+            cameraDummy = new GameObject
+            {
+                name = "Rearview Camera"
+            };
+
+            //and set its properties
+            cameraDummy.transform.parent = transform;
+            cameraDummy.transform.localPosition = cameraOffset;
+            cameraDummy.transform.localRotation = cameraRotation;
+
+            //And add a camera to it
+            camera = cameraDummy.AddComponent<Camera>();
+
+            //Now choose where it renders onscreen
+            camera.rect = new Rect(new Vector2(1 - cameraSize.x, 1 - cameraSize.y), cameraSize);
+
+            base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
-            pv.RPC("Rearview_RemoveAbility", PhotonTargets.All);
-        }
+            //pv.RPC("Rearview_RemoveAbility", PhotonTargets.All);
 
+            Destroy(camera);
+            Destroy(cameraDummy);
+
+            base.OnAbilityRemove();
+        }
+        
+        /*
         [PunRPC]
         void Rearview_AddAbility()
         {
@@ -60,24 +88,7 @@ namespace Powerups
         {
             Destroy(camera);
             Destroy(cameraDummy);
-            base.OnAbilityRemove();
         }
-
-        public override void OnUpdate()
-        {
-
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        */
     }
 }

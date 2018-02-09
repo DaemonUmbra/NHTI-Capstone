@@ -37,6 +37,9 @@ namespace Powerups
                 Debug.Log("Beam Added to Shoot Delegate");
                 pShoot.shoot += OnShoot;
             }
+
+            // Call base function
+            base.OnAbilityAdd();
         }
         public override void OnUpdate()
         {
@@ -78,6 +81,9 @@ namespace Powerups
 
                 VisualizeRaycast(rayOrigin, targetVector);
             }
+
+            // Call base function
+            base.OnUpdate();
         }
         public override void OnAbilityRemove()
         {
@@ -87,13 +93,14 @@ namespace Powerups
                 pShoot.shoot -= OnShoot;
             }
             pShoot = null;
-
+            
             // Call base function
             base.OnAbilityRemove();
         }
-        public override void Activate()
+
+        protected override void RPC_Activate()
         {
-            throw new NotImplementedException();
+            base.RPC_Activate();
         }
         public void OnShoot()
         {

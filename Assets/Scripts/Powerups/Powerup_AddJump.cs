@@ -13,7 +13,6 @@ namespace Powerups      //Ian MacKenzie
         void Start()
         {
             playerController = GetComponent<PlayerController>();
-            
         }
 
         public override void OnAbilityAdd()     
@@ -24,16 +23,17 @@ namespace Powerups      //Ian MacKenzie
 
             //Add to the max jumps variable on the player controller
             playerController.maxJumpCount++;
+
+            // Call base function
+            base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
             playerController.maxJumpCount--;
-        }
 
-        public override void OnUpdate()
-        {
-            // Nothing yet
+            // Call base function
+            base.OnAbilityRemove();
         }
     }
 }

@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour {
 
     Rigidbody rb;
     [SerializeField]
-    Transform shooter;
+    GameObject shooter;
     PlayerStats shooterStats;
     [SerializeField]
     ProjectileType type;
@@ -25,8 +25,6 @@ public class Projectile : MonoBehaviour {
 
     public void Start()
     {
-        
-
         // Set shooterStats if shooter was set in inspector
         if(shooter)
         {
@@ -53,7 +51,7 @@ public class Projectile : MonoBehaviour {
     }
 
     // Ignore collision with player
-    public void IgnorePlayer(Transform player)
+    public void IgnorePlayer(GameObject player)
     {
         shooter = player;
         shooterStats = shooter.GetComponent<PlayerStats>();
@@ -70,7 +68,7 @@ public class Projectile : MonoBehaviour {
 
         if(hitStats)
         {
-            hitStats.TakeDamage(damage, shooter.gameObject, shooterStats.OnHitEffects);
+            hitStats.TakeDamage(damage, shooter, shooterStats.OnHitEffects);
             Destroy(gameObject);
         }
     }

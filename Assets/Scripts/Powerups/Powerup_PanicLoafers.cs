@@ -23,6 +23,8 @@ public class Powerup_PanicLoafers : PassiveAbility {
         PS = GetComponent<PlayerStats>();
         WalkSpeed = PS.WalkSpeed; // Get current walkspeed to save for later use
         Health = PS.Health; // Get current health to keep track of damage
+
+        base.OnAbilityAdd();
     }
 
     public override void OnAbilityRemove()
@@ -44,6 +46,8 @@ public class Powerup_PanicLoafers : PassiveAbility {
         {
             Health = PS.Health; // Health variable is set to player's current health
         }
+
+        base.OnUpdate();
     }
 
     IEnumerator PanicTime() // Timer for running

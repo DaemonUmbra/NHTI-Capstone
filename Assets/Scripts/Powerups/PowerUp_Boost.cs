@@ -20,6 +20,9 @@ public class PowerUp_Boost : ActiveAbility {
         Name = "Boost";
         Debug.Log(Name + "  Added");
         PC = GetComponent<PlayerController>();
+
+        // Call base function
+        base.OnAbilityAdd();
     }
 
     public override void OnAbilityRemove()
@@ -28,13 +31,11 @@ public class PowerUp_Boost : ActiveAbility {
         base.OnAbilityRemove();
     }
 
-    public override void Activate()
+    protected override void RPC_Activate()
     {
         transform.Translate(transform.forward * BoostSpeed);
-    }
 
-    public override void OnUpdate()
-    {
-        throw new System.NotImplementedException();
+        // Call base function
+        base.RPC_Activate();
     }
 }

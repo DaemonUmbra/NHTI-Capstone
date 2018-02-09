@@ -7,11 +7,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     #region To be removed
     public readonly PhotonPlayer PhotonPlayer;
     public int Health;
-    public PlayerStats(PhotonPlayer photonPlayer, int health)
-    {
-        PhotonPlayer = photonPlayer;
-        Health = health;
-    }
+   
     #endregion
 
     #region Class Variables
@@ -150,19 +146,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount)
     {
-        if(amount < 0)
-        {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
-        }
-        // Reduce hp by amount
-        _currentHp -= amount;
-        Debug.Log(gameObject.name + " hp: " + _currentHp);
-        if (_currentHp <= 0)
-        {
-            Debug.Log(gameObject.name + " hp <= 0");
-            Die();
-        }
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, null, null);
     }
 
     /// <summary>
@@ -172,19 +156,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount, GameObject source)
     {
-        if (amount < 0)
-        {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
-        }
-
-        // Reduce hp by amount
-        _currentHp -= amount;
-        if (_currentHp <= 0)
-        {
-            Debug.Log(gameObject.name + " hp <= 0");
-            Die(source);
-        }
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source, null);
     }
    
     /// <summary>
@@ -194,28 +166,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, List<Effect> effects)
     {
-        if (effects != null)
-        {
-            // Add effects to player
-            foreach (Effect e in effects)
-            {
-                e.ApplyEffect(gameObject);
-            }
-        }
-
-        if (amount < 0)
-        {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
-        }
-
-        // Reduce hp by amount
-        _currentHp -= amount;
-        if (_currentHp <= 0)
-        {
-            Debug.Log(gameObject.name + " hp <= 0");
-            Die();
-        }
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, null, effects);
     }
    
     /// <summary>
@@ -226,26 +177,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
-        if (effects != null)
-        {
-            // Add effects to player
-            foreach (Effect e in effects)
-            {
-                e.ApplyEffect(gameObject);
-            }
-        }
-        if(amount < 0)
-        {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
-        }
-        // Reduce hp by amount
-        _currentHp -= amount;
-        if(_currentHp <= 0)
-        {
-            Debug.Log(gameObject.name + " hp <= 0");
-            Die(source);
-        }
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source, effects);
     }
     
     // Increase the player's current hp by amount
@@ -272,25 +204,37 @@ public class PlayerStats : Photon.MonoBehaviour {
     {
         Debug.Log(hit.name + " was hit by " + gameObject.name);
     }
-    /*
-    /// <summary>
-    /// Inflict your damage and effects on another player.
-    /// </summary>
-    /// <param name="target">Player to take damage</param>
-    public void DamagePlayer(GameObject target)
-    {
-        PlayerStats tStats = target.GetComponent<PlayerStats>();
-        if(!tStats)
-        {
-            Debug.LogError("Cannot damage " + target.name + ". No playerstats script found.");
-            return;
-        }
-
-        tStats.TakeDamage(_baseDmg, gameObject, _onHitEffects);
-    }
-    */
     #endregion
 
+    #region Photon RPCs
+    [PunRPC]
+    private void RPC_TakeDamage(float amount, GameObject source, List<Effect> effects)
+    {
+        PlayerStats pSource = source.GetComponent<PlayerStats>();
+        pSource.ReportHit(gameObject);
+
+        if (effects != null)
+        {
+            // Add effects to player
+            foreach (Effect e in effects)
+            {
+                e.ApplyEffect(gameObject);
+            }
+        }
+        if (amount < 0)
+        {
+            Debug.LogWarning("Cannot take negative damage.");
+            return;
+        }
+        // Reduce hp by amount
+        _currentHp -= amount;
+        if (_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+            Die(source);
+        }
+    }
+    #endregion
 
     #region Private Methods
     private void Die()

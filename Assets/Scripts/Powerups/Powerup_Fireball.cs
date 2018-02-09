@@ -16,8 +16,10 @@ public class Powerup_Fireball : ActiveAbility
         if (pShoot)
         {
             Debug.Log("Fireball Added to Shoot Delegate");
-            pShoot.shoot += OnShoot;
+            pShoot.shoot += Activate;
         }
+        // Call base function
+        base.OnAbilityAdd();
     }
 
     public override void OnAbilityRemove()
@@ -25,7 +27,7 @@ public class Powerup_Fireball : ActiveAbility
         // Remove shoot delegate
         if (pShoot)
         {
-            pShoot.shoot -= OnShoot;
+            pShoot.shoot -= Activate;
         }
         pShoot = null;
 
@@ -33,18 +35,11 @@ public class Powerup_Fireball : ActiveAbility
         base.OnAbilityRemove();
     }
 
-    public override void OnUpdate()
+    protected override void RPC_Activate()
     {
-
+        // Call base function
+        base.RPC_Activate();
     }
 
-    public override void Activate()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnShoot()
-    {
-        
-    }
+    
 }

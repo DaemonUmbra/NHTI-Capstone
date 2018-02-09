@@ -32,10 +32,11 @@ namespace Powerups
         {
             Name = "Thunder Wave";
             Debug.Log(Name + " Added");
+            base.OnAbilityAdd();
         }
         
 
-        public override void Activate() // Will need to be activated by something once we decide how players will trigger abilities.
+        protected override void RPC_Activate() // Will need to be activated by something once we decide how players will trigger abilities.
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             Vector3 back = transform.TransformDirection(-Vector3.forward);
@@ -63,20 +64,15 @@ namespace Powerups
                 }
             }
 
+            base.RPC_Activate();
         }
         /// <summary>
         /// Called when an ability is removed from the player
         /// </summary>
         public override void OnAbilityRemove()
         {
-            active = true;
+            base.OnAbilityRemove();
         }
-
-        public override void OnUpdate()
-        {
-            // Nothing yet
-        }
-        
         #endregion
 
         

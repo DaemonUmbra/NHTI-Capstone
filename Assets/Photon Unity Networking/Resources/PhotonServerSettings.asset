@@ -76,4 +76,8 @@ MonoBehaviour:
   - OnAbilityAdd
   - OnAbilityRemove
   - OnUpdate
+  - RPC_Activate
+  - RPC_AddAbility
+  - RPC_RemoveAbility
+  - RPC_TakeDamage
   DisableAutoOpenWizard: 1

@@ -13,6 +13,7 @@ namespace Powerups
         int BulletCount = 30;
         PlayerShoot pShoot;
         
+        // Called when ability is added to player
         public override void OnAbilityAdd()
         {
             // Set name
@@ -24,29 +25,35 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Ring Shoot Added to Shoot Delegate");
-                pShoot.shoot += Activate;
+                pShoot.shoot += RPC_Activate;
             }
+
+            // Call base function
+            base.OnAbilityAdd();
         }
+
         // Called every frame
         public override void OnUpdate()
         {
-            // Nothing yet
+            // Call base function
+            base.OnUpdate();
         }
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= Activate;
+                pShoot.shoot -= RPC_Activate;
             }
-            pShoot = null;
 
             // Call base function
             base.OnAbilityRemove();
         }
         
-        public override void Activate()
+        // Called on every client when the player shoots
+        protected override void RPC_Activate()
         {
+            base.RPC_Activate();
 
             Debug.Log("Trying to Shoot a Ring!");
             List<GameObject> bullets = new List<GameObject>();
@@ -63,7 +70,7 @@ namespace Powerups
                 // Debug.Log("NewRotation: " + NewRotation);
 
                 GameObject b = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, NewRotation,0); // Make sure to set parent
-                b.GetComponent<Projectile>().IgnorePlayer(transform);
+                b.GetComponent<Projectile>().IgnorePlayer(gameObject);
                 bullets.Add(b);
             }
             Debug.Log(bullets);
