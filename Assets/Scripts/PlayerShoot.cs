@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour {
+public class PlayerShoot : Photon.MonoBehaviour {
 
     // Shooting delegate
     public delegate void Shoot();
@@ -44,7 +44,7 @@ public class PlayerShoot : MonoBehaviour {
                 aManager.RemoveAbility<RingOfBullets>();
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             AbilityManager aManager = GetComponent<AbilityManager>();
 
@@ -67,7 +67,7 @@ public class PlayerShoot : MonoBehaviour {
             }
 
             
-        }
+        }*/
     }
 }
 
