@@ -27,11 +27,9 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+  - Activate
+  - AddAbility
   - Chat
-  - DestroyRpc
-  - InstantiateRpc
-<<<<<<< HEAD
-=======
   - Debugger_Remote_AddAbility
   - Debugger_Remote_RemoveAbility
   - DestroyRpc
@@ -43,34 +41,19 @@ MonoBehaviour:
   - NYEH_Activate
   - NYEH_AddAbility
   - NYEH_RemoveAbility
->>>>>>> eae0a9a89aba9daf4de3f9e2477bf6cf6ff0cb08
+  - OnAbilityAdd
+  - OnAbilityRemove
+  - OnUpdate
   - PickupItemInit
   - PunPickup
   - PunPickupSimple
   - PunRespawn
-<<<<<<< HEAD
-=======
   - Rearview_AddAbility
   - Rearview_RemoveAbility
->>>>>>> eae0a9a89aba9daf4de3f9e2477bf6cf6ff0cb08
+  - RemoveAbility
   - RequestForPickupItems
   - RequestForPickupTimes
-  - Ring
-  - RPC_CreatePlayer
   - RPC_LoadedGameScene
   - RPC_LoadGameOthers
-  - RPC_NewHealth
-  - RPC_PerformTaunt
   - Shoot
-<<<<<<< HEAD
-=======
-  - AddAbility
-  - RegisterAbility
-  - RemoveAbility
-  - UnregisterAbility
-  - Activate
-  - OnAbilityAdd
-  - OnAbilityRemove
-  - OnUpdate
->>>>>>> eae0a9a89aba9daf4de3f9e2477bf6cf6ff0cb08
   DisableAutoOpenWizard: 1
