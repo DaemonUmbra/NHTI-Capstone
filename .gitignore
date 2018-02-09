@@ -36,8 +36,3 @@ sysinfo.txt
 Assets/Scripts/Damage Types/PlayerStats.cs
 Assets/Scripts/Damage Types/PlayerStats.cs
 Assets/Scripts/Damage Types/PlayerStats.cs
-<<<<<<< HEAD
-*.meta
-=======
-Assets/Photon Unity Networking/Resources/PhotonServerSettings.asset.meta
->>>>>>> b4de1cf37d476576674a1cdc6763e2fe4922ad29
