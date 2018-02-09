@@ -51,6 +51,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Add ability
+    [PunRPC]
     public void AddAbility<T>() where T : BaseAbility
     {
         // Make sure the ability isn't already there
@@ -61,6 +62,7 @@ public class AbilityManager : MonoBehaviour {
             RegisterAbility(ability);
         }
     }
+    [PunRPC]
     public void AddAbility(BaseAbility ability)
     {
         // Make sure the ability isn't already there
@@ -78,6 +80,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Remove ability
+    [PunRPC]
     public void RemoveAbility<T>() where T : BaseAbility
     {
         // Get ability
@@ -89,6 +92,7 @@ public class AbilityManager : MonoBehaviour {
             Destroy(ability);
         }
     }
+    [PunRPC]
     public void RemoveAbility(BaseAbility ability)
     {
         // Get ability
@@ -107,6 +111,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Register ability
+    [PunRPC]
     public void RegisterAbility(BaseAbility ability)
     {
         // Run function for when the ability is added
@@ -117,6 +122,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Unregister ability
+    [PunRPC]
     public void UnregisterAbility(BaseAbility ability)
     {
         string aName = ability.GetName;

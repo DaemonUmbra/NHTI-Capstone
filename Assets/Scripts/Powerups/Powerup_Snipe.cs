@@ -10,10 +10,8 @@ Developers and Contributors: Ian Cahoon
 Information
     Name: Snipe
     Type: Active
-    Effect: Zoom in for AbilityTime(float), for the duration of the ability, your basic projectiles become hitscan
-            Lower fire rate, higher damage, and a cool lightning zappy zap effect
+    Effect: Basic fire turns into hitscan lightning bolts with increase damage but decreased fire rate
     Tier: Rare
-    Description: Basic fire turns into hitscan lightning bolts with increase damage but decreased fire rate
   */
 ///summary
 
@@ -24,6 +22,7 @@ namespace Powerups
         private float CDstart;
         bool onCooldown = false, CurrentlyActive = false;
         PlayerShoot pShoot;
+        GameObject rayOrigin;
 
 
         public override void OnAbilityAdd()
@@ -62,15 +61,22 @@ namespace Powerups
         }
         public void OnShoot()
         {
+            foreach(Transform child in transform)
+            {
+                if (child.name == "Gun")
+                {
+                    rayOrigin = child.gameObject;
+                }
+            }
             if (onCooldown)
             {
                 Debug.Log("This ability is on cooldown" + "Start Time: " + CDstart);
                 return;
             }
             //Debug.Log("Raycast Shot");
-            GameObject rayOrigin = GameObject.Find("BasicPlayer/Gun"); //Needs to be changed to local player when networked
+            
             Vector3 mp = Input.mousePosition;
-            mp.z = 10;
+            mp.z = 999;
             Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
             Vector3 targetVector = mouseLocation;
 
@@ -94,7 +100,6 @@ namespace Powerups
         }
         IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
         {
-            StartCoroutine(TriggerCoolDown());
 
             LineRenderer snipeLaser = Origin.GetComponent<LineRenderer>();
             snipeLaser.SetPosition(0, Origin.transform.position);
@@ -104,13 +109,6 @@ namespace Powerups
             yield return new WaitForSeconds(.2f);
             snipeLaser.enabled = false;
 
-        }
-        IEnumerator TriggerCoolDown()
-        {
-            onCooldown = true;
-            CDstart = Time.fixedTime;
-            yield return new WaitForSeconds(5);
-            onCooldown = false;
         }
 
     }

@@ -32,13 +32,11 @@ public class PowerUp_Blink : ActiveAbility {
 
     public override void OnAbilityRemove()
     {
-        // Call base function
-        base.OnAbilityRemove();
+
     }
 
     public override void OnUpdate()
     {
-        throw new NotImplementedException();
     }
 
     public override void Activate()
