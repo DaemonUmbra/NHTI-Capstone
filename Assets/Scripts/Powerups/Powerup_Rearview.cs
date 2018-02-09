@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Powerups
-{ public class Powerup_Rearview : PassiveAbility
+{
+    [Serializable]
+    public class Powerup_Rearview : PassiveAbility
     {
 
         //Camera Object
@@ -16,7 +19,22 @@ namespace Powerups
 
         private GameObject cameraDummy;
         new private Camera camera;
+
+        PhotonView pv;
         public override void OnAbilityAdd()
+        {
+            pv = PhotonView.Get(this);
+
+            pv.RPC("Rearview_AddAbility", PhotonTargets.All);
+        }
+
+        public override void OnAbilityRemove()
+        {
+            pv.RPC("Rearview_RemoveAbility", PhotonTargets.All);
+        }
+
+        [PunRPC]
+        void Rearview_AddAbility()
         {
             Name = "Rearview";
             //Created a camera dummy
@@ -34,10 +52,11 @@ namespace Powerups
             camera = cameraDummy.AddComponent<Camera>();
 
             //Now choose where it renders onscreen
-            camera.rect = new Rect(new Vector2(1-cameraSize.x,1-cameraSize.y), cameraSize);
+            camera.rect = new Rect(new Vector2(1 - cameraSize.x, 1 - cameraSize.y), cameraSize);
         }
 
-        public override void OnAbilityRemove()
+        [PunRPC]
+        void Rearview_RemoveAbility()
         {
             Destroy(camera);
             Destroy(cameraDummy);

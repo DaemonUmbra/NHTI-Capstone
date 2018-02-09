@@ -15,7 +15,7 @@ MonoBehaviour:
   VoiceAppID: 
   ChatAppID: 
   HostType: 1
-  PreferredRegion: 1
+  PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -30,19 +30,35 @@ MonoBehaviour:
   - Chat
   - DestroyRpc
   - InstantiateRpc
+  - Debugger_Remote_AddAbility
+  - Debugger_Remote_RemoveAbility
+  - DestroyRpc
+  - Growth_AddAbility
+  - Growth_RemoveAbility
+  - InstantiateRpc
+  - Miss_Unrealistic_AddAbility
+  - Miss_Unrealistic_RemoveAbility
+  - NYEH_Activate
+  - NYEH_AddAbility
+  - NYEH_RemoveAbility
   - PickupItemInit
   - PunPickup
   - PunPickupSimple
   - PunRespawn
+  - Rearview_AddAbility
+  - Rearview_RemoveAbility
   - RequestForPickupItems
   - RequestForPickupTimes
+  - Ring
   - RPC_CreatePlayer
   - RPC_LoadedGameScene
   - RPC_LoadGameOthers
   - RPC_NewHealth
   - RPC_PerformTaunt
+  - Shoot
   - AddAbility
   - RegisterAbility
   - RemoveAbility
   - UnregisterAbility
+  - Activate
   DisableAutoOpenWizard: 1
