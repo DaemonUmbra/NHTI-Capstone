@@ -17,6 +17,8 @@ public class PlayerShoot : MonoBehaviour {
 
         if (aManager)
         {
+            PhotonView pv = GetComponent<PhotonView>();
+            
             aManager.AddAbility<SingleShot>();
         }
 	}
