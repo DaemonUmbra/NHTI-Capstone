@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class RoomLayoutGroup : MonoBehaviour {
     //Finished
+    private GameObject lobby;
+    private bool status;
+
+    private void Start()
+    {
+        lobby = GameObject.Find("LobbyNetwork");
+    }
+
+    private void Update()
+    {
+        if (status != lobby.GetComponent<LobbyNetwork>().HideFullRoom)
+        {
+            RefreshList();
+            status = lobby.GetComponent<LobbyNetwork>().HideFullRoom;
+        }
+    }
+
     [SerializeField]
     private GameObject _roomListingPrefab;
     private GameObject RoomListingPrefab
@@ -33,15 +50,29 @@ public class RoomLayoutGroup : MonoBehaviour {
         int index = RoomListingButtons.FindIndex(x => x.RoomName == room.Name);
         if (index == -1)
         {
-            if(room.IsVisible && room.PlayerCount < room.MaxPlayers)
+            if(room.IsVisible)
             {
-                GameObject roomListingObj = Instantiate(RoomListingPrefab);
-                roomListingObj.transform.SetParent(transform, false);
+                if (lobby.GetComponent<LobbyNetwork>().HideFullRoom)
+                {
+                    if (room.PlayerCount < room.MaxPlayers)
+                    {
+                        GameObject roomListingObj = Instantiate(RoomListingPrefab);
+                        roomListingObj.transform.SetParent(transform, false);
 
-                RoomListing roomListing = roomListingObj.GetComponent<RoomListing>();
-                RoomListingButtons.Add(roomListing);
+                        RoomListing roomListing = roomListingObj.GetComponent<RoomListing>();
+                        RoomListingButtons.Add(roomListing);
 
-                index = (RoomListingButtons.Count - 1);
+                        index = (RoomListingButtons.Count - 1);
+                    }
+                } else {
+                    GameObject roomListingObj = Instantiate(RoomListingPrefab);
+                    roomListingObj.transform.SetParent(transform, false);
+
+                    RoomListing roomListing = roomListingObj.GetComponent<RoomListing>();
+                    RoomListingButtons.Add(roomListing);
+
+                    index = (RoomListingButtons.Count - 1);
+                }
             }
         }
 
@@ -49,8 +80,23 @@ public class RoomLayoutGroup : MonoBehaviour {
         {
             RoomListing roomListing = RoomListingButtons[index];
             roomListing.SetRoomNameText(room.Name);
+            roomListing.currentPlayersCount = room.PlayerCount;
+            roomListing.maxPlayersCount = room.MaxPlayers;
             roomListing.Updated = true;
+
         }
+    }
+
+    private void RefreshList()
+    {
+        foreach (RoomListing roomListing in RoomListingButtons)
+        {
+            GameObject roomListingObj = roomListing.gameObject;
+            RoomListingButtons.Remove(roomListing);
+            Destroy(roomListingObj);
+        }
+        OnReceivedRoomListUpdate();
+
     }
 
     private void RemoveOldRooms()
@@ -59,6 +105,7 @@ public class RoomLayoutGroup : MonoBehaviour {
 
         foreach (RoomListing roomListing in RoomListingButtons)
         {
+
             if (!roomListing.Updated)
             {
                 removeRooms.Add(roomListing);

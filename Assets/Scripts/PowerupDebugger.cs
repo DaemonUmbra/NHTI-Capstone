@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// DOES NOT WORK
+/// </summary>
 public class PowerupDebugger : MonoBehaviour {
     [HideInInspector]
     public AbilityManager Player = null;
@@ -10,16 +14,15 @@ public class PowerupDebugger : MonoBehaviour {
     public Type SelectedPowerup;
     [HideInInspector]
     public BaseAbility SelectedPlayerPowerup;
+
+    PhotonView pv;
 	// Use this for initialization
 	void Start () {
-		
+        pv = PhotonView.Get(this);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    public void AddAbility(BaseAbility ability)
+
+    [PunRPC]
+    void Debugger_Remote_AddAbility(BaseAbility ability)
     {
         if (Player)
         {
@@ -29,7 +32,9 @@ public class PowerupDebugger : MonoBehaviour {
             }
         }
     }
-    public void RemoveAbility(BaseAbility ability)
+
+    [PunRPC]
+    void Debugger_Remote_RemoveAbility(BaseAbility ability)
     {
         if (Player)
         {
@@ -38,5 +43,15 @@ public class PowerupDebugger : MonoBehaviour {
                 Player.RemoveAbility(ability);
             }
         }
+    }
+
+    public void AddAbility(BaseAbility ability)
+    {
+        pv.RPC("Debugger_Remote_AddAbility", PhotonTargets.All, ability);
+    }
+
+    public void RemoveAbility(BaseAbility ability)
+    {
+        pv.RPC("Debugger_Remote_RemoveAbility", PhotonTargets.All, ability);
     }
 }

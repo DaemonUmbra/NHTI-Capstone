@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class LobbyNetwork : MonoBehaviour {
 
-	//Finished
-	private void Start () {
+    public bool HideFullRoom;
+
+
+    //Finished
+    private void Start () {
         print("Connecting to server..");
         PhotonNetwork.ConnectUsingSettings("0.0.0");
 	}

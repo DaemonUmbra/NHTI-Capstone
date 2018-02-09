@@ -7,15 +7,20 @@ public class AbilityManager : MonoBehaviour {
 
     // Keyed list of abilities by name
     Dictionary<string, BaseAbility> Abilities;
+    PhotonView _pv;
 
 	// Use this for initialization
 	void Awake () {
+        _pv = GetComponent<PhotonView>();
         Abilities = new Dictionary<string, BaseAbility>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+        _pv.RPC("OnUpdate", PhotonTargets.All);
+
+        /*** SINGLE PLAYER ***
         // Call BaseAbility Updates for owned abilities
 		foreach (BaseAbility a in Abilities.Values)
         {
@@ -23,7 +28,7 @@ public class AbilityManager : MonoBehaviour {
             {
                 a.OnUpdate();
             }
-        }
+        }*/
 	}
 
     // Check if the player has an ability
@@ -51,6 +56,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Add ability
+    [PunRPC]
     public void AddAbility<T>() where T : BaseAbility
     {
         // Make sure the ability isn't already there
@@ -61,6 +67,7 @@ public class AbilityManager : MonoBehaviour {
             RegisterAbility(ability);
         }
     }
+    [PunRPC]
     public void AddAbility(BaseAbility ability)
     {
         // Make sure the ability isn't already there
@@ -78,6 +85,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Remove ability
+    [PunRPC]
     public void RemoveAbility<T>() where T : BaseAbility
     {
         // Get ability
@@ -89,6 +97,7 @@ public class AbilityManager : MonoBehaviour {
             Destroy(ability);
         }
     }
+    [PunRPC]
     public void RemoveAbility(BaseAbility ability)
     {
         // Get ability
@@ -107,7 +116,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Register ability
-    public void RegisterAbility(BaseAbility ability)
+    private void RegisterAbility(BaseAbility ability)
     {
         // Run function for when the ability is added
         ability.OnAbilityAdd();
@@ -117,7 +126,7 @@ public class AbilityManager : MonoBehaviour {
     }
 
     // Unregister ability
-    public void UnregisterAbility(BaseAbility ability)
+    private void UnregisterAbility(BaseAbility ability)
     {
         string aName = ability.GetName;
         // Run function for when the ability is added

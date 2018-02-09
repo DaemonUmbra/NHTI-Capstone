@@ -12,9 +12,13 @@ public class CreateRoom : MonoBehaviour {
         get { return _roomName; }
     }
 
+    public Text Playercount;
+    public int playerAmt;
+
     public void OnClick_CreateRoom()
     {
-        RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 4 };
+        
+        RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = byte.Parse(Playercount.text) };
 
         if(PhotonNetwork.CreateRoom(RoomName.text, roomOptions, TypedLobby.Default))
         {
