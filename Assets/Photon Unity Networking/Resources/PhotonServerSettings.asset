@@ -15,7 +15,7 @@ MonoBehaviour:
   VoiceAppID: 
   ChatAppID: 
   HostType: 1
-  PreferredRegion: 1
+  PreferredRegion: 0
   EnabledRegions: -1
   Protocol: 0
   ServerAddress: 
@@ -36,15 +36,11 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - Ring
   - RPC_CreatePlayer
   - RPC_LoadedGameScene
   - RPC_LoadGameOthers
   - RPC_NewHealth
   - RPC_PerformTaunt
-<<<<<<< HEAD
-=======
   - Shoot
-  - Activate
-  - Ring
->>>>>>> 51fd482afab65d8858569d6f1f9466d34fc372aa
   DisableAutoOpenWizard: 1
