@@ -29,6 +29,10 @@ public class PlayerStats : Photon.MonoBehaviour {
     private float _currentHp;
     [SerializeField]
     private float _baseDmg = 10f;
+
+    // Damage modifiers
+    public float dmgMult = 1f;
+    public float dmgAdd = 0f;
     #endregion
 
 
@@ -36,6 +40,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
+    public float EffectiveDamage { get { return _baseDmg * dmgMult + dmgAdd; } } // Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     #endregion
 
