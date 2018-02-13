@@ -22,7 +22,7 @@ public class PlayerNetwork : MonoBehaviour {
         PhotonNetwork.sendRate = 60;
         PhotonNetwork.sendRateOnSerialize = 30;
 
-        SceneManager.sceneLoaded += OnSceneFinishedLoading;
+        //SceneManager.sceneLoaded += OnSceneFinishedLoading;
     }
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)

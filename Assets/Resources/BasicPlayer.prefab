@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 114828804731430292}
   - component: {fileID: 114457672186585790}
   - component: {fileID: 114359696607058296}
+  - component: {fileID: 114273388652972974}
   m_Layer: 0
   m_Name: BasicPlayer
   m_TagString: Player
@@ -275,6 +276,23 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176983867760030}
   m_Enabled: 1
+--- !u!114 &114273388652972974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637758222917410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85986623c5889b4caae81d5710118c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ComponentsToDisable:
+  - {fileID: 114435186058187412}
+  - {fileID: 114762757652732374}
+  - {fileID: 114359696607058296}
+  GameObjectsToDisable:
+  - {fileID: 1176983867760030}
 --- !u!114 &114359696607058296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -445,6 +463,8 @@ MonoBehaviour:
   JumpPower: 10
   _maxHp: 100
   _baseDmg: 10
+  dmgMult: 1
+  dmgAdd: 0
 --- !u!120 &120494647477628508
 LineRenderer:
   m_ObjectHideFlags: 1

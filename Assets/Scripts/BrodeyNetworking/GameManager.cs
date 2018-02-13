@@ -30,7 +30,7 @@ namespace PUNTutorial
 
         void Start()
         {
-            PhotonNetwork.ConnectUsingSettings("PUNTutorial_Pt1");
+            //PhotonNetwork.ConnectUsingSettings("0.0.0");
         }
 
         public void JoinGame()
