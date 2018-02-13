@@ -17,12 +17,20 @@ namespace Powerups
     {
         private Vector3 OriginalScale;
         public float GrowthFactor = 2;
+
+        private PlayerStats pStats;
+
+        public float dmgMult = .5f;
+        public float dmgAdd = 2f;
         PhotonView pv;
         public override void OnAbilityAdd()
         {
+            pStats = gameObject.GetComponent<PlayerStats>();
             Name = "Growth";
             OriginalScale = transform.localScale;
             transform.localScale = OriginalScale * GrowthFactor;
+            pStats.dmgMult *= dmgMult;
+            pStats.dmgAdd += dmgAdd;
             base.OnAbilityAdd();
             
             /*** Handled by base class ***
@@ -48,6 +56,8 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
+            pStats.dmgMult /= dmgMult;
+            pStats.dmgAdd -= dmgAdd;
             transform.localScale = OriginalScale;
             base.OnAbilityRemove();
         }
