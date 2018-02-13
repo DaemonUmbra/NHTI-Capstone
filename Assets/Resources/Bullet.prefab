@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 135218563817387618}
   - component: {fileID: 23112800944961952}
   - component: {fileID: 54660862702059528}
-  - component: {fileID: 114756806571617936}
   - component: {fileID: 114012454441599962}
   - component: {fileID: 114010834543265448}
   - component: {fileID: 114074124897742402}
+  - component: {fileID: 114722332653809624}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 1
---- !u!114 &114756806571617936
+--- !u!114 &114722332653809624
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -216,13 +216,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1930332314063190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c550af7c51cf640aa1b5cc35255518, type: 3}
+  m_Script: {fileID: 11500000, guid: c10dd7befb8f79c4eba8120b579a2568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   type: 0
-  damage: 10
-  speed: 50
+  damage: 5
+  speed: 100
   lifetime: 3
 --- !u!135 &135218563817387618
 SphereCollider:
