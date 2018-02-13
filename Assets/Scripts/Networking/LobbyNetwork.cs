@@ -4,25 +4,8 @@ using UnityEngine;
 
 public class LobbyNetwork : MonoBehaviour {
 
-    public GameObject[] currentRooms;
     public bool HideFullRoom;
 
-    private void Update()
-    {
-        currentRooms = GameObject.FindGameObjectsWithTag("RoomListing");
-        if (HideFullRoom)
-        {
-            foreach (var room in currentRooms)
-            {
-                if (room.GetComponent<RoomListing>().currentPlayersCount == room.GetComponent<RoomListing>().maxPlayersCount)
-                {
-
-                    Debug.Log(room.GetComponent<RoomListing>().RoomName + " is full!");
-                }
-                
-            }
-        }
-    }
 
     //Finished
     private void Start () {
