@@ -20,7 +20,6 @@ namespace Powerups
         private GameObject cameraDummy;
         new private Camera camera;
 
-        PhotonView pv;
         public override void OnAbilityAdd()
         {
             /*
@@ -59,7 +58,7 @@ namespace Powerups
 
             base.OnAbilityRemove();
         }
-        
+
         /*
         [PunRPC]
         void Rearview_AddAbility()

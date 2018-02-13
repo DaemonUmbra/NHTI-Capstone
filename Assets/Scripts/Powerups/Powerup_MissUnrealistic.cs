@@ -28,8 +28,6 @@ namespace Powerups
         public Transform crownOrSashTemplate;
         private Transform crownOrSashInstance;
 
-        PhotonView pv;
-
         public override void OnAbilityAdd()
         {
             /*** Handled by base class ***
@@ -81,9 +79,9 @@ namespace Powerups
             }
             base.OnAbilityAdd();
 
-            
+
         }
-        
+
         /*** Handled by base class
         [PunRPC]
         void Miss_Unrealistic_AddAbility()

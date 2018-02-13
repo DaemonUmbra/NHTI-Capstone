@@ -22,7 +22,6 @@ namespace Powerups
 
         public float dmgMult = .5f;
         public float dmgAdd = 2f;
-        PhotonView pv;
         public override void OnAbilityAdd()
         {
             pStats = gameObject.GetComponent<PlayerStats>();
@@ -32,7 +31,7 @@ namespace Powerups
             pStats.dmgMult *= dmgMult;
             pStats.dmgAdd += dmgAdd;
             base.OnAbilityAdd();
-            
+
             /*** Handled by base class ***
             pv = PhotonView.Get(this);
             pv.RPC("Growth_AddAbility", PhotonTargets.All);

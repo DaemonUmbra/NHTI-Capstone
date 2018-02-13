@@ -14,8 +14,6 @@ namespace Powerups
 
         public float nyehVolume = 0.5f;
 
-        PhotonView pv;
-
         public override void OnAbilityAdd()
         {
             //*** Handled by base ca pv.RPC("NYEH_AddAbility", PhotonTargets.All);
@@ -36,7 +34,7 @@ namespace Powerups
             pShoot.shoot += RPC_Activate;
 
             base.OnAbilityAdd();
-        } 
+        }
 
         /*** Handled by base class
         [PunRPC]
