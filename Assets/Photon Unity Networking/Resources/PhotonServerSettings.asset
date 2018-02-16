@@ -80,4 +80,5 @@ MonoBehaviour:
   - RPC_AddAbility
   - RPC_RemoveAbility
   - RPC_TakeDamage
+  - RPC_Destroy
   DisableAutoOpenWizard: 1

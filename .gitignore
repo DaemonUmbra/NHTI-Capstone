@@ -36,3 +36,5 @@ sysinfo.txt
 Assets/Scripts/Damage Types/PlayerStats.cs
 Assets/Scripts/Damage Types/PlayerStats.cs
 Assets/Scripts/Damage Types/PlayerStats.cs
+*.meta
+*.meta

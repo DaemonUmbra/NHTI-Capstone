@@ -25,11 +25,6 @@ namespace Powerups
             }
         }
 
-        public override void OnUpdate()
-        {
-            // Nothing yet
-        }
-
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate

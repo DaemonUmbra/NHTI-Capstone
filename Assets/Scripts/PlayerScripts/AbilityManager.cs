@@ -53,15 +53,35 @@ public class AbilityManager : Photon.MonoBehaviour {
     // Add ability
     public void AddAbility<T>() where T : BaseAbility
     {
+        
+        if(HasAbility<T>())
+        {
+            Debug.LogWarning("Ability already owned by player.");
+            return;
+        }
+
         // Add ability locally then call on server
         BaseAbility ability = gameObject.AddComponent<T>();
         RegisterAbility(ability);
-        photonView.RPC("RPC_AddAbility", PhotonTargets.Others, ability);
+        Debug.Log("Ability added: " + ability.GetName);
+        //photonView.RPC("RPC_AddAbility", PhotonTargets.Others, ability);
     }
     public void AddAbility(BaseAbility ability)
     {
+        // Make sure the ability isn't already there
+        if (!HasAbility(ability))
+        {
+            // Add ability to player and register it
+            BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ability.GetType());
+            Debug.Log("Ability added: " + newAbility.GetName);
+            RegisterAbility(newAbility);
+        }
+        else
+        {
+            Debug.LogError(ability.GetName + " already owned by player.");
+        }
         // Add ability on server
-        photonView.RPC("RPC_AddAbility", PhotonTargets.All, ability);
+        //photonView.RPC("RPC_AddAbility", PhotonTargets.All, ability);
     }
 
     // Remove ability
@@ -69,15 +89,38 @@ public class AbilityManager : Photon.MonoBehaviour {
     {
         // Get ability
         BaseAbility ability = gameObject.GetComponent<T>();
-        photonView.RPC("RPC_RemoveAbility", PhotonTargets.All, ability);
+        if (ability)
+        {
+            // Unregister ability and destroy it
+            UnregisterAbility(ability);
+            Debug.Log("Ability removed: " + ability.name);
+            Destroy(ability);
+        }
+        else
+        {
+            Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
+        }
     }
     public void RemoveAbility(BaseAbility ability)
     {
-        photonView.RPC("RPC_RemoveAbility", PhotonTargets.All, ability);
+        // Get ability
+        BaseAbility newAbility = (BaseAbility)gameObject.GetComponent(ability.GetType());
+        if (newAbility)
+        {
+            // Unregister ability and destroy it
+            UnregisterAbility(ability);
+            Debug.Log("Ability removed: " + newAbility.name);
+            Destroy(ability);
+        }
+        else
+        {
+            Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
+        }
     }
     #endregion
 
     #region Photon RPCs
+    /**** Removed for simplicity, networking in progress ****
     [PunRPC]
     private void RPC_AddAbility(BaseAbility ability)
     {
@@ -111,6 +154,7 @@ public class AbilityManager : Photon.MonoBehaviour {
             Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
         }
     }
+    */
     #endregion
 
     #region Private Methods
