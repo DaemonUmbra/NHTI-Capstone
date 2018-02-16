@@ -30,30 +30,5 @@ public class PowerupSpawner : Photon.MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        PhotonView pv = PhotonView.Get(this);
-        
-        if (other.gameObject.tag == "Player")
-        {
-            
-            Debug.Log("Pick UP!");
-            pv.RPC("DestroyPickup", PhotonTargets.All, pickUp.GetPhotonView().viewID);
 
-            
-            hasPickup = false;
-        }
-        
-    }
-    [PunRPC]
-    void DestroyPickup(int viewID)
-    {
-        //FIND GAMEOBJECT from its VIEW ID
-        PhotonView srcViewID = PhotonView.Find(viewID);
-        GameObject srcObj = null;
-
-        if (srcViewID != null)
-            srcObj = srcViewID.gameObject;
-        PhotonNetwork.Destroy(srcObj);
-    }
 }
