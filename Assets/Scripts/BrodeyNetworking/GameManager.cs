@@ -25,7 +25,7 @@ namespace PUNTutorial
             defaultSpawnPoint.transform.position = new Vector3(0, 0.5f, 0);
             defaultSpawnPoint.transform.SetParent(transform, false);
 
-            PhotonNetwork.automaticallySyncScene = true;
+            //PhotonNetwork.automaticallySyncScene = true;
         }
 
         void Start()

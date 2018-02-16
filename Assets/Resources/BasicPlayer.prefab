@@ -306,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer: 8
   jumpCooldown: 0
-  maxJumpCount: 1
+  maxJumpCount: 0
   InvertX: 0
   InvertY: 0
 --- !u!114 &114435186058187412
@@ -343,6 +343,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114763310656542310}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
