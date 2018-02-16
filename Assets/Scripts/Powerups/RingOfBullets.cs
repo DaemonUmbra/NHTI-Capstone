@@ -22,7 +22,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Ring Shoot Added to Shoot Delegate");
-                pShoot.shoot += RPC_Activate;
+                pShoot.shoot += TryActivate;
             }
 
             // Call base function
@@ -41,7 +41,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= RPC_Activate;
+                pShoot.shoot -= TryActivate;
             }
 
             // Call base function
@@ -49,9 +49,9 @@ namespace Powerups
         }
 
         // Called on every client when the player shoots
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
-            base.RPC_Activate();
+            base.Activate();
 
             Debug.Log("Trying to Shoot a Ring!");
             List<GameObject> bullets = new List<GameObject>();

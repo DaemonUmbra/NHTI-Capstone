@@ -46,7 +46,7 @@ namespace Powerups
             base.OnAbilityAdd();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
             //if (CoolDown == false) // Checks if powerup has been used
             // Checks if player is blocked by a wall or player, only allows activate if the raycast returns false
@@ -58,7 +58,7 @@ namespace Powerups
                 // StartCoroutine(CooldownTimer());
             }
 
-            base.RPC_Activate();
+            base.Activate();
         }
 
         /*** Cooldown handled by base class ***

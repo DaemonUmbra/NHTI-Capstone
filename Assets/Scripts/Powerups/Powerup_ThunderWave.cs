@@ -31,7 +31,7 @@ namespace Powerups
             base.OnAbilityAdd();
         }
 
-        protected override void RPC_Activate() // Will need to be activated by something once we decide how players will trigger abilities.
+        protected override void Activate() // Will need to be activated by something once we decide how players will trigger abilities.
         {
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             Vector3 back = transform.TransformDirection(-Vector3.forward);
@@ -59,7 +59,7 @@ namespace Powerups
                 }
             }
 
-            base.RPC_Activate();
+            base.Activate();
         }
 
         /// <summary>

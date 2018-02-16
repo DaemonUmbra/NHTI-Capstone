@@ -20,7 +20,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Slime Added to Shoot Delegate");
-                pShoot.shoot += Activate;
+                pShoot.shoot += TryActivate;
             }
 
             // Call base function
@@ -32,7 +32,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= Activate;
+                pShoot.shoot -= TryActivate;
             }
             pShoot = null;
 
@@ -40,7 +40,7 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
             if (onCooldown)
             {
@@ -71,7 +71,7 @@ namespace Powerups
             StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
 
             // Call base class
-            base.RPC_Activate();
+            base.Activate();
         }
 
         private IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)

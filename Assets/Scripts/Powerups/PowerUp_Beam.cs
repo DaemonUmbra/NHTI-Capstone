@@ -94,9 +94,9 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
-            base.RPC_Activate();
+            base.Activate();
         }
 
         public void OnShoot()

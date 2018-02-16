@@ -28,7 +28,7 @@ namespace Powerups
                 Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
             }
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot += RPC_Activate;
+            pShoot.shoot += Activate;
 
             base.OnAbilityAdd();
         }
@@ -73,10 +73,10 @@ namespace Powerups
         {
             base.OnAbilityRemove();
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot -= RPC_Activate;
+            pShoot.shoot -= Activate;
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
             Debug.Log("NYEH!");
             audioSource.PlayOneShot(nyeh, nyehVolume);

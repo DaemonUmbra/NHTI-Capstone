@@ -16,7 +16,7 @@ public abstract class ActiveAbility : BaseAbility
         base.OnAbilityAdd();
     }
 
-    public void Activate()
+    public void TryActivate()
     {
         if (lastActivated + Cooldown <= Time.time)
         {
@@ -25,11 +25,16 @@ public abstract class ActiveAbility : BaseAbility
     }
 
     /// <summary>
-    /// Activate the ability
+    /// Activate the ability, called by RPC_Activate on server
     /// </summary>
-    [PunRPC]
-    protected virtual void RPC_Activate() // Check cooldown before activating
+    protected virtual void Activate() // Check cooldown before activating
     {
         lastActivated = Time.time;
+    }
+
+    [PunRPC]
+    public void RPC_Activate()
+    {
+        Activate();
     }
 }
