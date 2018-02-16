@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LeaveCurrentMatch : MonoBehaviour {
+public class LeaveCurrentMatch : MonoBehaviour
+{
     //Finished
     public void OnClick_LeaveMatch()
     {

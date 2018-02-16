@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class ActiveAbility : BaseAbility {
-    
+public abstract class ActiveAbility : BaseAbility
+{
     /// <summary>
     /// BaseAbility cooldown in seconds
     /// </summary>
     [SerializeField]
     protected float Cooldown = 0f;
+
     private float lastActivated = 0f;
 
     public override void OnAbilityAdd()
@@ -16,10 +15,10 @@ public abstract class ActiveAbility : BaseAbility {
         lastActivated = Time.time - Cooldown;
         base.OnAbilityAdd();
     }
-    
+
     public void Activate()
     {
-        if(lastActivated + Cooldown <= Time.time)
+        if (lastActivated + Cooldown <= Time.time)
         {
             photonView.RPC("RPC_Activate", PhotonTargets.All);
         }
@@ -33,8 +32,4 @@ public abstract class ActiveAbility : BaseAbility {
     {
         lastActivated = Time.time;
     }
-    
-    
-
-
 }

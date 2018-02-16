@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace PUNTutorial
@@ -9,9 +8,9 @@ namespace PUNTutorial
     {
         public static GameManager instance;
         public static GameObject localPlayer;
-        GameObject defaultSpawnPoint;
+        private GameObject defaultSpawnPoint;
 
-        void Awake()
+        private void Awake()
         {
             if (instance != null)
             {
@@ -28,7 +27,7 @@ namespace PUNTutorial
             //PhotonNetwork.automaticallySyncScene = true;
         }
 
-        void Start()
+        private void Start()
         {
             //PhotonNetwork.ConnectUsingSettings("0.0.0");
         }
@@ -40,7 +39,7 @@ namespace PUNTutorial
             PhotonNetwork.JoinOrCreateRoom("Default Room", ro, null);
         }
 
-        void OnLevelWasLoaded(int levelNumber)
+        private void OnLevelWasLoaded(int levelNumber)
         {
             if (!PhotonNetwork.inRoom) return;
 
@@ -54,12 +53,10 @@ namespace PUNTutorial
                     spawnPoint.position,
                     spawnPoint.rotation, 0);
             }
-            
         }
 
         public Transform GetRandomSpawnPoint()
         {
-            
             var spawnPoints = GetAllObjectsOfTypeInScene<SpawnPoint>();
             if (spawnPoints.Count == 0)
             {

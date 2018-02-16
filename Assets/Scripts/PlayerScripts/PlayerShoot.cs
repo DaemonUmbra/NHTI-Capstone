@@ -1,29 +1,29 @@
 ﻿using Powerups;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : Photon.MonoBehaviour {
-
+public class PlayerShoot : Photon.MonoBehaviour
+{
     // Shooting delegate
     public delegate void Shoot();
+
     public Shoot shoot;
 
     public GameObject projectile;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Start()
+    {
         AbilityManager aManager = GetComponent<AbilityManager>();
 
         if (aManager)
         {
             aManager.AddAbility<SingleShot>();
         }
-	}
+    }
 
     private void Update()
     {
-        if(Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2"))
         {
             AbilityManager aManager = GetComponent<AbilityManager>();
             if (aManager.HasAbility<Powerup_Snipe>())
@@ -63,15 +63,6 @@ public class PlayerShoot : Photon.MonoBehaviour {
                 }
                 aManager.AddAbility<Powerup_Slime>();
             }
-
-            
         }*/
     }
 }
-
-
-
-
-
-
-

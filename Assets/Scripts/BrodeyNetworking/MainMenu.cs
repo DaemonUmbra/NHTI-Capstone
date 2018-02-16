@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 namespace PUNTutorial
 {
     public class MainMenu : Photon.PunBehaviour
     {
-        static MainMenu instance;
+        private static MainMenu instance;
 
-        GameObject ui;
-        Button joinGameButton;
+        private GameObject ui;
+        private Button joinGameButton;
 
-        void Awake()
+        private void Awake()
         {
             if (instance != null)
             {
@@ -32,7 +31,7 @@ namespace PUNTutorial
             joinGameButton.interactable = true;
         }
 
-        void OnLevelWasLoaded(int level)
+        private void OnLevelWasLoaded(int level)
         {
             ui.SetActive(!PhotonNetwork.inRoom);
         }

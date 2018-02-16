@@ -1,49 +1,52 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityManager : Photon.MonoBehaviour {
-
+public class AbilityManager : Photon.MonoBehaviour
+{
     // Keyed list of abilities by name
-    Dictionary<string, BaseAbility> _abilities;
+    private Dictionary<string, BaseAbility> _abilities;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    private void Awake()
+    {
         _abilities = new Dictionary<string, BaseAbility>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
         // Call BaseAbility Updates for owned abilities
-		foreach (BaseAbility a in _abilities.Values)
+        foreach (BaseAbility a in _abilities.Values)
         {
             if (a.IsActive)
             {
                 a.OnUpdate();
             }
         }
-	}
+    }
 
     #region Public Methods
+
     // Check if the player has an ability
     public bool HasAbility<T>() where T : BaseAbility
     {
         return GetComponent<T>() != null;
     }
+
     public bool HasAbility(BaseAbility ability)
     {
         return GetComponent(ability.GetType()) != null;
     }
+
     public bool HasAbility(string name)
     {
         // Get ability from dictionary
         BaseAbility target = _abilities[name];
 
-        if(target)
+        if (target)
         {
             // Double check with player components
-            if(GetComponent(target.GetType()) != null)
+            if (GetComponent(target.GetType()) != null)
                 return true;
         }
         // False by default
@@ -53,8 +56,7 @@ public class AbilityManager : Photon.MonoBehaviour {
     // Add ability
     public void AddAbility<T>() where T : BaseAbility
     {
-        
-        if(HasAbility<T>())
+        if (HasAbility<T>())
         {
             Debug.LogWarning("Ability already owned by player.");
             return;
@@ -66,6 +68,7 @@ public class AbilityManager : Photon.MonoBehaviour {
         Debug.Log("Ability added: " + ability.GetName);
         //photonView.RPC("RPC_AddAbility", PhotonTargets.Others, ability);
     }
+
     public void AddAbility(BaseAbility ability)
     {
         // Make sure the ability isn't already there
@@ -101,6 +104,7 @@ public class AbilityManager : Photon.MonoBehaviour {
             Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
         }
     }
+
     public void RemoveAbility(BaseAbility ability)
     {
         // Get ability
@@ -117,9 +121,11 @@ public class AbilityManager : Photon.MonoBehaviour {
             Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
         }
     }
-    #endregion
+
+    #endregion Public Methods
 
     #region Photon RPCs
+
     /**** Removed for simplicity, networking in progress ****
     [PunRPC]
     private void RPC_AddAbility(BaseAbility ability)
@@ -155,9 +161,11 @@ public class AbilityManager : Photon.MonoBehaviour {
         }
     }
     */
-    #endregion
+
+    #endregion Photon RPCs
 
     #region Private Methods
+
     // Register ability
     private void RegisterAbility(BaseAbility ability)
     {
@@ -177,10 +185,10 @@ public class AbilityManager : Photon.MonoBehaviour {
         // Remove ability from dictionary
         _abilities.Remove(aName);
     }
-    #endregion
 
+    #endregion Private Methods
 
-    public Dictionary<string,BaseAbility> ListAbilities()
+    public Dictionary<string, BaseAbility> ListAbilities()
     {
         return _abilities;
     }

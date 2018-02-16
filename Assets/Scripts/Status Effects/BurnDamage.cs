@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BurnDamage : Effect
 {
     private float _burnDamage;
-    public float Damage {get { return _burnDamage; } }
+    public float Damage { get { return _burnDamage; } }
 
     public BurnDamage(BurnDamage burnDamage)
     {
@@ -18,6 +16,7 @@ public class BurnDamage : Effect
         _burnDamage = burnDamage;
         _lifetime = lifetime;
     }
+
     public override void Activate()
     {
         _tickTime = 1f;

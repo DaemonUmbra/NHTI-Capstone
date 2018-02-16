@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -8,36 +7,38 @@ using UnityEngine;
  * Description: Constantly restores a small amount of health to the player after a set amount of time.
  */
 
-public class PowerUp_CombatRegen : PassiveAbility {
-
-    [HideInInspector]
-    public PlayerStats PS;
-    
-
-    public override void OnAbilityAdd()
+namespace Powerups
+{
+    public class PowerUp_CombatRegen : PassiveAbility
     {
-        // active = true;  *** Base class handles this ***
-        Name = "Combat Regeneration";
-        Debug.Log(Name + " Added");
-        PS = GetComponent<PlayerStats>();
-        StartCoroutine(Regen()); // Begins the regen process
-        
-        // Call base function
-        base.OnAbilityAdd();
-    }
+        [HideInInspector]
+        public PlayerStats PS;
 
-    public override void OnAbilityRemove()
-    {
-        // Call base function
-        base.OnAbilityRemove();
-    }
-
-    IEnumerator Regen()
-    {
-        while (active) // While the player holds the power up, player gains 10 HP every 20 seconds
+        public override void OnAbilityAdd()
         {
-            PS.GainHp(10.0f);
-            yield return new WaitForSecondsRealtime(20);
+            // active = true;  *** Base class handles this ***
+            Name = "Combat Regeneration";
+            Debug.Log(Name + " Added");
+            PS = GetComponent<PlayerStats>();
+            StartCoroutine(Regen()); // Begins the regen process
+
+            // Call base function
+            base.OnAbilityAdd();
+        }
+
+        public override void OnAbilityRemove()
+        {
+            // Call base function
+            base.OnAbilityRemove();
+        }
+
+        private IEnumerator Regen()
+        {
+            while (active) // While the player holds the power up, player gains 10 HP every 20 seconds
+            {
+                PS.GainHp(10.0f);
+                yield return new WaitForSecondsRealtime(20);
+            }
         }
     }
 }

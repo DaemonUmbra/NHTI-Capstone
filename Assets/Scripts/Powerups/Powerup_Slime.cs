@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 ///summary
  /*
 Developers and Contributors: Ian Cahoon
-    
+
 Information
     Name: Slime
     Type: Active
@@ -20,10 +17,9 @@ namespace Powerups
     public class Powerup_Slime : ActiveAbility
     {
         private float CDstart;
-        bool onCooldown = false, Active = false;
-        PlayerShoot pShoot;
-        float offset = 2, duration = 7f;
-
+        private bool onCooldown = false, Active = false;
+        private PlayerShoot pShoot;
+        private float offset = 2, duration = 7f;
 
         public override void OnAbilityAdd()
         {
@@ -31,7 +27,7 @@ namespace Powerups
             Name = "Slime";
             Debug.Log(Name + " Added");
 
-            // Add new shoot function to delegate 
+            // Add new shoot function to delegate
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
@@ -41,6 +37,7 @@ namespace Powerups
 
             base.OnAbilityAdd();
         }
+
         public override void OnUpdate()
         {
             if (Active)
@@ -61,6 +58,7 @@ namespace Powerups
 
             base.OnUpdate();
         }
+
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate
@@ -73,6 +71,7 @@ namespace Powerups
             // Call base function
             base.OnAbilityRemove();
         }
+
         protected override void RPC_Activate()
         {
             if (Active)
@@ -111,7 +110,7 @@ namespace Powerups
 
             base.RPC_Activate();
         }
-       
+
         private void CoolDown(float currentTime, float duration)
         {
             if (currentTime >= CDstart + duration)
@@ -120,6 +119,5 @@ namespace Powerups
                 onCooldown = false;
             }
         }
-
     }
 }

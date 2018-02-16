@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Powerups
@@ -8,13 +6,14 @@ namespace Powerups
     [Serializable]
     public class Powerup_Rearview : PassiveAbility
     {
-
         //Camera Object
         private Vector3 cameraOffset = new Vector3(0, 0, 0);
+
         private Quaternion cameraRotation = Quaternion.Euler(0, 180, 0);
 
         //Camera Viewport
         private Vector2 cameraPosition; //Set automatically to fit the camerta on screen according to its size
+
         private Vector2 cameraSize = new Vector2(.35f, .35f);
 
         private GameObject cameraDummy;

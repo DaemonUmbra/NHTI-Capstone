@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MainCanvasManager : MonoBehaviour {
+public class MainCanvasManager : MonoBehaviour
+{
     //Finished
     public static MainCanvasManager Instance;
 
     [SerializeField]
     private LobbyCanvas _lobbyCanvas;
+
     public LobbyCanvas LobbyCanvas
     {
         get { return _lobbyCanvas; }
@@ -15,6 +15,7 @@ public class MainCanvasManager : MonoBehaviour {
 
     [SerializeField]
     private CurrentRoomCanvas _currentRoomCanvas;
+
     public CurrentRoomCanvas CurrentRoomCanvas
     {
         get { return _currentRoomCanvas; }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Powerups
 {
@@ -12,7 +10,7 @@ namespace Powerups
     /// <para>Power-Up Tier: Uncommon</para>
     /// <para>Power-Up Description:  Player model is larger,  gaining damage boost but same walk speed.</para>
     /// </summary>
-    /// 
+    ///
     public class Powerup_Growth : PassiveAbility
     {
         private Vector3 OriginalScale;
@@ -22,6 +20,7 @@ namespace Powerups
 
         public float dmgMult = .5f;
         public float dmgAdd = 2f;
+
         public override void OnAbilityAdd()
         {
             pStats = gameObject.GetComponent<PlayerStats>();

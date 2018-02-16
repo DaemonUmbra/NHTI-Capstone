@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Powerups
 {
@@ -9,9 +7,8 @@ namespace Powerups
         public float speed;
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
-
         }
 
         // Update is called once per frame
@@ -21,7 +18,7 @@ namespace Powerups
 
             float time = Time.deltaTime;
 
-            if(time >= 8.0f)
+            if (time >= 8.0f)
             {
                 speed *= 2.0f;
             }

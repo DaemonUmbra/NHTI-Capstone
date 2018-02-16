@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerStats))]
-public class PlayerMotor : Photon.MonoBehaviour {
-
-    
-    bool onJumpPad = false;
+public class PlayerMotor : Photon.MonoBehaviour
+{
+    private bool onJumpPad = false;
 
     private Rigidbody rb;
     private PlayerStats pStats;
@@ -23,7 +20,8 @@ public class PlayerMotor : Photon.MonoBehaviour {
         }
     }
 
-    void Start () {
+    private void Start()
+    {
         rb = GetComponent<Rigidbody>();
         pStats = GetComponent<PlayerStats>();
     }
@@ -34,7 +32,6 @@ public class PlayerMotor : Photon.MonoBehaviour {
         // Change rb velocity to local velocity
         _velocity.y = rb.velocity.y;
         rb.velocity = _velocity;
-
     }
 
     public void SetVelocity(Vector3 velocity)
@@ -66,6 +63,7 @@ public class PlayerMotor : Photon.MonoBehaviour {
             onJumpPad = true;
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "JumpPad")

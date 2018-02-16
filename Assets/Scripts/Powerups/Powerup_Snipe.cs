@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 ///summary
  /*
 Developers and Contributors: Ian Cahoon
-    
+
 Information
     Name: Snipe
     Type: Active
@@ -20,10 +18,9 @@ namespace Powerups
     public class Powerup_Snipe : ActiveAbility
     {
         private float CDstart;
-        bool onCooldown = false, CurrentlyActive = false;
-        PlayerShoot pShoot;
-        GameObject rayOrigin;
-
+        private bool onCooldown = false, CurrentlyActive = false;
+        private PlayerShoot pShoot;
+        private GameObject rayOrigin;
 
         public override void OnAbilityAdd()
         {
@@ -31,8 +28,8 @@ namespace Powerups
             Name = "Snipe";
             Debug.Log(Name + " Added");
 
-            // Add new shoot function to delegate 
-            pShoot = GetComponent<PlayerShoot>();                                        
+            // Add new shoot function to delegate
+            pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
                 Debug.Log("Snipe Added to Shoot Delegate");
@@ -41,7 +38,7 @@ namespace Powerups
 
             base.OnAbilityAdd();
         }
-        
+
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate
@@ -54,6 +51,7 @@ namespace Powerups
             // Call base function
             base.OnAbilityRemove();
         }
+
         protected override void RPC_Activate()
         {
             foreach (Transform child in transform)
@@ -83,22 +81,19 @@ namespace Powerups
             {
                 Debug.Log(endPoint.transform.gameObject.name);
                 targetVector = endPoint.point;
-
             }
             else
             {
                 Debug.Log("no object was hit");
             }
 
-
             StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
 
             base.RPC_Activate();
         }
-        
-        IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
-        {
 
+        private IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
+        {
             LineRenderer snipeLaser = Origin.GetComponent<LineRenderer>();
             snipeLaser.SetPosition(0, Origin.transform.position);
             snipeLaser.SetPosition(1, targetLocation);
@@ -106,8 +101,6 @@ namespace Powerups
             snipeLaser.enabled = true;
             yield return new WaitForSeconds(.2f);
             snipeLaser.enabled = false;
-
         }
-
     }
 }

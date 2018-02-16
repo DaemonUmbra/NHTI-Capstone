@@ -1,14 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerListing : MonoBehaviour {
+public class PlayerListing : MonoBehaviour
+{
     //Finished
     public PhotonPlayer PhotonPlayer { get; private set; }
 
     [SerializeField]
     private Text _playerName;
+
     private Text PlayerName
     {
         get { return _playerName; }
@@ -16,6 +17,7 @@ public class PlayerListing : MonoBehaviour {
 
     [SerializeField]
     private Text _playerPing;
+
     private Text m_playerPing
     {
         get { return _playerPing; }

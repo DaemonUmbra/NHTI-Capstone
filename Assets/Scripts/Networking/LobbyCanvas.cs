@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class LobbyCanvas : MonoBehaviour {
+public class LobbyCanvas : MonoBehaviour
+{
     //Finished
     [SerializeField]
     private RoomLayoutGroup _roomLayoutGroup;
+
     public RoomLayoutGroup RoomLayoutGroup
     {
         get { return _roomLayoutGroup; }
@@ -15,8 +15,9 @@ public class LobbyCanvas : MonoBehaviour {
     {
         if (PhotonNetwork.JoinRoom(roomName))
         {
-
-        } else {
+        }
+        else
+        {
             print("Join room failed.");
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Powerups
 {
@@ -14,13 +12,16 @@ namespace Powerups
         //TWEAKABLE
         [SerializeField]
         private float xChange = -0.5f;
+
         [SerializeField]
         private float yChange = 0.5f;
+
         [SerializeField]
         private float zChange = -0.5f;
 
         //TWEAKABLE
         private Vector3 crownOrSashOffset = new Vector3(0, 0, 0);
+
         private Quaternion crownOrSashRotation = Quaternion.Euler(0, 0, 0);
 
         private Vector3 ActualChanges;
@@ -34,7 +35,6 @@ namespace Powerups
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);
             */
-
 
             Name = "Miss Unrealistic";
             //If we don't have a template set in the editor
@@ -78,8 +78,6 @@ namespace Powerups
                 crownOrSashInstance.localPosition = crownOrSashOffset;
             }
             base.OnAbilityAdd();
-
-
         }
 
         /*** Handled by base class

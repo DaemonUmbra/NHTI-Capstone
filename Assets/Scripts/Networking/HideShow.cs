@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class HideShow : MonoBehaviour {
+public class HideShow : MonoBehaviour
+{
     private GameObject lobby;
     public Text buttonText;
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    private void Start()
+    {
         lobby = GameObject.Find("LobbyNetwork");
     }
 
@@ -19,7 +18,9 @@ public class HideShow : MonoBehaviour {
         {
             lobby.GetComponent<LobbyNetwork>().HideFullRoom = true;
             buttonText.text = "Show\nFull\nRooms";
-        } else {
+        }
+        else
+        {
             lobby.GetComponent<LobbyNetwork>().HideFullRoom = false;
             buttonText.text = "Hide\nFull\nRooms";
         }

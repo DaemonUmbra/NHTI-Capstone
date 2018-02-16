@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
@@ -12,28 +10,31 @@ public class PlayerController : Photon.MonoBehaviour
 
     [SerializeField]
     private int groundLayer = 8;
-    [SerializeField]
-    float jumpCooldown;
-    float lastJumpTime;
 
+    [SerializeField]
+    private float jumpCooldown;
+
+    private float lastJumpTime;
 
     [SerializeField]
     public int maxJumpCount;
-    
-    int jumpCount = 0;
-    
+
+    private int jumpCount = 0;
+
     // Local components
-    PlayerMotor motor;
-    PlayerShoot pShoot;
+    private PlayerMotor motor;
+
+    private PlayerShoot pShoot;
     //AbilityManager abilityManager;
 
-    bool isGrounded = false;
-    bool debounce = false;
+    private bool isGrounded = false;
+    private bool debounce = false;
 
     /// <summary>
     /// Inverted movement controls
     /// </summary>
     public bool InvertX = false;
+
     public bool InvertY = false;
 
     private void Awake()
@@ -43,14 +44,16 @@ public class PlayerController : Photon.MonoBehaviour
             enabled = false;
         }
     }
-    void Start ()
+
+    private void Start()
     {
         motor = GetComponent<PlayerMotor>();
         pShoot = GetComponent<PlayerShoot>();
         lastJumpTime = Time.time - jumpCooldown;
-	}
-    
-    void Update () {
+    }
+
+    private void Update()
+    {
         // Get movement input
         Vector3 inputVel = Vector3.zero;
 
@@ -60,8 +63,7 @@ public class PlayerController : Photon.MonoBehaviour
         if (InvertY) yInput *= -1;
 
         inputVel = xInput + yInput;
-        
-        
+
         if (!CrowdControlled)
         {
             motor.SetVelocity(inputVel); // Apply velocity
@@ -73,7 +75,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
 
         // Check for jump}
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             TryJump();
         }
@@ -84,14 +86,15 @@ public class PlayerController : Photon.MonoBehaviour
         // Check for shooting
         if (Input.GetButtonDown("Fire1"))
         {
-
             pShoot.shoot.Invoke();
         }
     }
-    void StopMomentum()
+
+    private void StopMomentum()
     {
         motor.SetVelocity(Vector3.zero);
     }
+
     private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
     {
         //Debug.Log("Crowd Control started: " + CCStartTime + " Current Time: " + currentTime);
@@ -104,7 +107,6 @@ public class PlayerController : Photon.MonoBehaviour
             CrowdControlled = false;
         }
     }
-    
 
     private void TryJump()
     {
@@ -121,7 +123,7 @@ public class PlayerController : Photon.MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
-        if(collision.collider.gameObject.layer == groundLayer)
+        if (collision.collider.gameObject.layer == groundLayer)
         {
             isGrounded = true;
             jumpCount = 0;
@@ -135,13 +137,12 @@ public class PlayerController : Photon.MonoBehaviour
             CCWearOff(Time.time, duration, true);
         }
     }
+
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.collider.gameObject.layer == groundLayer)
+        if (collision.collider.gameObject.layer == groundLayer)
         {
             isGrounded = false;
         }
     }
-    
-
 }

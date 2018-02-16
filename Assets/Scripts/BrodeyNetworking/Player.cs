@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace PUNTutorial
 {
     public class Player : Photon.PunBehaviour
     {
-        Camera playerCam;
+        private Camera playerCam;
 
-        void Awake()
+        private void Awake()
         {
             DontDestroyOnLoad(gameObject);
             playerCam = GetComponentInChildren<Camera>();

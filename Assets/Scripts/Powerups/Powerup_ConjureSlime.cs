@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Powerups
@@ -8,9 +6,8 @@ namespace Powerups
     public class ConjureSlime : ActiveAbility
     {
         private float CDstart;
-        bool onCooldown = false, CurrentlyActive = false;
-        PlayerShoot pShoot;
-
+        private bool onCooldown = false, CurrentlyActive = false;
+        private PlayerShoot pShoot;
 
         public override void OnAbilityAdd()
         {
@@ -18,7 +15,7 @@ namespace Powerups
             Name = "ConjureSlime";
             Debug.Log(Name + " Added");
 
-            // Add new shoot function to delegate 
+            // Add new shoot function to delegate
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
@@ -65,7 +62,6 @@ namespace Powerups
             {
                 Debug.Log(endPoint.transform.gameObject.name);
                 targetVector = endPoint.point;
-
             }
             else
             {
@@ -77,8 +73,8 @@ namespace Powerups
             // Call base class
             base.RPC_Activate();
         }
-       
-        IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
+
+        private IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
         {
             StartCoroutine(TriggerCoolDown());
 
@@ -89,15 +85,14 @@ namespace Powerups
             snipeLaser.enabled = true;
             yield return new WaitForSeconds(.2f);
             snipeLaser.enabled = false;
-
         }
-        IEnumerator TriggerCoolDown()
+
+        private IEnumerator TriggerCoolDown()
         {
             onCooldown = true;
             CDstart = Time.fixedTime;
-            yield return new WaitForSeconds(12  );
+            yield return new WaitForSeconds(12);
             onCooldown = false;
         }
-
     }
 }
