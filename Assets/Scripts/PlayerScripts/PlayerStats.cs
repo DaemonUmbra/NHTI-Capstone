@@ -211,7 +211,6 @@ public class PlayerStats : Photon.MonoBehaviour
 
     #endregion Public Methods
 
-
     #region Photon RPCs
 
     [PunRPC]
@@ -232,6 +231,7 @@ public class PlayerStats : Photon.MonoBehaviour
             Die();
         }
     }
+
     [PunRPC]
     private void RPC_TakeDamage(float amount, int srcViewId)
     {
@@ -253,12 +253,13 @@ public class PlayerStats : Photon.MonoBehaviour
         if (_currentHp <= 0)
         {
             Debug.Log(gameObject.name + " hp <= 0");
-            if(srcObj)
+            if (srcObj)
                 Die(srcObj);
             else
                 Die();
         }
     }
+
     /* Needs rework because of PUN serialization
     [PunRPC]
     private void RPC_TakeDamage(float amount, GameObject source, List<Effect> effects)
@@ -288,6 +289,7 @@ public class PlayerStats : Photon.MonoBehaviour
         }
     }
     */
+
     [PunRPC]
     private void RPC_GainHp(float amount)
     {
@@ -306,6 +308,7 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp += amount;
         }
     }
+
     [PunRPC]
     private void RPC_Die()
     {
@@ -315,6 +318,7 @@ public class PlayerStats : Photon.MonoBehaviour
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
+
     [PunRPC]
     private void RPC_Die(int srcId)
     {
@@ -333,17 +337,20 @@ public class PlayerStats : Photon.MonoBehaviour
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
-    #endregion
-    
-    
+
+    #endregion Photon RPCs
+
     #region Private Methods
+
     private void Die()
     {
         photonView.RPC("RPC_Die", PhotonTargets.All);
     }
+
     private void Die(GameObject killer)
     {
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
+
     #endregion Private Methods
 }

@@ -20,8 +20,9 @@ public class Projectile : Photon.MonoBehaviour
     public float speed = 10f;
 
     [SerializeField]
-    float lifetime = 3; // Seconds
-    float startTime = 0f;
+    private float lifetime = 3; // Seconds
+
+    private float startTime = 0f;
 
     public void Start()
     {
@@ -44,7 +45,7 @@ public class Projectile : Photon.MonoBehaviour
 
     public void Update()
     {
-        if(Time.time >= startTime + lifetime)
+        if (Time.time >= startTime + lifetime)
         {
             PhotonNetwork.Destroy(photonView);
         }
