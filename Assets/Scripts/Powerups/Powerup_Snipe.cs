@@ -33,7 +33,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Snipe Added to Shoot Delegate");
-                pShoot.shoot += Activate;
+                pShoot.shoot += TryActivate;
             }
 
             base.OnAbilityAdd();
@@ -44,7 +44,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= Activate;
+                pShoot.shoot -= TryActivate;
             }
             pShoot = null;
 
@@ -52,7 +52,7 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
             foreach (Transform child in transform)
             {
@@ -89,7 +89,7 @@ namespace Powerups
 
             StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
 
-            base.RPC_Activate();
+            base.Activate();
         }
 
         private IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)

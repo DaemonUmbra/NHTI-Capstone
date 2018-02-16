@@ -31,12 +31,12 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
             transform.Translate(transform.forward * BoostSpeed);
 
             // Call base function
-            base.RPC_Activate();
+            base.Activate();
         }
     }
 }

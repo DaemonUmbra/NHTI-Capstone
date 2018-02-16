@@ -17,7 +17,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Single Shot Added to Shoot Delegate");
-                pShoot.shoot += Activate;
+                pShoot.shoot += TryActivate;
             }
         }
 
@@ -26,7 +26,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= Activate;
+                pShoot.shoot -= TryActivate;
             }
             pShoot = null;
 
@@ -34,9 +34,9 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
-            base.RPC_Activate();
+            base.Activate();
             GameObject _proj = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, transform.rotation, 0);
             _proj.GetComponent<Projectile>().IgnorePlayer(gameObject);
         }

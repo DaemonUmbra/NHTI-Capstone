@@ -15,7 +15,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Fireball Added to Shoot Delegate");
-                pShoot.shoot += Activate;
+                pShoot.shoot += TryActivate;
             }
             // Call base function
             base.OnAbilityAdd();
@@ -26,7 +26,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= Activate;
+                pShoot.shoot -= TryActivate;
             }
             pShoot = null;
 
@@ -34,10 +34,10 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
             // Call base function
-            base.RPC_Activate();
+            base.Activate();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Slime Added to Shoot Delegate");
-                pShoot.shoot += Activate;
+                pShoot.shoot += TryActivate;
             }
 
             base.OnAbilityAdd();
@@ -64,7 +64,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= Activate;
+                pShoot.shoot -= TryActivate;
             }
             pShoot = null;
 
@@ -72,7 +72,7 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        protected override void RPC_Activate()
+        protected override void Activate()
         {
             if (Active)
             {
@@ -108,7 +108,7 @@ namespace Powerups
                 Active = true;
             }
 
-            base.RPC_Activate();
+            base.Activate();
         }
 
         private void CoolDown(float currentTime, float duration)

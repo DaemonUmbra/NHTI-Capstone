@@ -159,8 +159,8 @@ public class AbilityManager : Photon.MonoBehaviour
         {
             // Add ability to player and register it
             BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ability.GetType());
-            Debug.Log("Ability added: " + newAbility.GetName);
             RegisterAbility(newAbility);
+            Debug.Log("Ability added: " + newAbility.GetName);
         }
         else
         {
@@ -199,7 +199,6 @@ public class AbilityManager : Photon.MonoBehaviour
         ability.OnAbilityAdd();
         // Add ability to dictionary
         _abilities.Add(ability.GetName, ability);
-        Debug.Log(ability.GetName);
     }
 
     // Unregister ability

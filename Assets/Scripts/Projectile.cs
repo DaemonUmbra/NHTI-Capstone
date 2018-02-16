@@ -21,10 +21,23 @@ public class Projectile : Photon.MonoBehaviour
 
     [SerializeField]
     private float lifetime = 3; // Seconds
-
     private float startTime = 0f;
 
     public void Start()
+    {
+        photonView.RPC("Shoot", PhotonTargets.All);
+    }
+
+    public void Update()
+    {
+        if (Time.time >= startTime + lifetime)
+        {
+            PhotonNetwork.Destroy(photonView);
+        }
+    }
+
+    [PunRPC]
+    private void Shoot()
     {
         // Set shooterStats if shooter was set in inspector
         if (shooter)
@@ -40,20 +53,9 @@ public class Projectile : Photon.MonoBehaviour
             }
         }
 
-        photonView.RPC("Shoot", PhotonTargets.All);
-    }
+        // Set the start time of the bullet
+        startTime = Time.time;
 
-    public void Update()
-    {
-        if (Time.time >= startTime + lifetime)
-        {
-            PhotonNetwork.Destroy(photonView);
-        }
-    }
-
-    [PunRPC]
-    private void Shoot()
-    {
         // Get rigidbody reference
         rb = gameObject.GetComponent<Rigidbody>();
 
