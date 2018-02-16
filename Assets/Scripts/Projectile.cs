@@ -20,6 +20,7 @@ public class Projectile : Photon.MonoBehaviour {
 
     [SerializeField]
     float lifetime = 3; // Seconds
+    float startTime = 0f;
 
     public void Start()
     {
@@ -41,6 +42,14 @@ public class Projectile : Photon.MonoBehaviour {
         photonView.RPC("Shoot", PhotonTargets.All);
     }
 
+    public void Update()
+    {
+        if(Time.time >= startTime + lifetime)
+        {
+            PhotonNetwork.Destroy(photonView);
+        }
+    }
+
     [PunRPC]
     void Shoot()
     {
@@ -49,9 +58,6 @@ public class Projectile : Photon.MonoBehaviour {
 
         // Apply velocity
         rb.velocity = transform.forward * speed;
-
-        // Destroy after a set numer of seconds
-        Destroy(gameObject, lifetime);
     }
 
     // Ignore collision with player
@@ -74,13 +80,7 @@ public class Projectile : Photon.MonoBehaviour {
         {
             hitStats.TakeDamage(damage, shooter, shooterStats.OnHitEffects);
 
-            photonView.RPC("RPC_Destroy", PhotonTargets.All);
+            PhotonNetwork.Destroy(photonView);
         }
-    }
-
-    [PunRPC]
-    private void RPC_Destroy()
-    {
-        Destroy(gameObject);
     }
 }

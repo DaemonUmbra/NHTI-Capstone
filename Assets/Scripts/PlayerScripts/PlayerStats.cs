@@ -151,7 +151,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, null, null);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
 
     /// <summary>
@@ -161,7 +161,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount, GameObject source)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source, null);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
    
     /// <summary>
@@ -171,7 +171,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, List<Effect> effects)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, null, effects);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
    
     /// <summary>
@@ -182,26 +182,13 @@ public class PlayerStats : Photon.MonoBehaviour {
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source, effects);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
     
     // Increase the player's current hp by amount
     public void GainHp(float amount)
     {
-        if(amount < 0)
-        {
-            Debug.LogWarning("Cannot gain negative hp. Use TakeDamage instead.");
-            return;
-        }
-        if(_currentHp + amount > _maxHp)
-        {
-            Debug.LogWarning("Cannot overheal. Hp is max.");
-            _currentHp = _maxHp;
-        }
-        else
-        {
-            _currentHp += amount;
-        }
+        photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
     }
 
     // Can be used later for checking accuracy etc
@@ -211,7 +198,54 @@ public class PlayerStats : Photon.MonoBehaviour {
     }
     #endregion
 
+
     #region Photon RPCs
+    [PunRPC]
+    private void RPC_TakeDamage(float amount)
+    {
+        // Validate the damage amount
+        if (amount < 0)
+        {
+            Debug.LogWarning("Cannot take negative damage.");
+            return;
+        }
+        // Reduce hp by amount
+        _currentHp -= amount;
+        // Kill if hp is zero or less
+        if (_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+           Die();
+        }
+    }
+    [PunRPC]
+    private void RPC_TakeDamage(float amount, int srcViewId)
+    {
+        // Find the source gameobject from it's view id
+        PhotonView srcView = PhotonView.Find(srcViewId);
+        GameObject srcObj = null;
+        if (srcView != null)
+            srcObj = srcView.gameObject;
+
+        // Validate the damage amount
+        if (amount < 0)
+        {
+            Debug.LogWarning("Cannot take negative damage.");
+            return;
+        }
+        // Reduce hp by amount
+        _currentHp -= amount;
+        // Kill if hp is zero or less
+        if (_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+            if(srcObj)
+                Die(srcObj);
+            else
+                Die();
+        }
+    }
+    /* Needs rework because of PUN serialization
     [PunRPC]
     private void RPC_TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
@@ -239,10 +273,27 @@ public class PlayerStats : Photon.MonoBehaviour {
             Die(source);
         }
     }
-    #endregion
-
-    #region Private Methods
-    private void Die()
+    */
+    [PunRPC]
+    private void RPC_GainHp(float amount)
+    {
+        if (amount < 0)
+        {
+            Debug.LogWarning("Cannot gain negative hp. Use TakeDamage instead.");
+            return;
+        }
+        if (_currentHp + amount > _maxHp)
+        {
+            Debug.LogWarning("Cannot overheal. Hp is max.");
+            _currentHp = _maxHp;
+        }
+        else
+        {
+            _currentHp += amount;
+        }
+    }
+    [PunRPC]
+    private void RPC_Die()
     {
         Debug.Log(gameObject.name + " has died.");
 
@@ -250,9 +301,12 @@ public class PlayerStats : Photon.MonoBehaviour {
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
-    private void Die(GameObject killer)
+    [PunRPC]
+    private void RPC_Die(int srcId)
     {
-        if(killer != null)
+        GameObject killer = PhotonView.Find(srcId).gameObject;
+
+        if (killer != null)
         {
             Debug.Log(gameObject.name + " was killed by " + killer.name);
         }
@@ -264,6 +318,18 @@ public class PlayerStats : Photon.MonoBehaviour {
         // No death logic yet
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
+    }
+    #endregion
+    
+    
+    #region Private Methods
+    private void Die()
+    {
+        photonView.RPC("RPC_Die", PhotonTargets.All);
+    }
+    private void Die(GameObject killer)
+    {
+        photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
     #endregion
 

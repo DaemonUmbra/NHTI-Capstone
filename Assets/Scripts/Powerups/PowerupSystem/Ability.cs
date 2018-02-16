@@ -44,4 +44,24 @@ public abstract class BaseAbility : Photon.MonoBehaviour {
         active = false;
     }
     #endregion
+
+    #region Photon RPCs
+    [PunRPC]
+    public void RPC_OnAbilityAdd()
+    {
+        OnAbilityAdd();
+    }
+
+    [PunRPC]
+    public void RPC_OnAbilityUpdate()
+    {
+        OnUpdate();
+    }
+
+    [PunRPC]
+    public void RPC_OnAbilityRemove()
+    {
+        OnAbilityRemove();
+    }
+    #endregion
 }
