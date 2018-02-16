@@ -17,7 +17,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Single Shot Added to Shoot Delegate");
-                pShoot.shoot += RPC_Activate;
+                pShoot.shoot += Activate;
             }
         }
 
@@ -26,7 +26,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= RPC_Activate;
+                pShoot.shoot -= Activate;
             }
             pShoot = null;
 

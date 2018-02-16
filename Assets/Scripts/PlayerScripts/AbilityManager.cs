@@ -26,6 +26,7 @@ public class AbilityManager : Photon.MonoBehaviour
         }
     }
 
+
     #region Public Methods
 
     // Check if the player has an ability
@@ -142,6 +143,7 @@ public class AbilityManager : Photon.MonoBehaviour
     }
 
     #endregion Public Methods
+
 
     #region Photon RPCs
     [PunRPC]

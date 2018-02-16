@@ -16,8 +16,7 @@ public abstract class BaseAbility : Photon.MonoBehaviour
 
     public bool IsActive { get { return active; } }
 
-    #region Abstract Methods
-
+    #region Virtual Methods
     /// <summary>
     /// Called when abilities are added to a player.
     /// Make sure to set the ability name string!
@@ -50,12 +49,6 @@ public abstract class BaseAbility : Photon.MonoBehaviour
     public void RPC_OnAbilityAdd()
     {
         OnAbilityAdd();
-    }
-
-    [PunRPC]
-    public void RPC_OnAbilityUpdate()
-    {
-        OnUpdate();
     }
 
     [PunRPC]

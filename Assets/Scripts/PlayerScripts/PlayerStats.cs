@@ -229,7 +229,7 @@ public class PlayerStats : Photon.MonoBehaviour
         if (_currentHp <= 0)
         {
             Debug.Log(gameObject.name + " hp <= 0");
-           Die();
+            Die();
         }
     }
     [PunRPC]
