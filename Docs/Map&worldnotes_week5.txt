@@ -1,0 +1,34 @@
+Forest map
+-tree cover
+-ridges for viticality
+-pits, gullies-incites combat
+
+--dense, inland, shaded 
+
+River map
+-use water for traversal 
+-push player tward cental area
+-water changes direction
+-waterfall
+
+-- anywhere along the river, spread out the maps, not on the ocean
+
+Cave Map
+-Crystal centerpeice
+-Claustrophobic/enclosed
+-All underground
+-Central area opens up
+-Tunnels branch off
+-Get cornered
+-Giants couseway(?)
+-Glowing mushrooms
+
+-- can go literaly anywhere that dosent have a map already, spread out the maps
+
+Ruins Map
+-Wooded
+-Centerpiece stone stairs (madame sherri forest)
+-Other parts of buildings
+-Cover in the low areas, vulnurable on the centerpiece
+
+-- in the forest(not the map) and near the river(not the map) 
