@@ -144,6 +144,7 @@ public class AbilityManager : Photon.MonoBehaviour
     #endregion Public Methods
 
     #region Photon RPCs
+
     [PunRPC]
     private void RPC_AddAbility(string abilityType) // This could and should be optimized once it is working
     {
@@ -164,6 +165,7 @@ public class AbilityManager : Photon.MonoBehaviour
             Debug.LogError(ability.GetName + " already owned by player.");
         }
     }
+
     [PunRPC]
     private void RPC_RemoveAbility(string abilityType)
     {
@@ -183,8 +185,8 @@ public class AbilityManager : Photon.MonoBehaviour
             Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
         }
     }
-    #endregion
 
+    #endregion Photon RPCs
 
     #region Private Methods
 

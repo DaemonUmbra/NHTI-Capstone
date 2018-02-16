@@ -43,9 +43,11 @@ public abstract class BaseAbility : Photon.MonoBehaviour
     {
         active = false;
     }
-    #endregion
+
+    #endregion Abstract Methods
 
     #region Photon RPCs
+
     [PunRPC]
     public void RPC_OnAbilityAdd()
     {
@@ -63,5 +65,6 @@ public abstract class BaseAbility : Photon.MonoBehaviour
     {
         OnAbilityRemove();
     }
-    #endregion
+
+    #endregion Photon RPCs
 }
