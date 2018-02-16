@@ -1,17 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SlimeBall : MonoBehaviour
 {
-    float lifetime = 10f;
-    float force = 10f;
+    private float lifetime = 10f;
+    private float force = 10f;
 
-    float explosionForce = 300;
+    private float explosionForce = 300;
 
-    Rigidbody rb;
+    private Rigidbody rb;
+
     // Use this for initialization
-    void Start ()
+    private void Start()
     {
         Destroy(gameObject, lifetime);
         rb = gameObject.GetComponent<Rigidbody>();
@@ -24,14 +23,13 @@ public class SlimeBall : MonoBehaviour
 
         rb.velocity = transform.forward * force;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    private void Update()
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, .5f, Vector3.forward, 2f, 1);
         foreach (RaycastHit hit in hits)
         {
-            
             Rigidbody rb = hit.rigidbody;
             if (rb != null)
             {
@@ -43,5 +41,4 @@ public class SlimeBall : MonoBehaviour
             }
         }
     }
-
 }

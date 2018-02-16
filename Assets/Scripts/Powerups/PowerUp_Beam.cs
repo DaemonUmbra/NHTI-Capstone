@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 ///summary
  /*
 Developers and Contributors: Ian Cahoon
-    
+
 Information
     Name: Beam
     Type: Active
@@ -19,10 +16,9 @@ namespace Powerups
 {
     public class Powerup_Beam : ActiveAbility
     {
-        bool onCooldown = false, CurrentlyActive = false;
-        PlayerShoot pShoot;
-        GameObject rayOrigin;
-
+        private bool onCooldown = false, CurrentlyActive = false;
+        private PlayerShoot pShoot;
+        private GameObject rayOrigin;
 
         public override void OnAbilityAdd()
         {
@@ -30,7 +26,7 @@ namespace Powerups
             Name = "Beam";
             Debug.Log(Name + " Added");
 
-            // Add new shoot function to delegate 
+            // Add new shoot function to delegate
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
@@ -41,6 +37,7 @@ namespace Powerups
             // Call base function
             base.OnAbilityAdd();
         }
+
         public override void OnUpdate()
         {
             if (Input.GetMouseButtonUp(0))
@@ -71,13 +68,11 @@ namespace Powerups
                 {
                     Debug.Log(endPoint.transform.gameObject.name);
                     targetVector = endPoint.point;
-
                 }
                 else
                 {
                     Debug.Log("no object was hit");
                 }
-
 
                 VisualizeRaycast(rayOrigin, targetVector);
             }
@@ -85,6 +80,7 @@ namespace Powerups
             // Call base function
             base.OnUpdate();
         }
+
         public override void OnAbilityRemove()
         {
             // Remove shoot delegate
@@ -93,7 +89,7 @@ namespace Powerups
                 pShoot.shoot -= OnShoot;
             }
             pShoot = null;
-            
+
             // Call base function
             base.OnAbilityRemove();
         }
@@ -102,6 +98,7 @@ namespace Powerups
         {
             base.RPC_Activate();
         }
+
         public void OnShoot()
         {
             CurrentlyActive = true;
@@ -127,30 +124,28 @@ namespace Powerups
             {
                 Debug.Log(endPoint.transform.gameObject.name);
                 targetVector = endPoint.point;
-
             }
             else
             {
                 Debug.Log("no object was hit");
             }
 
-
             VisualizeRaycast(rayOrigin, targetVector);
         }
-        void VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
-        {
 
+        private void VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
+        {
             LineRenderer Laser = GetLaser(Origin);
             Laser.SetPosition(0, Origin.transform.position);
             Laser.SetPosition(1, targetLocation);
 
             Laser.enabled = true;
         }
-        LineRenderer GetLaser(GameObject Origin)
+
+        private LineRenderer GetLaser(GameObject Origin)
         {
             LineRenderer Laser = Origin.GetComponent<LineRenderer>();
             return Laser;
         }
-
     }
 }

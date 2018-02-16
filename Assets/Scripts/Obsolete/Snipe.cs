@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-///summary
+﻿///summary
 /*
 Developers and Contributors: Ian Cahoon
 
@@ -23,14 +18,13 @@ public class Snipe : Ability
    bool onCooldown = false, CurrentlyActive = false;
    PlayerShoot pShoot;
 
-
    public override void OnAbilityAdd()
    {
        // Set name
        Name = "Snipe";
        Debug.Log(Name + " Added");
 
-       // Add new shoot function to delegate 
+       // Add new shoot function to delegate
        pShoot = GetComponent<PlayerShoot>();
        if (pShoot)
        {
@@ -40,7 +34,6 @@ public class Snipe : Ability
    }
    public override void OnUpdate()
    {
-
    }
    public override void OnAbilityRemove()
    {
@@ -75,7 +68,6 @@ public class Snipe : Ability
        {
            Debug.Log(endPoint.transform.gameObject.name);
            targetVector = endPoint.point;
-
        }
        //Debug.DrawRay(rayOrigin.transform.position, mouseLocation - rayOrigin.transform.position, Color.red, 5.0f);
 
@@ -95,6 +87,5 @@ public class Snipe : Ability
 
        onCooldown = false;
    }
-
 }
 */

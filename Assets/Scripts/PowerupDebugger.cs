@@ -1,28 +1,30 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 /// <summary>
 /// DOES NOT WORK
 /// </summary>
-public class PowerupDebugger : MonoBehaviour {
+public class PowerupDebugger : MonoBehaviour
+{
     [HideInInspector]
     public AbilityManager Player = null;
+
     [HideInInspector]
     public Type SelectedPowerup;
+
     [HideInInspector]
     public BaseAbility SelectedPlayerPowerup;
 
-    PhotonView pv;
-	// Use this for initialization
-	void Start () {
+    private PhotonView pv;
+
+    // Use this for initialization
+    private void Start()
+    {
         pv = PhotonView.Get(this);
-	}
+    }
 
     [PunRPC]
-    void Debugger_Remote_AddAbility(BaseAbility ability)
+    private void Debugger_Remote_AddAbility(BaseAbility ability)
     {
         if (Player)
         {
@@ -34,7 +36,7 @@ public class PowerupDebugger : MonoBehaviour {
     }
 
     [PunRPC]
-    void Debugger_Remote_RemoveAbility(BaseAbility ability)
+    private void Debugger_Remote_RemoveAbility(BaseAbility ability)
     {
         if (Player)
         {

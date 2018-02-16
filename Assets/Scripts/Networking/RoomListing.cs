@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomListing : MonoBehaviour {
+public class RoomListing : MonoBehaviour
+{
     //Finished
     [SerializeField]
     private Text _roomNameText;
+
     private Text RoomNameText
     {
         get { return _roomNameText; }
@@ -19,9 +21,9 @@ public class RoomListing : MonoBehaviour {
 
     public bool Updated { get; set; }
 
-
-	// Use this for initialization
-	private void Start () {
+    // Use this for initialization
+    private void Start()
+    {
         GameObject lobbyCanvasObj = MainCanvasManager.Instance.LobbyCanvas.gameObject;
         if (lobbyCanvasObj == null) { return; }
 
@@ -29,8 +31,7 @@ public class RoomListing : MonoBehaviour {
 
         Button button = GetComponent<Button>();
         button.onClick.AddListener(() => lobbyCanvas.OnClickJoinRoom(RoomNameText.text));
-
-	}
+    }
 
     private void Update()
     {
@@ -49,5 +50,4 @@ public class RoomListing : MonoBehaviour {
         RoomName = text;
         RoomNameText.text = RoomName;
     }
-
 }

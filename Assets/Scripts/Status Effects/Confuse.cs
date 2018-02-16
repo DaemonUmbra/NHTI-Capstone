@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Confuse : Effect
 {
-    PlayerController pc = new PlayerController();
-    
+    private PlayerController pc = new PlayerController();
+
     public Confuse(float lifetime)
     {
         _lifetime = lifetime;

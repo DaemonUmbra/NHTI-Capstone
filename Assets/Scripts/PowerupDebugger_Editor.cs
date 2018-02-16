@@ -1,14 +1,16 @@
 ﻿#if UNITY_EDITOR
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(PowerupDebugger))]
-public class PowerupDebugger_Editor : Editor {
-    int SelectedPowerupIndex = -1;
-    int SelectedPlayerPowerupIndex = -1;
+public class PowerupDebugger_Editor : Editor
+{
+    private int SelectedPowerupIndex = -1;
+    private int SelectedPlayerPowerupIndex = -1;
+
     public override void OnInspectorGUI()
     {
         //Default
@@ -17,7 +19,7 @@ public class PowerupDebugger_Editor : Editor {
         PowerupDebugger debugger = (PowerupDebugger)target;
 
         //If a Player is selected
-        if(debugger.Player)
+        if (debugger.Player)
         {
             //Show player selection box with that player in it
             debugger.Player = EditorGUILayout.ObjectField("Player", debugger.Player, typeof(AbilityManager), true, null) as AbilityManager;
@@ -30,7 +32,7 @@ public class PowerupDebugger_Editor : Editor {
             //for each of them
             foreach (Type type in Types)
             {
-                if(type.Namespace == "Powerups" && type.IsSubclassOf(typeof(BaseAbility)))
+                if (type.Namespace == "Powerups" && type.IsSubclassOf(typeof(BaseAbility)))
                 {
                     AvailablePowerupStrings.Add(type.Name);
                     AbilityDict.Add(type.Name, type);
@@ -108,7 +110,8 @@ public class PowerupDebugger_Editor : Editor {
         if (debugger.Player)
         {
             //and a powerup is selected
-            if (debugger.SelectedPowerup != null) {
+            if (debugger.SelectedPowerup != null)
+            {
                 //Show a button to add the powerup
                 if (GUILayout.Button("Add Powerup"))
                 {
@@ -134,4 +137,5 @@ public class PowerupDebugger_Editor : Editor {
         return Activator.CreateInstance(selectedPowerup) as BaseAbility;
     }
 }
+
 #endif

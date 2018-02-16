@@ -1,34 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Enum of projectile types
 public enum ProjectileType { BULLET, LAZER };
 
 [RequireComponent(typeof(Rigidbody))]
-public class Projectile : Photon.MonoBehaviour {
+public class Projectile : Photon.MonoBehaviour
+{
+    private Rigidbody rb;
 
-    Rigidbody rb;
     [SerializeField]
-    GameObject shooter;
-    PlayerStats shooterStats;
+    private GameObject shooter;
+
+    private PlayerStats shooterStats;
+
     [SerializeField]
-    ProjectileType type;
+    private ProjectileType type;
 
     public float damage = 0f;
     public float speed = 10f;
 
     [SerializeField]
+<<<<<<< HEAD
     float lifetime = 3; // Seconds
     float startTime = 0f;
+=======
+    private float lifetime = 3; // Seconds
+>>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
 
     public void Start()
     {
         // Set shooterStats if shooter was set in inspector
-        if(shooter)
+        if (shooter)
         {
             shooterStats = shooter.GetComponent<PlayerStats>();
-            if(shooterStats == null)
+            if (shooterStats == null)
             {
                 Debug.LogError("No player stats found on shooter.");
             }
@@ -36,7 +41,6 @@ public class Projectile : Photon.MonoBehaviour {
             {
                 damage = shooterStats.EffectiveDamage;
             }
-
         }
 
         photonView.RPC("Shoot", PhotonTargets.All);
@@ -51,7 +55,7 @@ public class Projectile : Photon.MonoBehaviour {
     }
 
     [PunRPC]
-    void Shoot()
+    private void Shoot()
     {
         // Get rigidbody reference
         rb = gameObject.GetComponent<Rigidbody>();
@@ -65,22 +69,32 @@ public class Projectile : Photon.MonoBehaviour {
     {
         shooter = player;
         shooterStats = shooter.GetComponent<PlayerStats>();
-        if(shooterStats == null)
+        if (shooterStats == null)
             Debug.LogError("No player stats found on shooter.");
 
         Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
     }
-    
+
     private void OnCollisionEnter(Collision collision)
     {
         GameObject hit = collision.gameObject;
         PlayerStats hitStats = hit.GetComponent<PlayerStats>();
 
-        if(hitStats)
+        if (hitStats)
         {
             hitStats.TakeDamage(damage, shooter, shooterStats.OnHitEffects);
 
             PhotonNetwork.Destroy(photonView);
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+    [PunRPC]
+    private void RPC_Destroy()
+    {
+        Destroy(gameObject);
+    }
+}
+>>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213

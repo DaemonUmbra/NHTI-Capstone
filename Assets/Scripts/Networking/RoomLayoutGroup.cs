@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomLayoutGroup : MonoBehaviour {
+public class RoomLayoutGroup : MonoBehaviour
+{
     //Finished
     private GameObject lobby;
+
     private bool status;
 
     private void Start()
@@ -23,15 +24,17 @@ public class RoomLayoutGroup : MonoBehaviour {
 
     [SerializeField]
     private GameObject _roomListingPrefab;
+
     private GameObject RoomListingPrefab
     {
         get { return _roomListingPrefab; }
     }
 
     private List<RoomListing> _roomListingButtons = new List<RoomListing>();
+
     private List<RoomListing> RoomListingButtons
     {
-        get { return _roomListingButtons;  }
+        get { return _roomListingButtons; }
     }
 
     private void OnReceivedRoomListUpdate()
@@ -50,7 +53,7 @@ public class RoomLayoutGroup : MonoBehaviour {
         int index = RoomListingButtons.FindIndex(x => x.RoomName == room.Name);
         if (index == -1)
         {
-            if(room.IsVisible)
+            if (room.IsVisible)
             {
                 if (lobby.GetComponent<LobbyNetwork>().HideFullRoom)
                 {
@@ -64,7 +67,9 @@ public class RoomLayoutGroup : MonoBehaviour {
 
                         index = (RoomListingButtons.Count - 1);
                     }
-                } else {
+                }
+                else
+                {
                     GameObject roomListingObj = Instantiate(RoomListingPrefab);
                     roomListingObj.transform.SetParent(transform, false);
 
@@ -83,7 +88,6 @@ public class RoomLayoutGroup : MonoBehaviour {
             roomListing.currentPlayersCount = room.PlayerCount;
             roomListing.maxPlayersCount = room.MaxPlayers;
             roomListing.Updated = true;
-
         }
     }
 
@@ -96,7 +100,6 @@ public class RoomLayoutGroup : MonoBehaviour {
             Destroy(roomListingObj);
         }
         OnReceivedRoomListUpdate();
-
     }
 
     private void RemoveOldRooms()
@@ -105,11 +108,12 @@ public class RoomLayoutGroup : MonoBehaviour {
 
         foreach (RoomListing roomListing in RoomListingButtons)
         {
-
             if (!roomListing.Updated)
             {
                 removeRooms.Add(roomListing);
-            } else {
+            }
+            else
+            {
                 roomListing.Updated = false;
             }
         }

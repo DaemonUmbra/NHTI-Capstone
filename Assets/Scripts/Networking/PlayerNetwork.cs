@@ -1,10 +1,8 @@
 ﻿using System.Collections;
-using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PlayerNetwork : MonoBehaviour {
-
+public class PlayerNetwork : MonoBehaviour
+{
     public static PlayerNetwork Instance;
     public string PlayerName { get; private set; }
     private PhotonView PhotonView;
@@ -12,8 +10,9 @@ public class PlayerNetwork : MonoBehaviour {
     private ExitGames.Client.Photon.Hashtable m_playerCustomProperties = new ExitGames.Client.Photon.Hashtable();
     private Coroutine m_pingCoroutine;
 
-	// Use this for initialization
-	private void Awake () {
+    // Use this for initialization
+    private void Awake()
+    {
         Instance = this;
         PhotonView = GetComponent<PhotonView>();
 
@@ -58,7 +57,6 @@ public class PlayerNetwork : MonoBehaviour {
     //[PunRPC]
     //private void RPC_LoadedGameScene(PhotonPlayer photonPlayer)
     //{
-
     //    PlayersInGame++;
     //    if (PlayersInGame == PhotonNetwork.playerList.Length)
     //    {
@@ -66,8 +64,6 @@ public class PlayerNetwork : MonoBehaviour {
     //        PhotonView.RPC("RPC_CreatePlayer", PhotonTargets.All);
     //    }
     //}
-
-
 
     private IEnumerator C_SetPing()
     {

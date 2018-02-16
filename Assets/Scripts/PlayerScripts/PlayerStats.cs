@@ -1,62 +1,73 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : Photon.MonoBehaviour {
-
+public class PlayerStats : Photon.MonoBehaviour
+{
     #region To be removed
+
     public readonly PhotonPlayer PhotonPlayer;
     public int Health;
-   
-    #endregion
+
+    #endregion To be removed
 
     #region Class Variables
+
     // Effects the player is currently under
     private List<Effect> _effects;
+
     private List<Effect> _expiredEffects;
+
     // Effects applied to other players when attacking them
     private List<Effect> _onHitEffects;
 
     // Public Stats
     [SerializeField]
     public float WalkSpeed = 10f;
+
     [SerializeField]
     public float JumpPower = 10f;
 
     // Private stats (access variables below)
     [SerializeField]
     private float _maxHp = 100f;
+
     private float _currentHp;
+
     [SerializeField]
     private float _baseDmg = 10f;
 
     // Damage modifiers
     public float dmgMult = 1f;
-    public float dmgAdd = 0f;
-    #endregion
 
+    public float dmgAdd = 0f;
+
+    #endregion Class Variables
 
     #region Access Variables
+
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
     public float EffectiveDamage { get { return _baseDmg * dmgMult + dmgAdd; } } // Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
-    #endregion
 
+    #endregion Access Variables
 
     #region Unity Callbacks
+
     // Use this for initialization
-    void Start () {
+    private void Start()
+    {
         _effects = new List<Effect>();
         _expiredEffects = new List<Effect>();
         _onHitEffects = new List<Effect>();
 
         _currentHp = _maxHp;
-	}
-    // Update is called once per frame
-    void Update() {
+    }
 
+    // Update is called once per frame
+    private void Update()
+    {
         // Clean up the expired effects
         for (int i = 0; i < _expiredEffects.Count; ++i)
         {
@@ -69,26 +80,25 @@ public class PlayerStats : Photon.MonoBehaviour {
         {
             e.OnFrame();
         }
-        
-
 
         // TEST
         if (Input.GetKeyDown("q"))
         {
             TakeDamage(10f);
         }
-	}
-    #endregion
+    }
 
+    #endregion Unity Callbacks
 
     #region Public Methods
+
     // Add an effect to the player
     public void AddEffect(Effect effect)
     {
-        if(effect.Unique == true)
+        if (effect.Unique == true)
         {
             bool found = false;
-            foreach(Effect e in _effects)
+            foreach (Effect e in _effects)
             {
                 if (e.Name == effect.Name && effect.Name != "")
                 {
@@ -96,7 +106,7 @@ public class PlayerStats : Photon.MonoBehaviour {
                     found = true;
                 }
             }
-            if(!found)
+            if (!found)
             {
                 _effects.Add(effect);
             }
@@ -108,6 +118,7 @@ public class PlayerStats : Photon.MonoBehaviour {
             effect.Activate();
         }
     }
+
     // Called by effects when they expire
     public void RemoveEffect(Effect effect)
     {
@@ -117,18 +128,18 @@ public class PlayerStats : Photon.MonoBehaviour {
     // Add an OnHit effect to the player
     public void AddOnHit(Effect effect)
     {
-        if(effect.Unique == true)
+        if (effect.Unique == true)
         {
             bool found = false;
-            foreach(Effect e in _onHitEffects)
+            foreach (Effect e in _onHitEffects)
             {
-                if(e.GetType() == effect.GetType())
+                if (e.GetType() == effect.GetType())
                 {
                     Debug.LogError("Cannot add effect. Unique effect already exists on player");
                     found = true;
                 }
             }
-            if(!found)
+            if (!found)
             {
                 _onHitEffects.Add(effect);
             }
@@ -139,6 +150,7 @@ public class PlayerStats : Photon.MonoBehaviour {
             // Do NOT activate the effect or set an owner
         }
     }
+
     // Remove an OnHit effect from the player
     public void RemoveOnHit(Effect effect)
     {
@@ -163,7 +175,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     {
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
-   
+
     /// <summary>
     /// Cause the player to take damage with effects
     /// </summary>
@@ -173,7 +185,7 @@ public class PlayerStats : Photon.MonoBehaviour {
     {
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
-   
+
     /// <summary>
     /// Cause the player to take damage from a source with status effects
     /// </summary>
@@ -184,11 +196,28 @@ public class PlayerStats : Photon.MonoBehaviour {
     {
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
-    
+
     // Increase the player's current hp by amount
     public void GainHp(float amount)
     {
+<<<<<<< HEAD
         photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
+=======
+        if (amount < 0)
+        {
+            Debug.LogWarning("Cannot gain negative hp. Use TakeDamage instead.");
+            return;
+        }
+        if (_currentHp + amount > _maxHp)
+        {
+            Debug.LogWarning("Cannot overheal. Hp is max.");
+            _currentHp = _maxHp;
+        }
+        else
+        {
+            _currentHp += amount;
+        }
+>>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
     }
 
     // Can be used later for checking accuracy etc
@@ -196,10 +225,12 @@ public class PlayerStats : Photon.MonoBehaviour {
     {
         Debug.Log(hit.name + " was hit by " + gameObject.name);
     }
-    #endregion
+
+    #endregion Public Methods
 
 
     #region Photon RPCs
+
     [PunRPC]
     private void RPC_TakeDamage(float amount)
     {
@@ -273,6 +304,7 @@ public class PlayerStats : Photon.MonoBehaviour {
             Die(source);
         }
     }
+<<<<<<< HEAD
     */
     [PunRPC]
     private void RPC_GainHp(float amount)
@@ -294,6 +326,14 @@ public class PlayerStats : Photon.MonoBehaviour {
     }
     [PunRPC]
     private void RPC_Die()
+=======
+
+    #endregion Photon RPCs
+
+    #region Private Methods
+
+    private void Die()
+>>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
     {
         Debug.Log(gameObject.name + " has died.");
 
@@ -301,11 +341,17 @@ public class PlayerStats : Photon.MonoBehaviour {
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
+<<<<<<< HEAD
     [PunRPC]
     private void RPC_Die(int srcId)
     {
         GameObject killer = PhotonView.Find(srcId).gameObject;
 
+=======
+
+    private void Die(GameObject killer)
+    {
+>>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
         if (killer != null)
         {
             Debug.Log(gameObject.name + " was killed by " + killer.name);
@@ -319,6 +365,7 @@ public class PlayerStats : Photon.MonoBehaviour {
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
+<<<<<<< HEAD
     #endregion
     
     
@@ -332,5 +379,8 @@ public class PlayerStats : Photon.MonoBehaviour {
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
     #endregion
+=======
+>>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
 
+    #endregion Private Methods
 }

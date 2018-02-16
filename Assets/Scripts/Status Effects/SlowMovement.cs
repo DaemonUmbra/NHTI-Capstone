@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SlowMovement : Effect {
-
+public class SlowMovement : Effect
+{
     /// <summary>
     /// Amount to slow the player by as a decimal
     /// </summary>
     private float _slowAmount;
+
     private int _stacks = 1;
 
-
     #region Public Methods
+
     // Default constructor
     public SlowMovement(float slowAmount, float lifetime)
     {
@@ -21,6 +19,7 @@ public class SlowMovement : Effect {
 
         _name = "Slow Movement";
     }
+
     /// <summary>
     /// Copy constructor, used to copy abilities to a player
     /// </summary>
@@ -29,7 +28,7 @@ public class SlowMovement : Effect {
     {
         _slowAmount = jango._slowAmount;
         Debug.Log(jango + "cloned.");
-        
+
         _lifetime = jango.Lifetime;
         _tickTime = jango.TickTime;
         Debug.Log("Lifetime: " + jango.Lifetime + " | " + Lifetime);
@@ -37,7 +36,7 @@ public class SlowMovement : Effect {
 
         _name = "Slow Movement";
     }
-    
+
     /// <summary>
     /// Copies the effect to a target. Must transfer all values over
     /// a copy constructor helps with this.
@@ -47,7 +46,7 @@ public class SlowMovement : Effect {
     {
         // Ref the player stat class
         PlayerStats ps = target.GetComponent<PlayerStats>();
-        if(!ps)
+        if (!ps)
         {
             Debug.LogError("No Player Stats class in target: " + target.name);
             return;
@@ -78,10 +77,11 @@ public class SlowMovement : Effect {
         // Call base to remove effect from player
         base.RemoveEffect();
     }
-    #endregion
 
+    #endregion Public Methods
 
     #region Private Methods
+
     // Private functions to add and reverse the slow effect
     private void AddSlow()
     {
@@ -94,6 +94,7 @@ public class SlowMovement : Effect {
 
         ps.WalkSpeed *= _slowAmount;
     }
+
     private void ReverseSlow()
     {
         // Reverse effect
@@ -107,7 +108,6 @@ public class SlowMovement : Effect {
         if (factor < 100 && factor > 0.01)
             ps.WalkSpeed *= factor;
     }
-    #endregion
 
-    
+    #endregion Private Methods
 }

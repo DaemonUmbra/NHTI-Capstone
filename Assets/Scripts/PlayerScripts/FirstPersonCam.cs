@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class FirstPersonCam : Photon.MonoBehaviour
 {
-
     public float speedH = 2.0f;
     public float speedV = 2.0f;
 
@@ -16,11 +14,12 @@ public class FirstPersonCam : Photon.MonoBehaviour
             enabled = false;
     }
 
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-    void Update()
+
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
             Cursor.lockState = CursorLockMode.Locked;

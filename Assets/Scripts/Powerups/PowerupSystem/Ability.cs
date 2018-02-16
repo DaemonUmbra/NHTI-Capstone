@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// Base class for all abilities/powerups. 
+/// Base class for all abilities/powerups.
 /// Abilities should be derived from either ActiveAbility or PassiveAbility
 /// </summary>
-public abstract class BaseAbility : Photon.MonoBehaviour {
-
+public abstract class BaseAbility : Photon.MonoBehaviour
+{
     [SerializeField]
     protected string Name = "New Ability";
+
     public string GetName { get { return Name; } }
+
     [SerializeField]
     protected bool active = false;
+
     public bool IsActive { get { return active; } }
 
-
     #region Abstract Methods
+
     /// <summary>
     /// Called when abilities are added to a player.
     /// Make sure to set the ability name string!
@@ -28,7 +28,7 @@ public abstract class BaseAbility : Photon.MonoBehaviour {
     }
 
     /// <summary>
-    /// Called by the ability manager on each update step. 
+    /// Called by the ability manager on each update step.
     /// Use this instead of Unity's Update()
     /// </summary>
     public virtual void OnUpdate()
@@ -43,6 +43,7 @@ public abstract class BaseAbility : Photon.MonoBehaviour {
     {
         active = false;
     }
+<<<<<<< HEAD
     #endregion
 
     #region Photon RPCs
@@ -65,3 +66,8 @@ public abstract class BaseAbility : Photon.MonoBehaviour {
     }
     #endregion
 }
+=======
+
+    #endregion Abstract Methods
+}
+>>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213

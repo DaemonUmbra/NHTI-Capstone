@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Powerups
 {
     public class Fireball : MonoBehaviour
     {
         public float health = 10.0f;
-        int count = 0;
+        private int count = 0;
 
         public void OnTriggerEnter(Collider collision)
         {
@@ -18,7 +16,8 @@ namespace Powerups
             }
             Destroy(collision.gameObject);
         }
-        void Damage()
+
+        private void Damage()
         {
             if (count != 4)
             {

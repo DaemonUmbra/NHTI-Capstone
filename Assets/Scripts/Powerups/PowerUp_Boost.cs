@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /*
  * Programmer Assigned: Steven Zachary
@@ -8,34 +6,37 @@ using UnityEngine;
  * Description: Grants the player the ability to dash forward. Short-moderate cooldown.
  */
 
-public class PowerUp_Boost : ActiveAbility {
-
-    [HideInInspector]
-    public PlayerController PC;
-    public float BoostSpeed;
-
-
-    public override void OnAbilityAdd()
+namespace Powerups
+{
+    public class Powerup_Boost : ActiveAbility
     {
-        Name = "Boost";
-        Debug.Log(Name + "  Added");
-        PC = GetComponent<PlayerController>();
+        [HideInInspector]
+        public PlayerController PC;
 
-        // Call base function
-        base.OnAbilityAdd();
-    }
+        public float BoostSpeed;
 
-    public override void OnAbilityRemove()
-    {
-        // Call base function
-        base.OnAbilityRemove();
-    }
+        public override void OnAbilityAdd()
+        {
+            Name = "Boost";
+            Debug.Log(Name + "  Added");
+            PC = GetComponent<PlayerController>();
 
-    protected override void RPC_Activate()
-    {
-        transform.Translate(transform.forward * BoostSpeed);
+            // Call base function
+            base.OnAbilityAdd();
+        }
 
-        // Call base function
-        base.RPC_Activate();
+        public override void OnAbilityRemove()
+        {
+            // Call base function
+            base.OnAbilityRemove();
+        }
+
+        protected override void RPC_Activate()
+        {
+            transform.Translate(transform.forward * BoostSpeed);
+
+            // Call base function
+            base.RPC_Activate();
+        }
     }
 }

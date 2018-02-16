@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CreateRoom : MonoBehaviour {
+public class CreateRoom : MonoBehaviour
+{
     //Finished
     [SerializeField]
     private Text _roomName;
+
     public Text RoomName
     {
         get { return _roomName; }
@@ -17,13 +17,14 @@ public class CreateRoom : MonoBehaviour {
 
     public void OnClick_CreateRoom()
     {
-        
         RoomOptions roomOptions = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = byte.Parse(Playercount.text) };
 
-        if(PhotonNetwork.CreateRoom(RoomName.text, roomOptions, TypedLobby.Default))
+        if (PhotonNetwork.CreateRoom(RoomName.text, roomOptions, TypedLobby.Default))
         {
             Debug.Log("Room: " + RoomName.text + " created!");
-        } else {
+        }
+        else
+        {
             Debug.Log("Failed to create room!");
         }
     }
@@ -37,5 +38,4 @@ public class CreateRoom : MonoBehaviour {
     {
         Debug.Log("Created room successfully!");
     }
-
 }

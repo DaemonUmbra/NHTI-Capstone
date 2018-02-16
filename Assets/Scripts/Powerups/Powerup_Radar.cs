@@ -1,22 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Powerup_Radar : MonoBehaviour {
+namespace Powerups
+{
+    public class Powerup_Radar : PassiveAbility
+    {
+        /*
+        * Programmer Assigned: Steven Zachary
+        * Power-up: Radar
+        * Description: A soft beep, beeps more urgently as you approach a rare or higher powerup.
+        */
 
-    /*
- * Programmer Assigned: Steven Zachary
- * Power-up: Radar
- * Description: A soft beep, beeps more urgently as you approach a rare or higher powerup.                
- */
+        // Use this for initialization
+        private void Start()
+        {
+        }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        public override void OnAbilityAdd() // Function for adding ability to player
+        {
+            Name = "Radar";
+            Debug.Log(Name + " added!");
+            base.OnAbilityAdd();
+        }
+
+        public override void OnAbilityRemove() // Function for removing ability from player
+        {
+            base.OnAbilityRemove();
+        }
+
+        public override void OnUpdate() // Update function
+        {
+            base.OnUpdate();
+        }
+    }
 }

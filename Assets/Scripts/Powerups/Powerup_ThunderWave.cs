@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Powerups
 {
     public class Powerup_ThunderWave : ActiveAbility
     {
-        
         public float force = 500;
         public Vector3 explosionPos;
         public float radius = 20;
@@ -20,7 +16,7 @@ namespace Powerups
 
         public float sphereRadius = 5;
         public float maxDistance = 0;
-        public LayerMask layerMask= 1;
+        public LayerMask layerMask = 1;
 
         #region Abstract Methods
 
@@ -34,7 +30,6 @@ namespace Powerups
             Debug.Log(Name + " Added");
             base.OnAbilityAdd();
         }
-        
 
         protected override void RPC_Activate() // Will need to be activated by something once we decide how players will trigger abilities.
         {
@@ -66,6 +61,7 @@ namespace Powerups
 
             base.RPC_Activate();
         }
+
         /// <summary>
         /// Called when an ability is removed from the player
         /// </summary>
@@ -73,9 +69,7 @@ namespace Powerups
         {
             base.OnAbilityRemove();
         }
-        #endregion
 
-        
-
+        #endregion Abstract Methods
     }
 }

@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using PUNTutorial;
 
 public class DDOL : MonoBehaviour
 {
@@ -14,20 +11,20 @@ public class DDOL : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    void Update()
+    private void Update()
     {
-        
-        
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
 
-       // Debug.Log(sceneName);
+        // Debug.Log(sceneName);
         if (sceneName == "BrodeyJoinScene")
         {
             PhotonNetwork.LoadLevel("Sandbox" + "");
             //networkOBJ.SetActive(true);
             //networkOBJ.GetComponent<GameManager>().JoinGame();
-        } else {
+        }
+        else
+        {
             //networkOBJ.SetActive(false);
         }
     }

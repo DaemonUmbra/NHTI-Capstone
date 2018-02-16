@@ -10,7 +10,6 @@ namespace PUNTutorial
         private float m_MovementInputValue;         // The current value of the movement input.
         private float m_TurnInputValue;             // The current value of the turn input.
 
-
         private void Awake()
         {
             m_Rigidbody = GetComponent<Rigidbody>();
@@ -21,7 +20,6 @@ namespace PUNTutorial
             }
         }
 
-
         private void OnEnable()
         {
             // When the tank is turned on, make sure it's not kinematic.
@@ -31,7 +29,6 @@ namespace PUNTutorial
             m_MovementInputValue = 0f;
             m_TurnInputValue = 0f;
         }
-
 
         private void OnDisable()
         {

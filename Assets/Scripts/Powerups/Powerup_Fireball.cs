@@ -1,45 +1,43 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Powerup_Fireball : ActiveAbility
+namespace Powerups
 {
-    PlayerShoot pShoot;
-
-    public override void OnAbilityAdd()
+    public class Powerup_Fireball : ActiveAbility
     {
-        Name = "Fireball";
-        Debug.Log(Name + " Added");
+        private PlayerShoot pShoot;
 
-        pShoot = GetComponent<PlayerShoot>();
-        if (pShoot)
+        public override void OnAbilityAdd()
         {
-            Debug.Log("Fireball Added to Shoot Delegate");
-            pShoot.shoot += Activate;
-        }
-        // Call base function
-        base.OnAbilityAdd();
-    }
+            Name = "Fireball";
+            Debug.Log(Name + " Added");
 
-    public override void OnAbilityRemove()
-    {
-        // Remove shoot delegate
-        if (pShoot)
+            pShoot = GetComponent<PlayerShoot>();
+            if (pShoot)
+            {
+                Debug.Log("Fireball Added to Shoot Delegate");
+                pShoot.shoot += Activate;
+            }
+            // Call base function
+            base.OnAbilityAdd();
+        }
+
+        public override void OnAbilityRemove()
         {
-            pShoot.shoot -= Activate;
+            // Remove shoot delegate
+            if (pShoot)
+            {
+                pShoot.shoot -= Activate;
+            }
+            pShoot = null;
+
+            // Call base function
+            base.OnAbilityRemove();
         }
-        pShoot = null;
 
-        // Call base function
-        base.OnAbilityRemove();
+        protected override void RPC_Activate()
+        {
+            // Call base function
+            base.RPC_Activate();
+        }
     }
-
-    protected override void RPC_Activate()
-    {
-        // Call base function
-        base.RPC_Activate();
-    }
-
-    
 }

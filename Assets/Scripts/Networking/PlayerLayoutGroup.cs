@@ -1,17 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLayoutGroup : MonoBehaviour {
+public class PlayerLayoutGroup : MonoBehaviour
+{
     //Finished
     [SerializeField]
     private GameObject _playerListingPrefab;
+
     private GameObject PlayerListingPrefab
     {
         get { return _playerListingPrefab; }
     }
 
     private List<PlayerListing> _playerListings = new List<PlayerListing>();
+
     private List<PlayerListing> PlayerListings
     {
         get { return _playerListings; }
@@ -22,7 +24,6 @@ public class PlayerLayoutGroup : MonoBehaviour {
     {
         PhotonNetwork.LeaveRoom();
     }
-
 
     //Called by photon whenever you join a room.
     private void OnJoinedRoom()
@@ -52,7 +53,6 @@ public class PlayerLayoutGroup : MonoBehaviour {
     {
         PlayerLeftRoom(photonPlayer);
     }
-
 
     private void PlayerJoinedRoom(PhotonPlayer photonPlayer)
     {

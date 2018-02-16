@@ -1,21 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Powerups      //Ian MacKenzie
+﻿namespace Powerups      //Ian MacKenzie
 {
-    
     public class Powerup_AddJump : PassiveAbility
     {
-        PlayerController playerController;
+        private PlayerController playerController;
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             playerController = GetComponent<PlayerController>();
         }
 
-        public override void OnAbilityAdd()     
+        public override void OnAbilityAdd()
         {
             Name = "Add Jump";
             //!!!!!Commented out because I am waiting on the passive and active abilites, and to work with

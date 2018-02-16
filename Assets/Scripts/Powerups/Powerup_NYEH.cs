@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Powerups
 {
     [RequireComponent(typeof(AudioSource))]
-    class Powerup_NYEH : ActiveAbility
+    internal class Powerup_NYEH : ActiveAbility
     {
-        AudioSource audioSource;
-        AudioClip nyeh;
+        private AudioSource audioSource;
+        private AudioClip nyeh;
 
         public float nyehVolume = 0.5f;
 
@@ -19,6 +15,7 @@ namespace Powerups
             //*** Handled by base ca pv.RPC("NYEH_AddAbility", PhotonTargets.All);
 
             Name = "NYEH!";
+            //Handled by the RequireComponent
             if (!gameObject.GetComponent<AudioSource>())
             {
                 gameObject.AddComponent<AudioSource>();

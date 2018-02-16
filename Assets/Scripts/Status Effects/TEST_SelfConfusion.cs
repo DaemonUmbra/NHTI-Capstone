@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TEST_SelfConfusion : MonoBehaviour
 {
-    Confuse confusion;
+    private Confuse confusion;
 
-	void Start ()
+    private void Start()
     {
         confusion = new Confuse(5.0f);
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    private void Update()
     {
-		if (Input.GetKeyDown("i"))
+        if (Input.GetKeyDown("i"))
         {
             confusion.ApplyEffect(gameObject);
             confusion.Activate();

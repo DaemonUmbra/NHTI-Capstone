@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace PUNTutorial
 {
     public static class TransformExtensions
     {
-
         public static T FindAnyChild<T>(this Transform trans, string name) where T : Component
         {
             for (int n = 0; n < trans.childCount; n++)

@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Powerups
 {
     public class SingleShot : ActiveAbility
     {
+        private PlayerShoot pShoot;
 
-        PlayerShoot pShoot;
-        
         public override void OnAbilityAdd()
         {
             // Set name
             Name = "SingleShot";
             Debug.Log(Name + " Added");
 
-            // Add new shoot function to delegate 
+            // Add new shoot function to delegate
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
@@ -37,11 +33,11 @@ namespace Powerups
             // Call base function
             base.OnAbilityRemove();
         }
-        
+
         protected override void RPC_Activate()
         {
             base.RPC_Activate();
-            GameObject _proj = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, transform.rotation,0);
+            GameObject _proj = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, transform.rotation, 0);
             _proj.GetComponent<Projectile>().IgnorePlayer(gameObject);
         }
     }

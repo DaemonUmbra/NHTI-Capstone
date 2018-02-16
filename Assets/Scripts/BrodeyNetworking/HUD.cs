@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 
 namespace PUNTutorial
 {
     public class HUD : MonoBehaviour
     {
-        static HUD instance;
+        private static HUD instance;
 
-        void Awake()
+        private void Awake()
         {
             if (instance != null)
             {
@@ -18,6 +16,5 @@ namespace PUNTutorial
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
     }
 }
