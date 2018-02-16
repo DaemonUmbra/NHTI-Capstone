@@ -8,7 +8,7 @@
 
 namespace Powerups
 {
-    public class PowerUp_Blink : ActiveAbility
+    public class Powerup_Blink : ActiveAbility
     {
         [HideInInspector]
         public PlayerController playercontrol;

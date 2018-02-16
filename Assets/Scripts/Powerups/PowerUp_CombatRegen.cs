@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class PowerUp_CombatRegen : PassiveAbility
+    public class Powerup_CombatRegen : PassiveAbility
     {
         [HideInInspector]
         public PlayerStats PS;

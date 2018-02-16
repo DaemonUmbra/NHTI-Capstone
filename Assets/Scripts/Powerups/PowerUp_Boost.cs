@@ -8,7 +8,7 @@
 
 namespace Powerups
 {
-    public class PowerUp_Boost : ActiveAbility
+    public class Powerup_Boost : ActiveAbility
     {
         [HideInInspector]
         public PlayerController PC;
