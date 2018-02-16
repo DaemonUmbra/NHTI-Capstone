@@ -9,6 +9,9 @@ TagManager:
   - SlimeBall
   - Slime
   - RoomListing
+  - PickUpSpawn
+  - Pickup
+  - NetworkPlayer
   layers:
   - Default
   - TransparentFX
