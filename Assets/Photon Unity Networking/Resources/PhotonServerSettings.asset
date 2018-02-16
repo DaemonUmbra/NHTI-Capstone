@@ -81,4 +81,9 @@ MonoBehaviour:
   - RPC_RemoveAbility
   - RPC_TakeDamage
   - RPC_Destroy
+  - RPC_Die
+  - RPC_GainHp
+  - RPC_OnAbilityAdd
+  - RPC_OnAbilityRemove
+  - RPC_OnAbilityUpdate
   DisableAutoOpenWizard: 1

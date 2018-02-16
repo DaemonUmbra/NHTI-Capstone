@@ -20,12 +20,8 @@ public class Projectile : Photon.MonoBehaviour
     public float speed = 10f;
 
     [SerializeField]
-<<<<<<< HEAD
     float lifetime = 3; // Seconds
     float startTime = 0f;
-=======
-    private float lifetime = 3; // Seconds
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
 
     public void Start()
     {
@@ -87,14 +83,4 @@ public class Projectile : Photon.MonoBehaviour
             PhotonNetwork.Destroy(photonView);
         }
     }
-<<<<<<< HEAD
 }
-=======
-
-    [PunRPC]
-    private void RPC_Destroy()
-    {
-        Destroy(gameObject);
-    }
-}
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213

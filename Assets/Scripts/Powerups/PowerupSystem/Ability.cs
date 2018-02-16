@@ -43,7 +43,6 @@ public abstract class BaseAbility : Photon.MonoBehaviour
     {
         active = false;
     }
-<<<<<<< HEAD
     #endregion
 
     #region Photon RPCs
@@ -66,8 +65,3 @@ public abstract class BaseAbility : Photon.MonoBehaviour
     }
     #endregion
 }
-=======
-
-    #endregion Abstract Methods
-}
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213

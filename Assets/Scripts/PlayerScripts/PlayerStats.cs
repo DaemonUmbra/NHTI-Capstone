@@ -200,24 +200,7 @@ public class PlayerStats : Photon.MonoBehaviour
     // Increase the player's current hp by amount
     public void GainHp(float amount)
     {
-<<<<<<< HEAD
         photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
-=======
-        if (amount < 0)
-        {
-            Debug.LogWarning("Cannot gain negative hp. Use TakeDamage instead.");
-            return;
-        }
-        if (_currentHp + amount > _maxHp)
-        {
-            Debug.LogWarning("Cannot overheal. Hp is max.");
-            _currentHp = _maxHp;
-        }
-        else
-        {
-            _currentHp += amount;
-        }
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
     }
 
     // Can be used later for checking accuracy etc
@@ -304,7 +287,6 @@ public class PlayerStats : Photon.MonoBehaviour
             Die(source);
         }
     }
-<<<<<<< HEAD
     */
     [PunRPC]
     private void RPC_GainHp(float amount)
@@ -326,14 +308,6 @@ public class PlayerStats : Photon.MonoBehaviour
     }
     [PunRPC]
     private void RPC_Die()
-=======
-
-    #endregion Photon RPCs
-
-    #region Private Methods
-
-    private void Die()
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
     {
         Debug.Log(gameObject.name + " has died.");
 
@@ -341,17 +315,11 @@ public class PlayerStats : Photon.MonoBehaviour
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
-<<<<<<< HEAD
     [PunRPC]
     private void RPC_Die(int srcId)
     {
         GameObject killer = PhotonView.Find(srcId).gameObject;
 
-=======
-
-    private void Die(GameObject killer)
-    {
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
         if (killer != null)
         {
             Debug.Log(gameObject.name + " was killed by " + killer.name);
@@ -365,7 +333,6 @@ public class PlayerStats : Photon.MonoBehaviour
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
-<<<<<<< HEAD
     #endregion
     
     
@@ -378,9 +345,5 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
-    #endregion
-=======
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
-
     #endregion Private Methods
 }

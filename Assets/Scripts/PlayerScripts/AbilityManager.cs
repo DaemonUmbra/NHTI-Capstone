@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AbilityManager : Photon.MonoBehaviour
@@ -56,13 +57,10 @@ public class AbilityManager : Photon.MonoBehaviour
     // Add ability
     public void AddAbility<T>() where T : BaseAbility
     {
-<<<<<<< HEAD
         // Add ability on server
         photonView.RPC("RPC_AddAbility", PhotonTargets.All, typeof(T).ToString());
 
         /*
-=======
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
         if (HasAbility<T>())
         {
             Debug.LogWarning("Ability already owned by player.");
@@ -146,11 +144,6 @@ public class AbilityManager : Photon.MonoBehaviour
     #endregion Public Methods
 
     #region Photon RPCs
-<<<<<<< HEAD
-=======
-
-    /**** Removed for simplicity, networking in progress ****
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
     [PunRPC]
     private void RPC_AddAbility(string abilityType) // This could and should be optimized once it is working
     {
@@ -190,13 +183,7 @@ public class AbilityManager : Photon.MonoBehaviour
             Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
         }
     }
-<<<<<<< HEAD
     #endregion
-=======
-    */
-
-    #endregion Photon RPCs
->>>>>>> 7cdc5fcbfd2a9e56f2fd3397a3458ff715820213
 
 
     #region Private Methods
