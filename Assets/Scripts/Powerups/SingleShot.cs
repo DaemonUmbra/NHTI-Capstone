@@ -37,8 +37,12 @@ namespace Powerups
         protected override void Activate()
         {
             base.Activate();
-            GameObject _proj = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, transform.rotation, 0);
-            _proj.GetComponent<Projectile>().IgnorePlayer(gameObject);
+            if(photonView.isMine)
+            {
+                GameObject _proj = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, transform.rotation, 0);
+                //_proj.GetComponent<Projectile>().IgnorePlayer(gameObject);
+            }
+            
         }
     }
 }

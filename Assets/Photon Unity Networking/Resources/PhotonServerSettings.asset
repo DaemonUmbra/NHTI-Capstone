@@ -86,4 +86,6 @@ MonoBehaviour:
   - RPC_OnAbilityAdd
   - RPC_OnAbilityRemove
   - RPC_OnAbilityUpdate
+  - DestroyPickup
+  - RPC_IgnorePlayer
   DisableAutoOpenWizard: 1

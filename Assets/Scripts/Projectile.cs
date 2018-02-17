@@ -25,15 +25,43 @@ public class Projectile : Photon.MonoBehaviour
 
     public void Start()
     {
-        photonView.RPC("Shoot", PhotonTargets.All);
+        if(photonView.isMine)
+        {
+            GetShooter();
+            photonView.RPC("Shoot", PhotonTargets.All);
+        }
+        
+        
     }
 
     public void Update()
     {
         if (Time.time >= startTime + lifetime)
         {
-            PhotonNetwork.Destroy(photonView);
+            if(photonView.isMine)
+                PhotonNetwork.Destroy(photonView);
         }
+    }
+
+    private void GetShooter()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject player in players)
+        {
+            if(player.GetPhotonView().isMine)
+            {
+                Debug.Log("Player found!");
+                IgnorePlayer(player);
+                break;
+            }
+        }
+    }
+
+    // Ignore collision with player
+    public void IgnorePlayer(GameObject player)
+    {
+        int viewId = player.GetPhotonView().viewID;
+        photonView.RPC("RPC_IgnorePlayer", PhotonTargets.All, viewId);
     }
 
     [PunRPC]
@@ -63,27 +91,44 @@ public class Projectile : Photon.MonoBehaviour
         rb.velocity = transform.forward * speed;
     }
 
-    // Ignore collision with player
-    public void IgnorePlayer(GameObject player)
+    
+    [PunRPC]
+    private void RPC_IgnorePlayer(int playerId)
     {
-        shooter = player;
+        Debug.Log("Ignoring player.....");
+        // Find gameobject
+        PhotonView pv = PhotonView.Find(playerId);
+        if (pv == null)
+        {
+            Debug.LogError("Photon view not found!");
+            return;
+        }
+        // Set shooter to gameobject
+        shooter = pv.gameObject;
+
         shooterStats = shooter.GetComponent<PlayerStats>();
         if (shooterStats == null)
             Debug.LogError("No player stats found on shooter.");
 
         Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
     }
+    
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        GameObject hit = collision.gameObject;
-        PlayerStats hitStats = hit.GetComponent<PlayerStats>();
+        GameObject hit = other.gameObject;
 
+
+        PlayerStats hitStats = hit.GetComponent<PlayerStats>();
         if (hitStats)
         {
-            hitStats.TakeDamage(damage, shooter, shooterStats.OnHitEffects);
+            hitStats.TakeDamage(damage);
 
-            PhotonNetwork.Destroy(photonView);
+            if (photonView.isMine)
+            {
+                PhotonNetwork.Destroy(photonView);
+            }
+
         }
     }
 }

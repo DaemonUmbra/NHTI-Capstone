@@ -222,7 +222,7 @@ MonoBehaviour:
   shooter: {fileID: 0}
   type: 0
   damage: 5
-  speed: 100
+  speed: 30
   lifetime: 3
 --- !u!135 &135218563817387618
 SphereCollider:

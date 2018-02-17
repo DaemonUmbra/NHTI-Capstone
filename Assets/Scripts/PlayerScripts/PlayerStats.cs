@@ -163,7 +163,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
+        if(photonView.isMine)
+            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
 
     /// <summary>
@@ -173,7 +174,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount, GameObject source)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
+        if(photonView.isMine)
+            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
 
     /// <summary>
@@ -183,7 +185,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, List<Effect> effects)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
+        if(photonView.isMine)
+            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
 
     /// <summary>
@@ -194,13 +197,15 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
+        if(photonView.isMine)
+            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
 
     // Increase the player's current hp by amount
     public void GainHp(float amount)
     {
-        photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
+        if(photonView.isMine)
+            photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
     }
 
     // Can be used later for checking accuracy etc
@@ -230,6 +235,7 @@ public class PlayerStats : Photon.MonoBehaviour
             Debug.Log(gameObject.name + " hp <= 0");
             Die();
         }
+        Debug.Log("Player hp: " + CurrentHp);
     }
 
     [PunRPC]
@@ -258,6 +264,7 @@ public class PlayerStats : Photon.MonoBehaviour
             else
                 Die();
         }
+        Debug.Log("Player hp: " + CurrentHp);
     }
 
     /* Needs rework because of PUN serialization

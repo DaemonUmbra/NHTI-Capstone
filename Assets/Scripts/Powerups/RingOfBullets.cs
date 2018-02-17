@@ -53,24 +53,27 @@ namespace Powerups
         {
             base.Activate();
 
-            Debug.Log("Trying to Shoot a Ring!");
-            List<GameObject> bullets = new List<GameObject>();
-            // Spawn a ring of bullets
-            for (int i = 0; i < BulletCount; ++i)
+            if(photonView.isMine)
             {
-                // Create a bullet, rotate by a fraction of 360
+                Debug.Log("Trying to Shoot a Ring!");
+                List<GameObject> bullets = new List<GameObject>();
+                // Spawn a ring of bullets
+                for (int i = 0; i < BulletCount; ++i)
+                {
+                    // Create a bullet, rotate by a fraction of 360
 
-                // Integer Division sucks.
-                float NewAngle = (float)i / (float)BulletCount * 360.0f;
-                // Debug.Log("NewAngle: " + NewAngle);
-                Quaternion NewRotation = Quaternion.Euler(0, NewAngle, 0);
-                // Debug.Log("NewRotation: " + NewRotation);
+                    // Integer Division sucks.
+                    float NewAngle = (float)i / (float)BulletCount * 360.0f;
+                    // Debug.Log("NewAngle: " + NewAngle);
+                    Quaternion NewRotation = Quaternion.Euler(0, NewAngle, 0);
+                    // Debug.Log("NewRotation: " + NewRotation);
 
-                GameObject b = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, NewRotation, 0); // Make sure to set parent
-                b.GetComponent<Projectile>().IgnorePlayer(gameObject);
-                bullets.Add(b);
+                    GameObject b = PhotonNetwork.Instantiate(pShoot.projectile.name, transform.position, NewRotation, 0);
+                    //b.GetComponent<Projectile>().IgnorePlayer(gameObject);
+                    bullets.Add(b);
+                }
             }
-            Debug.Log(bullets);
+            
         }
     }
 }
