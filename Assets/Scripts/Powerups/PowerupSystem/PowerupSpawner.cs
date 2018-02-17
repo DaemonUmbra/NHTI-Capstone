@@ -24,7 +24,8 @@ public class PowerupSpawner : Photon.MonoBehaviour
         timer += Time.deltaTime;
         if (timer > spawnDelay && hasPickup == false)
         {
-            PhotonNetwork.Instantiate(pickUp.name, this.transform.position, this.transform.rotation,0);
+            var pickup = PhotonNetwork.Instantiate(pickUp.name, this.transform.position, this.transform.rotation,0);
+            pickup.transform.SetParent(this.transform);
             timer = 0;
             hasPickup = true;
         }

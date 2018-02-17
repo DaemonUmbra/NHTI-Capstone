@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114383589285141908}
   - component: {fileID: 114624853760394680}
   - component: {fileID: 54083499647309282}
+  - component: {fileID: 114842302552396540}
   m_Layer: 0
   m_Name: PickUp
   m_TagString: Pickup
@@ -204,3 +205,14 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &114842302552396540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431017886688766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54c3e071b8aafa4fa134514961250a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
