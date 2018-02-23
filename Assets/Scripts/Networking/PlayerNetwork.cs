@@ -9,14 +9,13 @@ public class PlayerNetwork : MonoBehaviour
     private int PlayersInGame = 0;
     private ExitGames.Client.Photon.Hashtable m_playerCustomProperties = new ExitGames.Client.Photon.Hashtable();
     private Coroutine m_pingCoroutine;
+    
 
     // Use this for initialization
     private void Awake()
     {
         Instance = this;
         PhotonView = GetComponent<PhotonView>();
-
-        PlayerName = "Zikiro" + Random.Range(1000, 9999);
 
         PhotonNetwork.sendRate = 60;
         PhotonNetwork.sendRateOnSerialize = 30;
