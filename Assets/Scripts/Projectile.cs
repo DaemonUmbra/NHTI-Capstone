@@ -9,7 +9,7 @@ public class Projectile : Photon.MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
-    private GameObject shooter;
+    private GameObject _shooter;
 
     private PlayerStats shooterStats;
 
@@ -25,59 +25,53 @@ public class Projectile : Photon.MonoBehaviour
 
     public void Start()
     {
-        if(photonView.isMine)
-        {
-            GetShooter();
-            photonView.RPC("Shoot", PhotonTargets.All);
-        }
-        
-        
+        GetShooter();
+        Shoot();
     }
 
     public void Update()
     {
-        if (Time.time >= startTime + lifetime)
+        if (photonView.isMine)
         {
-            if(photonView.isMine)
-                PhotonNetwork.Destroy(photonView);
-        }
-    }
-
-    private void GetShooter()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players)
-        {
-            if(player.GetPhotonView().isMine)
+            if (Time.time >= startTime + lifetime)
             {
-                Debug.Log("Player found!");
-                IgnorePlayer(player);
-                break;
+                PhotonNetwork.Destroy(photonView);
             }
         }
     }
 
-    // Ignore collision with player
-    public void IgnorePlayer(GameObject player)
+    // Find a reference to the shooter
+    private void GetShooter()
     {
-        int viewId = player.GetPhotonView().viewID;
-        photonView.RPC("RPC_IgnorePlayer", PhotonTargets.All, viewId);
+        // Finds tagged player who have the same owner as this bullet
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            if (player.GetPhotonView().owner == photonView.owner)
+            {
+                SetShooter(player);
+            }
+        }
+    }
+    // Set the shooter reference
+    private void SetShooter(GameObject shooter)
+    {
+        _shooter = shooter;
+        shooterStats = _shooter.GetComponent<PlayerStats>();
     }
 
-    [PunRPC]
     private void Shoot()
     {
         // Set shooterStats if shooter was set in inspector
-        if (shooter)
+        if (_shooter)
         {
-            shooterStats = shooter.GetComponent<PlayerStats>();
-            if (shooterStats == null)
+            if (shooterStats)
             {
-                Debug.LogError("No player stats found on shooter.");
+                damage = shooterStats.EffectiveDamage;
             }
             else
             {
-                damage = shooterStats.EffectiveDamage;
+                Debug.LogError("No player stats found on shooter.");
             }
         }
 
@@ -91,44 +85,25 @@ public class Projectile : Photon.MonoBehaviour
         rb.velocity = transform.forward * speed;
     }
 
-    
-    [PunRPC]
-    private void RPC_IgnorePlayer(int playerId)
-    {
-        Debug.Log("Ignoring player.....");
-        // Find gameobject
-        PhotonView pv = PhotonView.Find(playerId);
-        if (pv == null)
-        {
-            Debug.LogError("Photon view not found!");
-            return;
-        }
-        // Set shooter to gameobject
-        shooter = pv.gameObject;
-
-        shooterStats = shooter.GetComponent<PlayerStats>();
-        if (shooterStats == null)
-            Debug.LogError("No player stats found on shooter.");
-
-        Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
-    }
-    
 
     private void OnTriggerEnter(Collider other)
     {
         GameObject hit = other.gameObject;
 
-
-        PlayerStats hitStats = hit.GetComponent<PlayerStats>();
-        if (hitStats)
+        // Make sure the bullet isn't hitting it's own player
+        if (hit.GetPhotonView().owner != photonView.owner)
         {
-            hitStats.TakeDamage(damage);
-
-            if (photonView.isMine)
+            PlayerStats hitStats = hit.GetComponent<PlayerStats>();
+            if (hitStats)
             {
-                PhotonNetwork.Destroy(photonView);
-            }
+                if (photonView.isMine)
+                {
+                    hitStats.TakeDamage(damage);
+                    PhotonNetwork.Destroy(photonView);
+                }
 
+            }
         }
+
     }
 }

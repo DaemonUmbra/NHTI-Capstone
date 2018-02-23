@@ -26,6 +26,8 @@ public class PowerupSpawner : Photon.MonoBehaviour
         {
             var pickup = PhotonNetwork.Instantiate(pickUp.name, this.transform.position, this.transform.rotation,0);
             pickup.transform.SetParent(this.transform);
+            Pickup pUp = pickup.GetComponent<Pickup>();
+            pUp.spawner = gameObject;
             timer = 0;
             hasPickup = true;
         }
