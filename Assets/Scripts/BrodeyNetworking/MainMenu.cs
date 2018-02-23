@@ -10,6 +10,17 @@ namespace PUNTutorial
         private GameObject ui;
         private Button joinGameButton;
 
+        // This function is called when the object becomes enabled and active
+        private void OnEnable()
+        {
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += SceneManager_sceneLoaded; ;
+        }
+
+        private void SceneManager_sceneLoaded(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.LoadSceneMode arg1)
+        {
+            ui.SetActive(!PhotonNetwork.inRoom);
+        }
+
         private void Awake()
         {
             if (instance != null)
@@ -31,9 +42,12 @@ namespace PUNTutorial
             joinGameButton.interactable = true;
         }
 
+        //Replaced with eventhandler
+        /*
         private void OnLevelWasLoaded(int level)
         {
             ui.SetActive(!PhotonNetwork.inRoom);
         }
+        */
     }
 }

@@ -149,10 +149,13 @@ public class PhotonEditor : EditorWindow
     // setup once on load
     static PhotonEditor()
     {
+        //Shut up Deprecation, we're not updating (yet)
+#pragma warning disable CS0618
         EditorApplication.projectWindowChanged += EditorUpdate;
         EditorApplication.hierarchyWindowChanged += EditorUpdate;
         EditorApplication.playmodeStateChanged += PlaymodeStateChanged;
         EditorApplication.update += OnUpdate;
+#pragma warning restore CS0618
 
         // detect optional packages
         PhotonEditor.CheckPunPlus();
