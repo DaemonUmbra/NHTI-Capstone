@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Powerups;
 
 public class Pickup : Photon.MonoBehaviour
 {
@@ -20,20 +21,30 @@ public class Pickup : Photon.MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if(gameObject != null)
+        {
+            gameObject.AddComponent<PowerUp_Blink>();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PhotonView pv = PhotonView.Get(this);
 
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
-            //AbilityManager aManager = other.GetComponent<AbilityManager>();
-            //aManager.AddAbility(_ability);
+            AbilityManager aManager = other.GetComponent<AbilityManager>();
            
+            aManager.AddAbility(_ability);
+            PowerupSpawner pSpawn = spawner.GetComponent<PowerupSpawner>();
+            pSpawn.hasPickup = false;
             PhotonNetwork.Destroy(gameObject);
             if (photonView.isMine)
                 PhotonNetwork.Destroy(photonView);
-            PowerupSpawner pSpawn = spawner.GetComponent<PowerupSpawner>();
-            pSpawn.hasPickup = false;
+            
+            
            
         }
     }

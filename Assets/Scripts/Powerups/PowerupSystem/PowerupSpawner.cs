@@ -5,7 +5,7 @@ using System.Collections;
 public class PowerupSpawner : Photon.MonoBehaviour
 {
     float timer;
-    int spawnDelay = 4;
+    int spawnDelay;
 
     public bool hasPickup;
     public GameObject pickUp;
@@ -20,7 +20,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        spawnDelay = Random.Range(3, 10);
         timer += Time.deltaTime;
         if (timer > spawnDelay && hasPickup == false)
         {
