@@ -43,6 +43,11 @@ public abstract class BaseAbility : Photon.MonoBehaviour
         active = false;
     }
 
+    public virtual void Update()
+    {
+        Debug.LogWarning("Do not use Update for Ability ticking, use OnUpdate");
+    }
+
     #endregion Abstract Methods
 
     #region Photon RPCs
