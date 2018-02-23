@@ -10,6 +10,7 @@ namespace Powerups {
         public float ScaleStep = .1f;
         private AbilityManager AbilityManager;
         private Vector3 ScaleStepVector;
+        private List<GameObject> Affected;
 
         public override void OnAbilityAdd()
         {
@@ -24,21 +25,11 @@ namespace Powerups {
             Explosion.SetActive(false);
             Explosion.name = "Nova Explosion";
             Explosion.AddComponent<SphereCollider>();
+            Explosion.transform.localScale = Vector3.zero;
+            Explosion.SetActive(true);
             StartCoroutine(Explode(Explosion, ExplosionSize, ExplosionTime));
-            AbilityManager.RemoveAbility(this);
         }
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
         IEnumerator Explode(GameObject Explosion, float size, float time)
         {
             bool Exploding = true;
@@ -52,12 +43,18 @@ namespace Powerups {
                 }
                 else
                 {
+                    if(Explosion.transform.localScale == Vector3.zero)
+                    {
+                        Destroy(Explosion);
+                        Exploding = false;
+                    }
                     if (Explosion.transform.localScale.magnitude == size) { Stage1 = false; }
                     //Shrink
                     Explosion.transform.localScale -= ScaleStepVector;
                 }
                 yield return new WaitForEndOfFrame();
             }
+            AbilityManager.RemoveAbility(this);
         }
     }
 }
