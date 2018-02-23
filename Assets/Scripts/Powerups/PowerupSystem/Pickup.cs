@@ -4,7 +4,7 @@ using Powerups;
 public class Pickup : Photon.MonoBehaviour
 {
     private BaseAbility _ability;
-    GameObject spawner;
+    public GameObject spawner;
     
     // Use this for initialization
     private void Start()
@@ -13,12 +13,11 @@ public class Pickup : Photon.MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void OnEnable()
     {
-        if(this.gameObject != null)
-        {
-            spawner = gameObject.transform.parent.gameObject;
-        }
+
+            //spawner = GetComponent
+ 
     }
 
     private void Awake()
