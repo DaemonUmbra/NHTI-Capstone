@@ -45,7 +45,7 @@ public abstract class BaseAbility : Photon.MonoBehaviour
 
     public virtual void Update()
     {
-        Debug.LogWarning("Do not use Update for Ability ticking, use OnUpdate");
+        //Debug.LogWarning("Do not use Update for Ability ticking, use OnUpdate");
     }
 
     #endregion Abstract Methods

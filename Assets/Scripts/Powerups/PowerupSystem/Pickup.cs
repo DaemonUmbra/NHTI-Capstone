@@ -10,14 +10,7 @@ public class Pickup : Photon.MonoBehaviour
     private void Start()
     {
         _ability = GetComponent<BaseAbility>();
-    }
-
-    // Update is called once per frame
-    private void OnEnable()
-    {
-
-            //spawner = GetComponent
- 
+        
     }
 
     private void Awake()
