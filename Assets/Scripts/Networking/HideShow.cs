@@ -3,25 +3,23 @@ using UnityEngine.UI;
 
 public class HideShow : MonoBehaviour
 {
-    private GameObject lobby;
     public Text buttonText;
 
     // Use this for initialization
     private void Start()
     {
-        lobby = GameObject.Find("LobbyNetwork");
     }
 
     public void ChangeLobbyStatus()
     {
-        if (lobby.GetComponent<LobbyNetwork>().HideFullRoom == false)
+        LobbyManager.HideFullRoom = !LobbyManager.HideFullRoom;
+
+        if (LobbyManager.HideFullRoom)
         {
-            lobby.GetComponent<LobbyNetwork>().HideFullRoom = true;
             buttonText.text = "Show\nFull\nRooms";
         }
         else
         {
-            lobby.GetComponent<LobbyNetwork>().HideFullRoom = false;
             buttonText.text = "Hide\nFull\nRooms";
         }
     }

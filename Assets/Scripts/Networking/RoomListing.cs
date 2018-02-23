@@ -6,6 +6,8 @@ public class RoomListing : MonoBehaviour
     //Finished
     [SerializeField]
     private Text _roomNameText;
+    [SerializeField]
+    LobbyCanvas _lobbyCanvas;
 
     private Text RoomNameText
     {
@@ -17,6 +19,7 @@ public class RoomListing : MonoBehaviour
     public Text playerCount;
     public bool status;
 
+    
     public string RoomName { get; private set; }
 
     public bool Updated { get; set; }
@@ -24,13 +27,8 @@ public class RoomListing : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        GameObject lobbyCanvasObj = MainCanvasManager.Instance.LobbyCanvas.gameObject;
-        if (lobbyCanvasObj == null) { return; }
-
-        LobbyCanvas lobbyCanvas = lobbyCanvasObj.GetComponent<LobbyCanvas>();
-
         Button button = GetComponent<Button>();
-        button.onClick.AddListener(() => lobbyCanvas.OnClickJoinRoom(RoomNameText.text));
+        button.onClick.AddListener(() => _lobbyCanvas.OnClickJoinRoom(RoomNameText.text));
     }
 
     private void Update()

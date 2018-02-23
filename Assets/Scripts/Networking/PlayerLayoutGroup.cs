@@ -33,8 +33,6 @@ public class PlayerLayoutGroup : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        MainCanvasManager.Instance.CurrentRoomCanvas.transform.SetAsLastSibling();
-
         PhotonPlayer[] photonPlayers = PhotonNetwork.playerList;
         for (int i = 0; i < photonPlayers.Length; i++)
         {

@@ -15,10 +15,10 @@ public class RoomLayoutGroup : MonoBehaviour
 
     private void Update()
     {
-        if (status != lobby.GetComponent<LobbyNetwork>().HideFullRoom)
+        if (status != LobbyManager.HideFullRoom)
         {
             RefreshList();
-            status = lobby.GetComponent<LobbyNetwork>().HideFullRoom;
+            status = LobbyManager.HideFullRoom;
         }
     }
 
@@ -55,7 +55,7 @@ public class RoomLayoutGroup : MonoBehaviour
         {
             if (room.IsVisible)
             {
-                if (lobby.GetComponent<LobbyNetwork>().HideFullRoom)
+                if (LobbyManager.HideFullRoom)
                 {
                     if (room.PlayerCount < room.MaxPlayers)
                     {

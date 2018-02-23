@@ -1,0 +1,109 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum LobbyState { LOGIN, LOBBY, ROOM, GAME }
+public class LobbyManager : MonoBehaviour {
+
+    #region Private Variables
+    static LobbyState _clientState;
+    [SerializeField]
+    MainCanvasManager _canvasManager;
+    #endregion
+
+
+    #region Public Variables
+    public static bool HideFullRoom = true;
+    
+    #endregion
+    
+
+    #region Access Variables
+    LobbyState State { get { return _clientState; } }
+    MainCanvasManager CanvasManager { get { return _canvasManager; } }
+    
+    #endregion
+
+  
+    #region Public Methods
+    public void ChangeState(LobbyState newState)
+    {
+        switch(newState)
+        {
+            // Login
+            case LobbyState.LOGIN:
+                Debug.Log("Entered Login State");
+                _canvasManager.ChangeLobbyState(LobbyState.LOGIN);
+                break;
+
+            // Main Lobby
+            case LobbyState.LOBBY:
+                Debug.Log("Entering Lobby State");
+                PhotonNetwork.JoinLobby(TypedLobby.Default);
+                _canvasManager.ChangeLobbyState(LobbyState.LOBBY);
+                break;
+
+            // Room Lobby
+            case LobbyState.ROOM:
+                Debug.Log("Entering Room State");
+                _canvasManager.ChangeLobbyState(LobbyState.ROOM);
+                break;
+
+            // In Game
+            case LobbyState.GAME:
+                Debug.Log("Entering Game State");
+                break;
+        }
+    }
+
+    public void Login()
+    {
+        // Change state to lobby
+        ChangeState(LobbyState.LOBBY);
+    }
+    public void CreateRoom()
+    {
+        ChangeState(LobbyState.ROOM);
+    }
+    public void StartGame()
+    {
+        ChangeState(LobbyState.GAME);
+    }
+    #endregion
+
+
+    #region Unity Callbacks
+    private void Awake()
+    {
+        // Connect to server
+        PhotonNetwork.ConnectUsingSettings("0.0.0");
+
+        // Find canvas manager if not set manually
+        if (!_canvasManager)
+        {
+            GameObject cm = GameObject.Find("Canvas");
+            if (cm)
+                _canvasManager = cm.GetComponent<MainCanvasManager>();
+        }
+
+        // Set the initial game state
+        ChangeState(LobbyState.LOGIN);
+    }
+    #endregion
+    
+
+    #region Photon Callbacks
+    private void OnConnectedToMaster()
+    {
+        print("Connected to master.");
+        PhotonNetwork.automaticallySyncScene = true;
+        PhotonNetwork.playerName = PlayerNetwork.Instance.PlayerName;
+        
+    }
+    private void OnJoinedLobby()
+    {
+        print("Joined lobby.");
+    }
+    #endregion
+}
+

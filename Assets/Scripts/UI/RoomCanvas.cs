@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CurrentRoomCanvas : MonoBehaviour
+public class RoomCanvas : MonoBehaviour
 {
     //Finished
     public void OnClickStartSync()
