@@ -33,7 +33,7 @@ namespace Powerups
 
         protected override void Activate()
         {
-            transform.Translate(transform.forward * BoostSpeed);
+            transform.Translate(PC.transform.forward * BoostSpeed);
 
             // Call base function
             base.Activate();
