@@ -3,6 +3,7 @@ using Powerups;
 
 public class Pickup : Photon.MonoBehaviour
 {
+    private AbilityManager aMan;
     private BaseAbility _ability;
     public GameObject spawner;
     
