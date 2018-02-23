@@ -16,7 +16,7 @@ public class Pickup : Photon.MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        //_ability = GetComponent<BaseAbility>();
+        _ability = GetComponent<BaseAbility>();
         //aMan = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
         //List<KeyValuePair<string, BaseAbility>> list = aMan.ListAbilities().ToList();
         //foreach(KeyValuePair<string,BaseAbility> power in list)
