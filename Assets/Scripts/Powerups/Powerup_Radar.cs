@@ -10,9 +10,15 @@ namespace Powerups
         * Description: A soft beep, beeps more urgently as you approach a rare or higher powerup.
         */
 
+        public Pickup[] pickUp;
+        public AudioSource audioSource;
+        public AudioClip bleep; // The bleeps, the sweeps and the creeps
+
         // Use this for initialization
         private void Start()
         {
+            pickUp = FindObjectsOfType<Pickup>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         public override void OnAbilityAdd() // Function for adding ability to player
