@@ -8,13 +8,13 @@
 
 namespace Powerups
 {
-    public class Powerup_Blink : ActiveAbility
+    public class PowerUp_Blink : ActiveAbility
     {
         [HideInInspector]
         public PlayerController playercontrol;
 
         public float BlinkDistance; // For debugging purposes. Once this has been determined, will be set to HideInInspector
-                                    //public bool CoolDown;
+                                    
 
         // Use this for initialization
         private void Start()
@@ -28,7 +28,7 @@ namespace Powerups
             Debug.Log(Name + " Added");
             Cooldown = 5.0f;
             playercontrol = GetComponent<PlayerController>();
-            //CoolDown = false;   *** Cooldown handled by base class ***
+           
 
             // Call base function
             base.OnAbilityAdd();
@@ -48,25 +48,16 @@ namespace Powerups
 
         protected override void Activate()
         {
-            //if (CoolDown == false) // Checks if powerup has been used
             // Checks if player is blocked by a wall or player, only allows activate if the raycast returns false
             if (Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), BlinkDistance) == false)
             {
                 transform.position += transform.forward * BlinkDistance;
-                // *** Cooldown handled by base class ***
-                // CoolDown = true;
-                // StartCoroutine(CooldownTimer());
+                // **Cooldown**
+
             }
 
             base.Activate();
         }
 
-        /*** Cooldown handled by base class ***
-        IEnumerator CooldownTimer()
-        {
-            yield return new WaitForSecondsRealtime(Cooldown);
-            CoolDown = false;
-        }
-        */
     }
 }

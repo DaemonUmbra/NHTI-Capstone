@@ -16,7 +16,6 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
-            // active = true;  *** Base class handles this ***
             Name = "Combat Regeneration";
             Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
