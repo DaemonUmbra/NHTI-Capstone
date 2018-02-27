@@ -69,6 +69,27 @@ public class LobbyManager : MonoBehaviour {
     {
         ChangeState(LobbyState.GAME);
     }
+
+    //Finished
+    public void OnClickStartSync()
+    {
+        if (!PhotonNetwork.isMasterClient)
+            return;
+
+        PhotonNetwork.room.IsOpen = false;
+        PhotonNetwork.room.IsVisible = false;
+        PhotonNetwork.LoadLevel(1);
+    }
+
+    public void OnClickStartDelayed()
+    {
+        if (!PhotonNetwork.isMasterClient)
+            return;
+
+        PhotonNetwork.room.IsOpen = false;
+        PhotonNetwork.room.IsVisible = false;
+        PhotonNetwork.LoadLevel(1);
+    }
     #endregion
 
 

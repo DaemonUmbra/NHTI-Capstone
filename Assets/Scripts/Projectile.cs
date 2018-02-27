@@ -90,20 +90,25 @@ public class Projectile : Photon.MonoBehaviour
     {
         GameObject hit = other.gameObject;
 
-        // Make sure the bullet isn't hitting it's own player
-        if (hit.GetPhotonView().owner != photonView.owner)
+        if(hit.GetPhotonView())
         {
-            PlayerStats hitStats = hit.GetComponent<PlayerStats>();
-            if (hitStats)
+            // Make sure the bullet isn't hitting it's own player
+            if (hit.GetPhotonView().owner != photonView.owner)
             {
-                if (photonView.isMine)
+                PlayerStats hitStats = hit.GetComponent<PlayerStats>();
+                if (hitStats)
                 {
-                    hitStats.TakeDamage(damage);
-                    PhotonNetwork.Destroy(photonView);
-                }
+                    if (photonView.isMine)
+                    {
+                        hitStats.TakeDamage(damage);
+                        PhotonNetwork.Destroy(photonView);
+                    }
 
-            }
+                }
+            }   
         }
+
+        
 
     }
 }
