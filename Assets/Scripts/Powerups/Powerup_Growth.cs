@@ -10,20 +10,29 @@ namespace Powerups
     /// <para>Power-Up Tier: Uncommon</para>
     /// <para>Power-Up Description:  Player model is larger,  gaining damage boost but same walk speed.</para>
     /// </summary>
-    ///
+    
+    [RequireComponent(typeof(AudioSource))]
     public class Powerup_Growth : PassiveAbility
     {
         private Vector3 OriginalScale;
+        public AudioClip FootFall;
         public float GrowthFactor = 2;
+        public float DeadZone = .1f;
 
+        private AudioSource AudioSource;
         private PlayerStats pStats;
 
         public float dmgMult = .5f;
         public float dmgAdd = 2f;
 
+        public float LastFootfall = 0;
+
         public override void OnAbilityAdd()
         {
             pStats = gameObject.GetComponent<PlayerStats>();
+            AudioSource = GetComponent<AudioSource>();
+            FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
+            AudioSource = GetComponent<AudioSource>();
             Name = "Growth";
             OriginalScale = transform.localScale;
             transform.localScale = OriginalScale * GrowthFactor;
@@ -35,6 +44,29 @@ namespace Powerups
             pv = PhotonView.Get(this);
             pv.RPC("Growth_AddAbility", PhotonTargets.All);
             */
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+            //If moving
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
+            {
+                //If nto playing
+                if (!AudioSource.isPlaying)
+                {
+                    AudioSource.Play();
+                }
+            }
+            //If standing still
+            else
+            {
+                //If playing
+                if (AudioSource.isPlaying)
+                {
+                    AudioSource.Stop();
+                }
+            }
         }
 
         /*** Handled by base class ***

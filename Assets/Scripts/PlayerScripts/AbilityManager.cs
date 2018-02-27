@@ -40,6 +40,13 @@ public class AbilityManager : Photon.MonoBehaviour
         return GetComponent(ability.GetType()) != null;
     }
 
+    //HACK: I was getting dictionary exceptions using the other method
+    public bool HasAbility(string abilityName)
+    {
+        return GetComponent(ReflectionUtil.GetAbilityTypeFromName(abilityName));
+    }
+
+    /*
     public bool HasAbility(string name)
     {
         // Get ability from dictionary
@@ -54,6 +61,7 @@ public class AbilityManager : Photon.MonoBehaviour
         // False by default
         return false;
     }
+    */
 
     // Add ability
     public void AddAbility<T>() where T : BaseAbility
@@ -152,19 +160,19 @@ public class AbilityManager : Photon.MonoBehaviour
     {
         // Get ability type from string and create and ability
         Type t = Type.GetType(abilityType);
-        BaseAbility ability = (BaseAbility)Activator.CreateInstance(t);
+        //BaseAbility ability = (BaseAbility)Activator.CreateInstance(t);
 
         // Make sure the ability isn't already there
-        if (!HasAbility(ability))
+        if (!HasAbility(t.Name))
         {
             // Add ability to player and register it
-            BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ability.GetType());
+            BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ReflectionUtil.GetAbilityTypeFromName(t.Name));
             RegisterAbility(newAbility);
             Debug.Log("Ability added: " + newAbility.GetName);
         }
         else
         {
-            Debug.LogError(ability.GetName + " already owned by player.");
+            Debug.LogError(t.Name + " already owned by player.");
         }
     }
 

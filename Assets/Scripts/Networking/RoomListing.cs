@@ -6,8 +6,6 @@ public class RoomListing : MonoBehaviour
     //Finished
     [SerializeField]
     private Text _roomNameText;
-    [SerializeField]
-    LobbyCanvas _lobbyCanvas;
 
     private Text RoomNameText
     {
@@ -27,8 +25,7 @@ public class RoomListing : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        Button button = GetComponent<Button>();
-        button.onClick.AddListener(() => _lobbyCanvas.OnClickJoinRoom(RoomNameText.text));
+
     }
 
     private void Update()
@@ -40,9 +37,11 @@ public class RoomListing : MonoBehaviour
     private void OnDestroy()
     {
         Button button = GetComponent<Button>();
-        button.onClick.RemoveAllListeners();
     }
-
+    public void OnJoinClick()
+    {
+        PhotonNetwork.JoinRoom(_roomNameText.text);
+    }
     public void SetRoomNameText(string text)
     {
         RoomName = text;
