@@ -5,7 +5,7 @@ using UnityEngine;
 public class Powerup_ThunderCloud : PassiveAbility
 {
     PlayerStats ps;
-    private float timeLimit = 30.0f;
+    private float timeLimit = 15.0f;
     private float timer;
     public override void OnAbilityAdd()
     {
@@ -13,16 +13,18 @@ public class Powerup_ThunderCloud : PassiveAbility
 
         ps.WalkSpeed += 1.0f;
         ps.JumpPower += 1.0f;
+        ps.dmgAdd += 2.0f;
 
         base.OnAbilityAdd();
     }
 
-    public override void OnAbilityRemove()
+    public override void OnAbilityRemove() 
     {
         ps = GetComponentInParent<PlayerStats>();
 
         ps.WalkSpeed -= 1.0f;
         ps.JumpPower -= 1.0f;
+        ps.dmgAdd -= 2.0f;
 
         base.OnAbilityRemove();
     }
