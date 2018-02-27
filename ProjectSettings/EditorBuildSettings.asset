@@ -11,21 +11,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Sandbox.unity
     guid: 09c92900f82ff4944823d893c67f2703
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Testing Scenes/POWERUP_IANC.unity
     guid: 384b716a9850823458b7dcb298382435
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Testing Scenes/POWERUPTEST_BRODEY.unity
     guid: cf25109efb2c3cf4caa6a6561b4386ae
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Testing Scenes/POWERUPTEST_COLBY.unity
     guid: 9859d834adaa59b4fbed1be8db25b37c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Testing Scenes/POWERUPTEST_ERIQ.unity
     guid: a41a5a72a6b284a43aa8946305a5c91c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Testing Scenes/POWERUPTEST_IMackenzie.unity
     guid: 494fd8f3f7c63254aadd8cc396ae8d1a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Testing Scenes/POWERUPTEST_STEVE.unity
     guid: c538a63e99741394fa36f13cbb8b8f09

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum LobbyState { LOGIN, LOBBY, ROOM, GAME }
-public class LobbyManager : MonoBehaviour {
+public class LobbyManager : Photon.PunBehaviour {
 
     #region Private Variables
     static LobbyState _clientState;
@@ -55,7 +55,6 @@ public class LobbyManager : MonoBehaviour {
                 break;
         }
     }
-
     public void Login()
     {
         // Change state to lobby
@@ -67,28 +66,26 @@ public class LobbyManager : MonoBehaviour {
     }
     public void StartGame()
     {
+        if (!PhotonNetwork.isMasterClient)
+            return;
+
+        PhotonNetwork.room.IsOpen = false;
+        PhotonNetwork.room.IsVisible = false;
+        PhotonNetwork.LoadLevel(1);
+
         ChangeState(LobbyState.GAME);
     }
+    #endregion
 
-    //Finished
+
+    #region Click Events
     public void OnClickStartSync()
     {
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
-        PhotonNetwork.room.IsOpen = false;
-        PhotonNetwork.room.IsVisible = false;
-        PhotonNetwork.LoadLevel(1);
+        StartGame();
     }
-
     public void OnClickStartDelayed()
     {
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
-        PhotonNetwork.room.IsOpen = false;
-        PhotonNetwork.room.IsVisible = false;
-        PhotonNetwork.LoadLevel(1);
+        StartGame();
     }
     #endregion
 
@@ -114,16 +111,22 @@ public class LobbyManager : MonoBehaviour {
     
 
     #region Photon Callbacks
-    private void OnConnectedToMaster()
+    public override void OnConnectedToMaster()
     {
         print("Connected to master.");
         PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.playerName = PlayerNetwork.Instance.PlayerName;
-        
+        base.OnConnectedToMaster();
     }
-    private void OnJoinedLobby()
+    public override void OnJoinedLobby()
     {
         print("Joined lobby.");
+        base.OnJoinedLobby();
+    }
+    public override void OnJoinedRoom()
+    {
+        print("Joined room.");
+        base.OnJoinedRoom();
     }
     #endregion
 }
