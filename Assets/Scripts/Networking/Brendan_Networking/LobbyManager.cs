@@ -121,11 +121,13 @@ public class LobbyManager : Photon.PunBehaviour {
     public override void OnJoinedLobby()
     {
         print("Joined lobby.");
+        ChangeState(LobbyState.LOBBY);
         base.OnJoinedLobby();
     }
     public override void OnJoinedRoom()
     {
         print("Joined room.");
+        ChangeState(LobbyState.ROOM);
         base.OnJoinedRoom();
     }
     #endregion
