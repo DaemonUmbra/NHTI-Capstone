@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Powerups
 {
+    [RequireComponent(typeof(LineRenderer))]
     public class Powerup_ConjureSlime : ActiveAbility
     {
         private float CDstart;

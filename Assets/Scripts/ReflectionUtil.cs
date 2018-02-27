@@ -7,7 +7,16 @@ static class ReflectionUtil
 {
     public static Type GetAbilityTypeFromName(string TypeName)
     {
-        //HACK: hardcoced namespace
+        //HACK hardcoded namespace
         return System.Reflection.Assembly.GetExecutingAssembly().GetType("Powerups." + TypeName);
+    }
+
+    public static string GetTypeName(Type type)
+    {
+        return type.Name;
+    }
+    public static string GetTypeName(Object obj)
+    {
+        return obj.GetType().Name;
     }
 }

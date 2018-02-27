@@ -40,6 +40,7 @@ namespace Powerups {
             bool Stage1 = true;
             while (Exploding)
             {
+                Explosion.transform.position = transform.parent.localPosition;
                 if (Explosion.transform.localScale.magnitude < size && Stage1)
                 {
                     //Grow

@@ -131,7 +131,7 @@ public class AbilityManager : Photon.MonoBehaviour
     public void RemoveAbility(BaseAbility ability)
     {
         // Remove ability on server
-        photonView.RPC("RPC_RemoveAbility", PhotonTargets.All, ability.GetType().ToString());
+        photonView.RPC("RPC_RemoveAbility", PhotonTargets.All, ReflectionUtil.GetTypeName(ability));
 
         /*
         // Get ability

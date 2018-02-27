@@ -2,6 +2,7 @@
 
 namespace Powerups
 {
+    [RequireComponent(typeof(AudioSource))]
     public class Powerup_Radar : PassiveAbility
     {
         /*
