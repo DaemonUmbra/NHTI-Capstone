@@ -22,9 +22,7 @@ namespace Powerups
         // Use this for initialization
         private void Start()
         {
-            pickUp = FindObjectsOfType<Pickup>();
             audioSource = GetComponent<AudioSource>();
-            ElementsInArray = pickUp.Length;
             Closest = 0;
         }
 
@@ -42,7 +40,10 @@ namespace Powerups
 
         public override void OnUpdate() // Update function
         {
-        
+
+            pickUp = FindObjectsOfType<Pickup>();
+            ElementsInArray = pickUp.Length;
+
             for(int i = 0; i < ElementsInArray; i++) // Find the object closest to the player
             {
                 if(Vector3.Distance(transform.position, pickUp[i].transform.position) < Vector3.Distance(transform.position, pickUp[Closest].transform.position))
@@ -53,7 +54,7 @@ namespace Powerups
 
             DistanceToTarget = Vector3.Distance(transform.position, pickUp[Closest].transform.position); // Sets Distance to the closest power up every frame
 
-            // ** Set volume based on distance from closest power up. The further away the quieter the volume
+            // ** Set volume based on distance from closest power up. The further away the quieter the volume **
 
             if(DistanceToTarget > 50)
             {
