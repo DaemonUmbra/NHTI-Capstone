@@ -24,7 +24,7 @@ namespace Powerups
             Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
             WalkSpeed = PS.WalkSpeed; // Get current walkspeed to save for later use
-            Health = PS.Health; // Get current health to keep track of damage
+            Health = PS.CurrentHp; // Get current health to keep track of damage
 
             base.OnAbilityAdd();
         }
@@ -37,15 +37,15 @@ namespace Powerups
 
         public override void OnUpdate()
         {
-            if (PS.Health < Health) // If player is damaged
+            if (PS.CurrentHp < Health) // If player is damaged
             {
-                Health = PS.Health; // Health variable is set to player's current health
+                Health = PS.CurrentHp; // Health variable is set to player's current health
                 PS.WalkSpeed = PS.WalkSpeed * 3; // Walkspeed is tripled
                 StartCoroutine(PanicTime()); // Begin coroutine for timer
             }
-            else if (PS.Health > Health) // If player gains health
+            else if (PS.CurrentHp > Health) // If player gains health
             {
-                Health = PS.Health; // Health variable is set to player's current health
+                Health = PS.CurrentHp; // Health variable is set to player's current health
             }
 
             base.OnUpdate();
