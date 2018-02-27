@@ -58,8 +58,7 @@ public class Pickup : Photon.MonoBehaviour
             Powers = AvailablePowerupStrings;
             string powerName = Powers.OrderBy(s => Guid.NewGuid()).First();
             Debug.Log(powerName);
-            //HACK Hardcoded namespace
-            Type thisType = System.Reflection.Assembly.GetExecutingAssembly().GetType("Powerups." + powerName);
+            Type thisType = ReflectionUtil.GetAbilityTypeFromName(powerName);
             gameObject.AddComponent(thisType);
             //UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(this.gameObject,"Assets/Scripts/Powerups" ,powerName);
 

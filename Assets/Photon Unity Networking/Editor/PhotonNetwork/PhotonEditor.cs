@@ -149,16 +149,28 @@ public class PhotonEditor : EditorWindow
     // setup once on load
     static PhotonEditor()
     {
-        //HACK: This will need to be fixed if we update APIs
-#pragma warning disable 0618
         EditorApplication.projectWindowChanged += EditorUpdate;
         EditorApplication.hierarchyWindowChanged += EditorUpdate;
-        EditorApplication.playmodeStateChanged += PlaymodeStateChanged;
+        //EditorApplication.playmodeStateChanged += PlaymodeStateChanged;
+        //HACK Above delegate is deprecated, below is the replacement
+        EditorApplication.playModeStateChanged += EditorApplication_playModeStateChanged;
         EditorApplication.update += OnUpdate;
-#pragma warning restore 0618
 
         // detect optional packages
         PhotonEditor.CheckPunPlus();
+    }
+
+    private static void EditorApplication_playModeStateChanged(PlayModeStateChange obj)
+    {
+        if (EditorApplication.isPlaying || !EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            return;
+        }
+
+        if (PhotonNetwork.PhotonServerSettings.HostType == ServerSettings.HostingOption.NotSet)
+        {
+            EditorUtility.DisplayDialog(CurrentLang.SetupWizardWarningTitle, CurrentLang.SetupWizardWarningMessage, CurrentLang.OkButton);
+        }
     }
 
     // setup per window

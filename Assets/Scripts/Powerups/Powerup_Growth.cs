@@ -31,6 +31,8 @@ namespace Powerups
         {
             pStats = gameObject.GetComponent<PlayerStats>();
             AudioSource = GetComponent<AudioSource>();
+            FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
+            AudioSource = GetComponent<AudioSource>();
             Name = "Growth";
             OriginalScale = transform.localScale;
             transform.localScale = OriginalScale * GrowthFactor;
@@ -89,13 +91,5 @@ namespace Powerups
             transform.localScale = OriginalScale;
             base.OnAbilityRemove();
         }
-
-        // Awake is called when the script instance is being loaded
-        private void Awake()
-        {
-            FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
-        }
-
-
     }
 }
