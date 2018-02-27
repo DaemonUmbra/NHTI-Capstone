@@ -19,8 +19,8 @@ public class LobbyManager : Photon.PunBehaviour {
     
 
     #region Access Variables
-    LobbyState State { get { return _clientState; } }
-    MainCanvasManager CanvasManager { get { return _canvasManager; } }
+    public static LobbyState State { get { return _clientState; } }
+    public MainCanvasManager CanvasManager { get { return _canvasManager; } }
     
     #endregion
 
@@ -64,19 +64,27 @@ public class LobbyManager : Photon.PunBehaviour {
     {
         ChangeState(LobbyState.ROOM);
     }
+
     public void StartGame()
     {
         if (!PhotonNetwork.isMasterClient)
             return;
-
-        PhotonNetwork.room.IsOpen = false;
-        PhotonNetwork.room.IsVisible = false;
-        PhotonNetwork.LoadLevel(1);
-
+        photonView.RPC("RPC_ChangeLevel", PhotonTargets.MasterClient);
         ChangeState(LobbyState.GAME);
     }
     #endregion
 
+
+    #region RPCs
+    [PunRPC]
+    private void RPC_ChangeLevel()
+    {
+        PhotonNetwork.automaticallySyncScene = true;
+        PhotonNetwork.room.IsOpen = false;
+        PhotonNetwork.room.IsVisible = false;
+        PhotonNetwork.LoadLevel(1);
+    }
+    #endregion
 
     #region Click Events
     public void OnClickStartSync()

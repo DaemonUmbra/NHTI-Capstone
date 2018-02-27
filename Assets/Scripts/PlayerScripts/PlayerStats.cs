@@ -3,12 +3,7 @@ using UnityEngine;
 
 public class PlayerStats : Photon.MonoBehaviour
 {
-    #region To be removed
-
-    public readonly PhotonPlayer PhotonPlayer;
-    public int Health;
-
-    #endregion To be removed
+    
 
     #region Class Variables
 
