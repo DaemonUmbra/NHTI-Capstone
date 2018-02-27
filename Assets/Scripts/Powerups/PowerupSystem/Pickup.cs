@@ -58,13 +58,10 @@ public class Pickup : Photon.MonoBehaviour
             Powers = AvailablePowerupStrings;
             string powerName = Powers.OrderBy(s => Guid.NewGuid()).First();
             Debug.Log(powerName);
-
-            /*** Unable to build: Deprecated ***
-            //HACK: This will need to be fixed if we update APIs
-#pragma warning disable 0618
-            UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(this.gameObject,"Assets/Scripts/Powerups" ,powerName);
-#pragma warning restore 0618
-            */
+            //HACK Hardcoded namespace
+            Type thisType = System.Reflection.Assembly.GetExecutingAssembly().GetType("Powerups." + powerName);
+            gameObject.AddComponent(thisType);
+            //UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(this.gameObject,"Assets/Scripts/Powerups" ,powerName);
 
         }
     }
