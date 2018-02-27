@@ -103,7 +103,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114624575929960636}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114933016107670730}
+        m_MethodName: OnJoinClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114304013192775342
@@ -233,6 +244,7 @@ MonoBehaviour:
   maxPlayersCount: 0
   currentPlayersCount: 0
   playerCount: {fileID: 114789138110104402}
+  status: 0
 --- !u!222 &222242009846228242
 CanvasRenderer:
   m_ObjectHideFlags: 1

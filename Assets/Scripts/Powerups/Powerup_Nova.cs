@@ -8,9 +8,12 @@ namespace Powerups {
         public float ExplosionSize = 2f;
         public float ExplosionTime = 1f;
         public float ScaleStep = .1f;
+        public float ExplosionForce = 5f;
+        public float ExplosionDamage = 5f;
         private AbilityManager AbilityManager;
         private Vector3 ScaleStepVector;
         private List<GameObject> Affected;
+        private GameObject Explosion;
 
         public override void OnAbilityAdd()
         {
@@ -21,7 +24,8 @@ namespace Powerups {
         protected override void Activate()
         {
             base.Activate();
-            GameObject Explosion = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            Explosion = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            Explosion.transform.position = transform.parent.localPosition;
             Explosion.SetActive(false);
             Explosion.name = "Nova Explosion";
             Explosion.AddComponent<SphereCollider>();
@@ -36,6 +40,7 @@ namespace Powerups {
             bool Stage1 = true;
             while (Exploding)
             {
+                Explosion.transform.position = transform.parent.localPosition;
                 if (Explosion.transform.localScale.magnitude < size && Stage1)
                 {
                     //Grow
@@ -48,13 +53,25 @@ namespace Powerups {
                         Destroy(Explosion);
                         Exploding = false;
                     }
-                    if (Explosion.transform.localScale.magnitude == size) { Stage1 = false; }
+                    if (Explosion.transform.localScale.magnitude >= size) { Stage1 = false; }
                     //Shrink
                     Explosion.transform.localScale -= ScaleStepVector;
                 }
                 yield return new WaitForEndOfFrame();
             }
             AbilityManager.RemoveAbility(this);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponent<PlayerStats>() != null)
+            {
+                other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, Explosion);
+            }
+            if (other.GetComponent<Rigidbody>() != null)
+            {
+                other.GetComponent<Rigidbody>().AddExplosionForce(ExplosionForce, Explosion.transform.position, ExplosionSize);
+            }
         }
     }
 }

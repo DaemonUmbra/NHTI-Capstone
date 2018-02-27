@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum LobbyState { LOGIN, LOBBY, ROOM, GAME }
-public class LobbyManager : MonoBehaviour {
+public class LobbyManager : Photon.PunBehaviour {
 
     #region Private Variables
     static LobbyState _clientState;
@@ -19,8 +19,8 @@ public class LobbyManager : MonoBehaviour {
     
 
     #region Access Variables
-    LobbyState State { get { return _clientState; } }
-    MainCanvasManager CanvasManager { get { return _canvasManager; } }
+    public static LobbyState State { get { return _clientState; } }
+    public MainCanvasManager CanvasManager { get { return _canvasManager; } }
     
     #endregion
 
@@ -55,7 +55,6 @@ public class LobbyManager : MonoBehaviour {
                 break;
         }
     }
-
     public void Login()
     {
         // Change state to lobby
@@ -65,30 +64,36 @@ public class LobbyManager : MonoBehaviour {
     {
         ChangeState(LobbyState.ROOM);
     }
+
     public void StartGame()
     {
+        if (!PhotonNetwork.isMasterClient)
+            return;
+        photonView.RPC("RPC_ChangeLevel", PhotonTargets.MasterClient);
         ChangeState(LobbyState.GAME);
     }
+    #endregion
 
-    //Finished
-    public void OnClickStartSync()
+
+    #region RPCs
+    [PunRPC]
+    private void RPC_ChangeLevel()
     {
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
+        PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.room.IsOpen = false;
         PhotonNetwork.room.IsVisible = false;
         PhotonNetwork.LoadLevel(1);
     }
+    #endregion
 
+    #region Click Events
+    public void OnClickStartSync()
+    {
+        StartGame();
+    }
     public void OnClickStartDelayed()
     {
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
-        PhotonNetwork.room.IsOpen = false;
-        PhotonNetwork.room.IsVisible = false;
-        PhotonNetwork.LoadLevel(1);
+        StartGame();
     }
     #endregion
 
@@ -114,16 +119,24 @@ public class LobbyManager : MonoBehaviour {
     
 
     #region Photon Callbacks
-    private void OnConnectedToMaster()
+    public override void OnConnectedToMaster()
     {
         print("Connected to master.");
         PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.playerName = PlayerNetwork.Instance.PlayerName;
-        
+        base.OnConnectedToMaster();
     }
-    private void OnJoinedLobby()
+    public override void OnJoinedLobby()
     {
         print("Joined lobby.");
+        ChangeState(LobbyState.LOBBY);
+        base.OnJoinedLobby();
+    }
+    public override void OnJoinedRoom()
+    {
+        print("Joined room.");
+        ChangeState(LobbyState.ROOM);
+        base.OnJoinedRoom();
     }
     #endregion
 }
