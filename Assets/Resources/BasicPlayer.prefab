@@ -461,7 +461,6 @@ GameObject:
   - component: {fileID: 114359696607058296}
   - component: {fileID: 114273388652972974}
   - component: {fileID: 114018751422911142}
-  - component: {fileID: 114320860646331632}
   m_Layer: 0
   m_Name: BasicPlayer
   m_TagString: Player
@@ -952,6 +951,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 114279484828361822}
+  HealthBar: {fileID: 114048010708889690}
+  Health: {fileID: 114885646201131840}
 --- !u!114 &114035340513413636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1247,19 +1248,6 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
---- !u!114 &114320860646331632
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1637758222917410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e342f20adee558a43b8a05c6b12585c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealthBar: {fileID: 114048010708889690}
-  Health: {fileID: 114885646201131840}
 --- !u!114 &114338229459291560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1528,8 +1516,8 @@ MonoBehaviour:
   - {fileID: 114763310656542310}
   - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 4
-  instantiationId: 4
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114457672186585790

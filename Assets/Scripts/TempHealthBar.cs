@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TempHealthBar : MonoBehaviour {
+[RequireComponent(typeof(PlayerStats))]
+public class TempHealthBar : Photon.MonoBehaviour {
 
     public Slider HealthBar;
     public Text Health;
@@ -11,7 +12,7 @@ public class TempHealthBar : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        pstats = GetComponent<PlayerStats>();
+        pstats = this.GetComponent<PlayerStats>();
     }
 	
 	// Update is called once per frame
