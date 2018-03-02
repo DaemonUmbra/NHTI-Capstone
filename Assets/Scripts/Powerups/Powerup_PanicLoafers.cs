@@ -46,7 +46,7 @@ namespace Powerups
                 {
                     WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
                 }
-                PS.WalkSpeed = PS.WalkSpeed * 3; // Walkspeed is tripled
+                PS.WalkSpeed = PS.WalkSpeed + 7; 
                 Instances = Instances + 1; // Adds 1 to instances
                 if (Instances == 1)
                 {
