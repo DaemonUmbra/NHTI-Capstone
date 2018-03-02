@@ -35,7 +35,7 @@ namespace Powerups
             AudioSource = GetComponent<AudioSource>();
             Name = "Growth";
             OriginalScale = transform.localScale;
-            transform.localScale = OriginalScale * GrowthFactor;
+            transform.localScale *= GrowthFactor;
             pStats.dmgMult *= dmgMult;
             pStats.dmgAdd += dmgAdd;
             base.OnAbilityAdd();
@@ -88,7 +88,7 @@ namespace Powerups
         {
             pStats.dmgMult /= dmgMult;
             pStats.dmgAdd -= dmgAdd;
-            transform.localScale = OriginalScale;
+            transform.localScale = transform.localScale *= 1/GrowthFactor;
             base.OnAbilityRemove();
         }
     }
