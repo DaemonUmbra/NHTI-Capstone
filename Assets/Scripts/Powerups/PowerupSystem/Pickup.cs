@@ -67,6 +67,7 @@ public class Pickup : Photon.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        _ability = GetComponent<BaseAbility>();
         PhotonView pv = PhotonView.Get(this);
 
         if (other.gameObject.tag == "Player")

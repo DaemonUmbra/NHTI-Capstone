@@ -83,6 +83,8 @@ public class LobbyManager : Photon.PunBehaviour {
         PhotonNetwork.room.IsOpen = false;
         PhotonNetwork.room.IsVisible = false;
         PhotonNetwork.LoadLevel(1);
+
+
     }
     #endregion
 

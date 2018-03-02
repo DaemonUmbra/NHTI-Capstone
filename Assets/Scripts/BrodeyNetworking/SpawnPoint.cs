@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace PUNTutorial
-{
-    public class SpawnPoint : MonoBehaviour
-    {
-        private void Awake()
-        {
-            gameObject.SetActive(false);
-        }
-    }
+public class SpawnPoint : MonoBehaviour
+{ 
+   private void Awake()
+   {
+     gameObject.SetActive(false);
+   }
 }
+

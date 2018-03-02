@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public abstract class Effect
 {
@@ -123,4 +124,49 @@ public abstract class Effect
     }
 
     #endregion Overrides
+}
+
+
+public class SendEffect
+{
+    private enum EFFECTS
+    {
+        BURN,
+        SLOW,
+        CONFUSE
+    }
+    int effectEnum;
+
+    byte[] effectInfo;
+    public SendEffect(Effect effect)
+    {
+        Type type =  effect.GetType();
+
+        if(type == typeof(BurnDamage))
+        {
+            SerializeAsBurn(effect);
+        }
+        else if(type == typeof(SlowMovement))
+        {
+            SerializeAsSlow(effect);
+        }
+        else if(type == typeof(Confuse))
+        {
+            SerializeAsConfuse(effect);
+        }
+    }
+
+
+    private void SerializeAsBurn(Effect effect)
+    {
+
+    }
+    private void SerializeAsSlow(Effect effect)
+    {
+
+    }
+    private void SerializeAsConfuse(Effect effect)
+    {
+
+    }
 }

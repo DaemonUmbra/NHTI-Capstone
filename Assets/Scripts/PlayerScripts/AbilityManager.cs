@@ -172,7 +172,7 @@ public class AbilityManager : Photon.MonoBehaviour
         }
         else
         {
-            Debug.LogError(t.Name + " already owned by player.");
+            Debug.LogWarning(t.Name + " already owned by player.");
         }
     }
 
