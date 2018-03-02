@@ -1,35 +1,35 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Powerups
 {
-    [RequireComponent(typeof(AudioSource))]
     internal class Powerup_NYEH : ActiveAbility
     {
         private AudioSource audioSource;
         private AudioClip nyeh;
 
-        public float nyehVolume = 0.5f;
+        public float nyehVolume = 1f;
 
         public override void OnAbilityAdd()
         {
             //*** Handled by base ca pv.RPC("NYEH_AddAbility", PhotonTargets.All);
 
             Name = "NYEH!";
-            //Handled by the RequireComponent
-            if (!gameObject.GetComponent<AudioSource>())
-            {
-                gameObject.AddComponent<AudioSource>();
-            }
+            Cooldown = 0f;
             audioSource = gameObject.GetComponent<AudioSource>();
+            if (!audioSource)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
             audioSource.playOnAwake = false;
+            GetComponent<PhotonView>().ObservedComponents.Add(audioSource);
             nyeh = Resources.Load("Sounds/NYEH") as AudioClip;
             if (!nyeh)
             {
                 Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
             }
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot += Activate;
-
+            pShoot.shoot += TryActivate;
             base.OnAbilityAdd();
         }
 
@@ -73,13 +73,17 @@ namespace Powerups
         {
             base.OnAbilityRemove();
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot -= Activate;
+            pShoot.shoot -= TryActivate;
         }
 
         protected override void Activate()
         {
-            Debug.Log("NYEH!");
-            audioSource.PlayOneShot(nyeh, nyehVolume);
+            base.Activate();
+            if (photonView.isMine)
+            {
+                Debug.Log("NYEH!");
+                audioSource.PlayOneShot(nyeh, nyehVolume);
+            }
         }
     }
 }
