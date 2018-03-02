@@ -158,8 +158,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
 
     /// <summary>
@@ -169,8 +169,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount, GameObject source)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
 
     /// <summary>
@@ -180,8 +180,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, List<Effect> effects)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
 
     /// <summary>
@@ -192,15 +192,14 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
 
     // Increase the player's current hp by amount
     public void GainHp(float amount)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
+        photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
     }
 
     // Can be used later for checking accuracy etc
