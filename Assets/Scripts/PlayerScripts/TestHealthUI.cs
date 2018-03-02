@@ -8,9 +8,11 @@ public class TestHealthUI : Photon.MonoBehaviour {
 
     public Text healthText;
     private PlayerStats pstats;
-    
-	// Use this for initialization
-	void Start ()
+    public Slider HealthBar;
+    public Text Health;
+
+    // Use this for initialization
+    void Start ()
     {
         pstats = GetComponent<PlayerStats>();
     }
@@ -18,6 +20,8 @@ public class TestHealthUI : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        Health.text = pstats.CurrentHp.ToString();
+        HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
         healthText.text = pstats.CurrentHp.ToString();
     }
 }
