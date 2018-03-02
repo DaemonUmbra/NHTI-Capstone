@@ -13,22 +13,22 @@ namespace PUNTutorial
         // This function is called when the object becomes enabled and active
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+            ////SceneManager.sceneLoaded += SceneManager_sceneLoaded;
         }
 
-        private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
-        {
-            if (!PhotonNetwork.inRoom) return;
+        //private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+        //{
+        //    if (!PhotonNetwork.inRoom) return;
 
-            var spawnPoint = GetRandomSpawnPoint();
-            if (arg0.name == "Sandbox")
-            {
-                localPlayer = PhotonNetwork.Instantiate(
-                    "BasicPlayer",
-                    spawnPoint.position,
-                    spawnPoint.rotation, 0);
-            }
-        }
+        //    var spawnPoint = GetRandomSpawnPoint();
+        //    if (arg0.name == "Sandbox")
+        //    {
+        //        localPlayer = PhotonNetwork.Instantiate(
+        //            "BasicPlayer",
+        //            spawnPoint.position,
+        //            spawnPoint.rotation, 0);
+        //    }
+        //}
 
         private void Awake()
         {
@@ -60,7 +60,7 @@ namespace PUNTutorial
         }
 
         //Replaced with eventhandler
-        /*
+        
         private void OnLevelWasLoaded(int levelNumber)
         {
             if (!PhotonNetwork.inRoom) return;
@@ -76,7 +76,7 @@ namespace PUNTutorial
                     spawnPoint.rotation, 0);
             }
         }
-        */
+        
 
         public Transform GetRandomSpawnPoint()
         {
