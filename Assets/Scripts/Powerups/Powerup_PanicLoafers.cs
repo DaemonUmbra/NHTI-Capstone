@@ -18,6 +18,8 @@ namespace Powerups
         public float WalkSpeed;
         public float Health;
 
+        public int Instances;
+
         public override void OnAbilityAdd()
         {
             Name = "Panic Loafers"; // Setting Name of power up
@@ -40,8 +42,16 @@ namespace Powerups
             if (PS.CurrentHp < Health) // If player is damaged
             {
                 Health = PS.CurrentHp; // Health variable is set to player's current health
+                if (Instances == 0)
+                {
+                    WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
+                }
                 PS.WalkSpeed = PS.WalkSpeed * 3; // Walkspeed is tripled
-                StartCoroutine(PanicTime()); // Begin coroutine for timer
+                Instances = Instances + 1; // Adds 1 to instances
+                if (Instances == 1)
+                {
+                    StartCoroutine(PanicTime()); // Begin coroutine for timer
+                }
             }
             else if (PS.CurrentHp > Health) // If player gains health
             {
@@ -53,7 +63,11 @@ namespace Powerups
 
         private IEnumerator PanicTime() // Timer for running
         {
-            yield return new WaitForSecondsRealtime(5); // Wait for 5 seconds
+            for (int i = 0; i < Instances; i++)
+            {
+                yield return new WaitForSecondsRealtime(3); // Wait for 3 seconds
+            }
+            Instances = 0;
             PS.WalkSpeed = WalkSpeed; // Set player walkspeed back to normal
         }
     }

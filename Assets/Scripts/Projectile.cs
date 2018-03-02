@@ -43,13 +43,14 @@ public class Projectile : Photon.MonoBehaviour
     // Find a reference to the shooter
     private void GetShooter()
     {
-        // Finds tagged player who have the same owner as this bullet
+        // Finds tagged player who has the same owner as this bullet
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players)
         {
             if (player.GetPhotonView().owner == photonView.owner)
             {
                 SetShooter(player);
+                print("Shooter found: " + player.GetPhotonView().owner);
             }
         }
     }
@@ -89,26 +90,19 @@ public class Projectile : Photon.MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject hit = other.gameObject;
-
-        if(hit.GetPhotonView())
+        PhotonView hitView = hit.GetPhotonView();
+        PlayerStats hitStats = hit.GetComponent<PlayerStats>();
+        // Verify hit photon view
+        if(hitView)
         {
             // Make sure the bullet isn't hitting it's own player
-            if (hit.GetPhotonView().owner != photonView.owner)
+            if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
             {
-                PlayerStats hitStats = hit.GetComponent<PlayerStats>();
-                if (hitStats)
-                {
-                    if (photonView.isMine)
-                    {
-                        hitStats.TakeDamage(damage);
-                        PhotonNetwork.Destroy(photonView);
-                    }
-
-                }
+                // Apply damage to the player
+                hitStats.TakeDamage(damage);
+                print("Player hit!");
+                PhotonNetwork.Destroy(photonView);
             }   
         }
-
-        
-
     }
 }

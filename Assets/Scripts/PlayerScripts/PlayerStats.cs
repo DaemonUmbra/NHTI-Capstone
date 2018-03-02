@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class PlayerStats : Photon.MonoBehaviour
 {
-    
 
     #region Class Variables
-
     // Effects the player is currently under
     private List<Effect> _effects;
 
@@ -25,6 +23,7 @@ public class PlayerStats : Photon.MonoBehaviour
     // Private stats (access variables below)
     [SerializeField]
     private float _maxHp = 100f;
+    private float _defaultMaxHp;
 
     private float _currentHp;
 
@@ -35,21 +34,19 @@ public class PlayerStats : Photon.MonoBehaviour
     public float dmgMult = 1f;
 
     public float dmgAdd = 0f;
-
     #endregion Class Variables
 
-    #region Access Variables
 
+    #region Access Variables
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
     public float EffectiveDamage { get { return _baseDmg * dmgMult + dmgAdd; } } // Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
-
     #endregion Access Variables
 
-    #region Unity Callbacks
 
+    #region Unity Callbacks
     // Use this for initialization
     private void Start()
     {
@@ -57,6 +54,7 @@ public class PlayerStats : Photon.MonoBehaviour
         _expiredEffects = new List<Effect>();
         _onHitEffects = new List<Effect>();
 
+        _defaultMaxHp = _maxHp;
         _currentHp = _maxHp;
     }
 
@@ -82,11 +80,10 @@ public class PlayerStats : Photon.MonoBehaviour
             TakeDamage(10f);
         }
     }
-
     #endregion Unity Callbacks
 
-    #region Public Methods
 
+    #region Public Methods
     // Add an effect to the player
     public void AddEffect(Effect effect)
     {
@@ -158,8 +155,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
 
     /// <summary>
@@ -169,8 +166,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="amount">Amount of damage player will recieve</param>
     public void TakeDamage(float amount, GameObject source)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
 
     /// <summary>
@@ -180,8 +177,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, List<Effect> effects)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
 
     /// <summary>
@@ -192,27 +189,37 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="effects">Effects applied to the player, can be null</param>
     public void TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
 
     // Increase the player's current hp by amount
     public void GainHp(float amount)
     {
-        if(photonView.isMine)
-            photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
+        photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
     }
-
+    /// <summary>
+    /// Change the player's max hp
+    /// </summary>
+    /// <param name="amount">Amount to add, negative to reduce hp</param>
+    public void ChangeMaxHp(float amount)
+    {
+        _maxHp += amount;
+        // Check that the max hp isn't less than the current hp
+        if(CurrentHp > _maxHp)
+        {
+            _currentHp = _maxHp;
+        }
+    }
     // Can be used later for checking accuracy etc
     public void ReportHit(GameObject hit)
     {
         Debug.Log(hit.name + " was hit by " + gameObject.name);
     }
-
     #endregion Public Methods
 
-    #region Photon RPCs
 
+    #region Photon RPCs
     [PunRPC]
     private void RPC_TakeDamage(float amount)
     {
@@ -339,11 +346,10 @@ public class PlayerStats : Photon.MonoBehaviour
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
-
     #endregion Photon RPCs
 
-    #region Private Methods
 
+    #region Private Methods
     private void Die()
     {
         photonView.RPC("RPC_Die", PhotonTargets.All);
@@ -353,6 +359,5 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
-
     #endregion Private Methods
 }

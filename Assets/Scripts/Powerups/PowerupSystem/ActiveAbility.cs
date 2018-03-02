@@ -20,7 +20,7 @@ public abstract class ActiveAbility : BaseAbility
     {
         if (lastActivated + Cooldown <= Time.time)
         {
-            photonView.RPC("RPC_Activate", PhotonTargets.All);
+            Activate();
         }
     }
 
@@ -30,11 +30,5 @@ public abstract class ActiveAbility : BaseAbility
     protected virtual void Activate() // Check cooldown before activating
     {
         lastActivated = Time.time;
-    }
-
-    [PunRPC]
-    public void RPC_Activate()
-    {
-        Activate();
     }
 }

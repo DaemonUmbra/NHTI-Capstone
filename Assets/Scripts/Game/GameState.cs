@@ -15,12 +15,15 @@ public class GameState : MonoBehaviour {
     public int fontMax;
     public Text timeText;
     public Text gameState;
+
+    private float refreshRate = 0.1f;
     
 
     void Start()
     {
         state = StateOfGame.Protection;
         timeText.fontSize = fontMin;
+        timeText.color = Color.white;
         InitializeGameTime();
         InvokeRepeating("GameTime", 1f, 1f);
     }
@@ -68,15 +71,20 @@ public class GameState : MonoBehaviour {
         {
             if (seconds < 0)
             {
+                CancelInvoke("royaleStartWarning");
                 minutes--;
                 seconds = 59;
             }
-
-            if (seconds < 11 && minutes == 0)
+            if (seconds == 10 && minutes == 0)
+            {
+                timeText.text = "0" + minutes + ":" + seconds;
+                timeText.color = Color.red;
+                InvokeRepeating("royaleStartWarning", 0f, refreshRate);
+            }
+            else if (seconds < 10 && minutes == 0)
             {
                 timeText.text = "0" + minutes + ":0" + seconds;
-                InvokeRepeating("royaleStartWarning", 0f, .5f);
-                InvokeRepeating("royaleStartWarning", 1f, .5f);
+                timeText.color = Color.red;
             }
             else if (minutes < 10 && seconds < 10)
             {
@@ -121,9 +129,9 @@ public class GameState : MonoBehaviour {
 
     void royaleStartWarning()
     {
-        if (timeText.fontSize == fontMin)
+        if (timeText.fontSize < fontMax)
         {
-            timeText.fontSize = fontMax;
+            timeText.fontSize++;
         }
         else
         {
