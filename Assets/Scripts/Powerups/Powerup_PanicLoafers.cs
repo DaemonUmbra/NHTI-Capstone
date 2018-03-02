@@ -40,6 +40,7 @@ namespace Powerups
             if (PS.CurrentHp < Health) // If player is damaged
             {
                 Health = PS.CurrentHp; // Health variable is set to player's current health
+                WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
                 PS.WalkSpeed = PS.WalkSpeed * 3; // Walkspeed is tripled
                 StartCoroutine(PanicTime()); // Begin coroutine for timer
             }
