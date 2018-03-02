@@ -14,6 +14,7 @@ public class Powerup_ThunderCloud : PassiveAbility
         ps.WalkSpeed += 1.0f;
         ps.JumpPower += 1.0f;
         ps.dmgAdd += 2.0f;
+        ps.ChangeMaxHp(10.0f);
 
         base.OnAbilityAdd();
     }
@@ -25,6 +26,7 @@ public class Powerup_ThunderCloud : PassiveAbility
         ps.WalkSpeed -= 1.0f;
         ps.JumpPower -= 1.0f;
         ps.dmgAdd -= 2.0f;
+        ps.ChangeMaxHp(-10.0f);
 
         base.OnAbilityRemove();
     }
