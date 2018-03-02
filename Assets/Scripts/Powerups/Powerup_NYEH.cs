@@ -82,7 +82,7 @@ namespace Powerups
             if (photonView.isMine)
             {
                 Debug.Log("NYEH!");
-                audioSource.PlayOneShot(nyeh, nyehVolume);
+                photonView.GetComponent<AudioSource>().PlayOneShot(nyeh, nyehVolume);
             }
         }
     }
