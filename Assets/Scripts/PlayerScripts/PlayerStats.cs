@@ -204,12 +204,7 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="amount">Amount to add, negative to reduce hp</param>
     public void ChangeMaxHp(float amount)
     {
-        _maxHp += amount;
-        // Check that the max hp isn't less than the current hp
-        if(CurrentHp > _maxHp)
-        {
-            _currentHp = _maxHp;
-        }
+        photonView.RPC("RPC_ChangeMaxHp", PhotonTargets.All, amount);
     }
     // Can be used later for checking accuracy etc
     public void ReportHit(GameObject hit)
@@ -317,7 +312,16 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp += amount;
         }
     }
-
+    [PunRPC]
+    private void RPC_ModifyMaxHp(float amount)
+    {
+        _maxHp += amount;
+        // Check that the max hp isn't less than the current hp
+        if (CurrentHp > _maxHp)
+        {
+            _currentHp = _maxHp;
+        }
+    }
     [PunRPC]
     private void RPC_Die()
     {
