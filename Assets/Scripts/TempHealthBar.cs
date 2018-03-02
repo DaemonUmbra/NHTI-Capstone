@@ -7,8 +7,6 @@ public class TempHealthBar : MonoBehaviour {
 
     public Slider HealthBar;
     public Text Health;
-    public int currentHealth;
-    public int maxHealth;
 
 
 	// Use this for initialization
@@ -18,7 +16,7 @@ public class TempHealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Health.text = currentHealth.ToString();
-        HealthBar.value = ((float)currentHealth / (float)maxHealth);
+        Health.text = GetComponent<PlayerStats>().CurrentHp.ToString();
+        HealthBar.value = ((float)GetComponent<PlayerStats>().CurrentHp / (float)GetComponent<PlayerStats>().MaxHp);
     }
 }
