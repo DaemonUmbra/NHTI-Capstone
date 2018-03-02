@@ -20,8 +20,8 @@ public class TestHealthUI : Photon.MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Health.text = pstats.CurrentHp.ToString();
         HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
         healthText.text = pstats.CurrentHp.ToString();
+        Health.text = healthText.text;
     }
 }
