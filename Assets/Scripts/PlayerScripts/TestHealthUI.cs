@@ -22,6 +22,6 @@ public class TestHealthUI : Photon.MonoBehaviour {
     {
         HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
         healthText.text = pstats.CurrentHp.ToString();
-        Health.text = healthText.text;
+        Health.text = pstats.CurrentHp.ToString();
     }
 }

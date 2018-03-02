@@ -45,7 +45,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1034066672772884
 GameObject:
   m_ObjectHideFlags: 1
@@ -1172,8 +1172,10 @@ MonoBehaviour:
   - {fileID: 114435186058187412}
   - {fileID: 114762757652732374}
   - {fileID: 114359696607058296}
+  - {fileID: 114018751422911142}
   GameObjectsToDisable:
   - {fileID: 1176983867760030}
+  - {fileID: 1764969335421944}
 --- !u!114 &114279484828361822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1514,7 +1516,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114763310656542310}
-  - {fileID: 0}
+  - {fileID: 114828804731430292}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
