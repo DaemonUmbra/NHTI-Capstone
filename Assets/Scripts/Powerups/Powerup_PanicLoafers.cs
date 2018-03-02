@@ -45,7 +45,10 @@ namespace Powerups
                 WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
                 PS.WalkSpeed = PS.WalkSpeed * 3; // Walkspeed is tripled
                 Instances = Instances + 1; // Adds 1 to instances
-                StartCoroutine(PanicTime()); // Begin coroutine for timer
+                if (Instances == 1)
+                {
+                    StartCoroutine(PanicTime()); // Begin coroutine for timer
+                }
             }
             else if (PS.CurrentHp > Health) // If player gains health
             {
