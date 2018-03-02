@@ -37,7 +37,7 @@ namespace PUNTutorial
                 DestroyImmediate(gameObject);
                 return;
             }
-            DontDestroyOnLoad(transform.parent.gameObject);
+            DontDestroyOnLoad(gameObject);
             instance = this;
 
             defaultSpawnPoint = new GameObject("Default SpawnPoint");
