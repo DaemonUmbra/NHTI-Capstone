@@ -4,9 +4,12 @@ public class Confuse : Effect
 {
     private PlayerController pc = new PlayerController();
 
+    public Confuse()
+    {
+    }
     public Confuse(float lifetime)
     {
-        _lifetime = lifetime;
+        Lifetime = lifetime;
     }
 
     public override void Activate()
@@ -27,7 +30,7 @@ public class Confuse : Effect
         }
 
         // Apply the effect
-        Confuse confused = new Confuse(this._lifetime);
+        Confuse confused = new Confuse(Lifetime);
         ps.AddEffect(confused);
     }
 

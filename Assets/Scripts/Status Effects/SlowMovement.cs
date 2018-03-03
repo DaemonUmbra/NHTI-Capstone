@@ -5,19 +5,23 @@ public class SlowMovement : Effect
     /// <summary>
     /// Amount to slow the player by as a decimal
     /// </summary>
-    private float _slowAmount;
-
-    private int _stacks = 1;
+    public float SlowAmount;
 
     #region Public Methods
 
     // Default constructor
+    public SlowMovement()
+    {
+        SlowAmount = 0.3f;
+        Lifetime = 5f;
+        Name = "Slow Movement";
+    }
     public SlowMovement(float slowAmount, float lifetime)
     {
-        _slowAmount = slowAmount;
-        _lifetime = lifetime;
+        SlowAmount = slowAmount;
+        Lifetime = lifetime;
 
-        _name = "Slow Movement";
+        Name = "Slow Movement";
     }
 
     /// <summary>
@@ -26,15 +30,15 @@ public class SlowMovement : Effect
     /// <param name="jango"></param>
     public SlowMovement(SlowMovement jango)
     {
-        _slowAmount = jango._slowAmount;
+        SlowAmount = jango.SlowAmount;
         Debug.Log(jango + "cloned.");
 
-        _lifetime = jango.Lifetime;
-        _tickTime = jango.TickTime;
+        Lifetime = jango.Lifetime;
+        TickTime = jango.TickTime;
         Debug.Log("Lifetime: " + jango.Lifetime + " | " + Lifetime);
         Debug.Log("Ticktime: " + jango.TickTime + " | " + TickTime);
 
-        _name = "Slow Movement";
+        Name = "Slow Movement";
     }
 
     /// <summary>
@@ -92,7 +96,7 @@ public class SlowMovement : Effect
             return;
         }
 
-        ps.WalkSpeed *= _slowAmount;
+        ps.WalkSpeed *= SlowAmount;
     }
 
     private void ReverseSlow()
@@ -104,7 +108,7 @@ public class SlowMovement : Effect
             Debug.LogError("Stats script not found. Unable to reverse slow");
             return;
         }
-        float factor = 1 / _slowAmount; // Inverse of the slow percent
+        float factor = 1 / SlowAmount; // Inverse of the slow percent
         if (factor < 100 && factor > 0.01)
             ps.WalkSpeed *= factor;
     }

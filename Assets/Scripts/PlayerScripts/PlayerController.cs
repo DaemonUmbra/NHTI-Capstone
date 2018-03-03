@@ -86,12 +86,12 @@ public class PlayerController : Photon.MonoBehaviour
         // Check for shooting
         if (Input.GetButtonDown("Fire1"))
         {
-            photonView.RPC("RPC_FireEvent", PhotonTargets.All);
+            photonView.RPC("RPC_FirePrimary", PhotonTargets.All);
         }
     }
 
     [PunRPC]
-    private void RPC_FireEvent()
+    private void RPC_FirePrimary()
     {
         pShoot.shoot.Invoke();
     }

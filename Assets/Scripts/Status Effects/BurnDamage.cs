@@ -2,31 +2,33 @@
 
 public class BurnDamage : Effect
 {
-    private float _burnDamage;
-    public float Damage { get { return _burnDamage; } }
+    public float Damage;
 
+    public BurnDamage()
+    {
+    }
     public BurnDamage(BurnDamage burnDamage)
     {
-        _burnDamage = burnDamage.Damage;
-        _lifetime = burnDamage.Lifetime;
+        Damage = burnDamage.Damage;
+        Lifetime = burnDamage.Lifetime;
     }
 
     public BurnDamage(float burnDamage, float lifetime)
     {
-        _burnDamage = burnDamage;
-        _lifetime = lifetime;
+        Damage = burnDamage;
+        Lifetime = lifetime;
     }
 
     public override void Activate()
     {
-        _tickTime = 1f;
+        TickTime = 1f;
         base.Activate();
     }
 
     public override void OnTick()
     {
         PlayerStats ps = Owner.GetComponent<PlayerStats>();
-        ps.TakeDamage(_burnDamage);
+        ps.TakeDamage(Damage);
 
         base.OnTick();
     }
