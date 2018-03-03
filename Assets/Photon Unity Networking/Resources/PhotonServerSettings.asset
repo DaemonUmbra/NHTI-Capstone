@@ -91,4 +91,5 @@ MonoBehaviour:
   - RPC_ChangeLevel
   - RPC_FireEvent
   - RPC_ModifyMaxHp
+  - RPC_FirePrimary
   DisableAutoOpenWizard: 1
