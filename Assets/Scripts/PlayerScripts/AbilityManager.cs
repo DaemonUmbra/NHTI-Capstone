@@ -6,6 +6,7 @@ public class AbilityManager : Photon.MonoBehaviour
 {
     // Keyed list of abilities by name
     private Dictionary<string, BaseAbility> _abilities;
+    public Dictionary<string, BaseAbility> AbilityList { get { return _abilities; } }
 
     // Use this for initialization
     private void Awake()
@@ -220,9 +221,4 @@ public class AbilityManager : Photon.MonoBehaviour
     }
 
     #endregion Private Methods
-
-    public Dictionary<string, BaseAbility> ListAbilities()
-    {
-        return _abilities;
-    }
 }
