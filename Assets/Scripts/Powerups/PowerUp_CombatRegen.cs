@@ -34,9 +34,10 @@ namespace Powerups
         private IEnumerator Regen()
         {
             while (active) // While the player holds the power up, player gains 10 HP every 20 seconds
-            {
+            {                
                 PS.GainHp(10.0f);
-                yield return new WaitForSecondsRealtime(20);
+                Debug.Log("You gained 10 HP!");
+                yield return new WaitForSecondsRealtime(10);                
             }
         }
     }
