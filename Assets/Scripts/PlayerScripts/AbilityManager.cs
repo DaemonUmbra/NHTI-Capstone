@@ -150,6 +150,13 @@ public class AbilityManager : Photon.MonoBehaviour
         }
         */
     }
+    public void ResetAbilities()
+    {
+        foreach(BaseAbility a in _abilities.Values)
+        {
+            RemoveAbility(a);
+        }
+    }
 
     #endregion Public Methods
 

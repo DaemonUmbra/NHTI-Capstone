@@ -41,18 +41,18 @@ public class PowerupDebugger_Editor : Editor
             //Get a list of the player's current powerups
             List<string> PlayerPowerupStrings = new List<string>();
             //if they have any
-            if (debugger.Player.ListAbilities() != null)
+            if (debugger.Player.AbilityList != null)
             {
-                if (debugger.Player.ListAbilities().Count > 0)
+                if (debugger.Player.AbilityList.Count > 0)
                 {
                     //do a check for array bounds
-                    if (SelectedPlayerPowerupIndex == -1 || SelectedPlayerPowerupIndex >= debugger.Player.ListAbilities().Count)
+                    if (SelectedPlayerPowerupIndex == -1 || SelectedPlayerPowerupIndex >= debugger.Player.AbilityList.Count)
                     {
                         //and reset if needed
                         SelectedPlayerPowerupIndex = 0;
                     }
                     //and for each powerup the Player has
-                    foreach (KeyValuePair<string, BaseAbility> entry in debugger.Player.ListAbilities())
+                    foreach (KeyValuePair<string, BaseAbility> entry in debugger.Player.AbilityList)
                     {
                         //add its name to the list
                         PlayerPowerupStrings.Add(entry.Value.GetName);
@@ -92,7 +92,7 @@ public class PowerupDebugger_Editor : Editor
                 //Set the powerup selected for removal
                 if (SelectedPlayerPowerupIndex != -1)
                 {
-                    debugger.SelectedPlayerPowerup = debugger.Player.ListAbilities()[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
+                    debugger.SelectedPlayerPowerup = debugger.Player.AbilityList[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
                 }
                 else
                 {

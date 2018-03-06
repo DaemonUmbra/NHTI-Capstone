@@ -9,60 +9,17 @@ public class PlayerShoot : Photon.MonoBehaviour
     public Shoot shoot;
 
     public GameObject projectile;
-
-    // Use this for initialization
-    private void Start()
+    
+    private void Awake()
     {
-        AbilityManager aManager = GetComponent<AbilityManager>();
-
-        if (aManager)
-        {
-            aManager.AddAbility<SingleShot>();
-        }
+        shoot += DefaultShoot;
     }
 
-    private void Update()
+    public void DefaultShoot()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (photonView.isMine)
         {
-            AbilityManager aManager = GetComponent<AbilityManager>();
-            if (aManager.HasAbility<Powerup_Snipe>())
-            {
-                aManager.AddAbility<SingleShot>();
-                aManager.RemoveAbility<Powerup_Snipe>();
-            }
-            else if (aManager.HasAbility<SingleShot>())
-            {
-                aManager.AddAbility<RingOfBullets>();
-                aManager.RemoveAbility<SingleShot>();
-            }
-            else if (aManager.HasAbility<RingOfBullets>())
-            {
-                aManager.AddAbility<SingleShot>();
-                aManager.RemoveAbility<RingOfBullets>();
-            }
+            GameObject _proj = PhotonNetwork.Instantiate(projectile.name, transform.position, transform.rotation, 0);
         }
-        /*if (Input.GetKeyDown(KeyCode.E))
-        {
-            AbilityManager aManager = GetComponent<AbilityManager>();
-
-            if (aManager.HasAbility<Powerup_Slime>())
-            {
-                aManager.RemoveAbility<Powerup_Slime>();
-                aManager.AddAbility<SingleShot>();
-            }
-            else
-            {
-                if (aManager.HasAbility<SingleShot>())
-                {
-                    aManager.RemoveAbility<SingleShot>();
-                }
-                if (aManager.HasAbility<RingOfBullets>())
-                {
-                    aManager.RemoveAbility<RingOfBullets>();
-                }
-                aManager.AddAbility<Powerup_Slime>();
-            }
-        }*/
     }
 }

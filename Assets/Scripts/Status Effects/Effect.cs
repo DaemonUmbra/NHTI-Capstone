@@ -160,7 +160,6 @@ public class EffectPackage
     }
     public EffectPackage()
     {
-
     }
     public EffectPackage(byte[] eInfo)
     {
@@ -337,4 +336,5 @@ public class EffectPackage
         return package;
     }
     #endregion
+    
 }
