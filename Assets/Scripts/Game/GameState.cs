@@ -38,7 +38,7 @@ public class GameState : MonoBehaviour {
         switch (state)
         {
             case StateOfGame.Protection:
-                gameState.text = state.ToString();
+                //gameState.text = state.ToString();
                 if (playerHealth <= 0)
                 {
                     Respawn();
