@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum LobbyState { LOGIN, LOBBY, ROOM, GAME }
 public class LobbyManager : Photon.PunBehaviour {
@@ -14,7 +15,8 @@ public class LobbyManager : Photon.PunBehaviour {
 
     #region Public Variables
     public static bool HideFullRoom = true;
-    
+    public Button loginButton;
+    public Text connectingText;
     #endregion
     
 
@@ -123,6 +125,9 @@ public class LobbyManager : Photon.PunBehaviour {
     #region Photon Callbacks
     public override void OnConnectedToMaster()
     {
+
+        loginButton.interactable = true;
+        connectingText.text = "Connected!";
         print("Connected to master.");
         PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.playerName = PlayerNetwork.Instance.PlayerName;

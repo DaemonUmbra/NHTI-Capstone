@@ -36,6 +36,10 @@ public class PlayerStats : Photon.MonoBehaviour
     public float dmgMult = 1f;
 
     public float dmgAdd = 0f;
+
+   
+
+    private PlayerSpawning pSpawn;
     #endregion Class Variables
 
 
@@ -392,6 +396,11 @@ public class PlayerStats : Photon.MonoBehaviour
         Debug.Log(gameObject.name + " has died.");
 
         // No death logic yet
+        GameObject gameMng = FindObjectOfType<PlayerSpawning>().gameObject;
+        var Mng = gameMng.GetComponent<PlayerSpawning>();
+        Transform respawn = Mng.GetRandomSpawnPoint();
+
+        gameObject.transform.position = respawn.position;
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
