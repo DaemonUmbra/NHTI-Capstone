@@ -667,7 +667,7 @@ GameObject:
   - component: {fileID: 222552125189235866}
   - component: {fileID: 114565652137508772}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Powerups
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -970,7 +970,7 @@ MonoBehaviour:
   healthText: {fileID: 114279484828361822}
   HealthBar: {fileID: 114048010708889690}
   Health: {fileID: 114885646201131840}
-  powerups: {fileID: 0}
+  powerups: {fileID: 114565652137508772}
 --- !u!114 &114035340513413636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1535,9 +1535,10 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114763310656542310}
   - {fileID: 114828804731430292}
+  - {fileID: 114623875041770714}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 1
-  instantiationId: 1
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114457672186585790
