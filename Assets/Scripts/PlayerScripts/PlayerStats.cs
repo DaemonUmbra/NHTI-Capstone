@@ -12,6 +12,8 @@ public class PlayerStats : Photon.MonoBehaviour
 
     // Effects applied to other players when attacking them
     private List<Effect> _onHitEffects;
+    //private List<EffectPackage> _packagedEffects;
+    //private Dictionary<Effect, EffectPackage> _packageLinker;
 
     // Public Stats
     [SerializeField]
@@ -43,6 +45,7 @@ public class PlayerStats : Photon.MonoBehaviour
     public float BaseDamage { get { return _baseDmg; } }
     public float EffectiveDamage { get { return _baseDmg * dmgMult + dmgAdd; } } // Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
+    //public List<EffectPackage> PackagedEffects { get { return _packagedEffects; } }
     #endregion Access Variables
 
 
@@ -53,6 +56,8 @@ public class PlayerStats : Photon.MonoBehaviour
         _effects = new List<Effect>();
         _expiredEffects = new List<Effect>();
         _onHitEffects = new List<Effect>();
+        //_packagedEffects = new List<EffectPackage>();
+        //_packageLinker = new Dictionary<Effect, EffectPackage>();
 
         _defaultMaxHp = _maxHp;
         _currentHp = _maxHp;
@@ -101,6 +106,8 @@ public class PlayerStats : Photon.MonoBehaviour
             if (!found)
             {
                 _effects.Add(effect);
+                effect.Owner = gameObject;
+                effect.Activate();
             }
         }
         else
@@ -134,11 +141,18 @@ public class PlayerStats : Photon.MonoBehaviour
             if (!found)
             {
                 _onHitEffects.Add(effect);
+                EffectPackage ePack = new EffectPackage(effect);
+                //_packagedEffects.Add(ePack);
+                //_packageLinker[effect] = ePack;
+                // Do NOT activate the effect or set an owner
             }
         }
         else
         {
             _onHitEffects.Add(effect);
+            EffectPackage ePack = new EffectPackage(effect);
+            //_packagedEffects.Add(ePack);
+            //_packageLinker[effect] = ePack;
             // Do NOT activate the effect or set an owner
         }
     }
@@ -146,7 +160,10 @@ public class PlayerStats : Photon.MonoBehaviour
     // Remove an OnHit effect from the player
     public void RemoveOnHit(Effect effect)
     {
+        // Remove onhit effect from all lists
         _onHitEffects.Remove(effect);
+        //_packagedEffects.Remove(_packageLinker[effect]);
+        //_packageLinker.Remove(effect);
     }
 
     /// <summary>
@@ -178,7 +195,12 @@ public class PlayerStats : Photon.MonoBehaviour
     public void TakeDamage(float amount, List<Effect> effects)
     {
         print("In take damage function. Damage to be taken: " + amount);
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
+        List<EffectPackage> packagedEffects = new List<EffectPackage>();
+        foreach(Effect e in effects)
+        {
+            packagedEffects.Add(new EffectPackage(e));
+        }
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, packagedEffects);
     }
 
     /// <summary>
@@ -190,7 +212,12 @@ public class PlayerStats : Photon.MonoBehaviour
     public void TakeDamage(float amount, GameObject source, List<Effect> effects)
     {
         print("In take damage function. Damage to be taken: " + amount);
-        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
+        List<EffectPackage> packagedEffects = new List<EffectPackage>();
+        foreach (Effect e in effects)
+        {
+            packagedEffects.Add(new EffectPackage(e));
+        }
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID, packagedEffects);
     }
 
     // Increase the player's current hp by amount
@@ -263,22 +290,20 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         Debug.Log("Player hp: " + CurrentHp);
     }
-
-    /* Needs rework because of PUN serialization
     [PunRPC]
-    private void RPC_TakeDamage(float amount, GameObject source, List<Effect> effects)
+    private void RPC_TakeDamage(float amount, List<EffectPackage> effects)
     {
-        PlayerStats pSource = source.GetComponent<PlayerStats>();
-        pSource.ReportHit(gameObject);
-
+        // Apply effects
         if (effects != null)
         {
-            // Add effects to player
-            foreach (Effect e in effects)
+            // Unpack and add effects to player
+            foreach (EffectPackage ePack in effects)
             {
-                e.ApplyEffect(gameObject);
+                Effect eff = ePack.PackedEffect;
+                eff.ApplyEffect(gameObject);
             }
         }
+        // Validate the damage amount
         if (amount < 0)
         {
             Debug.LogWarning("Cannot take negative damage.");
@@ -286,13 +311,52 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         // Reduce hp by amount
         _currentHp -= amount;
+        // Kill if hp is zero or less
         if (_currentHp <= 0)
         {
             Debug.Log(gameObject.name + " hp <= 0");
-            Die(source);
+            Die();
         }
+        Debug.Log("Player hp: " + CurrentHp);
     }
-    */
+    [PunRPC]
+    private void RPC_TakeDamage(float amount, int srcViewId, List<EffectPackage> effects)
+    {
+        // Find the source gameobject from it's view id
+        PhotonView srcView = PhotonView.Find(srcViewId);
+        GameObject srcObj = null;
+        if (srcView != null)
+            srcObj = srcView.gameObject;
+
+        // Apply effects
+        if (effects != null)
+        {
+            // Unpack and add effects to player
+            foreach (EffectPackage ePack in effects)
+            {
+                Effect eff = ePack.PackedEffect;
+                eff.ApplyEffect(gameObject);
+            }
+        }
+        // Validate the damage amount
+        if (amount < 0)
+        {
+            Debug.LogWarning("Cannot take negative damage.");
+            return;
+        }
+        // Reduce hp by amount
+        _currentHp -= amount;
+        // Kill if hp is zero or less
+        if (_currentHp <= 0)
+        {
+            Debug.Log(gameObject.name + " hp <= 0");
+            if (srcObj)
+                Die(srcObj);
+            else
+                Die();
+        }
+        Debug.Log("Player hp: " + CurrentHp);
+    }
 
     [PunRPC]
     private void RPC_GainHp(float amount)

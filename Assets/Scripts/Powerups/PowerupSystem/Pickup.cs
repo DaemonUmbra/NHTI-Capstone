@@ -18,7 +18,7 @@ public class Pickup : Photon.MonoBehaviour
     {
         _ability = GetComponent<BaseAbility>();
         //aMan = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
-        //List<KeyValuePair<string, BaseAbility>> list = aMan.ListAbilities().ToList();
+        //List<KeyValuePair<string, BaseAbility>> list = aMan.AbilityList.ToList();
         //foreach(KeyValuePair<string,BaseAbility> power in list)
         //{
         //    Debug.Log(power);
