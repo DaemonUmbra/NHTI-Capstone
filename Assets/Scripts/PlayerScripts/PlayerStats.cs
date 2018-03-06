@@ -401,6 +401,8 @@ public class PlayerStats : Photon.MonoBehaviour
         Transform respawn = Mng.GetRandomSpawnPoint();
 
         gameObject.transform.position = respawn.position;
+        AbilityManager abilityManager = GetComponent<AbilityManager>();
+        abilityManager.ResetAbilities();
         _currentHp = _maxHp; // Resets hp
         Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
