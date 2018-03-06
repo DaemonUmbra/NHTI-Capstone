@@ -162,25 +162,32 @@ public class EffectPackage
     {
 
     }
+    public EffectPackage(byte[] eInfo)
+    {
+        effectInfo = eInfo;
+        Deserialize();
+    }
 
     public void Deserialize()
     {
+        int index = 0;
+        DeserializeBaseEffect(ref index);
         if(effectType == (byte)EFFECTS.BURN)
         {
-            DeserializeBurn();
+            DeserializeBurn(ref index);
         }
         else if(effectType == (byte)EFFECTS.SLOW)
         {
-            DeserializeSlow();
+            DeserializeSlow(ref index);
         }
         else if (effectType == (byte)EFFECTS.CONFUSE)
         {
-            DeserializeConfuse();
+            DeserializeConfuse(ref index);
         }
     }
 
-    #region Internal Serialization Methods
-    // Serialize
+    #region Effect Serialization Methods
+    // Serialize Burn
     private void SerializeAsBurn(BurnDamage effect)
     {
         int index = 0;
@@ -194,6 +201,7 @@ public class EffectPackage
         Protocol.Serialize(effect.Damage, effectInfo, ref index);
 
     }
+    // Serialize Slow
     private void SerializeAsSlow(SlowMovement effect)
     {
         int index = 0;
@@ -205,6 +213,7 @@ public class EffectPackage
         // Serialization
         Protocol.Serialize(effect.SlowAmount, effectInfo, ref index);
     }
+    // Serialize Confuse
     private void SerializeAsConfuse(Confuse effect)
     {
         int index = 0;
@@ -214,6 +223,7 @@ public class EffectPackage
         // No extra serialization
 
     }
+    // Serialize Base Effect
     private void SerializeBaseEffect(Effect effect, ref int index)
     {
         // Default Parameter sizes
@@ -239,11 +249,13 @@ public class EffectPackage
         // Ticktime [float]
         Protocol.Serialize(effect.TickTime, effectInfo, ref index);
     }
-    // Deserialize
-    private void DeserializeBurn()
+    #endregion
+
+    #region Effect Deserialization Methods
+    // Deserialize Burn
+    private void DeserializeBurn(ref int index)
     {
         PackedEffect = new BurnDamage();
-        int index = 0;
         DeserializeBaseEffect(ref index);
 
         // Damage [float]
@@ -251,23 +263,22 @@ public class EffectPackage
         Protocol.Deserialize(out dmg, effectInfo, ref index);
         ((BurnDamage)PackedEffect).Damage = dmg;
     }
-    private void DeserializeSlow()
+    // Deserialize Slow
+    private void DeserializeSlow(ref int index)
     {
         PackedEffect = new SlowMovement();
-        int index = 0;
-        DeserializeBaseEffect(ref index);
 
         // SlowAmount [float]
         int slow;
         Protocol.Deserialize(out slow, effectInfo, ref index);
         ((SlowMovement)PackedEffect).SlowAmount = slow;
     }
-    private void DeserializeConfuse()
+    // Deserialize Confuse
+    private void DeserializeConfuse(ref int index)
     {
         PackedEffect = new Confuse();
-        int index = 0;
-        DeserializeBaseEffect(ref index);
     }
+    // Deserialize Base Effect
     private void DeserializeBaseEffect(ref int index)
     {
         int nameSize;
