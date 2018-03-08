@@ -8,7 +8,14 @@ static class ReflectionUtil
     public static Type GetAbilityTypeFromName(string TypeName)
     {
         //HACK hardcoded namespace
-        return System.Reflection.Assembly.GetExecutingAssembly().GetType("Powerups." + TypeName);
+        if (TypeName.StartsWith("Powerups.", true, System.Globalization.CultureInfo.CurrentCulture))
+        {
+            return System.Reflection.Assembly.GetExecutingAssembly().GetType(TypeName);
+        }
+        else
+        {
+            return System.Reflection.Assembly.GetExecutingAssembly().GetType("Powerups." + TypeName);
+        }
     }
 
     public static string GetTypeName(Type type)

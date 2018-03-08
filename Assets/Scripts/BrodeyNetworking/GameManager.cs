@@ -10,26 +10,6 @@ namespace PUNTutorial
         public static GameObject localPlayer;
         private GameObject defaultSpawnPoint;
 
-        // This function is called when the object becomes enabled and active
-        private void OnEnable()
-        {
-            ////SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        }
-
-        //private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
-        //{
-        //    if (!PhotonNetwork.inRoom) return;
-
-        //    var spawnPoint = GetRandomSpawnPoint();
-        //    if (arg0.name == "Sandbox")
-        //    {
-        //        localPlayer = PhotonNetwork.Instantiate(
-        //            "BasicPlayer",
-        //            spawnPoint.position,
-        //            spawnPoint.rotation, 0);
-        //    }
-        //}
-
         private void Awake()
         {
             if (instance != null)
@@ -58,8 +38,6 @@ namespace PUNTutorial
             ro.MaxPlayers = 8;
             PhotonNetwork.JoinOrCreateRoom("Default Room", ro, null);
         }
-
-        //Replaced with eventhandler
         
         private void OnLevelWasLoaded(int levelNumber)
         {

@@ -168,7 +168,7 @@ public class AbilityManager : Photon.MonoBehaviour
     private void RPC_AddAbility(string abilityType) // This could and should be optimized once it is working
     {
         // Get ability type from string and create and ability
-        Type t = Type.GetType(abilityType);
+        Type t = ReflectionUtil.GetAbilityTypeFromName(abilityType);
         //BaseAbility ability = (BaseAbility)Activator.CreateInstance(t);
 
         // Make sure the ability isn't already there
@@ -189,7 +189,7 @@ public class AbilityManager : Photon.MonoBehaviour
     private void RPC_RemoveAbility(string abilityType)
     {
         // Get ability type from string and create and ability
-        Type t = Type.GetType(abilityType);
+        Type t = ReflectionUtil.GetAbilityTypeFromName(abilityType);
         BaseAbility ability = (BaseAbility)gameObject.GetComponent(t);
 
         if (ability)
