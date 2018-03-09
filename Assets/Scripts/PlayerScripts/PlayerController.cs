@@ -93,6 +93,8 @@ public class PlayerController : Photon.MonoBehaviour
     [PunRPC]
     private void RPC_FirePrimary()
     {
+        //HACK
+        pShoot = gameObject.GetComponent<PlayerShoot>();
         pShoot.shoot.Invoke();
     }
 

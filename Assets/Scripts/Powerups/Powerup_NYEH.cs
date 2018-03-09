@@ -22,7 +22,7 @@ namespace Powerups
                 audioSource = gameObject.AddComponent<AudioSource>();
             }
             audioSource.playOnAwake = false;
-            GetComponent<PhotonView>().ObservedComponents.Add(audioSource);
+            //GetComponent<PhotonView>().ObservedComponents.Add(audioSource);
             nyeh = Resources.Load("Sounds/NYEH") as AudioClip;
             if (!nyeh)
             {
@@ -79,10 +79,10 @@ namespace Powerups
         protected override void Activate()
         {
             base.Activate();
-            if (photonView.isMine)
+            ;// if (photonView.isMine)
             {
                 Debug.Log("NYEH!");
-                photonView.GetComponent<AudioSource>().PlayOneShot(nyeh, nyehVolume);
+                gameObject.GetComponent<AudioSource>().PlayOneShot(nyeh, nyehVolume);
             }
         }
     }
