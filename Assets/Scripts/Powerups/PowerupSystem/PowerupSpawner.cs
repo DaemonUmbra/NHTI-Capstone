@@ -74,6 +74,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
     private void RPC_SpawnPowerup(float newDelay, int powerupId, string powerupName)
     {
         spawnDelay = newDelay;
+        lastPickupTime = Time.time;
         Type thisType = ReflectionUtil.GetAbilityTypeFromName(powerupName);
 
         // Find pickup by photon ID
