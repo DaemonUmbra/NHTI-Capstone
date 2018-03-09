@@ -95,4 +95,5 @@ MonoBehaviour:
   - AddPickupAbility
   - AbilityPickup
   - PowerUpSpawn
+  - RPC_SpawnPowerup
   DisableAutoOpenWizard: 1
