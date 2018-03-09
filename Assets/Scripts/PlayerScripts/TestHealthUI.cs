@@ -38,10 +38,12 @@ public class TestHealthUI : Photon.MonoBehaviour {
             HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
             healthText.text = pstats.CurrentHp.ToString();
             Health.text = pstats.CurrentHp.ToString();
-
+            powerups.text = "";
             List<string> abilityNames = new List<string>(abilities.AbilityList.Keys);
-            //powerups.text = abilityNames.ToString();
-            Debug.Log(abilityNames.ToString());
+            foreach (var power in abilityNames)
+            {
+                powerups.text += power + "\n";
+            }
         }
     }
 }
