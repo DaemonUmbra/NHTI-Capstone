@@ -14,33 +14,59 @@ public class Pickup : Photon.MonoBehaviour
     public string[] powerList;
     public List<string> Powers;
     // Use this for initialization
+    //private void Start()
+    //{
+    //    //_ability = GetComponent<BaseAbility>();
+    //    ////aMan = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
+    //    ////List<KeyValuePair<string, BaseAbility>> list = aMan.AbilityList.ToList();
+    //    ////foreach(KeyValuePair<string,BaseAbility> power in list)
+    //    ////{
+    //    ////    Debug.Log(power);
+    //    ////}
+    //    //List<string> AvailablePowerupStrings = new List<string>();
+    //    //Type[] Types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+    //    //Dictionary<string, Type> AbilityDict = new Dictionary<string, Type>();
+    //    //foreach (Type type in Types)
+    //    //{
+    //    //    if (type.Namespace == "Powerups" && type.IsSubclassOf(typeof(BaseAbility)))
+    //    //    {
+    //    //        AvailablePowerupStrings.Add(type.Name);
+    //    //        AbilityDict.Add(type.Name, type);
+    //    //    }
+    //    //}
+
+    //}
+
     private void Start()
     {
-        _ability = GetComponent<BaseAbility>();
-        //aMan = GameObject.FindGameObjectWithTag("Player").GetComponent<AbilityManager>();
-        //List<KeyValuePair<string, BaseAbility>> list = aMan.AbilityList.ToList();
-        //foreach(KeyValuePair<string,BaseAbility> power in list)
-        //{
-        //    Debug.Log(power);
-        //}
-        List<string> AvailablePowerupStrings = new List<string>();
-        Type[] Types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
-        Dictionary<string, Type> AbilityDict = new Dictionary<string, Type>();
-        foreach (Type type in Types)
-        {
-            if (type.Namespace == "Powerups" && type.IsSubclassOf(typeof(BaseAbility)))
-            {
-                AvailablePowerupStrings.Add(type.Name);
-                AbilityDict.Add(type.Name, type);
-            }
-        }
-
+        photonView.RPC("AddPickupAbility", PhotonTargets.All, null);
     }
 
-    private void Awake()
+    
+    private void OnTriggerEnter(Collider other)
     {
-        
-        if(gameObject != null)
+        _ability = GetComponent<BaseAbility>();
+        PhotonView pv = PhotonView.Get(this);
+
+        if (other.gameObject.tag == "Player" && other.GetComponent<PhotonView>().isMine)
+        {
+            AbilityManager aManager = other.GetComponent<AbilityManager>();
+           
+            aManager.AddAbility(_ability);
+            PowerupSpawner pSpawn = spawner.GetComponent<PowerupSpawner>();
+            pSpawn.hasPickup = false;
+            PhotonNetwork.Destroy(gameObject);
+            if (photonView.isMine)
+                PhotonNetwork.Destroy(photonView);
+
+        }
+    }
+
+    [PunRPC]
+    public void AddPickupAbility()
+    {
+
+        if (gameObject != null)
         {
             var rnd = new System.Random();
 
@@ -52,7 +78,7 @@ public class Pickup : Photon.MonoBehaviour
                 if (type.Namespace == "Powerups" && type.IsSubclassOf(typeof(BaseAbility)))
                 {
                     AvailablePowerupStrings.Add(type.Name);
-                    AbilityDict.Add(type.Name, type);
+                    // AbilityDict.Add(type.Name, type);
                 }
             }
             Powers = AvailablePowerupStrings;
@@ -65,25 +91,10 @@ public class Pickup : Photon.MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    [PunRPC]
+    public void AbilityPickup()
     {
-        _ability = GetComponent<BaseAbility>();
-        PhotonView pv = PhotonView.Get(this);
 
-        if (other.gameObject.tag == "Player")
-        {
-            AbilityManager aManager = other.GetComponent<AbilityManager>();
-           
-            aManager.AddAbility(_ability);
-            PowerupSpawner pSpawn = spawner.GetComponent<PowerupSpawner>();
-            pSpawn.hasPickup = false;
-            PhotonNetwork.Destroy(gameObject);
-            if (photonView.isMine)
-                PhotonNetwork.Destroy(photonView);
-            
-            
-           
-        }
     }
   
 }
