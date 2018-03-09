@@ -58,16 +58,16 @@ namespace Powerups
                 Debug.LogWarning("No Crown or Sash prefab set, could not apply to model");
             }
 
-            ActualChanges = new Vector3(gameObject.transform.localScale.x * xChange, gameObject.transform.localScale.y * yChange, gameObject.transform.localScale.z * zChange);
+            ActualChanges = new Vector3(transform.Find("Player Model").localScale.x * xChange, transform.Find("Player Model").localScale.y * yChange, transform.Find("Player Model").localScale.z * zChange);
 
             //Set the players scale
-            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x + ActualChanges.x, gameObject.transform.localScale.x + ActualChanges.y, gameObject.transform.localScale.x + ActualChanges.z);
+            transform.Find("Player Model").localScale = new Vector3(1+ xChange * transform.Find("Player Model").localScale.x, 1 + yChange * transform.Find("Player Model").localScale.y, 1 + zChange * transform.Find("Player Model").localScale.z);
 
             //If we have a template
             if (crownOrSashTemplate)
             {
                 //Instantiate
-                crownOrSashInstance = Instantiate(crownOrSashTemplate, gameObject.transform);
+                crownOrSashInstance = Instantiate(crownOrSashTemplate, transform.Find("Player Model"));
             }
 
             //If we have successfully spawned the Crown or Sash
@@ -147,7 +147,7 @@ namespace Powerups
             Destroy(crownOrSashInstance);
 
             //And undo our changes to the player's scale
-            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x - ActualChanges.x, gameObject.transform.localScale.y - ActualChanges.y, gameObject.transform.localScale.z - ActualChanges.z);
+            transform.Find("Player Model").localScale = new Vector3(1 / (1 + xChange) * transform.Find("Player Model").localScale.x, 1 / (1 + yChange) * transform.Find("Player Model").localScale.y, 1 / (1 + zChange) * transform.Find("Player Model").localScale.z);
             base.OnAbilityRemove();
         }
     }

@@ -31,12 +31,22 @@ public class Powerup_ThunderCloud : PassiveAbility
         base.OnAbilityRemove();
     }
 
-    private void Update()
+    public override void OnUpdate()
     {
         timer += Time.deltaTime;
         if(timer >= timeLimit)
         {
             OnAbilityRemove();
         }
+
+        base.OnUpdate();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        AbilityManager manager = collision.gameObject.GetComponent<AbilityManager>();
+        manager.AddAbility<Powerup_ThunderCloud>();
+
+        OnAbilityRemove();
     }
 }
