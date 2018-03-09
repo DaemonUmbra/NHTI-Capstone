@@ -45,7 +45,7 @@ public class GameState : MonoBehaviour {
                 }
                 break;
             case StateOfGame.Royale:
-                gameState.text = state.ToString();
+                //gameState.text = state.ToString();
                 if (playerHealth <= 0)
                 {
                     Death();
