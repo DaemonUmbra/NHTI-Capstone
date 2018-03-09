@@ -15,7 +15,11 @@ public class PowerupSpawner : Photon.MonoBehaviour
    
     private void Start()
     {
-        pv = this.gameObject.GetPhotonView();
+        if (PhotonNetwork.isMasterClient)
+        {
+            pv = this.gameObject.GetPhotonView();
+        }
+        
      
     }
 
