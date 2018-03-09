@@ -94,4 +94,5 @@ MonoBehaviour:
   - RPC_FirePrimary
   - AddPickupAbility
   - AbilityPickup
+  - PowerUpSpawn
   DisableAutoOpenWizard: 1
