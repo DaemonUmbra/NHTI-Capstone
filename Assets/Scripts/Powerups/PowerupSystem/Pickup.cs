@@ -41,7 +41,7 @@ public class Pickup : Photon.MonoBehaviour
     {
         if (PhotonNetwork.isMasterClient)
         {
-            photonView.RPC("AddPickupAbility", PhotonTargets.All, null);
+            photonView.RPC("AddPickupAbility", PhotonTargets.MasterClient, null);
         }
         else return;
         
@@ -56,13 +56,14 @@ public class Pickup : Photon.MonoBehaviour
         if (other.gameObject.tag == "Player" && other.GetComponent<PhotonView>().isMine)
         {
             AbilityManager aManager = other.GetComponent<AbilityManager>();
-           
+
             aManager.AddAbility(_ability);
             PowerupSpawner pSpawn = spawner.GetComponent<PowerupSpawner>();
             pSpawn.hasPickup = false;
             PhotonNetwork.Destroy(gameObject);
             if (photonView.isMine)
                 PhotonNetwork.Destroy(photonView);
+
 
         }
     }
@@ -99,7 +100,7 @@ public class Pickup : Photon.MonoBehaviour
     [PunRPC]
     public void AbilityPickup()
     {
-
+      
     }
   
 }
