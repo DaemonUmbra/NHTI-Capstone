@@ -101,6 +101,10 @@ namespace Powerups
 
         public void OnShoot()
         {
+            if (!photonView.isMine)
+            {
+                return;
+            }
             CurrentlyActive = true;
             foreach (Transform child in transform)
             {
