@@ -38,23 +38,25 @@ namespace Powerups
             cameraDummy.transform.parent = transform;
             cameraDummy.transform.localPosition = cameraOffset;
             cameraDummy.transform.localRotation = cameraRotation;
+            if (photonView.isMine)
+            {
+                //And add a camera to it
+                camera = cameraDummy.AddComponent<Camera>();
 
-            //And add a camera to it
-            camera = cameraDummy.AddComponent<Camera>();
-
-            //Now choose where it renders onscreen
-            camera.rect = new Rect(new Vector2(1 - cameraSize.x, 1 - cameraSize.y), cameraSize);
-
+                //Now choose where it renders onscreen
+                camera.rect = new Rect(new Vector2(1 - cameraSize.x, 1 - cameraSize.y), cameraSize);
+            }
             base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
             //pv.RPC("Rearview_RemoveAbility", PhotonTargets.All);
-
-            Destroy(camera);
-            Destroy(cameraDummy);
-
+            if (photonView.isMine)
+            {
+                Destroy(camera);
+                Destroy(cameraDummy);
+            }
             base.OnAbilityRemove();
         }
 

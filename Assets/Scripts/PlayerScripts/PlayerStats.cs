@@ -395,16 +395,15 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         Debug.Log(gameObject.name + " has died.");
 
-        // No death logic yet
+        // Respawn Player
         GameObject gameMng = FindObjectOfType<PlayerSpawning>().gameObject;
         var Mng = gameMng.GetComponent<PlayerSpawning>();
         Transform respawn = Mng.GetRandomSpawnPoint();
-
         gameObject.transform.position = respawn.position;
+        // Reset abilities
         AbilityManager abilityManager = GetComponent<AbilityManager>();
         abilityManager.ResetAbilities();
         _currentHp = _maxHp; // Resets hp
-        Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
 
     [PunRPC]
@@ -421,9 +420,14 @@ public class PlayerStats : Photon.MonoBehaviour
             Debug.Log(gameObject.name + " has died of mysterious causes.");
         }
 
-        // No death logic yet
+        // Respawn Player
+        PlayerSpawning Mng = FindObjectOfType<PlayerSpawning>();
+        Transform respawn = Mng.GetRandomSpawnPoint();
+        gameObject.transform.position = respawn.position;
+        // Reset abilities
+        AbilityManager abilityManager = GetComponent<AbilityManager>();
+        abilityManager.ResetAbilities();
         _currentHp = _maxHp; // Resets hp
-        Debug.LogWarning("Death logic not implemented yet. Player healed to full.");
     }
     #endregion Photon RPCs
 

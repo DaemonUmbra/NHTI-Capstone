@@ -39,10 +39,7 @@ public class PlayerController : Photon.MonoBehaviour
 
     private void Awake()
     {
-        if (!photonView.isMine)
-        {
-            enabled = false;
-        }
+        
     }
 
     private void Start()
@@ -54,45 +51,51 @@ public class PlayerController : Photon.MonoBehaviour
 
     private void Update()
     {
-        // Get movement input
-        Vector3 inputVel = Vector3.zero;
+        // Check input only on owner client
+        if (photonView.isMine)
+        {
+            // Get movement input
+            Vector3 inputVel = Vector3.zero;
 
-        Vector3 xInput = Input.GetAxis("Horizontal") * transform.right;
-        if (InvertX) xInput *= -1;
-        Vector3 yInput = Input.GetAxis("Vertical") * transform.forward;
-        if (InvertY) yInput *= -1;
+            Vector3 xInput = Input.GetAxis("Horizontal") * transform.right;
+            if (InvertX) xInput *= -1;
+            Vector3 yInput = Input.GetAxis("Vertical") * transform.forward;
+            if (InvertY) yInput *= -1;
 
-        inputVel = xInput + yInput;
+            inputVel = xInput + yInput;
 
-        if (!CrowdControlled)
-        {
-            motor.SetVelocity(inputVel); // Apply velocity
-        }
-        else
-        {
-            CCWearOff(Time.time, duration, false);
-            return;
-        }
+            if (!CrowdControlled)
+            {
+                motor.SetVelocity(inputVel); // Apply velocity
+            }
+            else
+            {
+                CCWearOff(Time.time, duration, false);
+                return;
+            }
 
-        // Check for jump}
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TryJump();
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StopMomentum();
-        }
-        // Check for shooting
-        if (Input.GetButtonDown("Fire1"))
-        {
-            photonView.RPC("RPC_FirePrimary", PhotonTargets.All);
+            // Check for jump}
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TryJump();
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                StopMomentum();
+            }
+            // Check for shooting
+            if (Input.GetButtonDown("Fire1"))
+            {
+                photonView.RPC("RPC_FirePrimary", PhotonTargets.All);
+            }
         }
     }
 
     [PunRPC]
     private void RPC_FirePrimary()
     {
+        //HACK
+        pShoot = gameObject.GetComponent<PlayerShoot>();
         pShoot.shoot.Invoke();
     }
 
