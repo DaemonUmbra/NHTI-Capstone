@@ -15,10 +15,9 @@ public class PowerupSpawner : Photon.MonoBehaviour
    
     private void Start()
     {
-        if (PhotonNetwork.isMasterClient)
-        {
+      
             pv = this.gameObject.GetPhotonView();
-        }
+        
         
      
     }
@@ -28,11 +27,10 @@ public class PowerupSpawner : Photon.MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (PhotonNetwork.isMasterClient)
-        {
-            pv.RPC("PowerUpSpawn", PhotonTargets.All, null);
-        }
-        else return;
+       
+            pv.RPC("PowerUpSpawn", PhotonTargets.AllViaServer, null);
+        
+      
         
     }
 

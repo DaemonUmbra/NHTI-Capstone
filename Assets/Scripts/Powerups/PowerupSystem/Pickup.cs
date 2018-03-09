@@ -41,7 +41,7 @@ public class Pickup : Photon.MonoBehaviour
     {
         if (PhotonNetwork.isMasterClient)
         {
-            photonView.RPC("AddPickupAbility", PhotonTargets.AllBuffered, null);
+            photonView.RPC("AddPickupAbility", PhotonTargets.AllViaServer, null);
         }
         else return;
         
@@ -52,10 +52,10 @@ public class Pickup : Photon.MonoBehaviour
     {
         
         PhotonView pv = PhotonView.Get(this);
-
-        if (other.gameObject.tag == "Player" && other.GetComponent<PhotonView>().isMine)
+        _ability = GetComponent<BaseAbility>();
+        if (other.gameObject.tag == "Player")
         {
-            _ability = GetComponent<BaseAbility>();
+            
             AbilityManager aManager = other.GetComponent<AbilityManager>();
 
             aManager.AddAbility(_ability);
