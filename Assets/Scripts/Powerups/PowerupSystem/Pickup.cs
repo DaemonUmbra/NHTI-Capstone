@@ -51,21 +51,22 @@ public class Pickup : Photon.MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        PhotonView pv = PhotonView.Get(this);
+        
         _ability = GetComponent<BaseAbility>();
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" )
         {
-            
-            AbilityManager aManager = other.GetComponent<AbilityManager>();
+            PhotonView pv =other.GetComponent<PhotonView>();
+            if (pv.isMine)
+            {
+                AbilityManager aManager = other.GetComponent<AbilityManager>();
 
-            aManager.AddAbility(_ability);
-            PowerupSpawner pSpawn = spawner.GetComponent<PowerupSpawner>();
-            pSpawn.hasPickup = false;
-            PhotonNetwork.Destroy(gameObject);
-            if (photonView.isMine)
-                PhotonNetwork.Destroy(photonView);
-
-
+                aManager.AddAbility(_ability);
+                PowerupSpawner pSpawn = spawner.GetComponent<PowerupSpawner>();
+                pSpawn.hasPickup = false;
+                PhotonNetwork.Destroy(gameObject);
+                if (photonView.isMine)
+                    PhotonNetwork.Destroy(photonView);
+            }
         }
     }
 
@@ -89,7 +90,7 @@ public class Pickup : Photon.MonoBehaviour
                 }
             }
             //Powers = AvailablePowerupStrings;
-            string powerName = AvailablePowerupStrings.OrderBy(s => Guid.NewGuid()).First();
+            string powerName = AvailablePowerupStrings[UnityEngine.Random.Range(0, AvailablePowerupStrings.Count)];
             Debug.Log(powerName);
             Type thisType = ReflectionUtil.GetAbilityTypeFromName(powerName);
             gameObject.AddComponent(thisType);
