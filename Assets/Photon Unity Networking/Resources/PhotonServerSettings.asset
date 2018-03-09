@@ -92,4 +92,7 @@ MonoBehaviour:
   - RPC_FireEvent
   - RPC_ModifyMaxHp
   - RPC_FirePrimary
+  - AddPickupAbility
+  - AbilityPickup
+  - PowerUpSpawn
   DisableAutoOpenWizard: 1
