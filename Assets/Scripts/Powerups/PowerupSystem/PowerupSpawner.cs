@@ -9,22 +9,37 @@ public class PowerupSpawner : Photon.MonoBehaviour
 
     public bool hasPickup;
     public GameObject pickUp;
+    private PhotonView pv;
 
     // Use this for initialization
    
     private void Start()
     {
-       
+        pv = this.gameObject.GetPhotonView();
+     
     }
+
+    
 
     // Update is called once per frame
     private void Update()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            pv.RPC("PowerUpSpawn", PhotonTargets.All, null);
+        }
+        else return;
+        
+    }
+
+    [PunRPC]
+    private void PowerUpSpawn()
     {
         spawnDelay = Random.Range(3, 10);
         timer += Time.deltaTime;
         if (timer > spawnDelay && hasPickup == false)
         {
-            var pickup = PhotonNetwork.Instantiate(pickUp.name, this.transform.position, this.transform.rotation,0);
+            var pickup = PhotonNetwork.Instantiate(pickUp.name, this.transform.position, this.transform.rotation, 0);
             pickup.transform.SetParent(this.transform);
             Pickup pUp = pickup.GetComponent<Pickup>();
             pUp.spawner = gameObject;

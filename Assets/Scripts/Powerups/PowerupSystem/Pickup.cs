@@ -37,9 +37,13 @@ public class Pickup : Photon.MonoBehaviour
 
     //}
 
-    private void Start()
+    private void Awake()
     {
-        photonView.RPC("AddPickupAbility", PhotonTargets.All, null);
+        if (PhotonNetwork.isMasterClient)
+        {
+         photonView.RPC("AddPickupAbility", PhotonTargets.All, null);
+        }
+        
     }
 
     
