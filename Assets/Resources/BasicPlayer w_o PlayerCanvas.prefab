@@ -595,12 +595,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComponentsToDisable:
   - {fileID: 114958967302875398}
-  - {fileID: 114123109819469288}
-  - {fileID: 114103599103732572}
   - {fileID: 114525675898936844}
   GameObjectsToDisable:
   - {fileID: 1355726087706212}
-  - {fileID: 0}
 --- !u!114 &114932071336122592
 MonoBehaviour:
   m_ObjectHideFlags: 1

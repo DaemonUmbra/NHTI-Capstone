@@ -41,14 +41,14 @@ public class GameState : MonoBehaviour {
                 //gameState.text = state.ToString();
                 if (playerHealth <= 0)
                 {
-                    Respawn();
+                    //Respawn();
                 }
                 break;
             case StateOfGame.Royale:
                 //gameState.text = state.ToString();
                 if (playerHealth <= 0)
                 {
-                    Death();
+                    //Death();
                 }
                 break;
             default:
@@ -139,13 +139,5 @@ public class GameState : MonoBehaviour {
         }
     }
 
-	void Respawn()
-    {
-        Destroy(gameObject);
-    }
-
-    void Death()
-    {
-        Destroy(gameObject);
-    }
+	
 }
