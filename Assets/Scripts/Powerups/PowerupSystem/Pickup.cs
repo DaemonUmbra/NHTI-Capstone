@@ -12,7 +12,7 @@ public class Pickup : Photon.MonoBehaviour
     public GameObject spawner;
     //public List<BaseAbility> powerList;
     public string[] powerList;
-    public List<string> Powers;
+    public List<string> AvailablePowerupStrings;
     // Use this for initialization
     //private void Start()
     //{
@@ -41,7 +41,7 @@ public class Pickup : Photon.MonoBehaviour
     {
         if (PhotonNetwork.isMasterClient)
         {
-            photonView.RPC("AddPickupAbility", PhotonTargets.MasterClient, null);
+            photonView.RPC("AddPickupAbility", PhotonTargets.AllBuffered, null);
         }
         else return;
         
@@ -50,11 +50,12 @@ public class Pickup : Photon.MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        _ability = GetComponent<BaseAbility>();
+        
         PhotonView pv = PhotonView.Get(this);
 
         if (other.gameObject.tag == "Player" && other.GetComponent<PhotonView>().isMine)
         {
+            _ability = GetComponent<BaseAbility>();
             AbilityManager aManager = other.GetComponent<AbilityManager>();
 
             aManager.AddAbility(_ability);
@@ -76,7 +77,7 @@ public class Pickup : Photon.MonoBehaviour
         {
             var rnd = new System.Random();
 
-            List<string> AvailablePowerupStrings = new List<string>();
+            AvailablePowerupStrings = new List<string>();
             Type[] Types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
             Dictionary<string, Type> AbilityDict = new Dictionary<string, Type>();
             foreach (Type type in Types)
@@ -87,8 +88,8 @@ public class Pickup : Photon.MonoBehaviour
                     // AbilityDict.Add(type.Name, type);
                 }
             }
-            Powers = AvailablePowerupStrings;
-            string powerName = Powers.OrderBy(s => Guid.NewGuid()).First();
+            //Powers = AvailablePowerupStrings;
+            string powerName = AvailablePowerupStrings.OrderBy(s => Guid.NewGuid()).First();
             Debug.Log(powerName);
             Type thisType = ReflectionUtil.GetAbilityTypeFromName(powerName);
             gameObject.AddComponent(thisType);
