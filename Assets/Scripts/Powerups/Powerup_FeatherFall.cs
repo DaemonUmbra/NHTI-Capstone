@@ -9,6 +9,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+            Name = "Feather Fall";
             rb = gameObject.GetComponent<Rigidbody>();
             // Call base function
             base.OnAbilityAdd();

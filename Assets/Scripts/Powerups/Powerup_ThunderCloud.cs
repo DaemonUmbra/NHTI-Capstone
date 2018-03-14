@@ -9,6 +9,7 @@ public class Powerup_ThunderCloud : PassiveAbility
     private float timer;
     public override void OnAbilityAdd()
     {
+        Name = "Thunder Cloud";
         ps = GetComponentInParent<PlayerStats>();
 
         ps.WalkSpeed += 1.0f;

@@ -131,7 +131,7 @@ public class PlayerController : Photon.MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
+        //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
         if (collision.collider.gameObject.layer == groundLayer)
         {
             isGrounded = true;

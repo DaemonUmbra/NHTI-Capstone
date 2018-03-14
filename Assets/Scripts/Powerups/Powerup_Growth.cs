@@ -12,7 +12,7 @@ namespace Powerups
     /// </summary>
     
     [RequireComponent(typeof(AudioSource))]
-    public class Powerup_Growth : PassiveAbility
+    public class Powerup_Growth : BaseAbility
     {
         private Vector3 OriginalScale;
         public AudioClip FootFall;

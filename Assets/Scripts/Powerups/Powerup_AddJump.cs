@@ -17,7 +17,7 @@
             // someone on the player controller!!!!!.
 
             //Add to the max jumps variable on the player controller
-            playerController.maxJumpCount++;
+            //playerController.maxJumpCount++;
 
             // Call base function
             base.OnAbilityAdd();

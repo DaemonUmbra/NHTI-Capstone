@@ -2,10 +2,15 @@
 
 namespace Powerups
 {
-    public class Powerup_Confuse : MonoBehaviour
+    public class Powerup_Confuse : ActiveAbility
     {
-        // Use this for initialization
-        private void Start()
+
+        public override void OnAbilityAdd()
+        {
+            Name = "Confuse";
+        }
+            // Use this for initialization
+            private void Start()
         {
         }
 

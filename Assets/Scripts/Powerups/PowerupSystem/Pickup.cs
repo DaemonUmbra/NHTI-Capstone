@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Powerups;
 
-public class Pickup : Photon.MonoBehaviour
+public class Pickup : Photon.PunBehaviour
 {
-    private BaseAbility _ability;
+    public BaseAbility _ability;
 
     // Use this for initialization
     //private void Start()
@@ -35,15 +35,18 @@ public class Pickup : Photon.MonoBehaviour
 
     private void Awake()
     {
+        
     }
 
     
     private void OnTriggerEnter(Collider other)
     {
         _ability = GetComponent<BaseAbility>();
+        
+        Debug.Log(_ability);
         if (other.gameObject.tag == "Player" )
         {
-            PhotonView pv =other.GetComponent<PhotonView>();
+            PhotonView pv = other.GetComponent<PhotonView>();
             if (pv.isMine)
             {
                 AbilityManager aManager = other.GetComponent<AbilityManager>();
@@ -52,29 +55,13 @@ public class Pickup : Photon.MonoBehaviour
                 PowerupSpawner pSpawn = GetComponentInParent<PowerupSpawner>();
                 pSpawn.hasPickup = false;
                 PhotonNetwork.Destroy(gameObject);
-                if (photonView.isMine)
-                    PhotonNetwork.Destroy(photonView);
+                PhotonNetwork.Destroy(photonView);
+
             }
         }
     }
 
-    [PunRPC]
-    public void AddPickupAbility()
-    {
-
-        if (gameObject != null)
-        {
-            
-
-        }
-    }
-
-    [PunRPC]
-    public void AbilityPickup()
-    {
-      
-    }
-  
+    
 }
 
 
