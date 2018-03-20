@@ -7,7 +7,7 @@ using System;
 
 public class PowerupSpawner : Photon.MonoBehaviour
 {
-    float lastPickupTime;
+    
     float spawnDelay;
 
     //private static bool IsSetup;
@@ -18,6 +18,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
     public float MaxDelay = 10f;
 
     public bool hasPickup;
+    public float lastPickupTime;
     public GameObject pickUp;
     
     
@@ -28,6 +29,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
     {
         spawnDelay = UnityEngine.Random.Range(MinDelay, MaxDelay);
         lastPickupTime = Time.time - spawnDelay;
+        hasPickup = false;
     }
 
     
@@ -37,9 +39,16 @@ public class PowerupSpawner : Photon.MonoBehaviour
     {
         if(PhotonNetwork.isMasterClient)
         {
-            if(Time.time > lastPickupTime + spawnDelay)
+            // Check if enough time has passed to spawn a powerup
+            if(Time.time > lastPickupTime + spawnDelay && hasPickup == false)
             {
                 SpawnPowerup();
+            }
+
+            // Set the last pickup time to the current time if a pickup is currently held
+            if(hasPickup)
+            {
+                lastPickupTime = Time.time;
             }
         }
     }
@@ -66,11 +75,15 @@ public class PowerupSpawner : Photon.MonoBehaviour
             //Powers = AvailablePowerupStrings;
             string powerName = AvailablePowerupStrings[UnityEngine.Random.Range(0, AvailablePowerupStrings.Count)];
             
-            var pickup = PhotonNetwork.Instantiate(pickUp.name, this.transform.position, this.transform.rotation, 0);
+            var pickup = PhotonNetwork.Instantiate(pickUp.name, transform.position, transform.rotation, 0);
 
 
             photonView.RPC("RPC_SpawnPowerup", PhotonTargets.All, spawnDelay, pickup.GetPhotonView().viewID, powerName);
         }
+    }
+    public void CollectPowerup()
+    {
+        photonView.RPC("RPC_CollectPowerup", PhotonTargets.All);
     }
     [PunRPC]
     private void RPC_SpawnPowerup(float newDelay, int powerupId, string powerupName)
@@ -92,6 +105,11 @@ public class PowerupSpawner : Photon.MonoBehaviour
         }
     }
 
-    
+    [PunRPC]
+    private void RPC_CollectPowerup()
+    {
+        lastPickupTime = Time.time;
+        hasPickup = false;
+    }
 
 }

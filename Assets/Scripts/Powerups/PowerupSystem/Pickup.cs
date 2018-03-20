@@ -41,22 +41,23 @@ public class Pickup : Photon.PunBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        _ability = GetComponent<BaseAbility>();
-        
-        Debug.Log(_ability);
-        if (other.gameObject.tag == "Player" )
+        // Only recieve the powerup on the client that picked it up
+        // It is then synced to all other clients when the powerup is added
+        PhotonView pv = other.GetComponent<PhotonView>();
+        if (pv.isMine)
         {
-            PhotonView pv = other.GetComponent<PhotonView>();
-            if (pv.isMine)
+            _ability = GetComponent<BaseAbility>();
+            Debug.Log(_ability);
+            if (other.gameObject.tag == "Player")
             {
+                // Add ability to player
                 AbilityManager aManager = other.GetComponent<AbilityManager>();
-
                 aManager.AddAbility(_ability);
+                // Reset the spawner
                 PowerupSpawner pSpawn = GetComponentInParent<PowerupSpawner>();
-                pSpawn.hasPickup = false;
-                PhotonNetwork.Destroy(gameObject);
+                pSpawn.CollectPowerup();
+                // Destroy pickup
                 PhotonNetwork.Destroy(photonView);
-
             }
         }
     }
