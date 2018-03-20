@@ -16,6 +16,7 @@ public abstract class BaseAbility : Photon.MonoBehaviour
 
     public bool IsActive { get { return active; } }
 
+
     #region Virtual Methods
     /// <summary>
     /// Called when abilities are added to a player.
@@ -42,8 +43,8 @@ public abstract class BaseAbility : Photon.MonoBehaviour
     {
         active = false;
     }
-
     #endregion Abstract Methods
+
 
     #region Photon RPCs
 

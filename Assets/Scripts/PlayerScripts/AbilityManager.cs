@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class AbilityManager : Photon.MonoBehaviour
 {
+    #region Variables
     // Keyed list of abilities by name
     [SerializeField]
     private Dictionary<string, BaseAbility> _abilities;
     public Dictionary<string, BaseAbility> AbilityList { get { return _abilities; } }
+    #endregion
 
+
+    #region Unity Callbacks
     // Use this for initialization
     private void Awake()
     {
@@ -27,6 +31,7 @@ public class AbilityManager : Photon.MonoBehaviour
             }
         }
     }
+    #endregion
 
 
     #region Public Methods
@@ -206,6 +211,7 @@ public class AbilityManager : Photon.MonoBehaviour
     }
 
     #endregion Photon RPCs
+
 
     #region Private Methods
 
