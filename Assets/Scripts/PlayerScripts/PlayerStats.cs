@@ -20,7 +20,7 @@ public class PlayerStats : Photon.MonoBehaviour
     public float WalkSpeed = 10f;
 
     [SerializeField]
-    public float JumpPower = 10f;
+    public float JumpPower = 200f;
 
     // Private stats (access variables below)
     [SerializeField]
