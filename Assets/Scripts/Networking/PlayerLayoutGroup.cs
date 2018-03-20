@@ -77,18 +77,4 @@ public class PlayerLayoutGroup : MonoBehaviour
             PlayerListings.RemoveAt(index);
         }
     }
-
-    public void OnClickRoomState()
-    {
-        if (!PhotonNetwork.isMasterClient)
-            return;
-
-        PhotonNetwork.room.IsOpen = !PhotonNetwork.room.IsOpen;
-        PhotonNetwork.room.IsVisible = PhotonNetwork.room.IsOpen;
-    }
-
-    public void OnClickLeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
 }
