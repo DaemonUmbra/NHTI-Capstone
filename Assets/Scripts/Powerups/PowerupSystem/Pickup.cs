@@ -56,9 +56,16 @@ public class Pickup : Photon.PunBehaviour
                 // Reset the spawner
                 PowerupSpawner pSpawn = GetComponentInParent<PowerupSpawner>();
                 pSpawn.CollectPowerup();
-                // Destroy pickup
-                PhotonNetwork.Destroy(photonView);
+               
             }
+        }
+        if(other.gameObject.tag == "Player")
+        {
+            // Destroy pickup
+            Destroy(gameObject);
+            Destroy(photonView);
+            PhotonNetwork.Destroy(photonView);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
