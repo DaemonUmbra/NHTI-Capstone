@@ -7,8 +7,10 @@ namespace Powerups
      * without permission, ask in the discord first
      **/
 
-    public class Powerup_MissUnrealistic : PassiveAbility
+    public class Powerup_MissUnrealistic : BaseAbility
     {
+
+        
         //TWEAKABLE
         [SerializeField]
         private float xChange = -0.5f;
@@ -28,9 +30,10 @@ namespace Powerups
 
         public Transform crownOrSashTemplate;
         private Transform crownOrSashInstance;
-
+        
         public override void OnAbilityAdd()
         {
+            
             /*** Handled by base class ***
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);

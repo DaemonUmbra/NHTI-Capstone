@@ -50,7 +50,7 @@ public class Projectile : Photon.MonoBehaviour
             if (player.GetPhotonView().owner == photonView.owner)
             {
                 SetShooter(player);
-                print("Shooter found: " + player.GetPhotonView().owner);
+                //print("Shooter found: " + player.GetPhotonView().owner);
             }
         }
     }

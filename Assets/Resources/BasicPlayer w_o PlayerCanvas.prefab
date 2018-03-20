@@ -608,7 +608,7 @@ MonoBehaviour:
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
@@ -783,7 +783,7 @@ SphereCollider:
   m_GameObject: {fileID: 1003550237943030}
   m_Material: {fileID: 13400000, guid: 61a5f884443d23a41929a7610b191de6, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -795,7 +795,7 @@ SphereCollider:
   m_GameObject: {fileID: 1591509329833866}
   m_Material: {fileID: 13400000, guid: 61a5f884443d23a41929a7610b191de6, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

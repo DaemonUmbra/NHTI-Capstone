@@ -31,7 +31,7 @@ namespace Powerups
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
-                Debug.Log("Slime Added to Shoot Delegate");
+                //Debug.Log("Slime Added to Shoot Delegate");
                 pShoot.shoot += TryActivate;
             }
 

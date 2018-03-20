@@ -20,6 +20,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
     public bool hasPickup;
     public GameObject pickUp;
     
+    
 
     // Use this for initialization
    
@@ -44,7 +45,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
     }
     public void SpawnPowerup()
     {
-        if (hasPickup == false)
+        if (hasPickup == false && PhotonNetwork.isMasterClient)
         {
             // Reset spawn delay
             spawnDelay = UnityEngine.Random.Range(MinDelay, MaxDelay);
@@ -64,6 +65,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
             }
             //Powers = AvailablePowerupStrings;
             string powerName = AvailablePowerupStrings[UnityEngine.Random.Range(0, AvailablePowerupStrings.Count)];
+            
             var pickup = PhotonNetwork.Instantiate(pickUp.name, this.transform.position, this.transform.rotation, 0);
 
 
@@ -80,6 +82,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
         // Find pickup by photon ID
         GameObject pickup = PhotonView.Find(powerupId).gameObject;
         pickup.AddComponent(thisType);
+      
 
         if (hasPickup == false)
         {
@@ -89,5 +92,6 @@ public class PowerupSpawner : Photon.MonoBehaviour
         }
     }
 
+    
 
 }
