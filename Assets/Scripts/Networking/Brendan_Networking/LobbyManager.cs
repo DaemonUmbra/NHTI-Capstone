@@ -106,6 +106,7 @@ public class LobbyManager : Photon.PunBehaviour {
     private void Awake()
     {
         // Connect to server
+        loginButton.interactable = false;
         PhotonNetwork.ConnectUsingSettings("0.0.0");
 
         // Find canvas manager if not set manually
