@@ -23,7 +23,7 @@ namespace Powerups
         private PlayerStats pStats;
 
         public float dmgMult = .5f;
-        public float dmgAdd = 2f;
+        public float dmgAdd = 0f;
 
         public float LastFootfall = 0;
 

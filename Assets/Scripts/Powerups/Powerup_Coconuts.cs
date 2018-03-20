@@ -16,25 +16,25 @@ namespace Powerups {
 
         public override void OnUpdate()
         {
-            //If moving
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
-            {
-                //If nto playing
-                if (!AudioSource.isPlaying)
-                {
-                    AudioSource.Play();
-                }
-            }
-            //If standing still
-            else
-            {
-                //If playing
-                if (AudioSource.isPlaying)
-                {
-                    AudioSource.Stop();
-                }
-            }
-            base.OnUpdate();
+            ////If moving
+            //if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
+            //{
+            //    //If nto playing
+            //    if (!AudioSource.isPlaying)
+            //    {
+            //        AudioSource.Play();
+            //    }
+            //}
+            ////If standing still
+            //else
+            //{
+            //    //If playing
+            //    if (AudioSource.isPlaying)
+            //    {
+            //        AudioSource.Stop();
+            //    }
+            //}
+            //base.OnUpdate();
         }
 
         public override void OnAbilityAdd()
@@ -46,11 +46,13 @@ namespace Powerups {
             PlayerStats.WalkSpeed += SpeedBoost;
             AudioSource.loop = true;
             AudioSource.clip = CoconutSound;
+            AudioSource.Play();
             base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
+            AudioSource.Stop();
             PlayerStats.WalkSpeed -= SpeedBoost;
             base.OnAbilityRemove();
         }
