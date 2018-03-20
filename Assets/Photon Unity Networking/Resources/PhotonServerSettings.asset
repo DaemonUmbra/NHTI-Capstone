@@ -97,4 +97,5 @@ MonoBehaviour:
   - PowerUpSpawn
   - RPC_SpawnPowerup
   - RPC_CollectPowerup
+  - TryJump
   DisableAutoOpenWizard: 1

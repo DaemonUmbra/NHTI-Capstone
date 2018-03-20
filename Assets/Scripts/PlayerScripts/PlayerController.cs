@@ -16,8 +16,7 @@ public class PlayerController : Photon.MonoBehaviour
 
     private float lastJumpTime;
 
-    [SerializeField]
-    public int maxJumpCount;
+    public int maxJumpCount = 1;
 
     private int jumpCount = 0;
 
@@ -77,7 +76,7 @@ public class PlayerController : Photon.MonoBehaviour
             // Check for jump}
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                TryJump();
+                photonView.RPC("TryJump", PhotonTargets.All);
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -116,10 +115,10 @@ public class PlayerController : Photon.MonoBehaviour
             CrowdControlled = false;
         }
     }
-
+    [PunRPC]
     private void TryJump()
     {
-        Debug.Log("tryjump!");
+        Debug.Log("tryjump! " + maxJumpCount);
         if (jumpCount < maxJumpCount)
         {
             Debug.Log("jump!");
