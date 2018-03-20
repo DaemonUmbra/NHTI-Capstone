@@ -7,7 +7,7 @@ public class TEST_SelfBurn : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        burn = new BurnDamage(10f, 3f);
+        burn = new BurnDamage(1f, 3f);
     }
 
     // Update is called once per frame
