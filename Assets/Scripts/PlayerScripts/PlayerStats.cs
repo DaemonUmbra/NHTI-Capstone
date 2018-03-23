@@ -3,44 +3,49 @@ using UnityEngine;
 
 public class PlayerStats : Photon.MonoBehaviour
 {
-
     #region Class Variables
     // Effects the player is currently under
     private List<Effect> _effects;
 
     private List<Effect> _expiredEffects;
-
-    // Effects applied to other players when attacking them
+    
     private List<Effect> _onHitEffects;
-    //private List<EffectPackage> _packagedEffects;
-    //private Dictionary<Effect, EffectPackage> _packageLinker;
 
-    // Public Stats
+
+    // **** Stats **** //
+    // Speed
     [SerializeField]
-    public float WalkSpeed = 10f;
+    private float _baseWalkSpeed = 10f;
+    List<KeyValuePair<string, float>> _speedMultipliers;
+    List<KeyValuePair<string, float>> _speedBoosts;
+    float _walkSpeed;
 
+    // Jump Power
     [SerializeField]
     public float JumpPower = 20000f;
 
-    // Private stats (access variables below)
+    // Health
     [SerializeField]
-    private float _maxHp = 100f;
-    private float _defaultMaxHp;
-
+    private float _baseMaxHp = 100f;
+    List<KeyValuePair<string, float>> _healthBoosts;
+    private float _maxHp;
     private float _currentHp;
 
+    // Damage
     [SerializeField]
     private float _baseDmg = 10f;
+    List<KeyValuePair<string, float>> _dmgMultipliers;
+    List<KeyValuePair<string, float>> _dmgBoosts;
+    float _damage;
 
-    // Damage modifiers
-    public float dmgMult = 1f;
-    public float dmgAdd = 0f;
-
-    // Scale modifier
+    // Scale
     Vector3 _scaleMod;
     Vector3 _baseScale;
-    List<Vector3> _scaleFactors;
-    List<Transform> _scaledTransforms;
+    List<KeyValuePair<string, Vector3>> _scaleFactors;
+    /// <summary>
+    /// Transforms to be scaled with the player. For now it just includes the local transform which is added at runtime.
+    /// </summary>
+    List<Transform> _transformsToScale;
 
     private PlayerSpawning pSpawn;
     #endregion Class Variables
@@ -50,28 +55,31 @@ public class PlayerStats : Photon.MonoBehaviour
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
-    public float Damage { get { return _baseDmg * dmgMult + dmgAdd; } } // Calculate effective damage with dmg mods
+    public float Damage { get { return _damage; } } // Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     //public List<EffectPackage> PackagedEffects { get { return _packagedEffects; } }
     #endregion Access Variables
 
 
     #region Unity Callbacks
+
     // Use this for initialization
     private void Awake()
     {
         _effects = new List<Effect>();
         _expiredEffects = new List<Effect>();
         _onHitEffects = new List<Effect>();
-        _scaleFactors = new List<Vector3>();
-        _scaledTransforms = new List<Transform>();
+        _scaleFactors = new List<KeyValuePair<string, Vector3>>();
+        if(_transformsToScale == null) _transformsToScale = new List<Transform>();
+        _dmgBoosts = new List<KeyValuePair<string, float>>();
+        _dmgMultipliers = new List<KeyValuePair<string, float>>();
 
-        _defaultMaxHp = _maxHp;
+        _baseMaxHp = _maxHp;
         _currentHp = _maxHp;
         _baseScale = transform.localScale;
         _scaleMod = new Vector3(1f, 1f, 1f);
 
-        _scaledTransforms.Add(transform);
+        _transformsToScale.Add(transform);
     }
 
     // Update is called once per frame
@@ -90,10 +98,12 @@ public class PlayerStats : Photon.MonoBehaviour
             e.OnFrame();
         }
     }
+
     #endregion Unity Callbacks
 
 
     #region Public Methods
+
     // Add an effect to the player
     public void AddEffect(Effect effect)
     {
@@ -168,6 +178,7 @@ public class PlayerStats : Photon.MonoBehaviour
         //_packageLinker.Remove(effect);
     }
 
+    // Public Damage methods
     /// <summary>
     /// Cause the player to take damage
     /// </summary>
@@ -219,7 +230,7 @@ public class PlayerStats : Photon.MonoBehaviour
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID, packagedEffects);
     }
 
-    // Increase the player's current hp by amount
+    // Increase the player's current hp
     public void GainHp(float amount)
     {
         photonView.RPC("RPC_GainHp", PhotonTargets.All, amount);
@@ -233,36 +244,98 @@ public class PlayerStats : Photon.MonoBehaviour
         photonView.RPC("RPC_ChangeMaxHp", PhotonTargets.All, amount);
     }
 
+    // Public Damage Modifiers
+    /// <summary>
+    /// Add a damage multiplier to the player. Save the multiplier name as a reference for when you remove it.
+    /// </summary>
+    /// <param name="dmgMultiplier">Damage multiplier</param>
+    /// <param name="multiplierName">Name of multiplier for reference. Used to remove the multiplier later on.</param>
+    public void AddDmgMultiplier(string multiplierName, float dmgMultiplier)
+    {
+        photonView.RPC("RPC_AddDamageMutiplier", PhotonTargets.All, multiplierName, dmgMultiplier);
+    }
+    /// <summary>
+    /// Add a flat boost to the player. Save the multiplier name as a reference for when you remove it.
+    /// </summary>
+    /// <param name="dmgBoost">Boost amount</param>
+    /// <param name="boostName">Name of boost for reference. Used to remove the boost later on.</param>
+    public void AddDmgBoost(string boostName, float dmgBoost)
+    {
+        photonView.RPC("RPC_AddDamageBoost", PhotonTargets.All, boostName, dmgBoost);
+        //_dmgFlatBuffs.Add(new KeyValuePair<string, float>(sourceName, dmgBoost));
+    }
+    /// <summary>
+    /// Remove damage multiplier from player. Use the name set when adding the multiplier.
+    /// </summary>
+    /// <param name="multiplierName">Name of the multiplier</param>
+    public void RemoveDmgMultiplier(string multiplierName)
+    {
+        photonView.RPC("RPC_RemoveDmgMultiplier", PhotonTargets.All, multiplierName);
+    }
+    /// <summary>
+    /// Remove a damage boost from the player. Use the name set when adding the boost.
+    /// </summary>
+    /// <param name="boostName">Name of the boost</param>
+    public void RemoveDmgBoost(string boostName)
+    {
+        photonView.RPC("RPC_RemoveDmgBoost", PhotonTargets.All, boostName);
+    }
+
+    // Public Scale Modifiers
+    public void AddScaleFactor(string factorName, Vector3 factor)
+    {
+        photonView.RPC("RPC_AddScaleFactor", PhotonTargets.All, factorName, factor);
+    }
+    public void AddScaleFactor(string factorName, float factor)
+    {
+        AddScaleFactor(factorName, new Vector3(factor, factor, factor));
+    }
+    public void RemoveScaleFactor(string factorName)
+    {
+        photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All);
+    }
+    
+    // Public Speed Modifiers
+    public void AddSpeedMultipler(string multName, float multiplier)
+    {
+        photonView.RPC("RPC_AddSpeedMultiplier", PhotonTargets.All, multName, multiplier);
+    }
+    public void AddSpeedBoost(string boostName, float boost)
+    {
+        photonView.RPC("RPC_AddSpeedBoost", PhotonTargets.All, boostName, boost);
+    }
+    public void RemoveSpeedMultiplier(string multName)
+    {
+        photonView.RPC("RPC_RemoveSpeedMultiplier", PhotonTargets.All, multName);
+    }
+    public void RemoveSpeedBoost(string boostName)
+    {
+        photonView.RPC("RPC_RemoveSpeedBoost", PhotonTargets.All, boostName);
+    }
+
+    // Public Max Health Modifiers
+    public void AddHealthBoost(string boostName, float boost)
+    {
+        photonView.RPC("RPC_AddHealthBoost", PhotonTargets.All, boostName, boost);
+    }
+    public void RemoveHealthBoost(string boostName)
+    {
+        photonView.RPC("RPC_RemoveHealthBoost", PhotonTargets.All, boostName);
+    }
+
     // Can be used later for checking accuracy etc
     public void ReportHit(GameObject hit)
     {
         Debug.Log(hit.name + " was hit by " + gameObject.name);
     }
 
-    // Change player's scale
-    public void AddScaleFactor(Vector3 factor)
-    {
-        photonView.RPC("RPC_AddScaleFactor", PhotonTargets.All, factor);
-    }
-    public void AddScaleFactor(float factor)
-    {
-        AddScaleFactor(new Vector3(factor, factor, factor));
-    }
-    public void RemoveScaleFactor(Vector3 factor)
-    {
-        photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All);
-    }
-    public void RemoveScaleFactor(float factor)
-    {
-        RemoveScaleFactor(new Vector3(factor, factor, factor));
-    }
     #endregion Public Methods
 
 
     #region Photon RPCs
+
     // Damage RPCs
-    [PunRPC]
-    private void RPC_TakeDamage(float amount)
+    [PunRPC] private void RPC_TakeDamage(float amount)
     {
         // Validate the damage amount
         if (amount < 0)
@@ -280,8 +353,7 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         Debug.Log("Player hp: " + CurrentHp);
     }
-    [PunRPC]
-    private void RPC_TakeDamage(float amount, int srcViewId)
+    [PunRPC] private void RPC_TakeDamage(float amount, int srcViewId)
     {
         // Find the source gameobject from it's view id
         PhotonView srcView = PhotonView.Find(srcViewId);
@@ -308,8 +380,7 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         Debug.Log("Player hp: " + CurrentHp);
     }
-    [PunRPC]
-    private void RPC_TakeDamage(float amount, List<EffectPackage> effects)
+    [PunRPC] private void RPC_TakeDamage(float amount, List<EffectPackage> effects)
     {
         // Apply effects
         if (effects != null)
@@ -337,8 +408,7 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         Debug.Log("Player hp: " + CurrentHp);
     }
-    [PunRPC]
-    private void RPC_TakeDamage(float amount, int srcViewId, List<EffectPackage> effects)
+    [PunRPC] private void RPC_TakeDamage(float amount, int srcViewId, List<EffectPackage> effects)
     {
         // Find the source gameobject from it's view id
         PhotonView srcView = PhotonView.Find(srcViewId);
@@ -375,9 +445,9 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         Debug.Log("Player hp: " + CurrentHp);
     }
+
     // Health RPCs
-    [PunRPC]
-    private void RPC_GainHp(float amount)
+    [PunRPC] private void RPC_GainHp(float amount)
     {
         if (amount < 0)
         {
@@ -394,8 +464,7 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp += amount;
         }
     }
-    [PunRPC]
-    private void RPC_ModifyMaxHp(float amount)
+    [PunRPC] private void RPC_ModifyMaxHp(float amount)
     {
         _maxHp += amount;
         // Check that the max hp isn't less than the current hp
@@ -404,9 +473,9 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp = _maxHp;
         }
     }
+
     // Death RPCs
-    [PunRPC]
-    private void RPC_Die()
+    [PunRPC] private void RPC_Die()
     {
         Debug.Log(gameObject.name + " has died.");
 
@@ -420,8 +489,7 @@ public class PlayerStats : Photon.MonoBehaviour
         abilityManager.ResetAbilities();
         _currentHp = _maxHp; // Resets hp
     }
-    [PunRPC]
-    private void RPC_Die(int srcId)
+    [PunRPC] private void RPC_Die(int srcId)
     {
         GameObject killer = PhotonView.Find(srcId).gameObject;
 
@@ -443,49 +511,133 @@ public class PlayerStats : Photon.MonoBehaviour
         abilityManager.ResetAbilities();
         _currentHp = _maxHp; // Resets hp
     }
+
+    // Damage Modifier RPCs
+    [PunRPC] private void RPC_AddDamageMultiplier(string multName, float multiplier)
+    {
+        _dmgMultipliers.Add(new KeyValuePair<string, float>(multName, multiplier));
+        CalcNewDamage();
+    }
+    [PunRPC] private void RPC_AddDamageBoost(string boostName, float boost)
+    {
+        _dmgBoosts.Add(new KeyValuePair<string, float>(boostName, boost));
+        CalcNewDamage();
+    }
+    [PunRPC] private void RPC_RemoveDamageMultiplier(string multName)
+    {
+        foreach(KeyValuePair<string, float> multPair in _dmgMultipliers)
+        {
+            if(multPair.Key == multName)
+            {
+                _dmgMultipliers.Remove(multPair);
+                break;
+            }
+        }
+        CalcNewDamage();
+    }
+    [PunRPC] private void RPC_RemoveDamageBoost(string boostName)
+    {
+        foreach(KeyValuePair<string, float> boostPair in _dmgBoosts)
+        {
+            if(boostPair.Key == boostName)
+            {
+                _dmgBoosts.Remove(boostPair);
+                break;
+            }
+        }
+        CalcNewDamage();
+    }
+
     // Scale RPCs
-    [PunRPC]
-    private void RPC_AddScaleFactor(Vector3 factor)
+    [PunRPC] private void RPC_AddScaleFactor(string factorName, Vector3 factor)
     {
         // Add scale factor
-        _scaleFactors.Add(factor);
-        // Recalculate scale modifier
-        _scaleMod = new Vector3(1f, 1f, 1f);
-        foreach (Vector3 f in _scaleFactors)
-        {
-            _scaleMod.x *= f.x;
-            _scaleMod.y *= f.y;
-            _scaleMod.z *= f.z;
-        }
+        _scaleFactors.Add(new KeyValuePair<string, Vector3>(factorName, factor));
+        CalcNewScale();
         // Calculate the new scale on the client only since transforms are synced
         if (photonView.isMine)
         {
             ApplyNewScale();
         }
     }
-    [PunRPC]
-    private void RPC_RemoveScaleFactor(Vector3 factor)
+    [PunRPC] private void RPC_RemoveScaleFactor(string factorName)
     {
-        // Remove scale factor
-        _scaleFactors.Remove(factor);
-        // Recalculate scale modifier
-        _scaleMod = new Vector3(1f, 1f, 1f);
-        foreach (Vector3 f in _scaleFactors)
+        foreach(KeyValuePair<string, Vector3> factorPair in _scaleFactors)
         {
-            _scaleMod.x *= f.x;
-            _scaleMod.y *= f.y;
-            _scaleMod.z *= f.z;
+            if(factorPair.Key == factorName)
+            {
+                _scaleFactors.Remove(factorPair);
+                break;
+            }
         }
+        CalcNewScale();
         // Calculate the new scale on the client only since transforms are synced
         if(photonView.isMine)
         {
             ApplyNewScale();
         }
     }
+
+    // Speed Modifier RPCs
+    [PunRPC] private void RPC_AddSpeedMultiplier(string multName, float multiplier)
+    {
+        _speedMultipliers.Add(new KeyValuePair<string, float>(multName, multiplier));
+        CalcNewSpeed();
+    }
+    [PunRPC] private void RPC_AddSpeedBoost(string boostName, float boost)
+    {
+        _speedBoosts.Add(new KeyValuePair<string, float>(boostName, boost));
+        CalcNewSpeed();
+    }
+    [PunRPC] private void RPC_RemoveSpeedMultiplier(string multName)
+    {
+        foreach (KeyValuePair<string, float> multPair in _speedMultipliers)
+        {
+            if (multPair.Key == multName)
+            {
+                _speedMultipliers.Remove(multPair);
+                break;
+            }
+        }
+        CalcNewSpeed();
+    }
+    [PunRPC] private void RPC_RemoveSpeedBoost(string boostName)
+    {
+        foreach (KeyValuePair<string, float> boostPair in _speedBoosts)
+        {
+            if (boostPair.Key == boostName)
+            {
+                _speedBoosts.Remove(boostPair);
+                break;
+            }
+        }
+        CalcNewSpeed();
+    }
+
+    // Max Health RPCs
+    [PunRPC] private void RPC_AddHealthBoost(string boostName, float boost)
+    {
+        _healthBoosts.Add(new KeyValuePair<string, float>(boostName, boost));
+        CalcNewHealth();
+    }
+    [PunRPC] private void RPC_RemoveHealthBoost(string boostName)
+    {
+        foreach(KeyValuePair<string, float> boostPair in _healthBoosts)
+        {
+            if(boostPair.Key == boostName)
+            {
+                _speedBoosts.Remove(boostPair);
+                break;
+            }
+        }
+        CalcNewHealth();
+    }
+
     #endregion Photon RPCs
 
 
     #region Private Methods
+
     private void Die()
     {
         photonView.RPC("RPC_Die", PhotonTargets.All);
@@ -498,10 +650,69 @@ public class PlayerStats : Photon.MonoBehaviour
     private void ApplyNewScale()
     {
         // Scale each transform individually
-        foreach (Transform t in _scaledTransforms)
+        foreach (Transform t in _transformsToScale)
         {
             t.localScale = new Vector3(_baseScale.x * _scaleMod.x, _baseScale.y * _scaleMod.y, _baseScale.z * _scaleMod.z);
         }
     }
+    private void CalcNewScale()
+    {
+        // Recalculate scale modifier
+        _scaleMod = new Vector3(1f, 1f, 1f);
+        foreach (KeyValuePair<string, Vector3> f in _scaleFactors)
+        {
+            _scaleMod.x *= f.Value.x;
+            _scaleMod.y *= f.Value.y;
+            _scaleMod.z *= f.Value.z;
+        }
+    }
+    private void CalcNewDamage()
+    {
+        // Set damage to base
+        _damage = _baseDmg;
+        
+        // Multiply by all multipliers
+        foreach(KeyValuePair<string, float> multPair in _dmgMultipliers)
+        {
+            _damage *= multPair.Value;
+        }
+        
+        // Add all boosts
+        foreach(KeyValuePair<string, float> boostPair in _dmgBoosts)
+        {
+            _damage += boostPair.Value;
+        }
+    }
+    private void CalcNewSpeed()
+    {
+        // Reset walk speed
+        _walkSpeed = _baseWalkSpeed;
+        // Multiply speed by all factors
+        foreach(KeyValuePair<string, float> multPair in _speedMultipliers)
+        {
+            _walkSpeed *= multPair.Value;
+        }
+        // Increase speed by all boosts
+        foreach(KeyValuePair<string, float> boostPair in _speedBoosts)
+        {
+            _walkSpeed += boostPair.Value;
+        }
+    }
+    private void CalcNewHealth()
+    {
+        float newMaxHp = _baseMaxHp;
+        foreach(KeyValuePair<string, float> boostPair in _healthBoosts)
+        {
+            newMaxHp += boostPair.Value;
+        }
+        _maxHp = newMaxHp;
+
+        // Make sure health isn't over the max
+        if(_currentHp > _maxHp)
+        {
+            _currentHp = _maxHp;
+        }
+    }
+
     #endregion Private Methods
 }

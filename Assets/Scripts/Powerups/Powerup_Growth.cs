@@ -14,7 +14,6 @@ namespace Powerups
     [RequireComponent(typeof(AudioSource))]
     public class Powerup_Growth : BaseAbility
     {
-        private Vector3 OriginalScale;
         public AudioClip FootFall;
         public float GrowthFactor = 2;
         public float DeadZone = .1f;
@@ -35,16 +34,12 @@ namespace Powerups
             FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
             Name = "Growth";
             AudioSource = AudioManager.GetNewAudioSource(Name);
-            OriginalScale = transform.Find("Player Model").localScale;
-            transform.Find("Player Model").localScale *= GrowthFactor;
+            // Only adjust scale on the controlling client because AddScaleFactor is networked
+            if(photonView.isMine)
+                pStats.AddScaleFactor(GrowthFactor);
             pStats.dmgMult *= dmgMult;
             pStats.dmgAdd += dmgAdd;
             base.OnAbilityAdd();
-
-            /*** Handled by base class ***
-            pv = PhotonView.Get(this);
-            pv.RPC("Growth_AddAbility", PhotonTargets.All);
-            */
         }
 
         public override void OnUpdate()
@@ -69,27 +64,14 @@ namespace Powerups
                 }
             }
         }
-
-        /*** Handled by base class ***
-        [PunRPC]
-        void Growth_AddAbility()
-        {
-            Name = "Growth";
-            OriginalScale = transform.localScale;
-            transform.localScale = OriginalScale * GrowthFactor;
-        }
-        [PunRPC]
-        void Growth_RemoveAbility()
-        {
-            transform.localScale = OriginalScale;
-        }
-        */
-
+        
         public override void OnAbilityRemove()
         {
             pStats.dmgMult /= dmgMult;
             pStats.dmgAdd -= dmgAdd;
-            transform.localScale = transform.Find("Player Model").localScale *= 1/GrowthFactor;
+            // Only adjust scale on the controlling client because RemoveScaleFactor is networked
+            if(photonView.isMine)
+                pStats.RemoveScaleFactor(GrowthFactor);
             AudioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }
