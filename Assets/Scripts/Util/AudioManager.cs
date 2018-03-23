@@ -28,6 +28,7 @@ public class AudioManager : Photon.MonoBehaviour
         try
         {
             AudioSources.Add(name, gameObject.AddComponent<AudioSource>());
+            AudioSources[name].rolloffMode = AudioRolloffMode.Logarithmic;
             return AudioSources[name];
         }
         catch(Exception ex)
