@@ -68,7 +68,7 @@ public class Projectile : Photon.MonoBehaviour
         {
             if (shooterStats)
             {
-                damage = shooterStats.EffectiveDamage;
+                damage = shooterStats.Damage;
             }
             else
             {

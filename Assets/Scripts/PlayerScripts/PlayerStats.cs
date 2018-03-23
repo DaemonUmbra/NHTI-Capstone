@@ -34,10 +34,13 @@ public class PlayerStats : Photon.MonoBehaviour
 
     // Damage modifiers
     public float dmgMult = 1f;
-
     public float dmgAdd = 0f;
 
-   
+    // Scale modifier
+    Vector3 _scaleMod;
+    Vector3 _baseScale;
+    List<Vector3> _scaleFactors;
+    List<Transform> _scaledTransforms;
 
     private PlayerSpawning pSpawn;
     #endregion Class Variables
@@ -47,7 +50,7 @@ public class PlayerStats : Photon.MonoBehaviour
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
-    public float EffectiveDamage { get { return _baseDmg * dmgMult + dmgAdd; } } // Calculate effective damage with dmg mods
+    public float Damage { get { return _baseDmg * dmgMult + dmgAdd; } } // Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     //public List<EffectPackage> PackagedEffects { get { return _packagedEffects; } }
     #endregion Access Variables
@@ -55,16 +58,18 @@ public class PlayerStats : Photon.MonoBehaviour
 
     #region Unity Callbacks
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
         _effects = new List<Effect>();
         _expiredEffects = new List<Effect>();
         _onHitEffects = new List<Effect>();
-        //_packagedEffects = new List<EffectPackage>();
-        //_packageLinker = new Dictionary<Effect, EffectPackage>();
+        _scaleFactors = new List<Vector3>();
+        _scaledTransforms = new List<Transform>();
 
         _defaultMaxHp = _maxHp;
         _currentHp = _maxHp;
+
+        _scaledTransforms.Add(transform);
     }
 
     // Update is called once per frame
@@ -81,12 +86,6 @@ public class PlayerStats : Photon.MonoBehaviour
         foreach (Effect e in _effects)
         {
             e.OnFrame();
-        }
-
-        // TEST
-        if (Input.GetKeyDown("q"))
-        {
-            TakeDamage(10f);
         }
     }
     #endregion Unity Callbacks
@@ -121,13 +120,11 @@ public class PlayerStats : Photon.MonoBehaviour
             effect.Activate();
         }
     }
-
     // Called by effects when they expire
     public void RemoveEffect(Effect effect)
     {
         _expiredEffects.Add(effect);
     }
-
     // Add an OnHit effect to the player
     public void AddOnHit(Effect effect)
     {
@@ -160,7 +157,6 @@ public class PlayerStats : Photon.MonoBehaviour
             // Do NOT activate the effect or set an owner
         }
     }
-
     // Remove an OnHit effect from the player
     public void RemoveOnHit(Effect effect)
     {
@@ -179,7 +175,6 @@ public class PlayerStats : Photon.MonoBehaviour
         print("In take damage function. Damage to be taken: " + amount);
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount);
     }
-
     /// <summary>
     /// Cause the player to take damage from a source
     /// </summary>
@@ -190,7 +185,6 @@ public class PlayerStats : Photon.MonoBehaviour
         print("In take damage function. Damage to be taken: " + amount);
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID);
     }
-
     /// <summary>
     /// Cause the player to take damage with effects
     /// </summary>
@@ -206,7 +200,6 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, packagedEffects);
     }
-
     /// <summary>
     /// Cause the player to take damage from a source with status effects
     /// </summary>
@@ -237,15 +230,50 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         photonView.RPC("RPC_ChangeMaxHp", PhotonTargets.All, amount);
     }
+
     // Can be used later for checking accuracy etc
     public void ReportHit(GameObject hit)
     {
         Debug.Log(hit.name + " was hit by " + gameObject.name);
     }
+
+    
+    public void AddScaleFactor(Vector3 factor)
+    {
+        _scaleFactors.Add(factor);
+        // Only actually change the scale on the client
+        if(photonView.isMine)
+        {
+            CalculateScale();
+        }
+    }
+    public void AddScaleFactor(float factor)
+    {
+        AddScaleFactor(new Vector3(factor, factor, factor));
+    }
+    public void RemoveScaleFactor(Vector3 factor)
+    {
+        _scaleFactors.Remove(factor);
+        // Only actually change the scale on the client
+        if(photonView.isMine)
+        {
+            CalculateScale();
+        }
+    }
+    public void RemoveScaleFactor(float factor)
+    {
+        RemoveScaleFactor(new Vector3(factor, factor, factor));
+    }
+    
+    public void CalculateScale()
+    {
+        //foreach (Transform t in )
+    }
     #endregion Public Methods
 
 
     #region Photon RPCs
+    // Damage RPCs
     [PunRPC]
     private void RPC_TakeDamage(float amount)
     {
@@ -265,7 +293,6 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         Debug.Log("Player hp: " + CurrentHp);
     }
-
     [PunRPC]
     private void RPC_TakeDamage(float amount, int srcViewId)
     {
@@ -361,7 +388,7 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         Debug.Log("Player hp: " + CurrentHp);
     }
-
+    // Health RPCs
     [PunRPC]
     private void RPC_GainHp(float amount)
     {
@@ -390,6 +417,7 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp = _maxHp;
         }
     }
+    // Death RPCs
     [PunRPC]
     private void RPC_Die()
     {
@@ -405,7 +433,6 @@ public class PlayerStats : Photon.MonoBehaviour
         abilityManager.ResetAbilities();
         _currentHp = _maxHp; // Resets hp
     }
-
     [PunRPC]
     private void RPC_Die(int srcId)
     {
