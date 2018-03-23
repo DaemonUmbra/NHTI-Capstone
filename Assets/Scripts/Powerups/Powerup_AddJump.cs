@@ -1,4 +1,4 @@
-﻿namespace Powerups      //Ian MacKenzie
+﻿namespace Powerups   //Ian MacKenzie
 {
     public class Powerup_AddJump : PassiveAbility
     {

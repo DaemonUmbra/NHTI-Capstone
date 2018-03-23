@@ -480,6 +480,32 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   Health: {fileID: 0}
   powerups: {fileID: 0}
+  slotsActive:
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  slotsPassive:
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
 --- !u!114 &114572536733741510
 MonoBehaviour:
   m_ObjectHideFlags: 1
