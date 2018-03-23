@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 114103599103732572}
   - component: {fileID: 114852648514759674}
   - component: {fileID: 114525675898936844}
+  - component: {fileID: 114275901328029248}
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
@@ -423,6 +424,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1930332314063190, guid: d216057aafb3ae14c8db7f20c67f516f, type: 2}
+--- !u!114 &114275901328029248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591509329833866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50b3ab1ec100494ebd0fd2aa76195a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114375452557378366
 MonoBehaviour:
   m_ObjectHideFlags: 1
