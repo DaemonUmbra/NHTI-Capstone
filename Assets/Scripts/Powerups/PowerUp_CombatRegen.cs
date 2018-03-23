@@ -13,17 +13,28 @@ namespace Powerups
     {
         [HideInInspector]
         public PlayerStats PS;
+        public bool Healing;
 
         public override void OnAbilityAdd()
         {
             Name = "Combat Regeneration";
             Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
-            StartCoroutine(Regen()); // Begins the regen process
+            Healing = false;
 
             // Call base function
             base.OnAbilityAdd();
         }
+
+        public override void OnUpdate()
+        {
+            if(Healing == false)
+            {
+                StartCoroutine(Regen());
+            }
+            base.OnUpdate();
+        }
+
 
         public override void OnAbilityRemove()
         {
@@ -33,12 +44,10 @@ namespace Powerups
 
         private IEnumerator Regen()
         {
-            while (active) // While the player holds the power up, player gains 10 HP every 20 seconds
-            {                
-                PS.GainHp(10.0f);
-                Debug.Log("You gained 10 HP!");
-                yield return new WaitForSecondsRealtime(10);                
-            }
+            Healing = true;
+            PS.GainHp(1.0f);            
+            yield return new WaitForSecondsRealtime(1);
+            Healing = false;
         }
     }
 }

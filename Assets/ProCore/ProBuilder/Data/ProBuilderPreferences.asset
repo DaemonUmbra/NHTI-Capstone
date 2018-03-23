@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Name: ProBuilderPreferences
   m_EditorClassIdentifier: 
   m_Bool_keys:
+<<<<<<< HEAD
   - pbIconGUI
   - pbEnableBackfaceSelection
   - pbGrowSelectionUsingAngle
   - pbGrowSelectionAngleIterative
+=======
+  - pbEnableBackfaceSelection
+  - pbDragSelectWholeElement
+  - pbIconGUI
+>>>>>>> fd6d6f3bc7dc930f225f338f8d0cce999214f17e
   m_Int_keys:
   - pbDefaultEditLevel
   - pbDefaultSelectionMode
@@ -25,6 +31,7 @@ MonoBehaviour:
   - pbBevelAmount
   - pbEditorScroll.x
   - pbEditorScroll.y
+<<<<<<< HEAD
   - pbGrowSelectionAngle
   m_String_keys:
   - pbCurrentMaterialPalette
@@ -32,12 +39,25 @@ MonoBehaviour:
   m_Material_keys: []
   m_Bool_values: 00000100
   m_Int_values: 00000000010000000000000000000000
+=======
+  - pbWeldDistance
+  m_String_keys: []
+  m_Color_keys: []
+  m_Material_keys: []
+  m_Bool_values: 010101
+  m_Int_values: 01000000000000000000000000000000
+>>>>>>> fd6d6f3bc7dc930f225f338f8d0cce999214f17e
   m_Float_values:
   - 0.83529603
   - 0
   - 0
+<<<<<<< HEAD
   - 0
   m_String_values:
   - Assets/ProCore/ProBuilder/Data/Default Material Palette.asset
+=======
+  - 0.25
+  m_String_values: []
+>>>>>>> fd6d6f3bc7dc930f225f338f8d0cce999214f17e
   m_Color_values: []
   m_Material_values: []

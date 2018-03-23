@@ -97,4 +97,10 @@ MonoBehaviour:
   - PowerUpSpawn
   - RPC_SpawnPowerup
   - RPC_CollectPowerup
+  - TryJump
+  - AM_PlayClip
+  - AM_PlayOneShot
+  - AM_SetClip
+  - AM_SetVolume
+  - AM_StopClip
   DisableAutoOpenWizard: 1

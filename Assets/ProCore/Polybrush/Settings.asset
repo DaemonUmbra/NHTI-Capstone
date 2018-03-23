@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fc1a6584efa41f38b85fc9dd9d264e, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   m_bool_keys:
   - z_pref_lockBrushToFirst
   - z_pref_rebuildNormals
@@ -18,10 +19,14 @@ MonoBehaviour:
   - z_pref_lockBrushSettings
   - z_pref_additionalVertexStreams
   - z_pref_hideWireframe
+=======
+  m_bool_keys: []
+>>>>>>> fd6d6f3bc7dc930f225f338f8d0cce999214f17e
   m_int_keys:
   - z_GIWorkflowMode
   m_float_keys: []
   m_string_keys: []
+<<<<<<< HEAD
   m_Color_keys:
   - z_pref_brushColor
   m_bool_values: 010101000101
@@ -30,3 +35,11 @@ MonoBehaviour:
   m_string_values: []
   m_Color_values:
   - {r: 0, g: 0.8, b: 1, a: 1}
+=======
+  m_Color_keys: []
+  m_bool_values: 
+  m_int_values: 00000000
+  m_float_values: []
+  m_string_values: []
+  m_Color_values: []
+>>>>>>> fd6d6f3bc7dc930f225f338f8d0cce999214f17e

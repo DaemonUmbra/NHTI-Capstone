@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 114103599103732572}
   - component: {fileID: 114852648514759674}
   - component: {fileID: 114525675898936844}
+  - component: {fileID: 114275901328029248}
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
@@ -408,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer: 8
   jumpCooldown: 0
-  maxJumpCount: 0
+  maxJumpCount: 1
   InvertX: 0
   InvertY: 0
 --- !u!114 &114123109819469288
@@ -423,6 +424,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1930332314063190, guid: d216057aafb3ae14c8db7f20c67f516f, type: 2}
+--- !u!114 &114275901328029248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591509329833866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50b3ab1ec100494ebd0fd2aa76195a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114375452557378366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -468,6 +480,32 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   Health: {fileID: 0}
   powerups: {fileID: 0}
+  slotsActive:
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  slotsPassive:
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
+  - Icon: {fileID: 0}
+    taken: 0
 --- !u!114 &114572536733741510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -513,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkSpeed: 10
-  JumpPower: 10
+  JumpPower: 300
   _maxHp: 100
   _baseDmg: 10
   dmgMult: 1
@@ -562,9 +600,9 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 1
+    InterpolateLerpSpeed: 10
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
     InterpolateSpeedCurve:
@@ -597,14 +635,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ExtrapolateOption: 0
+    ExtrapolateOption: 1
     ExtrapolateSpeed: 1
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
     DrawErrorGizmo: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
+    InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:
