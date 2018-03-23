@@ -4,17 +4,17 @@ namespace Powerups
 {
     public class Powerup_ThunderWave : ActiveAbility
     {
-        public float force = 500;
+        public float force = 1300;
         public Vector3 explosionPos;
         public float radius = 20;
-        public float up = 1;
+        public float up = 2;
         public float hitDistance = 20;
 
         public Vector3 origin;
         private Vector3 direction;
 
-        public float sphereRadius = 5;
-        public float maxDistance = 5;
+        public float sphereRadius = 10;
+        public float maxDistance = 10;
         public LayerMask layerMask = 1;
 
         private PlayerShoot pShoot;
