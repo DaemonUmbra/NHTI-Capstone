@@ -19,6 +19,7 @@ namespace Powerups
         public float GrowthFactor = 2;
         public float DeadZone = .1f;
 
+        private AudioManager AudioManager;
         private AudioSource AudioSource;
         private PlayerStats pStats;
 
@@ -30,10 +31,10 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             pStats = gameObject.GetComponent<PlayerStats>();
-            AudioSource = GetComponent<AudioSource>();
+            AudioManager = GetComponent<AudioManager>();
             FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
-            AudioSource = GetComponent<AudioSource>();
             Name = "Growth";
+            AudioSource = AudioManager.GetNewAudioSource(Name);
             OriginalScale = transform.Find("Player Model").localScale;
             transform.Find("Player Model").localScale *= GrowthFactor;
             pStats.dmgMult *= dmgMult;
@@ -89,6 +90,7 @@ namespace Powerups
             pStats.dmgMult /= dmgMult;
             pStats.dmgAdd -= dmgAdd;
             transform.localScale = transform.Find("Player Model").localScale *= 1/GrowthFactor;
+            AudioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }
     }
