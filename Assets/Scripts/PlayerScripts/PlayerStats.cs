@@ -68,6 +68,8 @@ public class PlayerStats : Photon.MonoBehaviour
 
         _defaultMaxHp = _maxHp;
         _currentHp = _maxHp;
+        _baseScale = new Vector3(1f, 1f, 1f);
+        _scaleMod = new Vector3(1f, 1f, 1f);
 
         _scaledTransforms.Add(transform);
     }
@@ -237,15 +239,10 @@ public class PlayerStats : Photon.MonoBehaviour
         Debug.Log(hit.name + " was hit by " + gameObject.name);
     }
 
-    
+    // Change player's scale
     public void AddScaleFactor(Vector3 factor)
     {
-        _scaleFactors.Add(factor);
-        // Only actually change the scale on the client
-        if(photonView.isMine)
-        {
-            CalculateScale();
-        }
+        photonView.RPC("RPC_AddScaleFactor", PhotonTargets.All, factor);
     }
     public void AddScaleFactor(float factor)
     {
@@ -253,21 +250,11 @@ public class PlayerStats : Photon.MonoBehaviour
     }
     public void RemoveScaleFactor(Vector3 factor)
     {
-        _scaleFactors.Remove(factor);
-        // Only actually change the scale on the client
-        if(photonView.isMine)
-        {
-            CalculateScale();
-        }
+        photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All);
     }
     public void RemoveScaleFactor(float factor)
     {
         RemoveScaleFactor(new Vector3(factor, factor, factor));
-    }
-    
-    public void CalculateScale()
-    {
-        //foreach (Transform t in )
     }
     #endregion Public Methods
 
@@ -456,6 +443,45 @@ public class PlayerStats : Photon.MonoBehaviour
         abilityManager.ResetAbilities();
         _currentHp = _maxHp; // Resets hp
     }
+    // Scale RPCs
+    [PunRPC]
+    private void RPC_AddScaleFactor(Vector3 factor)
+    {
+        // Add scale factor
+        _scaleFactors.Add(factor);
+        // Recalculate scale modifier
+        _scaleMod = new Vector3(1f, 1f, 1f);
+        foreach (Vector3 f in _scaleFactors)
+        {
+            _scaleMod.x *= f.x;
+            _scaleMod.y *= f.y;
+            _scaleMod.z *= f.z;
+        }
+        // Calculate the new scale on the client only since transforms are synced
+        if (photonView.isMine)
+        {
+            ApplyNewScale();
+        }
+    }
+    [PunRPC]
+    private void RPC_RemoveScaleFactor(Vector3 factor)
+    {
+        // Remove scale factor
+        _scaleFactors.Remove(factor);
+        // Recalculate scale modifier
+        _scaleMod = new Vector3(1f, 1f, 1f);
+        foreach (Vector3 f in _scaleFactors)
+        {
+            _scaleMod.x *= f.x;
+            _scaleMod.y *= f.y;
+            _scaleMod.z *= f.z;
+        }
+        // Calculate the new scale on the client only since transforms are synced
+        if(photonView.isMine)
+        {
+            ApplyNewScale();
+        }
+    }
     #endregion Photon RPCs
 
 
@@ -468,6 +494,14 @@ public class PlayerStats : Photon.MonoBehaviour
     private void Die(GameObject killer)
     {
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
+    }
+    private void ApplyNewScale()
+    {
+        // Scale each transform individually
+        foreach (Transform t in _scaledTransforms)
+        {
+            t.localScale = new Vector3(_baseScale.x * _scaleMod.x, _baseScale.y * _scaleMod.y, _baseScale.z * _scaleMod.z);
+        }
     }
     #endregion Private Methods
 }

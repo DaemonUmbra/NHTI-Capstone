@@ -4,10 +4,10 @@ namespace Powerups
 {
     public class Powerup_ThunderWave : ActiveAbility
     {
-        public float force = 1300;
+        public float force = 700;
         public Vector3 explosionPos;
         public float radius = 20;
-        public float up = 2;
+        public float up = 3;
         public float hitDistance = 20;
 
         public Vector3 origin;
@@ -27,6 +27,7 @@ namespace Powerups
         /// </summary>
         public override void OnAbilityAdd()
         {
+            Cooldown = 2;
             Name = "Thunder Wave";
             Debug.Log(Name + " Added");
             
