@@ -3,6 +3,7 @@
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
 [RequireComponent(typeof(PlayerShoot))]
+[RequireComponent(typeof(AudioManager))]
 public class PlayerController : Photon.MonoBehaviour
 {
     private bool CrowdControlled = false;
