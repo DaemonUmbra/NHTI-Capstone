@@ -6,11 +6,8 @@ public class PlayerStats : Photon.MonoBehaviour
     #region Class Variables
     // Effects the player is currently under
     private List<Effect> _effects;
-
     private List<Effect> _expiredEffects;
-    
     private List<Effect> _onHitEffects;
-
 
     // **** Stats **** //
     // Speed
@@ -48,6 +45,7 @@ public class PlayerStats : Photon.MonoBehaviour
     List<Transform> _transformsToScale;
 
     private PlayerSpawning pSpawn;
+
     #endregion Class Variables
 
 
@@ -66,19 +64,25 @@ public class PlayerStats : Photon.MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
+        // Effects
         _effects = new List<Effect>();
         _expiredEffects = new List<Effect>();
         _onHitEffects = new List<Effect>();
-        _scaleFactors = new List<KeyValuePair<string, Vector3>>();
-        if(_transformsToScale == null) _transformsToScale = new List<Transform>();
+        
+        // Stat Mod Lists
         _dmgBoosts = new List<KeyValuePair<string, float>>();
         _dmgMultipliers = new List<KeyValuePair<string, float>>();
+        _scaleFactors = new List<KeyValuePair<string, Vector3>>();
+        _speedBoosts = new List<KeyValuePair<string, float>>();
+        _speedMultipliers = new List<KeyValuePair<string, float>>();
+        _healthBoosts = new List<KeyValuePair<string, float>>();
 
-        _baseMaxHp = _maxHp;
+        // Starting Stats
+        _maxHp = _baseMaxHp;
         _currentHp = _maxHp;
         _baseScale = transform.localScale;
         _scaleMod = new Vector3(1f, 1f, 1f);
-
+        _transformsToScale = new List<Transform>();
         _transformsToScale.Add(transform);
     }
 
@@ -655,9 +659,9 @@ public class PlayerStats : Photon.MonoBehaviour
             t.localScale = new Vector3(_baseScale.x * _scaleMod.x, _baseScale.y * _scaleMod.y, _baseScale.z * _scaleMod.z);
         }
     }
+    // Recalculate scale modifier
     private void CalcNewScale()
     {
-        // Recalculate scale modifier
         _scaleMod = new Vector3(1f, 1f, 1f);
         foreach (KeyValuePair<string, Vector3> f in _scaleFactors)
         {
