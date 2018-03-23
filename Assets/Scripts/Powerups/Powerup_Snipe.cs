@@ -22,11 +22,20 @@ namespace Powerups
         private PlayerShoot pShoot;
         private GameObject rayOrigin;
 
-        public override void OnAbilityAdd()
+        private void Awake()
         {
             // Set name
             Name = "Snipe";
+            //Set Sprite
+            Icon = Resources.Load<Sprite>("Sniper");
+        }
+
+
+        public override void OnAbilityAdd()
+        {
+            //Powerup added
             Debug.Log(Name + " Added");
+          
 
             // Add new shoot function to delegate
             pShoot = GetComponent<PlayerShoot>();

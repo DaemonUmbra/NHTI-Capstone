@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Base class for all abilities/powerups.
@@ -16,6 +17,12 @@ public abstract class BaseAbility : Photon.MonoBehaviour
 
     public bool IsActive { get { return active; } }
 
+    public Sprite Icon;
+
+    private void Awake()
+    {
+        Icon = Resources.Load<Sprite>("Sniper");
+    }
 
     #region Virtual Methods
     /// <summary>

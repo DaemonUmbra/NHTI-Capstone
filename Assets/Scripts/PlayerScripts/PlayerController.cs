@@ -3,8 +3,11 @@
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
 [RequireComponent(typeof(PlayerShoot))]
-public class PlayerController : Photon.MonoBehaviour
+public class PlayerController : Photon.PunBehaviour
 {
+    Vector3 position;
+    Quaternion rotation;
+
     private bool CrowdControlled = false;
     private float CCStartTime, duration;
 
@@ -151,6 +154,23 @@ public class PlayerController : Photon.MonoBehaviour
         if (collision.collider.gameObject.layer == groundLayer)
         {
             isGrounded = false;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext(transform.localScale);
+        }
+        else
+        {
+            
+            position = (Vector3)stream.ReceiveNext();
+            rotation = (Quaternion)stream.ReceiveNext();
+
         }
     }
 }
