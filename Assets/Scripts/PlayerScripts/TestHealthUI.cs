@@ -15,6 +15,8 @@ public class TestHealthUI : Photon.MonoBehaviour {
     public Slider HealthBar;
     public Text Health;
     public Text powerups;
+    public AbilitySlots[] slotsActive;
+    public AbilitySlots[] slotsPassive;
 
     // Use this for initialization
     void Start ()
@@ -27,6 +29,18 @@ public class TestHealthUI : Photon.MonoBehaviour {
             GameObject.Find("HealthBar").GetComponent<TempHealthBar>().SetPlayer(gameObject);
             Health = GameObject.Find("HealthBar").transform.Find("Health").GetComponent<Text>();
             powerups = GameObject.Find("Powerups").GetComponent<Text>();
+            for (int i = 0; i < 6; i++)
+            {
+                string slotName = "Active_" + i;
+                slotsActive[i].Icon = GameObject.Find(slotName).GetComponent<Image>();
+                slotsActive[i].taken = false;
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                string slotName = "Passive_" + i;
+                slotsPassive[i].Icon = GameObject.Find(slotName).GetComponent<Image>();
+                slotsPassive[i].taken = false;
+            }
         }
     }
 	
@@ -44,6 +58,14 @@ public class TestHealthUI : Photon.MonoBehaviour {
             {
                 powerups.text += power + "\n";
             }
+
         }
     }
+}
+
+[System.Serializable]
+public class AbilitySlots
+{
+    public Image Icon;
+    public bool taken;
 }
