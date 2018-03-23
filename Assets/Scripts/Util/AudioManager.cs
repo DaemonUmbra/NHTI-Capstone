@@ -67,4 +67,58 @@ public class AudioManager : Photon.MonoBehaviour
             return false;
         }
     }
+    public void SetClip(string name, AudioClip clip)
+    {
+        photonView.RPC("AM_SetClip", PhotonTargets.All, new object[] { name, clip });
+    }
+
+    [PunRPC]
+    public void AM_SetClip(string name, AudioClip clip)
+    {
+        GetExistingAudioSource(name).clip = clip;
+    }
+
+    public void PlayClip(string name)
+    {
+        photonView.RPC("AM_PlayClip", PhotonTargets.All, new object[] { name });
+    }
+
+    [PunRPC]
+    public void AM_PlayClip(string name)
+    {
+        GetExistingAudioSource(name).Play();
+    }
+
+    public void StopClip(string name)
+    {
+        photonView.RPC("AM_StopClip", PhotonTargets.All, new object[] { name });
+    }
+
+    [PunRPC]
+    public void AM_StopClip(string name)
+    {
+        GetExistingAudioSource(name).Stop();
+    }
+
+    public void SetVolume(string name, float volume)
+    {
+        photonView.RPC("AM_SetVolume", PhotonTargets.All, new object[] { name, volume });
+    }
+
+    [PunRPC]
+    public void AM_SetVolume(string name, float volume)
+    {
+        GetExistingAudioSource(name).volume = volume;
+    }
+
+    public void PlayOneShot(string name, AudioClip clip, float? volume)
+    {
+        photonView.RPC("AM_PlayOneShot", PhotonTargets.All, new object[] { name, clip, volume });
+    }
+
+    [PunRPC]
+    public void AM_PlayOneShot(string name, AudioClip clip, float volume = 0.5f)
+    {
+        GetExistingAudioSource(name).PlayOneShot(clip, volume);
+    }
 }
