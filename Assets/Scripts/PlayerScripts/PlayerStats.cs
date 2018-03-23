@@ -68,7 +68,7 @@ public class PlayerStats : Photon.MonoBehaviour
 
         _defaultMaxHp = _maxHp;
         _currentHp = _maxHp;
-        _baseScale = new Vector3(1f, 1f, 1f);
+        _baseScale = transform.localScale;
         _scaleMod = new Vector3(1f, 1f, 1f);
 
         _scaledTransforms.Add(transform);
