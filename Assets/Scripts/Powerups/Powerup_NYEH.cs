@@ -5,6 +5,7 @@ namespace Powerups
 {
     internal class Powerup_NYEH : ActiveAbility
     {
+        private AudioManager audioManager;
         private AudioSource audioSource;
         private AudioClip nyeh;
 
@@ -13,14 +14,10 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             //*** Handled by base ca pv.RPC("NYEH_AddAbility", PhotonTargets.All);
-
+            audioManager = gameObject.GetComponent<AudioManager>();
             Name = "NYEH!";
             Cooldown = 0f;
-            audioSource = gameObject.GetComponent<AudioSource>();
-            if (!audioSource)
-            {
-                audioSource = gameObject.AddComponent<AudioSource>();
-            }
+            audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
             //GetComponent<PhotonView>().ObservedComponents.Add(audioSource);
             nyeh = Resources.Load("Sounds/NYEH") as AudioClip;
@@ -71,9 +68,10 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            base.OnAbilityRemove();
+            audioManager.DeleteAudioSource(Name);
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
             pShoot.shoot -= TryActivate;
+            base.OnAbilityRemove();
         }
 
         protected override void Activate()
