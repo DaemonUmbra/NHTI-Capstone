@@ -4,19 +4,20 @@ namespace Powerups
 {
     public class Powerup_ThunderWave : ActiveAbility
     {
-        public float force = 500;
+        public float force = 1300;
         public Vector3 explosionPos;
         public float radius = 20;
-        public float up = 1;
-        public float hitForce = 500;
+        public float up = 2;
         public float hitDistance = 20;
 
         public Vector3 origin;
         private Vector3 direction;
 
-        public float sphereRadius = 5;
-        public float maxDistance = 0;
+        public float sphereRadius = 10;
+        public float maxDistance = 10;
         public LayerMask layerMask = 1;
+
+        private PlayerShoot pShoot;
 
         #region Abstract Methods
 
@@ -28,38 +29,46 @@ namespace Powerups
         {
             Name = "Thunder Wave";
             Debug.Log(Name + " Added");
+            
+            pShoot = GetComponent<PlayerShoot>();
+            if (pShoot)
+            {
+                
+                pShoot.shoot += TryActivate;
+            }
+
             base.OnAbilityAdd();
         }
 
         protected override void Activate() // Will need to be activated by something once we decide how players will trigger abilities.
         {
-            Vector3 fwd = transform.TransformDirection(Vector3.forward);
-            Vector3 back = transform.TransformDirection(-Vector3.forward);
-            Vector3 left = transform.TransformDirection(Vector3.left);
-            Vector3 right = transform.TransformDirection(Vector3.right);
+                origin = transform.position;
+                direction = Vector3.forward;
 
-            origin = transform.position;
-            direction = Vector3.forward;
+                explosionPos = transform.position;
 
-            explosionPos = transform.position;
-
-            RaycastHit[] hits = Physics.SphereCastAll(origin, sphereRadius, direction, maxDistance, layerMask);
-            foreach (RaycastHit hit in hits)
-            {
-                Debug.Log("I hit :" + hit.transform.name);
-                if (Input.GetMouseButtonDown(0))
+                RaycastHit[] hits = Physics.SphereCastAll(origin, sphereRadius, direction, maxDistance, layerMask);
+                foreach (RaycastHit hit in hits)
                 {
-                    if (hit.rigidbody != null)
-                    {
-                        if (hit.transform.gameObject != this.gameObject)
-                        {
-                            hit.rigidbody.AddExplosionForce(force, explosionPos, radius, up);
-                        }
-                    }
-                }
-            }
+                
 
+                    if (hit.rigidbody != null && hit.transform.gameObject.tag == "Player")
+                    {
+                            if (hit.transform.gameObject != this.gameObject)
+                            {
+                                hit.rigidbody.AddExplosionForce(force, explosionPos, radius, up);
+                                Debug.Log("I hit:" + hit.transform.gameObject.name);
+                            }
+                    }
+                    
+                }
             base.Activate();
+        }
+
+        public override void OnUpdate()
+        {
+            // Call base function
+            base.OnUpdate();
         }
 
         /// <summary>

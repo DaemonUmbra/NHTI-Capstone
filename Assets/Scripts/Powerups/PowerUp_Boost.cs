@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 /*
  * Programmer Assigned: Steven Zachary
@@ -11,15 +12,18 @@ namespace Powerups
     public class Powerup_Boost : ActiveAbility
     {
         [HideInInspector]
-        public PlayerController PC;
+        public PlayerStats PS;
 
-        public float BoostSpeed;
+        public float WalkSpeed;
+        public bool Boosted;
+        
 
         public override void OnAbilityAdd()
         {
             Name = "Boost";
             Debug.Log(Name + "  Added");
-            PC = GetComponent<PlayerController>();
+            PS = GetComponent<PlayerStats>();
+            Boosted = false;
 
             // Call base function
             base.OnAbilityAdd();
@@ -33,10 +37,26 @@ namespace Powerups
 
         protected override void Activate()
         {
-            transform.Translate(PC.transform.forward * BoostSpeed);
+            if (Boosted == false)
+            {
+                StartCoroutine(FastTime());
+            }
 
             // Call base function
             base.Activate();
+
+            Debug.Log("Activate Test - Boost");
+        }
+
+        IEnumerator FastTime()
+        {
+            Boosted = true;
+            WalkSpeed = PS.WalkSpeed;
+            PS.WalkSpeed = PS.WalkSpeed + WalkSpeed;
+            yield return new WaitForSecondsRealtime(1.0f);
+            PS.WalkSpeed = PS.WalkSpeed - WalkSpeed;
+            yield return new WaitForSecondsRealtime(3.0f);
+            Boosted = false;            
         }
     }
 }

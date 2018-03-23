@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 222132059175817246}
   - component: {fileID: 114955724386295524}
   m_Layer: 5
-  m_Name: Ability
+  m_Name: Active_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 222415273817330456}
   - component: {fileID: 114263161169188246}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: Passive_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 222363966395749198}
   - component: {fileID: 114779010612606926}
   m_Layer: 5
-  m_Name: Ability
+  m_Name: Active_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 222786008711129416}
   - component: {fileID: 114849813907748296}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: Passive_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 222509504386512992}
   - component: {fileID: 114281214225459286}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: Passive_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 222504531256153278}
   - component: {fileID: 114587408256444216}
   m_Layer: 5
-  m_Name: Ability
+  m_Name: Active_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 222231820297990154}
   - component: {fileID: 114347811292718040}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: Passive_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 222551365137460258}
   - component: {fileID: 114712334177885338}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: Passive_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 222648064732110680}
   - component: {fileID: 114341219876981324}
   m_Layer: 5
-  m_Name: Ability
+  m_Name: Active_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,7 +498,7 @@ GameObject:
   - component: {fileID: 222814513040262088}
   - component: {fileID: 114398637123028582}
   m_Layer: 5
-  m_Name: Ability
+  m_Name: Active_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 222617666781356968}
   - component: {fileID: 114018521486979530}
   m_Layer: 5
-  m_Name: Ability
+  m_Name: Active_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 222617130946515412}
   - component: {fileID: 114725058211294192}
   m_Layer: 5
-  m_Name: Effect
+  m_Name: Passive_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -799,8 +799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  minutes: 0
-  seconds: 12
+  minutes: 99
+  seconds: 0
   fontMin: 18
   fontMax: 27
   timeText: {fileID: 114846305657138042}

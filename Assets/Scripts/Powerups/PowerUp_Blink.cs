@@ -48,6 +48,7 @@ namespace Powerups
 
         protected override void Activate()
         {
+            Debug.Log("Blink blink");
             // Checks if player is blocked by a wall or player, only allows activate if the raycast returns false
             if (Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), BlinkDistance) == false)
             {
@@ -57,6 +58,7 @@ namespace Powerups
             }
 
             base.Activate();
+            Debug.Log("Activate Test - Blink");
         }
 
     }
