@@ -4,6 +4,7 @@ using System;
 
 public class AudioManager : Photon.MonoBehaviour
 {
+    [SerializeField]
     Dictionary<string, AudioSource> AudioSources;
     // Use this for initialization
     void Start()
