@@ -19,7 +19,7 @@ public class TestHealthUI : Photon.MonoBehaviour {
     public AbilitySlots[] slotsPassive;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         if (photonView.isMine) {
             Player = photonView.gameObject;
@@ -42,7 +42,8 @@ public class TestHealthUI : Photon.MonoBehaviour {
                 slotsPassive[i].taken = false;
             }
         }
-    }
+
+}
 	
 	// Update is called once per frame
 	void Update ()
@@ -60,6 +61,11 @@ public class TestHealthUI : Photon.MonoBehaviour {
             }
 
         }
+    }
+
+    public void UpdateSlot(int slotID, Sprite pSprite)
+    {
+        slotsPassive[slotID].Icon.sprite = pSprite;
     }
 }
 
