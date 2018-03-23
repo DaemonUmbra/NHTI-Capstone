@@ -6,6 +6,7 @@ public class AudioManager : Photon.MonoBehaviour
 {
     [SerializeField]
     Dictionary<string, AudioSource> AudioSources;
+    public const float defaultVolume = 0.5f;
     // Use this for initialization
     void Start()
     {
@@ -70,6 +71,7 @@ public class AudioManager : Photon.MonoBehaviour
     }
     public void SetClip(string name, AudioClip clip)
     {
+        if(photonView.isMine)
         photonView.RPC("AM_SetClip", PhotonTargets.All, new object[] { name, clip });
     }
 
@@ -81,7 +83,8 @@ public class AudioManager : Photon.MonoBehaviour
 
     public void PlayClip(string name)
     {
-        photonView.RPC("AM_PlayClip", PhotonTargets.All, new object[] { name });
+        if (photonView.isMine)
+            photonView.RPC("AM_PlayClip", PhotonTargets.All, new object[] { name });
     }
 
     [PunRPC]
@@ -92,7 +95,8 @@ public class AudioManager : Photon.MonoBehaviour
 
     public void StopClip(string name)
     {
-        photonView.RPC("AM_StopClip", PhotonTargets.All, new object[] { name });
+        if (photonView.isMine)
+            photonView.RPC("AM_StopClip", PhotonTargets.All, new object[] { name });
     }
 
     [PunRPC]
@@ -103,23 +107,26 @@ public class AudioManager : Photon.MonoBehaviour
 
     public void SetVolume(string name, float volume)
     {
-        photonView.RPC("AM_SetVolume", PhotonTargets.All, new object[] { name, volume });
+        if (photonView.isMine)
+            photonView.RPC("AM_SetVolume", PhotonTargets.All, new object[] { name, volume });
     }
 
     [PunRPC]
     public void AM_SetVolume(string name, float volume)
     {
-        GetExistingAudioSource(name).volume = volume;
+            GetExistingAudioSource(name).volume = volume;
     }
 
     public void PlayOneShot(string name, AudioClip clip, float? volume)
     {
-        photonView.RPC("AM_PlayOneShot", PhotonTargets.All, new object[] { name, clip, volume });
+        if (photonView.isMine)
+            photonView.RPC("AM_PlayOneShot", PhotonTargets.All, new object[] { name, clip, volume });
     }
 
     [PunRPC]
-    public void AM_PlayOneShot(string name, AudioClip clip, float volume = 0.5f)
+    public void AM_PlayOneShot(string name, AudioClip clip, float volume = defaultVolume)
     {
-        GetExistingAudioSource(name).PlayOneShot(clip, volume);
+        if (photonView.isMine)
+            GetExistingAudioSource(name).PlayOneShot(clip, volume);
     }
 }
