@@ -19,12 +19,6 @@ namespace Powerups
             Cooldown = 0f;
             audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
-            //GetComponent<PhotonView>().ObservedComponents.Add(audioSource);
-            nyeh = Resources.Load("Sounds/NYEH") as AudioClip;
-            if (!nyeh)
-            {
-                Debug.LogWarning("NYEH not found in /Resources/Sounds/ folder!");
-            }
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
             pShoot.shoot += TryActivate;
             base.OnAbilityAdd();
@@ -77,10 +71,9 @@ namespace Powerups
         protected override void Activate()
         {
             base.Activate();
-            ;// if (photonView.isMine)
             {
-                Debug.Log("NYEH!");
-                gameObject.GetComponent<AudioSource>().PlayOneShot(nyeh, nyehVolume);
+                Debug.Log(photonView.owner.NickName + ": NYEH!");
+                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!", nyehVolume);
             }
         }
     }

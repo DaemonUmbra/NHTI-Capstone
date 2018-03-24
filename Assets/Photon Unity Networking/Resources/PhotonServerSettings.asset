@@ -103,4 +103,6 @@ MonoBehaviour:
   - AM_SetClip
   - AM_SetVolume
   - AM_StopClip
+  - RPC_AddScaleFactor
+  - RPC_RemoveScaleFactor
   DisableAutoOpenWizard: 1
