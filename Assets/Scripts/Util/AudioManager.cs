@@ -1,11 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using ExitGames.Client.Photon;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
-public class AudioManager : Photon.MonoBehaviour
+public partial class AudioManager : Photon.MonoBehaviour
 {
-    [SerializeField]
-    Dictionary<string, AudioSource> AudioSources;
+    public Dictionary<string, AudioSource> AudioSources { get; private set; }
+    public const float defaultVolume = 0.5f;
+
+    //HACK: Wasteful in terms of memory, every player object has an instance of every sound
+    private Dictionary<string, AudioClip> clipRegistry = new Dictionary<string, AudioClip>();
+
+    // Awake is called when the script instance is being loaded
+    private void Awake()
+    {
+        LoadClips();
+    }
+
+    private void LoadClips()
+    {
+        clipRegistry.Add("NYEH!", Resources.Load<AudioClip>("Sounds/NYEH"));
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -28,6 +46,11 @@ public class AudioManager : Photon.MonoBehaviour
         try
         {
             AudioSources.Add(name, gameObject.AddComponent<AudioSource>());
+            AudioSources[name].rolloffMode = AudioRolloffMode.Linear;
+            AudioSources[name].spatialBlend = 1;
+            AudioSources[name].spread = 360;
+            AudioSources[name].velocityUpdateMode = AudioVelocityUpdateMode.Auto;
+            AudioSources[name].maxDistance = 150;
             return AudioSources[name];
         }
         catch(Exception ex)
@@ -69,18 +92,33 @@ public class AudioManager : Photon.MonoBehaviour
     }
     public void SetClip(string name, AudioClip clip)
     {
-        photonView.RPC("AM_SetClip", PhotonTargets.All, new object[] { name, clip });
+        if (photonView.isMine)
+        {
+            float[] data = new float[clip.samples];
+            clip.GetData(data, 0);
+            photonView.RPC("AM_SetClip", PhotonTargets.All, new object[] { name, data });
+        }
     }
 
     [PunRPC]
-    public void AM_SetClip(string name, AudioClip clip)
+    public void AM_SetClip(string name, string clipName)
     {
-        GetExistingAudioSource(name).clip = clip;
+        try
+        {
+            GetExistingAudioSource(name).clip = clipRegistry[clipName];
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 
     public void PlayClip(string name)
     {
-        photonView.RPC("AM_PlayClip", PhotonTargets.All, new object[] { name });
+        if (photonView.isMine)
+        {
+            photonView.RPC("AM_PlayClip", PhotonTargets.All, new object[] { name });
+        }
     }
 
     [PunRPC]
@@ -91,7 +129,10 @@ public class AudioManager : Photon.MonoBehaviour
 
     public void StopClip(string name)
     {
-        photonView.RPC("AM_StopClip", PhotonTargets.All, new object[] { name });
+        if (photonView.isMine)
+        {
+            photonView.RPC("AM_StopClip", PhotonTargets.All, new object[] { name });
+        }
     }
 
     [PunRPC]
@@ -102,23 +143,36 @@ public class AudioManager : Photon.MonoBehaviour
 
     public void SetVolume(string name, float volume)
     {
-        photonView.RPC("AM_SetVolume", PhotonTargets.All, new object[] { name, volume });
+        if (photonView.isMine)
+        {
+            photonView.RPC("AM_SetVolume", PhotonTargets.All, new object[] { name, volume });
+        }
     }
 
     [PunRPC]
     public void AM_SetVolume(string name, float volume)
     {
-        GetExistingAudioSource(name).volume = volume;
+            GetExistingAudioSource(name).volume = volume;
     }
 
-    public void PlayOneShot(string name, AudioClip clip, float? volume)
+    public void PlayOneShot(string name, string clipName, float? volume)
     {
-        photonView.RPC("AM_PlayOneShot", PhotonTargets.All, new object[] { name, clip, volume });
+        if (photonView.isMine)
+        {
+            photonView.RPC("AM_PlayOneShot", PhotonTargets.All, new object[] { name, clipName, volume });
+        }
     }
 
     [PunRPC]
-    public void AM_PlayOneShot(string name, AudioClip clip, float volume = 0.5f)
+    public void AM_PlayOneShot(string name, string clipName, float volume = defaultVolume)
     {
-        GetExistingAudioSource(name).PlayOneShot(clip, volume);
+        try
+        {
+            GetExistingAudioSource(name).PlayOneShot(clipRegistry[clipName], volume);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 }

@@ -94,10 +94,25 @@ GameObject:
   - component: {fileID: 20056865647188686}
   - component: {fileID: 92247492994184948}
   - component: {fileID: 124301335282550464}
-  - component: {fileID: 81895751159537138}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1495747941269698
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4320722840044116}
+  - component: {fileID: 81146183190412704}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,6 +192,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4320722840044116
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1495747941269698}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4796406773373926}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4366754985636014
 Transform:
   m_ObjectHideFlags: 1
@@ -213,7 +241,8 @@ Transform:
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
   m_LocalPosition: {x: 0, y: 2.65, z: -5.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4320722840044116}
   m_Father: {fileID: 4227324288345048}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
@@ -361,12 +390,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!81 &81895751159537138
+--- !u!81 &81146183190412704
 AudioListener:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355726087706212}
+  m_GameObject: {fileID: 1495747941269698}
   m_Enabled: 1
 --- !u!92 &92247492994184948
 Behaviour:
