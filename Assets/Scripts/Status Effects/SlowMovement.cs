@@ -95,8 +95,11 @@ public class SlowMovement : Effect
             Debug.LogError("Stats script not found. Unable to slow target");
             return;
         }
-
-        ps.WalkSpeed *= SlowAmount;
+        if (SlowAmount >= 1)
+        {
+            ps.AddSpeedMultipler(Name, 1 / SlowAmount);
+        }
+        else ps.AddSpeedMultipler(Name, 1);
     }
 
     private void ReverseSlow()
@@ -110,7 +113,7 @@ public class SlowMovement : Effect
         }
         float factor = 1 / SlowAmount; // Inverse of the slow percent
         if (factor < 100 && factor > 0.01)
-            ps.WalkSpeed *= factor;
+            ps.RemoveSpeedMultiplier(Name);
     }
 
     #endregion Private Methods

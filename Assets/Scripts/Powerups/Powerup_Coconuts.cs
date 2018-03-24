@@ -43,7 +43,7 @@ namespace Powerups {
             CoconutSound = Resources.Load<AudioClip>("Audio/Coconuts");
             AudioSource = GetComponent<AudioSource>();
             PlayerStats = GetComponent<PlayerStats>();
-            PlayerStats.WalkSpeed += SpeedBoost;
+            PlayerStats.AddSpeedBoost(Name, SpeedBoost);
             AudioSource.loop = true;
             AudioSource.clip = CoconutSound;
             AudioSource.Play();
@@ -53,7 +53,7 @@ namespace Powerups {
         public override void OnAbilityRemove()
         {
             AudioSource.Stop();
-            PlayerStats.WalkSpeed -= SpeedBoost;
+            PlayerStats.RemoveSpeedBoost(Name);
             base.OnAbilityRemove();
         }
     }

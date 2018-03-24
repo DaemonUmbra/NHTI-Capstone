@@ -53,8 +53,9 @@ public class PlayerStats : Photon.MonoBehaviour
     public float MaxHp { get { return _maxHp; } }
     public float CurrentHp { get { return _currentHp; } }
     public float BaseDamage { get { return _baseDmg; } }
-    public float Damage { get { return _damage; } } // Calculate effective damage with dmg mods
+    public float Damage { get { return _damage; } } //TODO: Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
+    public float WalkSpeed { get { return _walkSpeed; } } //TODO: Calculate effective walk/movement speed
     //public List<EffectPackage> PackagedEffects { get { return _packagedEffects; } }
     #endregion Access Variables
 

@@ -12,9 +12,9 @@ public class Powerup_ThunderCloud : PassiveAbility
         Name = "Thunder Cloud";
         ps = GetComponentInParent<PlayerStats>();
 
-        ps.WalkSpeed += 1.0f;
+        ps.AddSpeedBoost(Name,0.1f);
         ps.JumpPower += 1.0f;
-        ps.dmgAdd += 2.0f;
+        ps.AddDmgBoost(Name, 2.0f);
         ps.ChangeMaxHp(10.0f);
 
         base.OnAbilityAdd();
@@ -24,9 +24,9 @@ public class Powerup_ThunderCloud : PassiveAbility
     {
         ps = GetComponentInParent<PlayerStats>();
 
-        ps.WalkSpeed -= 1.0f;
+        ps.RemoveSpeedBoost(Name);
         ps.JumpPower -= 1.0f;
-        ps.dmgAdd -= 2.0f;
+        ps.RemoveDmgBoost(Name);
         ps.ChangeMaxHp(-10.0f);
 
         base.OnAbilityRemove();

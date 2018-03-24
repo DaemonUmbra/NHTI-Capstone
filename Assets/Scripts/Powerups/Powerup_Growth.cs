@@ -36,9 +36,9 @@ namespace Powerups
             AudioSource = AudioManager.GetNewAudioSource(Name);
             // Only adjust scale on the controlling client because AddScaleFactor is networked
             if(photonView.isMine)
-                pStats.AddScaleFactor(GrowthFactor);
-            pStats.dmgMult *= dmgMult;
-            pStats.dmgAdd += dmgAdd;
+                pStats.AddScaleFactor(Name,GrowthFactor);
+            pStats.AddDmgMultiplier(Name,dmgMult);
+            pStats.AddDmgBoost(Name,dmgAdd);
             base.OnAbilityAdd();
         }
 
@@ -67,11 +67,11 @@ namespace Powerups
         
         public override void OnAbilityRemove()
         {
-            pStats.dmgMult /= dmgMult;
-            pStats.dmgAdd -= dmgAdd;
+            pStats.RemoveDmgMultiplier(Name);
+            pStats.RemoveDmgBoost(Name);
             // Only adjust scale on the controlling client because RemoveScaleFactor is networked
             if(photonView.isMine)
-                pStats.RemoveScaleFactor(GrowthFactor);
+                pStats.RemoveScaleFactor(Name);
             AudioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }

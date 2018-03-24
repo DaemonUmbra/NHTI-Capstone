@@ -52,9 +52,9 @@ namespace Powerups
         {
             Boosted = true;
             WalkSpeed = PS.WalkSpeed;
-            PS.WalkSpeed = PS.WalkSpeed + WalkSpeed;
+            PS.AddSpeedMultipler(Name, 2);
             yield return new WaitForSecondsRealtime(1.0f);
-            PS.WalkSpeed = PS.WalkSpeed - WalkSpeed;
+            PS.RemoveSpeedMultiplier(Name);
             yield return new WaitForSecondsRealtime(3.0f);
             Boosted = false;            
         }
