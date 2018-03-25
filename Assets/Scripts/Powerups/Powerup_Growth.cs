@@ -35,34 +35,37 @@ namespace Powerups
             Name = "Growth";
             AudioSource = AudioManager.GetNewAudioSource(Name);
             // Only adjust scale on the controlling client because AddScaleFactor is networked
-            if(photonView.isMine)
-                pStats.AddScaleFactor(Name,GrowthFactor);
-            pStats.AddDmgMultiplier(Name,dmgMult);
-            pStats.AddDmgBoost(Name,dmgAdd);
+            if (photonView.isMine)
+            {
+                pStats.AddScaleFactor(Name, GrowthFactor);
+                //pStats.AddDmgMultiplier(Name, dmgMult);
+                //pStats.AddDmgBoost(Name, dmgAdd);
+            }
             base.OnAbilityAdd();
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            //If moving
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
-            {
-                //If nto playing
-                if (!AudioSource.isPlaying)
-                {
-                    AudioSource.Play();
-                }
-            }
-            //If standing still
-            else
-            {
-                //If playing
-                if (AudioSource.isPlaying)
-                {
-                    AudioSource.Stop();
-                }
-            }
+            //This whole thing is something I'm not sure we'll be using
+            ////If moving
+            //if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
+            //{
+            //    //If not playing
+            //    if (!AudioSource.isPlaying)
+            //    {
+            //        AudioSource.Play();
+            //    }
+            //}
+            ////If standing still
+            //else
+            //{
+            //    //If playing
+            //    if (AudioSource.isPlaying)
+            //    {
+            //        AudioSource.Stop();
+            //    }
+            //}
         }
         
         public override void OnAbilityRemove()

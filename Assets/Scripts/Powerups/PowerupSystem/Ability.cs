@@ -21,6 +21,7 @@ public abstract class BaseAbility : Photon.MonoBehaviour
 
     private void Awake()
     {
+        if(!Icon) //Just so we don't override icons set in inspector
         Icon = Resources.Load<Sprite>("Sniper");
     }
 

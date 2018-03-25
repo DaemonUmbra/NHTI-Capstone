@@ -80,6 +80,7 @@ public class PlayerStats : Photon.MonoBehaviour
 
         // Starting Stats
         _maxHp = _baseMaxHp;
+        _walkSpeed = _baseWalkSpeed;
         _currentHp = _maxHp;
         _baseScale = transform.localScale;
         _scaleMod = new Vector3(1f, 1f, 1f);
@@ -297,7 +298,7 @@ public class PlayerStats : Photon.MonoBehaviour
     }
     public void RemoveScaleFactor(string factorName)
     {
-        photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All);
+        photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All, factorName);
     }
     
     // Public Speed Modifiers

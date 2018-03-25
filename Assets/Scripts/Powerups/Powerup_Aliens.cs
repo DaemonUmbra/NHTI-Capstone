@@ -10,7 +10,8 @@ namespace Powerups
     public class Powerup_Aliens : BaseAbility
     {
 
-        
+        PlayerStats playerStats;
+
         //TWEAKABLE
         [SerializeField]
         private float xChange = 0.5f;
@@ -20,20 +21,10 @@ namespace Powerups
 
         [SerializeField]
         private float zChange = 0.5f;
-
-        //TWEAKABLE
-        private Vector3 crownOrSashOffset = new Vector3(0, 0, 0);
-
-        private Quaternion crownOrSashRotation = Quaternion.Euler(0, 0, 0);
-
-        private Vector3 ActualChanges;
-
-        public Transform crownOrSashTemplate;
-        private Transform crownOrSashInstance;
         
         public override void OnAbilityAdd()
         {
-            
+            playerStats = GetComponent<PlayerStats>();
             /*** Handled by base class ***
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);
@@ -41,10 +32,7 @@ namespace Powerups
 
             Name = "Aliens";
 
-            ActualChanges = new Vector3(transform.Find("Player Model").localScale.x * xChange, transform.Find("Player Model").localScale.y * yChange, transform.Find("Player Model").localScale.z * zChange);
-
-            //Set the players scale
-            transform.Find("Player Model").localScale = new Vector3(1 + xChange * transform.Find("Player Model").localScale.x, 1 + yChange * transform.Find("Player Model").localScale.y, 1 + zChange * transform.Find("Player Model").localScale.z);
+            playerStats.AddScaleFactor(Name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
 
             base.OnAbilityAdd();
         }
@@ -116,12 +104,8 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            //Remove the crown
-            //FLAW: Due to the way our powerups are handled, simply disabling the crown or sash would be a possible memory leak
-            Destroy(crownOrSashInstance);
+            playerStats.RemoveScaleFactor(Name);
 
-            //And undo our changes to the player's scale
-            transform.Find("Player Model").localScale = new Vector3(1 / (1 + xChange) * transform.Find("Player Model").localScale.x, 1 / (1 + yChange) * transform.Find("Player Model").localScale.y, 1 / (1 + zChange) * transform.Find("Player Model").localScale.z);
             base.OnAbilityRemove();
         }
     }

@@ -6,7 +6,10 @@ public class AbilityManager : Photon.MonoBehaviour
 {
     #region Variables
     // Keyed list of abilities by name
+
     [SerializeField]
+    private List<string> _abilityStrings; //HACK: For debugging
+
     private Dictionary<string, BaseAbility> _abilities;
     public Dictionary<string, BaseAbility> AbilityList { get { return _abilities; } }
     #endregion
@@ -22,6 +25,11 @@ public class AbilityManager : Photon.MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        _abilityStrings.Clear();
+        foreach(string str in _abilities.Keys)
+        {
+            _abilityStrings.Add(str);
+        }
         // Call BaseAbility Updates for owned abilities
         foreach (BaseAbility a in _abilities.Values)
         {
@@ -52,6 +60,20 @@ public class AbilityManager : Photon.MonoBehaviour
     public bool HasAbility(Type type)
     {
         return GetComponent(type) != null;
+    }
+
+    /// <summary>
+    /// Used by the Powerup Debugger to get an ability list with C# class names as keys
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<string, BaseAbility> GetAbilityClasses()
+    {
+        Dictionary<string, BaseAbility> output = new Dictionary<string, BaseAbility>();
+        foreach(KeyValuePair<string,BaseAbility> kvp in _abilities)
+        {
+            output.Add(kvp.Value.GetType().Name, kvp.Value);
+        }
+        return output;
     }
 
     // Add ability
@@ -119,14 +141,14 @@ public class AbilityManager : Photon.MonoBehaviour
     private void RPC_RemoveAbility(string abilityType)
     {
         // Get ability type from string and create and ability
-        Type t = Type.GetType(abilityType);
-        BaseAbility ability = (BaseAbility)gameObject.GetComponent(t);
+        Type t = ReflectionUtil.GetAbilityTypeFromName(abilityType);
+        BaseAbility ability = (BaseAbility)GetComponent(t);
 
         if (ability)
         {
             // Unregister ability and destroy it
             UnregisterAbility(ability);
-            Debug.Log("Ability removed: " + ability.name);
+            Debug.Log("Ability removed: " + ability.GetName);
             Destroy(ability);
         }
         else
@@ -142,7 +164,7 @@ public class AbilityManager : Photon.MonoBehaviour
     private void RegisterAbility(BaseAbility ability)
     {
         // Add ability to dictionary
-        _abilities.Add(ability.GetName, ability);
+        _abilities.Add(ReflectionUtil.GetTypeName(ability), ability);
         // Run function for when the ability is added
         ability.OnAbilityAdd();
     }
@@ -150,11 +172,10 @@ public class AbilityManager : Photon.MonoBehaviour
     // Unregister ability
     private void UnregisterAbility(BaseAbility ability)
     {
-        string aName = ability.GetName;
         // Run function for when the ability is added
         ability.OnAbilityRemove();
         // Remove ability from dictionary
-        _abilities.Remove(aName);
+        _abilities.Remove(ReflectionUtil.GetTypeName(ability));
     }
     #endregion Private Methods
 }

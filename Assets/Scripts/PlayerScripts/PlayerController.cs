@@ -59,9 +59,12 @@ public class PlayerController : Photon.PunBehaviour
             // Get movement input
             Vector3 inputVel = Vector3.zero;
 
-            Vector3 xInput = Input.GetAxis("Horizontal") * transform.right;
+            float xAxis = Input.GetAxis("Horizontal");
+            Vector3 xInput = xAxis * transform.right;
             if (InvertX) xInput *= -1;
-            Vector3 yInput = Input.GetAxis("Vertical") * transform.forward;
+
+            float yAxis = Input.GetAxis("Vertical");
+            Vector3 yInput = yAxis * transform.forward;
             if (InvertY) yInput *= -1;
 
             inputVel = xInput + yInput;

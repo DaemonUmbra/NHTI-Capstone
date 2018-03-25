@@ -55,7 +55,7 @@ public class PowerupDebugger_Editor : Editor
                     foreach (KeyValuePair<string, BaseAbility> entry in debugger.Player.AbilityList)
                     {
                         //add its name to the list
-                        PlayerPowerupStrings.Add(entry.Value.GetName);
+                        PlayerPowerupStrings.Add(entry.Value.GetType().Name);
                         //and remove it from the list of available powerups
                         AvailablePowerupStrings.Remove(entry.Value.GetType().Name);
                     }
@@ -92,7 +92,7 @@ public class PowerupDebugger_Editor : Editor
                 //Set the powerup selected for removal
                 if (SelectedPlayerPowerupIndex != -1)
                 {
-                    debugger.SelectedPlayerPowerup = debugger.Player.AbilityList[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
+                    debugger.SelectedPlayerPowerup = debugger.Player.GetAbilityClasses()[PlayerPowerupStrings[SelectedPlayerPowerupIndex]];
                 }
                 else
                 {
@@ -123,11 +123,13 @@ public class PowerupDebugger_Editor : Editor
             {
                 //and it is valid
                 if (debugger.Player.HasAbility(debugger.SelectedPlayerPowerup))
+                {
                     //show a button to remove that powerup
                     if (GUILayout.Button("Remove Powerup"))
                     {
                         debugger.RemoveAbility(debugger.SelectedPlayerPowerup);
                     }
+                }
             }
         }
     }
