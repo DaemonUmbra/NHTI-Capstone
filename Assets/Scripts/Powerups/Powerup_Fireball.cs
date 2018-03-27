@@ -9,7 +9,7 @@ namespace Powerups
 
         private void Awake()
         {
-            fireball = Resources.Load<Projectile_Fireball>("Fireball");
+            
             Name = "Fireball";
         }
 
@@ -43,13 +43,15 @@ namespace Powerups
 
         protected override void Activate()
         {
+            //fireball = Resources.Load<Projectile_Fireball>("Fireball");
             // Call base function
-            base.Activate();
+            
 
             if(photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate(fireball.name, transform.position, transform.rotation, 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Fireball", transform.position, transform.rotation, 0);
             }
+            base.Activate();
         }
     }
 }
