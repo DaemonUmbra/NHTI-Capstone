@@ -63,6 +63,10 @@ namespace Powerups
 
         protected override void Activate()
         {
+            if (!photonView.isMine)
+            {
+                return;
+            }
             foreach (Transform child in transform)
             {
                 if (child.name == "Gun")
