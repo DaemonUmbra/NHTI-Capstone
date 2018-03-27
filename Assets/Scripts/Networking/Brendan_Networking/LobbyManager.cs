@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum LobbyState { LOGIN, LOBBY, ROOM, GAME }
+public enum LobbyState { LOGIN, LOBBY, ROOM, GAME, MAP }
 public class LobbyManager : Photon.PunBehaviour {
 
     #region Private Variables
     static LobbyState _clientState;
     [SerializeField]
     MainCanvasManager _canvasManager;
+    int level;
     #endregion
 
 
@@ -55,6 +56,12 @@ public class LobbyManager : Photon.PunBehaviour {
             case LobbyState.GAME:
                 Debug.Log("Entering Game State");
                 break;
+
+            // Selecting Map
+            case LobbyState.MAP:
+                Debug.Log("Entering Game State");
+                _canvasManager.ChangeLobbyState(LobbyState.MAP);
+                break;
         }
     }
     public void Login()
@@ -74,6 +81,15 @@ public class LobbyManager : Photon.PunBehaviour {
         photonView.RPC("RPC_ChangeLevel", PhotonTargets.MasterClient);
         ChangeState(LobbyState.GAME);
     }
+    public void MapsMenu()
+    {
+        ChangeState(LobbyState.MAP);
+    }
+    public void ChooseScene(int levelChoice)
+    {
+        level = levelChoice;
+        ChangeState(LobbyState.LOBBY);
+    }
     #endregion
 
 
@@ -84,7 +100,7 @@ public class LobbyManager : Photon.PunBehaviour {
         PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.room.IsOpen = false;
         PhotonNetwork.room.IsVisible = false;
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(level);
 
 
     }

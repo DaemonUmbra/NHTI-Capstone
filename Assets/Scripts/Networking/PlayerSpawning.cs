@@ -25,7 +25,8 @@ public class PlayerSpawning : Photon.PunBehaviour {
 
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "IceWorld")
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (scene.name == currentScene.name)
         {
             if (PhotonNetwork.isMasterClient)
                 MasterLoadedGame();

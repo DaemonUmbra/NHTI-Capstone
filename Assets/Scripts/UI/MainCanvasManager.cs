@@ -9,6 +9,8 @@ public class MainCanvasManager : MonoBehaviour
     private RoomCanvas _roomCanvas;
     [SerializeField]
     private LoginCanvas _loginCanvas;
+    [SerializeField]
+    private MapCanvas _mapCanvas;
 
     LobbyState _lobbyState = LobbyState.LOGIN;
     #endregion
@@ -18,6 +20,7 @@ public class MainCanvasManager : MonoBehaviour
     public LobbyCanvas LobbyCanvas { get { return _lobbyCanvas; } }
     public RoomCanvas RoomCanvas { get { return _roomCanvas; } }
     public LoginCanvas LoginCanvas { get { return _loginCanvas; } }
+    public MapCanvas MapCanvas { get { return _mapCanvas; } }
     #endregion
 
 
@@ -39,6 +42,11 @@ public class MainCanvasManager : MonoBehaviour
             GameObject login = GameObject.Find("LoginCanvas");
             if (login) _loginCanvas = login.GetComponent<LoginCanvas>();
         }
+        if (!_mapCanvas)
+        {
+            GameObject map = GameObject.Find("MapCanvas");
+            if (map) _mapCanvas = map.GetComponent<MapCanvas>();
+        }
     }
 
     public void ChangeLobbyState(LobbyState newState)
@@ -59,6 +67,10 @@ public class MainCanvasManager : MonoBehaviour
             case LobbyState.ROOM:
                 _roomCanvas.transform.SetAsLastSibling();
                 _lobbyState = LobbyState.ROOM;
+                break;
+            case LobbyState.MAP:
+                _mapCanvas.transform.SetAsLastSibling();
+                _lobbyState = LobbyState.MAP;
                 break;
             default:
                 Debug.LogError("Invalid lobby state");
