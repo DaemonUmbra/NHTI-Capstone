@@ -34,6 +34,12 @@ namespace Powerups
             FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
             Name = "Growth";
             AudioSource = AudioManager.GetNewAudioSource(Name);
+<<<<<<< HEAD
+            OriginalScale = transform.Find("Player Model").localScale;
+            transform.Find("Player Model").localScale *= GrowthFactor;
+            pStats.dmgMult *= dmgMult;
+            pStats.dmgAdd += dmgAdd;
+=======
             // Only adjust scale on the controlling client because AddScaleFactor is networked
             if (photonView.isMine)
             {
@@ -41,6 +47,7 @@ namespace Powerups
                 //pStats.AddDmgMultiplier(Name, dmgMult);
                 //pStats.AddDmgBoost(Name, dmgAdd);
             }
+>>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
             base.OnAbilityAdd();
         }
 
@@ -70,11 +77,17 @@ namespace Powerups
         
         public override void OnAbilityRemove()
         {
+<<<<<<< HEAD
+            pStats.dmgMult /= dmgMult;
+            pStats.dmgAdd -= dmgAdd;
+            transform.localScale = transform.Find("Player Model").localScale *= 1/GrowthFactor;
+=======
             pStats.RemoveDmgMultiplier(Name);
             pStats.RemoveDmgBoost(Name);
             // Only adjust scale on the controlling client because RemoveScaleFactor is networked
             if(photonView.isMine)
                 pStats.RemoveScaleFactor(Name);
+>>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
             AudioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }
