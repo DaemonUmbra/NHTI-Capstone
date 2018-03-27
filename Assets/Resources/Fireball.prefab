@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114074124897742402}
   - component: {fileID: 114722332653809624}
   m_Layer: 0
-  m_Name: Bullet 1
+  m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,8 +191,8 @@ MonoBehaviour:
   - {fileID: 114010834543265448}
   - {fileID: 114074124897742402}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 10
-  instantiationId: 10
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114074124897742402
@@ -219,10 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10dd7befb8f79c4eba8120b579a2568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shooter: {fileID: 0}
-  type: 0
-  damage: 10
-  speed: 60
   lifetime: 2
 --- !u!135 &135218563817387618
 SphereCollider:
