@@ -15,7 +15,7 @@ namespace Powerups
         public PlayerStats PS;
 
         public float WalkSpeed;
-        public bool Boosted;
+        public bool Boosted = false;
         
 
         public override void OnAbilityAdd()
