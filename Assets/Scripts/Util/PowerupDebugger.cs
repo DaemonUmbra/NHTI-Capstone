@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Powerups;
 
 /// <summary>
 /// DOES NOT WORK
@@ -19,7 +20,7 @@ public class PowerupDebugger : Photon.MonoBehaviour
     {
         if (Player && photonView.isMine)
         {
-            if (!Player.HasAbility(ability))
+            if (!Player.CanPickupAbility(ability))
             {
                 Player.AddAbility(ability);
             }
@@ -30,7 +31,7 @@ public class PowerupDebugger : Photon.MonoBehaviour
     {
         if (Player && photonView.isMine)
         {
-            if (Player.HasAbility(ability))
+            if (Player.CanPickupAbility(ability))
             {
                 Player.RemoveAbility(ability);
             }

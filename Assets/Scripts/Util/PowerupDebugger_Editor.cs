@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Powerups;
 
 [CustomEditor(typeof(PowerupDebugger))]
 public class PowerupDebugger_Editor : Editor
@@ -122,7 +123,7 @@ public class PowerupDebugger_Editor : Editor
             if (debugger.SelectedPlayerPowerup)
             {
                 //and it is valid
-                if (debugger.Player.HasAbility(debugger.SelectedPlayerPowerup))
+                if (debugger.Player.CanPickupAbility(debugger.SelectedPlayerPowerup))
                 {
                     //show a button to remove that powerup
                     if (GUILayout.Button("Remove Powerup"))

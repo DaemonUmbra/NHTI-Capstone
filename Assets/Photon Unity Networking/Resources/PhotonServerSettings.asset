@@ -117,4 +117,5 @@ MonoBehaviour:
   - RPC_RemoveSpeedMultiplier
   - RPC_Activate_NYEH
   - RPC_Activate_Blink
+  - RPC_TriggerAbility
   DisableAutoOpenWizard: 1
