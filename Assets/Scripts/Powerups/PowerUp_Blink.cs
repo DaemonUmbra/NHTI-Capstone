@@ -16,7 +16,12 @@ namespace Powerups
         private PlayerShoot pShoot;
 
         public float BlinkDistance = 12; // For debugging purposes. Once this has been determined, will be set to HideInInspector
-                                    
+
+        private AudioManager audioManager;
+        private AudioSource audioSource;
+        private AudioClip blink;
+
+        public float blinkVolume = 1f;
 
         // Use this for initialization
         private void Start()
@@ -29,7 +34,13 @@ namespace Powerups
             Name = "Blink";
             Debug.Log(Name + " Added");
             Cooldown = 2.0f;
+
             playercontrol = GetComponent<PlayerController>();
+
+            audioManager = gameObject.GetComponent<AudioManager>();
+            audioSource = audioManager.GetNewAudioSource(Name);
+            audioSource.playOnAwake = false;
+
 
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
@@ -43,6 +54,8 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
+            audioManager.DeleteAudioSource(Name);
+
             if (pShoot)
             {
                 pShoot.shoot -= TryActivate;
@@ -89,10 +102,22 @@ namespace Powerups
                 //        **Cooldown * *
 
                 //}
+                photonView.RPC("RPC_Activate_Blink", PhotonTargets.All);
             }
                 base.Activate();
             
         }
 
+
+        [PunRPC]
+        protected void RPC_Activate_Blink()
+        {
+            {
+                Debug.Log(photonView.owner.NickName + ": Blink!");
+                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "Blink", blinkVolume);
+            }
+        }
+
+       
     }
 }
