@@ -10,7 +10,7 @@ public class LobbyManager : Photon.PunBehaviour {
     static LobbyState _clientState;
     [SerializeField]
     MainCanvasManager _canvasManager;
-    int level;
+    private int level = 1;
     #endregion
 
 
