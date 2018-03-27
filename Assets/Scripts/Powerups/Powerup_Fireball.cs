@@ -5,7 +5,7 @@ namespace Powerups
     public class Powerup_Fireball : ActiveAbility
     {
         private PlayerShoot pShoot;
-        private Projectile_Fireball fireball;
+        private Fireball fireball;
 
         private void Awake()
         {

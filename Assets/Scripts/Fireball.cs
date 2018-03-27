@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_Fireball : Projectile
+public class Fireball : Projectile
 {
     private new void Awake()
     {
