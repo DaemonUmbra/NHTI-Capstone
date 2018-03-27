@@ -60,6 +60,9 @@ public class Projectile : Photon.MonoBehaviour
     private void SetShooter(GameObject shooter)
     {
         _shooter = shooter;
+        //HACK: Fixes mismatched rotation, but not correctly
+        transform.localRotation = _shooter.transform.rotation;
+        Physics.IgnoreCollision(_shooter.transform.Find("Player Model").GetComponent<Collider>(), GetComponent<Collider>());
         shooterStats = _shooter.GetComponent<PlayerStats>();
     }
 
