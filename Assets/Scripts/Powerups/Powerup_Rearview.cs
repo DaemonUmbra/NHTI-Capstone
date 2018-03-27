@@ -7,7 +7,7 @@ namespace Powerups
     public class Powerup_Rearview : PassiveAbility
     {
         //Camera Object
-        private Vector3 cameraOffset = new Vector3(0, 0, 0);
+        private Vector3 cameraOffset = new Vector3(0, 2.26f, 0);
 
         private Quaternion cameraRotation = Quaternion.Euler(0, 180, 0);
 
