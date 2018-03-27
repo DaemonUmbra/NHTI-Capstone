@@ -3,7 +3,8 @@
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
 [RequireComponent(typeof(PlayerShoot))]
-public class PlayerController : Photon.PunBehaviour
+[RequireComponent(typeof(AudioManager))]
+public class PlayerController : Photon.MonoBehaviour
 {
     Vector3 position;
     Quaternion rotation;
