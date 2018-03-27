@@ -5,10 +5,17 @@ namespace Powerups
     public class Powerup_Fireball : ActiveAbility
     {
         private PlayerShoot pShoot;
+        private Projectile_Fireball fireball;
+
+        private void Awake()
+        {
+            fireball = Resources.Load<Projectile_Fireball>("Fireball");
+            Name = "Fireball";
+        }
 
         public override void OnAbilityAdd()
         {
-            Name = "Fireball";
+            
             Debug.Log(Name + " Added");
 
             pShoot = GetComponent<PlayerShoot>();
@@ -38,6 +45,11 @@ namespace Powerups
         {
             // Call base function
             base.Activate();
+
+            if(photonView.isMine)
+            {
+                GameObject _proj = PhotonNetwork.Instantiate(fireball.name, transform.position, transform.rotation, 0);
+            }
         }
     }
 }
