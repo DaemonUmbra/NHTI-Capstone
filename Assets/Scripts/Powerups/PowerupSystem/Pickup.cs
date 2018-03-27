@@ -44,6 +44,10 @@ public class Pickup : Photon.PunBehaviour
         // Only recieve the powerup on the client that picked it up
         // It is then synced to all other clients when the powerup is added
         PhotonView pv = other.GetComponent<PhotonView>();
+
+        //HACK NullReferenceExceptions galore without this check
+        if (pv == null)
+            return;
         if (pv.isMine)
         {
             _ability = GetComponent<BaseAbility>();

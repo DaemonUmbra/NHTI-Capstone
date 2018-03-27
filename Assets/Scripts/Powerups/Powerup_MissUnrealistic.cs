@@ -9,7 +9,7 @@ namespace Powerups
 
     public class Powerup_MissUnrealistic : BaseAbility
     {
-
+        PlayerStats playerStats;
         
         //TWEAKABLE
         [SerializeField]
@@ -33,7 +33,7 @@ namespace Powerups
         
         public override void OnAbilityAdd()
         {
-            
+            playerStats = GetComponent<PlayerStats>();
             /*** Handled by base class ***
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);
@@ -61,10 +61,7 @@ namespace Powerups
                 Debug.LogWarning("No Crown or Sash prefab set, could not apply to model");
             }
 
-            ActualChanges = new Vector3(transform.Find("Player Model").localScale.x * xChange, transform.Find("Player Model").localScale.y * yChange, transform.Find("Player Model").localScale.z * zChange);
-
-            //Set the players scale
-            transform.Find("Player Model").localScale = new Vector3(1+ xChange * transform.Find("Player Model").localScale.x, 1 + yChange * transform.Find("Player Model").localScale.y, 1 + zChange * transform.Find("Player Model").localScale.z);
+            playerStats.AddScaleFactor(Name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
 
             //If we have a template
             if (crownOrSashTemplate)
@@ -150,7 +147,7 @@ namespace Powerups
             Destroy(crownOrSashInstance);
 
             //And undo our changes to the player's scale
-            transform.Find("Player Model").localScale = new Vector3(1 / (1 + xChange) * transform.Find("Player Model").localScale.x, 1 / (1 + yChange) * transform.Find("Player Model").localScale.y, 1 / (1 + zChange) * transform.Find("Player Model").localScale.z);
+            playerStats.RemoveScaleFactor(Name);
             base.OnAbilityRemove();
         }
     }

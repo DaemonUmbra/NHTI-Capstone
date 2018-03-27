@@ -98,4 +98,21 @@ MonoBehaviour:
   - RPC_SpawnPowerup
   - RPC_CollectPowerup
   - TryJump
+  - AM_PlayClip
+  - AM_PlayOneShot
+  - AM_SetClip
+  - AM_SetVolume
+  - AM_StopClip
+  - RPC_AddScaleFactor
+  - RPC_RemoveScaleFactor
+  - RPC_AddDamageBoost
+  - RPC_AddDamageMultiplier
+  - RPC_AddHealthBoost
+  - RPC_AddSpeedBoost
+  - RPC_AddSpeedMultiplier
+  - RPC_RemoveDamageBoost
+  - RPC_RemoveDamageMultiplier
+  - RPC_RemoveHealthBoost
+  - RPC_RemoveSpeedBoost
+  - RPC_RemoveSpeedMultiplier
   DisableAutoOpenWizard: 1

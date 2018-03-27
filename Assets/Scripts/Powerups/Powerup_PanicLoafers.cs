@@ -33,7 +33,7 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            PS.WalkSpeed = WalkSpeed; // In the event the powerup is removed part way through Panic Time
+            PS.RemoveSpeedBoost(Name); // In the event the powerup is removed part way through Panic Time
             base.OnAbilityRemove(); // Remove the ability
         }
 
@@ -46,7 +46,7 @@ namespace Powerups
                 {
                     WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
                 }
-                PS.WalkSpeed = PS.WalkSpeed + 6; 
+                PS.AddSpeedBoost(Name, 6); 
                 Instances = Instances + 1; // Adds 1 to instances
                 if (Instances == 1)
                 {
@@ -68,7 +68,7 @@ namespace Powerups
                 yield return new WaitForSecondsRealtime(2); // Wait for 2 seconds
             }
             Instances = 0;
-            PS.WalkSpeed = WalkSpeed; // Set player walkspeed back to normal
+            PS.RemoveSpeedBoost(Name); // Set player walkspeed back to normal
         }
     }
 }

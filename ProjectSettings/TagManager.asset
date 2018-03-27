@@ -12,6 +12,8 @@ TagManager:
   - PickUpSpawn
   - Pickup
   - NetworkPlayer
+  - Bullet
+  - Environment
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,10 @@ public class AbilityManager : Photon.MonoBehaviour
 {
     #region Variables
     // Keyed list of abilities by name
+
     [SerializeField]
+    private List<string> _abilityStrings; //HACK: For debugging
+
     private Dictionary<string, BaseAbility> _abilities;
     public Dictionary<string, BaseAbility> AbilityList { get { return _abilities; } }
     #endregion
@@ -22,6 +25,11 @@ public class AbilityManager : Photon.MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        _abilityStrings.Clear();
+        foreach(string str in _abilities.Keys)
+        {
+            _abilityStrings.Add(str);
+        }
         // Call BaseAbility Updates for owned abilities
         foreach (BaseAbility a in _abilities.Values)
         {
@@ -36,80 +44,51 @@ public class AbilityManager : Photon.MonoBehaviour
 
     #region Public Methods
 
-    // Check if the player has an ability
+    // Check Ability
     public bool HasAbility<T>() where T : BaseAbility
     {
         return GetComponent<T>() != null;
     }
-
     public bool HasAbility(BaseAbility ability)
     {
         return GetComponent(ability.GetType()) != null;
     }
-
-    //HACK: I was getting dictionary exceptions using the other method
     public bool HasAbility(string abilityName)
     {
-        return GetComponent(ReflectionUtil.GetAbilityTypeFromName(abilityName));
+        return GetComponent(Type.GetType(abilityName)) != null;
     }
-
-    /*
-    public bool HasAbility(string name)
+    public bool HasAbility(Type type)
     {
-        // Get ability from dictionary
-        BaseAbility target = _abilities[name];
-
-        if (target)
-        {
-            // Double check with player components
-            if (GetComponent(target.GetType()) != null)
-                return true;
-        }
-        // False by default
-        return false;
+        return GetComponent(type) != null;
     }
-    */
+
+    /// <summary>
+    /// Used by the Powerup Debugger to get an ability list with C# class names as keys
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<string, BaseAbility> GetAbilityClasses()
+    {
+        Dictionary<string, BaseAbility> output = new Dictionary<string, BaseAbility>();
+        foreach(KeyValuePair<string,BaseAbility> kvp in _abilities)
+        {
+            output.Add(kvp.Value.GetType().Name, kvp.Value);
+        }
+        return output;
+    }
 
     // Add ability
     public void AddAbility<T>() where T : BaseAbility
     {
-        // Add ability on server
-        photonView.RPC("RPC_AddAbility", PhotonTargets.All, typeof(T).ToString());
-
-        /*
-        if (HasAbility<T>())
+        if (!HasAbility<T>())
         {
-            Debug.LogWarning("Ability already owned by player.");
-            return;
+            // Add ability on server
+            photonView.RPC("RPC_AddAbility", PhotonTargets.All, typeof(T).ToString());
         }
-
-        // Add ability locally then call on server
-        BaseAbility ability = gameObject.AddComponent<T>();
-        RegisterAbility(ability);
-        Debug.Log("Ability added: " + ability.GetName);
-        //photonView.RPC("RPC_AddAbility", PhotonTargets.Others, ability);
-        */
     }
-
     public void AddAbility(BaseAbility ability)
     {
         // Add ability on server
-        photonView.RPC("RPC_AddAbility", PhotonTargets.All, ability.GetType().ToString());
-
-        /*
-        // Make sure the ability isn't already there
-        if (!HasAbility(ability))
-        {
-            // Add ability to player and register it
-            BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ability.GetType());
-            Debug.Log("Ability added: " + newAbility.GetName);
-            RegisterAbility(newAbility);
-        }
-        else
-        {
-            Debug.LogError(ability.GetName + " already owned by player.");
-        }
-        */
+        photonView.RPC("RPC_AddAbility", PhotonTargets.All, ability.GetType().ToString());        
     }
 
     // Remove ability
@@ -117,45 +96,17 @@ public class AbilityManager : Photon.MonoBehaviour
     {
         // Remove ability on server
         photonView.RPC("RPC_RemoveAbility", PhotonTargets.All, typeof(T).ToString());
-
-        /*
-        // Get ability
-        BaseAbility ability = gameObject.GetComponent<T>();
-        if (ability)
-        {
-            // Unregister ability and destroy it
-            UnregisterAbility(ability);
-            Debug.Log("Ability removed: " + ability.name);
-            Destroy(ability);
-        }
-        else
-        {
-            Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
-        }
-        */
     }
-
     public void RemoveAbility(BaseAbility ability)
     {
-        // Remove ability on server
-        photonView.RPC("RPC_RemoveAbility", PhotonTargets.All, ReflectionUtil.GetTypeName(ability));
-
-        /*
-        // Get ability
-        BaseAbility newAbility = (BaseAbility)gameObject.GetComponent(ability.GetType());
-        if (newAbility)
+        if(HasAbility(ability))
         {
-            // Unregister ability and destroy it
-            UnregisterAbility(ability);
-            Debug.Log("Ability removed: " + newAbility.name);
-            Destroy(ability);
+            // Remove ability on server
+            photonView.RPC("RPC_RemoveAbility", PhotonTargets.All, ability.GetType().ToString());
         }
-        else
-        {
-            Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
-        }
-        */
     }
+    
+    // Remove all abilities
     public void ResetAbilities()
     {
         foreach(BaseAbility a in _abilities.Values)
@@ -163,24 +114,21 @@ public class AbilityManager : Photon.MonoBehaviour
             RemoveAbility(a);
         }
     }
-
     #endregion Public Methods
 
 
     #region Photon RPCs
-
     [PunRPC]
     private void RPC_AddAbility(string abilityType) // This could and should be optimized once it is working
     {
-        // Get ability type from string and create and ability
-        Type t = ReflectionUtil.GetAbilityTypeFromName(abilityType);
-        //BaseAbility ability = (BaseAbility)Activator.CreateInstance(t);
+        // Get ability type from string
+        Type t = Type.GetType(abilityType);
 
         // Make sure the ability isn't already there
-        if (!HasAbility(t.Name))
+        if (!HasAbility(t))
         {
             // Add ability to player and register it
-            BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(ReflectionUtil.GetAbilityTypeFromName(t.Name));
+            BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(t);
             RegisterAbility(newAbility);
             Debug.Log("Ability added: " + newAbility.GetName);
         }
@@ -189,19 +137,18 @@ public class AbilityManager : Photon.MonoBehaviour
             Debug.LogWarning(t.Name + " already owned by player.");
         }
     }
-
     [PunRPC]
     private void RPC_RemoveAbility(string abilityType)
     {
         // Get ability type from string and create and ability
         Type t = ReflectionUtil.GetAbilityTypeFromName(abilityType);
-        BaseAbility ability = (BaseAbility)gameObject.GetComponent(t);
+        BaseAbility ability = (BaseAbility)GetComponent(t);
 
         if (ability)
         {
             // Unregister ability and destroy it
             UnregisterAbility(ability);
-            Debug.Log("Ability removed: " + ability.name);
+            Debug.Log("Ability removed: " + ability.GetName);
             Destroy(ability);
         }
         else
@@ -209,30 +156,26 @@ public class AbilityManager : Photon.MonoBehaviour
             Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
         }
     }
-
     #endregion Photon RPCs
 
 
     #region Private Methods
-
     // Register ability
     private void RegisterAbility(BaseAbility ability)
     {
+        // Add ability to dictionary
+        _abilities.Add(ReflectionUtil.GetTypeName(ability), ability);
         // Run function for when the ability is added
         ability.OnAbilityAdd();
-        // Add ability to dictionary
-        _abilities.Add(ability.GetName, ability);
     }
 
     // Unregister ability
     private void UnregisterAbility(BaseAbility ability)
     {
-        string aName = ability.GetName;
         // Run function for when the ability is added
         ability.OnAbilityRemove();
         // Remove ability from dictionary
-        _abilities.Remove(aName);
+        _abilities.Remove(ReflectionUtil.GetTypeName(ability));
     }
-
     #endregion Private Methods
 }

@@ -41,6 +41,7 @@ namespace Powerups
 
         public override void OnUpdate() // Update function
         {
+            /* 
 
             pickUp = FindObjectsOfType<Pickup>();
             ElementsInArray = pickUp.Length;
@@ -76,6 +77,8 @@ namespace Powerups
             {
                 audioSource.volume = 100f;
             }
+
+            */
 
             base.OnUpdate();
         }

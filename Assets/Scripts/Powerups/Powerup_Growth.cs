@@ -14,7 +14,6 @@ namespace Powerups
     [RequireComponent(typeof(AudioSource))]
     public class Powerup_Growth : BaseAbility
     {
-        private Vector3 OriginalScale;
         public AudioClip FootFall;
         public float GrowthFactor = 2;
         public float DeadZone = .1f;
@@ -35,61 +34,60 @@ namespace Powerups
             FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
             Name = "Growth";
             AudioSource = AudioManager.GetNewAudioSource(Name);
+<<<<<<< HEAD
             OriginalScale = transform.Find("Player Model").localScale;
             transform.Find("Player Model").localScale *= GrowthFactor;
             pStats.dmgMult *= dmgMult;
             pStats.dmgAdd += dmgAdd;
+=======
+            // Only adjust scale on the controlling client because AddScaleFactor is networked
+            if (photonView.isMine)
+            {
+                pStats.AddScaleFactor(Name, GrowthFactor);
+                //pStats.AddDmgMultiplier(Name, dmgMult);
+                //pStats.AddDmgBoost(Name, dmgAdd);
+            }
+>>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
             base.OnAbilityAdd();
-
-            /*** Handled by base class ***
-            pv = PhotonView.Get(this);
-            pv.RPC("Growth_AddAbility", PhotonTargets.All);
-            */
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            //If moving
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
-            {
-                //If nto playing
-                if (!AudioSource.isPlaying)
-                {
-                    AudioSource.Play();
-                }
-            }
-            //If standing still
-            else
-            {
-                //If playing
-                if (AudioSource.isPlaying)
-                {
-                    AudioSource.Stop();
-                }
-            }
+            //This whole thing is something I'm not sure we'll be using
+            ////If moving
+            //if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
+            //{
+            //    //If not playing
+            //    if (!AudioSource.isPlaying)
+            //    {
+            //        AudioSource.Play();
+            //    }
+            //}
+            ////If standing still
+            //else
+            //{
+            //    //If playing
+            //    if (AudioSource.isPlaying)
+            //    {
+            //        AudioSource.Stop();
+            //    }
+            //}
         }
-
-        /*** Handled by base class ***
-        [PunRPC]
-        void Growth_AddAbility()
-        {
-            Name = "Growth";
-            OriginalScale = transform.localScale;
-            transform.localScale = OriginalScale * GrowthFactor;
-        }
-        [PunRPC]
-        void Growth_RemoveAbility()
-        {
-            transform.localScale = OriginalScale;
-        }
-        */
-
+        
         public override void OnAbilityRemove()
         {
+<<<<<<< HEAD
             pStats.dmgMult /= dmgMult;
             pStats.dmgAdd -= dmgAdd;
             transform.localScale = transform.Find("Player Model").localScale *= 1/GrowthFactor;
+=======
+            pStats.RemoveDmgMultiplier(Name);
+            pStats.RemoveDmgBoost(Name);
+            // Only adjust scale on the controlling client because RemoveScaleFactor is networked
+            if(photonView.isMine)
+                pStats.RemoveScaleFactor(Name);
+>>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
             AudioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }

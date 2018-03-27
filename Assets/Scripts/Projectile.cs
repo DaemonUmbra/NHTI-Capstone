@@ -68,7 +68,7 @@ public class Projectile : Photon.MonoBehaviour
         {
             if (shooterStats)
             {
-                damage = shooterStats.EffectiveDamage;
+                damage = shooterStats.Damage;
             }
             else
             {
@@ -102,7 +102,13 @@ public class Projectile : Photon.MonoBehaviour
                 hitStats.TakeDamage(damage);
                 print("Player hit!");
                 PhotonNetwork.Destroy(photonView);
+                PhotonNetwork.Destroy(gameObject);
             }   
+        }
+        if(hit.tag == "Environment")
+        {
+            PhotonNetwork.Destroy(photonView);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }

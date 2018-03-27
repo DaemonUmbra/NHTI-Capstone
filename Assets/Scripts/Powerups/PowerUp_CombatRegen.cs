@@ -45,8 +45,8 @@ namespace Powerups
         private IEnumerator Regen()
         {
             Healing = true;
-            PS.GainHp(1.0f);            
-            yield return new WaitForSecondsRealtime(1);
+            PS.GainHp(3.0f);            
+            yield return new WaitForSecondsRealtime(5);
             Healing = false;
         }
     }

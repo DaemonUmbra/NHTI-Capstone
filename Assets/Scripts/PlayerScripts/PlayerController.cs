@@ -3,9 +3,16 @@
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(AbilityManager))]
 [RequireComponent(typeof(PlayerShoot))]
+<<<<<<< HEAD
 [RequireComponent(typeof(AudioManager))]
 public class PlayerController : Photon.MonoBehaviour
+=======
+public class PlayerController : Photon.PunBehaviour
+>>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
 {
+    Vector3 position;
+    Quaternion rotation;
+
     private bool CrowdControlled = false;
     private float CCStartTime, duration;
 
@@ -57,9 +64,12 @@ public class PlayerController : Photon.MonoBehaviour
             // Get movement input
             Vector3 inputVel = Vector3.zero;
 
-            Vector3 xInput = Input.GetAxis("Horizontal") * transform.right;
+            float xAxis = Input.GetAxis("Horizontal");
+            Vector3 xInput = xAxis * transform.right;
             if (InvertX) xInput *= -1;
-            Vector3 yInput = Input.GetAxis("Vertical") * transform.forward;
+
+            float yAxis = Input.GetAxis("Vertical");
+            Vector3 yInput = yAxis * transform.forward;
             if (InvertY) yInput *= -1;
 
             inputVel = xInput + yInput;
@@ -152,6 +162,23 @@ public class PlayerController : Photon.MonoBehaviour
         if (collision.collider.gameObject.layer == groundLayer)
         {
             isGrounded = false;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            stream.SendNext(transform.localScale);
+        }
+        else
+        {
+            
+            position = (Vector3)stream.ReceiveNext();
+            rotation = (Quaternion)stream.ReceiveNext();
+
         }
     }
 }
