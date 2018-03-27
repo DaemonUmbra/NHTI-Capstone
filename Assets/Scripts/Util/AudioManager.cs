@@ -50,7 +50,7 @@ public partial class AudioManager : Photon.MonoBehaviour
             AudioSources[name].spatialBlend = 1;
             AudioSources[name].spread = 360;
             AudioSources[name].velocityUpdateMode = AudioVelocityUpdateMode.Auto;
-            AudioSources[name].maxDistance = 150;
+            AudioSources[name].maxDistance = 75;
             return AudioSources[name];
         }
         catch(Exception ex)

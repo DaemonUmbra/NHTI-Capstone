@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Powerups {
+namespace Powerups
+{
     [RequireComponent(typeof(AudioSource))]
     public class Powerup_Coconuts : PassiveAbility
     {
