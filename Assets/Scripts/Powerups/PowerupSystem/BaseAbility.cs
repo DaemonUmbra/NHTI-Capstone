@@ -24,11 +24,15 @@ namespace Powerups
         public bool IsUnique { get { return unique; } }
 
         public Sprite Icon;
+        protected string IconPath;
 
         private void Awake()
         {
-            if (!Icon) //Just so we don't override icons set in inspector
-                Icon = Resources.Load<Sprite>("Sniper");
+            // Load the icon if another doesn't already exist
+            if(Icon == null && IconPath != null)
+            {
+                Icon = Resources.Load<Sprite>(IconPath);
+            }
         }
 
         #region Virtual Methods
