@@ -40,6 +40,10 @@ namespace Powerups
 
         public override void OnUpdate()
         {
+            if (!photonView.isMine)
+            {
+                return;
+            }
             if (Active)
             {
                 GameObject pool = GameObject.Find("SP");
@@ -74,6 +78,10 @@ namespace Powerups
 
         protected override void Activate()
         {
+            if (!photonView.isMine)
+            {
+                return;
+            }
             if (Active)
             {
                 return;
