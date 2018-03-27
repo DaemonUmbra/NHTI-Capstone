@@ -1,29 +1,31 @@
 ﻿using UnityEngine;
+using UnityEngine.Collections;
+using System.Collections.Generic;
 
 // Enum of projectile types
-public enum ProjectileType { BULLET, LAZER };
+//public enum ProjectileType { BULLET, LAZER };
 
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : Photon.MonoBehaviour
 {
     private Rigidbody rb;
+    protected GameObject _shooter;
+
+    protected PlayerStats shooterStats;
+
+    //[SerializeField]
+    //protected ProjectileType type;
+    protected List<Effect> onHitEffects;
+    
+
+    protected float damage = 0f;
+    protected float speed = 10f;
 
     [SerializeField]
-    private GameObject _shooter;
-
-    private PlayerStats shooterStats;
-
-    [SerializeField]
-    private ProjectileType type;
-
-    public float damage = 0f;
-    public float speed = 10f;
-
-    [SerializeField]
-    private float lifetime = 3; // Seconds
+    protected float lifetime = 3; // Seconds
     private float startTime = 0f;
 
-    public void Start()
+    public void Awake()
     {
         GetShooter();
         Shoot();
@@ -89,23 +91,31 @@ public class Projectile : Photon.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject hit = other.gameObject;
+        if (other.gameObject.tag == "Player")
+        {
+            onPlayerHit(other);
+        }
+    }
+
+    protected virtual void onPlayerHit(Collider hitPlayer)
+    {
+        GameObject hit = hitPlayer.gameObject;
         PhotonView hitView = hit.GetPhotonView();
         PlayerStats hitStats = hit.GetComponent<PlayerStats>();
         // Verify hit photon view
-        if(hitView)
+        if (hitView)
         {
             // Make sure the bullet isn't hitting it's own player
             if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
             {
                 // Apply damage to the player
-                hitStats.TakeDamage(damage);
+                hitStats.TakeDamage(damage, hitStats.gameObject, onHitEffects);
                 print("Player hit!");
                 PhotonNetwork.Destroy(photonView);
                 PhotonNetwork.Destroy(gameObject);
-            }   
+            }
         }
-        if(hit.tag == "Environment")
+        if (hit.tag == "Environment")
         {
             PhotonNetwork.Destroy(photonView);
             PhotonNetwork.Destroy(gameObject);

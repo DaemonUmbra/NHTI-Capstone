@@ -1,33 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace Powerups
+public class Projectile_Fireball : Projectile
 {
-    public class Fireball : MonoBehaviour
+    private new void Awake()
     {
-        public float health = 10.0f;
-        private int count = 0;
-
-        public void OnTriggerEnter(Collider collision)
-        {
-            if (count != 0)
-            {
-                count = 0;
-                InvokeRepeating("Damage", 0.0f, 1.0f);
-            }
-            Destroy(collision.gameObject);
-        }
-
-        private void Damage()
-        {
-            if (count != 4)
-            {
-                health -= 0.5f;
-                count++;
-            }
-            else
-            {
-                return;
-            }
-        }
+        base.Awake();
+        BurnDamage hitBurn = new BurnDamage(1f, 3f);
+        onHitEffects.Add(hitBurn);
     }
 }
