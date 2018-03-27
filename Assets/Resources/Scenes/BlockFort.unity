@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1764430}
   - component: {fileID: 1764429}
   - component: {fileID: 1764428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,6 +311,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
   m_IsPrefabParent: 0
@@ -385,7 +389,7 @@ GameObject:
   - component: {fileID: 154360004}
   - component: {fileID: 154360003}
   - component: {fileID: 154360002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walkway1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +557,7 @@ GameObject:
   - component: {fileID: 305272165}
   - component: {fileID: 305272164}
   - component: {fileID: 305272163}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walkway2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +809,7 @@ GameObject:
   - component: {fileID: 362564133}
   - component: {fileID: 362564132}
   - component: {fileID: 362564131}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -973,7 +977,7 @@ GameObject:
   - component: {fileID: 406392920}
   - component: {fileID: 406392919}
   - component: {fileID: 406392918}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,7 +1241,7 @@ GameObject:
   - component: {fileID: 701750441}
   - component: {fileID: 701750440}
   - component: {fileID: 701750439}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,7 +1325,7 @@ GameObject:
   - component: {fileID: 725604900}
   - component: {fileID: 725604899}
   - component: {fileID: 725604898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1409,7 @@ GameObject:
   - component: {fileID: 734551460}
   - component: {fileID: 734551459}
   - component: {fileID: 734551458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1529,7 +1533,7 @@ GameObject:
   - component: {fileID: 783415756}
   - component: {fileID: 783415755}
   - component: {fileID: 783415754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1613,7 +1617,7 @@ GameObject:
   - component: {fileID: 818304322}
   - component: {fileID: 818304321}
   - component: {fileID: 818304320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CornerBlock4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1737,7 +1741,7 @@ GameObject:
   - component: {fileID: 840780486}
   - component: {fileID: 840780485}
   - component: {fileID: 840780484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walkway4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1821,7 +1825,7 @@ GameObject:
   - component: {fileID: 880088401}
   - component: {fileID: 880088400}
   - component: {fileID: 880088399}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2001,7 +2005,7 @@ GameObject:
   - component: {fileID: 931134757}
   - component: {fileID: 931134756}
   - component: {fileID: 931134755}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CornerBlock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2225,7 +2229,7 @@ GameObject:
   - component: {fileID: 997239184}
   - component: {fileID: 997239183}
   - component: {fileID: 997239182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CornerBlock3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2563,7 +2567,7 @@ GameObject:
   - component: {fileID: 1168624637}
   - component: {fileID: 1168624636}
   - component: {fileID: 1168624635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walkway3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2816,6 +2820,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 179.99998
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
   m_IsPrefabParent: 0
@@ -2886,6 +2894,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
   m_IsPrefabParent: 0
@@ -2948,6 +2960,10 @@ Prefab:
       propertyPath: m_Name
       value: Octogon2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
   m_IsPrefabParent: 0
@@ -2966,7 +2982,7 @@ GameObject:
   - component: {fileID: 1421181162}
   - component: {fileID: 1421181161}
   - component: {fileID: 1421181160}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3094,6 +3110,10 @@ Prefab:
       propertyPath: m_Name
       value: Octogon4
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
   m_IsPrefabParent: 0
@@ -3212,6 +3232,10 @@ Prefab:
       propertyPath: m_Name
       value: Octogon1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
   m_IsPrefabParent: 0
@@ -3310,7 +3334,7 @@ GameObject:
   - component: {fileID: 1564615521}
   - component: {fileID: 1564615520}
   - component: {fileID: 1564615519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3394,7 +3418,7 @@ GameObject:
   - component: {fileID: 1591530122}
   - component: {fileID: 1591530121}
   - component: {fileID: 1591530120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3562,6 +3586,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
   m_IsPrefabParent: 0
@@ -3580,7 +3608,7 @@ GameObject:
   - component: {fileID: 1603916858}
   - component: {fileID: 1603916857}
   - component: {fileID: 1603916856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RampLanding3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3708,6 +3736,10 @@ Prefab:
       propertyPath: m_Name
       value: Octogon3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4dcd8a620070ad4b8044dffeb5248db, type: 3}
   m_IsPrefabParent: 0
@@ -3762,12 +3794,12 @@ Prefab:
     - target: {fileID: 224901764964477640, guid: 94f5c785b4b3bc942b4ebc172f319e75,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 340
+      value: 563
       objectReference: {fileID: 0}
     - target: {fileID: 224901764964477640, guid: 94f5c785b4b3bc942b4ebc172f319e75,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 211
+      value: 304
       objectReference: {fileID: 0}
     - target: {fileID: 224901764964477640, guid: 94f5c785b4b3bc942b4ebc172f319e75,
         type: 2}
@@ -3982,6 +4014,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
   m_IsPrefabParent: 0
@@ -4084,7 +4120,7 @@ GameObject:
   - component: {fileID: 1697815198}
   - component: {fileID: 1697815197}
   - component: {fileID: 1697815196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CornerBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4371,6 +4407,10 @@ Prefab:
     - target: {fileID: 400000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 179.99998
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
@@ -4667,6 +4707,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
   m_IsPrefabParent: 0
@@ -4822,6 +4866,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97785ec49bfa60e4098ce53e475f9ef6, type: 3}
   m_IsPrefabParent: 0
@@ -4840,7 +4888,7 @@ GameObject:
   - component: {fileID: 2137452987}
   - component: {fileID: 2137452986}
   - component: {fileID: 2137452985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tower4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
