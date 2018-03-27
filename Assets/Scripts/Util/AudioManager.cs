@@ -1,13 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-<<<<<<< HEAD
-
-public class AudioManager : Photon.MonoBehaviour
-{
-    [SerializeField]
-    Dictionary<string, AudioSource> AudioSources;
-=======
 using ExitGames.Client.Photon;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -31,7 +24,6 @@ public partial class AudioManager : Photon.MonoBehaviour
         clipRegistry.Add("NYEH!", Resources.Load<AudioClip>("Sounds/NYEH"));
     }
 
->>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
     // Use this for initialization
     void Start()
     {
@@ -54,14 +46,11 @@ public partial class AudioManager : Photon.MonoBehaviour
         try
         {
             AudioSources.Add(name, gameObject.AddComponent<AudioSource>());
-<<<<<<< HEAD
-=======
             AudioSources[name].rolloffMode = AudioRolloffMode.Linear;
             AudioSources[name].spatialBlend = 1;
             AudioSources[name].spread = 360;
             AudioSources[name].velocityUpdateMode = AudioVelocityUpdateMode.Auto;
             AudioSources[name].maxDistance = 150;
->>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
             return AudioSources[name];
         }
         catch(Exception ex)
@@ -103,15 +92,6 @@ public partial class AudioManager : Photon.MonoBehaviour
     }
     public void SetClip(string name, AudioClip clip)
     {
-<<<<<<< HEAD
-        photonView.RPC("AM_SetClip", PhotonTargets.All, new object[] { name, clip });
-    }
-
-    [PunRPC]
-    public void AM_SetClip(string name, AudioClip clip)
-    {
-        GetExistingAudioSource(name).clip = clip;
-=======
         if (photonView.isMine)
         {
             float[] data = new float[clip.samples];
@@ -131,19 +111,14 @@ public partial class AudioManager : Photon.MonoBehaviour
         {
             throw ex;
         }
->>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
     }
 
     public void PlayClip(string name)
     {
-<<<<<<< HEAD
-        photonView.RPC("AM_PlayClip", PhotonTargets.All, new object[] { name });
-=======
         if (photonView.isMine)
         {
             photonView.RPC("AM_PlayClip", PhotonTargets.All, new object[] { name });
         }
->>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
     }
 
     [PunRPC]
@@ -154,14 +129,10 @@ public partial class AudioManager : Photon.MonoBehaviour
 
     public void StopClip(string name)
     {
-<<<<<<< HEAD
-        photonView.RPC("AM_StopClip", PhotonTargets.All, new object[] { name });
-=======
         if (photonView.isMine)
         {
             photonView.RPC("AM_StopClip", PhotonTargets.All, new object[] { name });
         }
->>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
     }
 
     [PunRPC]
@@ -172,33 +143,15 @@ public partial class AudioManager : Photon.MonoBehaviour
 
     public void SetVolume(string name, float volume)
     {
-<<<<<<< HEAD
-        photonView.RPC("AM_SetVolume", PhotonTargets.All, new object[] { name, volume });
-=======
         if (photonView.isMine)
         {
             photonView.RPC("AM_SetVolume", PhotonTargets.All, new object[] { name, volume });
         }
->>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
     }
 
     [PunRPC]
     public void AM_SetVolume(string name, float volume)
     {
-<<<<<<< HEAD
-        GetExistingAudioSource(name).volume = volume;
-    }
-
-    public void PlayOneShot(string name, AudioClip clip, float? volume)
-    {
-        photonView.RPC("AM_PlayOneShot", PhotonTargets.All, new object[] { name, clip, volume });
-    }
-
-    [PunRPC]
-    public void AM_PlayOneShot(string name, AudioClip clip, float volume = 0.5f)
-    {
-        GetExistingAudioSource(name).PlayOneShot(clip, volume);
-=======
             GetExistingAudioSource(name).volume = volume;
     }
 
@@ -221,6 +174,5 @@ public partial class AudioManager : Photon.MonoBehaviour
         {
             throw ex;
         }
->>>>>>> 57f82a68aaeb6a4e40a6ebb45f160b01ce1fb3da
     }
 }
