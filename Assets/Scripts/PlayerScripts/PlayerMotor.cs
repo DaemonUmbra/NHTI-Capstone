@@ -9,6 +9,7 @@ public class PlayerMotor : Photon.MonoBehaviour
     private Rigidbody rb;
     private PlayerStats pStats;
     private Vector3 _velocity = Vector3.zero;
+    public float JumpMultiplier = 1f;
 
     // Use this for initialization
 
@@ -42,7 +43,7 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     public void Jump()
     {
-        float JumpMultiplier = 1f;
+        
         if (onJumpPad)
         {
             JumpMultiplier = 2f;

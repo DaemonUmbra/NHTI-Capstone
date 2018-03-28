@@ -6,19 +6,26 @@ namespace Powerups
 {
     public class Powerup_HighJump : PassiveAbility
     {
-        public float JumpBoost = .2f;
+        public float JumpBoost = 2;
 
         public override void OnAbilityAdd()
         {
             Name = "High Jump";
+            if (photonView.isMine)
+            {
+                GetComponent<PlayerMotor>().JumpMultiplier += JumpBoost;
+            }
+           
             base.OnAbilityAdd();
-            GetComponent<PlayerStats>().JumpPower += JumpBoost;
         }
 
         public override void OnAbilityRemove()
         {
             base.OnAbilityRemove();
-            GetComponent<PlayerStats>().JumpPower -= JumpBoost;
+            if (photonView.isMine)
+            {
+                GetComponent<PlayerStats>().JumpPower -= JumpBoost;
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ public class Projectile : Photon.MonoBehaviour
     
 
     protected float damage = 0f;
-    protected float speed = 10f;
+    protected float speed = 100f;
 
     [SerializeField]
     protected float lifetime = 3; // Seconds
