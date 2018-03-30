@@ -27,6 +27,7 @@ public class AbilityManager : Photon.MonoBehaviour
     {
         _abilities = new Dictionary<string, BaseAbility>();
         _activeAbilities = new List<ActiveAbility>();
+        _passiveAbilities = new List<PassiveAbility>();
     }
 
     // Update is called once per frame
