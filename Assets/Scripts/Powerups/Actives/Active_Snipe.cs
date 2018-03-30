@@ -17,8 +17,8 @@ namespace Powerups
 {
     public class Active_Snipe : ActiveAbility
     {
-        private float CDstart;
-        private bool onCooldown = false, CurrentlyActive = false;
+        //private float CDstart;
+        private bool CurrentlyActive = false;
         private PlayerShoot pShoot;
         private GameObject rayOrigin;
 
@@ -33,6 +33,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+            Cooldown = 5;
             //Powerup added
             Debug.Log(Name + " Added");
           
@@ -74,12 +75,6 @@ namespace Powerups
                     rayOrigin = child.gameObject;
                 }
             }
-            if (onCooldown)
-            {
-                Debug.Log("This ability is on cooldown" + "Start Time: " + CDstart);
-                return;
-            }
-            //Debug.Log("Raycast Shot");
 
             Vector3 mp = Input.mousePosition;
             mp.z = 999;
@@ -100,20 +95,20 @@ namespace Powerups
                 Debug.Log("no object was hit");
             }
 
-            StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
+            //StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
 
             base.Activate();
         }
 
-        private IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
-        {
-            LineRenderer snipeLaser = Origin.GetComponent<LineRenderer>();
-            snipeLaser.SetPosition(0, Origin.transform.position);
-            snipeLaser.SetPosition(1, targetLocation);
+        //private IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
+       // {
+            //LineRenderer snipeLaser = Origin.GetComponent<LineRenderer>();
+            //snipeLaser.SetPosition(0, Origin.transform.position);
+            //snipeLaser.SetPosition(1, targetLocation);
 
-            snipeLaser.enabled = true;
-            yield return new WaitForSeconds(.2f);
-            snipeLaser.enabled = false;
-        }
+            //snipeLaser.enabled = true;
+            //yield return new WaitForSeconds(.2f);
+            //snipeLaser.enabled = false;
+       // }
     }
 }

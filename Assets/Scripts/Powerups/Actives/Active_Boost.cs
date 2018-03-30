@@ -20,6 +20,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+            Cooldown = 5;
             Name = "Boost";
             Debug.Log(Name + "  Added");
             PS = GetComponent<PlayerStats>();

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Powerups
+/*namespace Powerups
 {
     public class Active_ConjureSlime : ActiveAbility
     {
@@ -96,3 +96,4 @@ namespace Powerups
         }
     }
 }
+*/
