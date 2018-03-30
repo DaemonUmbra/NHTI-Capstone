@@ -33,7 +33,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Debug.Log(Name + " Added");
-            Cooldown = 2.0f;
+            Cooldown = 3.0f;
 
             playercontrol = GetComponent<PlayerController>();
 
