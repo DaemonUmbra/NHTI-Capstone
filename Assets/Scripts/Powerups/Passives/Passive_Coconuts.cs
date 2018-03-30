@@ -14,7 +14,10 @@ namespace Powerups
         private AudioSource AudioSource;
         private AudioClip CoconutSound;
         private PlayerStats PlayerStats;
-
+        private void Awake()
+        {
+            Name = "Coconuts";
+        }
         public override void OnUpdate()
         {
             ////If moving

@@ -21,15 +21,15 @@ namespace Powerups
         public int Closest;
 
         // Use this for initialization
-        private void Start()
+        private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
             Closest = 0;
+            Name = "Radar";
         }
 
         public override void OnAbilityAdd() // Function for adding ability to player
         {
-            Name = "Radar";
             Debug.Log(Name + " added!");
             base.OnAbilityAdd();
         }

@@ -14,10 +14,12 @@ namespace Powerups
         [HideInInspector]
         public PlayerStats PS;
         public bool Healing;
-
-        public override void OnAbilityAdd()
+        private void Awake()
         {
             Name = "Combat Regeneration";
+        }
+        public override void OnAbilityAdd()
+        {
             Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
             Healing = false;

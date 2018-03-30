@@ -6,10 +6,13 @@ namespace Powerups
     {
         public float maxSpeed = 5f;
         private Rigidbody rb;
-
-        public override void OnAbilityAdd()
+        
+        private void Awake()
         {
             Name = "Feather Fall";
+        }
+        public override void OnAbilityAdd()
+        {
             rb = gameObject.GetComponent<Rigidbody>();
             // Call base function
             base.OnAbilityAdd();

@@ -10,11 +10,13 @@ namespace Powerups
         private AudioClip nyeh;
 
         public float nyehVolume = 1f;
-
+        private void Awake()
+        {
+            Name = "NYEH!";
+        }
         public override void OnAbilityAdd()
         {
             audioManager = gameObject.GetComponent<AudioManager>();
-            Name = "NYEH!";
             audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();

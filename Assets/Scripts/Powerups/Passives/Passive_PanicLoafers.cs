@@ -19,10 +19,12 @@ namespace Powerups
         public float Health;
 
         public int Instances;
-
+        private void Awake()
+        {
+            Name = "Panic Loafers";
+        }
         public override void OnAbilityAdd()
         {
-            Name = "Panic Loafers"; // Setting Name of power up
             Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
             WalkSpeed = PS.WalkSpeed; // Get current walkspeed to save for later use
