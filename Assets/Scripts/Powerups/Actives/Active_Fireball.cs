@@ -2,7 +2,7 @@
 
 namespace Powerups
 {
-    public class Powerup_Fireball : ActiveAbility
+    public class Active_Fireball : ActiveAbility
     {
         private PlayerShoot pShoot;
         private Fireball fireball;

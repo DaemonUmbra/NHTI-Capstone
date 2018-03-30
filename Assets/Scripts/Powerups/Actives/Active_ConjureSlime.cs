@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_ConjureSlime : ActiveAbility
+    public class Active_ConjureSlime : ActiveAbility
     {
         private float CDstart;
         private bool onCooldown = false, CurrentlyActive = false;

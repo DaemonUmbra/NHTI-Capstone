@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_IceBall : ActiveAbility
+    public class Active_IceBall : ActiveAbility
     {
         private PlayerShoot pShoot;
         private Ice iceball;

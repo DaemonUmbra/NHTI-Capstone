@@ -14,7 +14,7 @@ Information
 
 namespace Powerups
 {
-    public class Powerup_Slime : ActiveAbility
+    public class Active_Slime : ActiveAbility
     {
         private float CDstart;
         private bool onCooldown = false, Active = false;

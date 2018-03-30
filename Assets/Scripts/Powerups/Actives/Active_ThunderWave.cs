@@ -2,7 +2,7 @@
 
 namespace Powerups
 {
-    public class Powerup_ThunderWave : ActiveAbility
+    public class Active_ThunderWave : ActiveAbility
     {
         public float force = 700;
         public Vector3 explosionPos;

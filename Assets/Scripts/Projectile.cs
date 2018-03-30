@@ -66,6 +66,7 @@ public class Projectile : Photon.MonoBehaviour
         transform.localRotation = _shooter.transform.rotation;
         Physics.IgnoreCollision(_shooter.transform.Find("Player Model").GetComponent<Collider>(), GetComponent<Collider>());
         shooterStats = _shooter.GetComponent<PlayerStats>();
+        onHitEffects = shooterStats.OnHitEffects;
     }
 
     private void Shoot()
@@ -114,7 +115,7 @@ public class Projectile : Photon.MonoBehaviour
             if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
             {
                 // Apply damage to the player
-                hitStats.TakeDamage(damage, hitStats.gameObject, onHitEffects);
+                hitStats.TakeDamage(damage, _shooter);
                 print("Player hit!");
                 PhotonNetwork.Destroy(photonView);
                 PhotonNetwork.Destroy(gameObject);
