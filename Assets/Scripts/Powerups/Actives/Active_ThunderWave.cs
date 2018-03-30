@@ -2,12 +2,14 @@
 
 namespace Powerups
 {
-    public class Active_ThunderWave : ActiveAbility
+    public class Powerup_ThunderWave : ActiveAbility
     {
-        public float force = 700;
+        public float upforce = 15;
+
+        public float forwardforce = 500;
         public Vector3 explosionPos;
         public float radius = 20;
-        public float up = 3;
+        public float up = .1f;
         public float hitDistance = 20;
 
         public Vector3 origin;
@@ -30,11 +32,11 @@ namespace Powerups
             Cooldown = 2;
             Name = "Thunder Wave";
             Debug.Log(Name + " Added");
-            
+
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
-                
+
                 pShoot.shoot += TryActivate;
             }
 
@@ -43,26 +45,32 @@ namespace Powerups
 
         protected override void Activate() // Will need to be activated by something once we decide how players will trigger abilities.
         {
-                origin = transform.position;
-                direction = Vector3.forward;
+            origin = transform.position;
+            direction = Vector3.forward;
 
-                explosionPos = transform.position;
+            explosionPos = transform.position;
 
-                RaycastHit[] hits = Physics.SphereCastAll(origin, sphereRadius, direction, maxDistance, layerMask);
-                foreach (RaycastHit hit in hits)
+            RaycastHit[] hits = Physics.SphereCastAll(origin, sphereRadius, direction, maxDistance, layerMask);
+            foreach (RaycastHit hit in hits)
+            {
+
+
+                if (hit.rigidbody != null && hit.transform.gameObject.tag == "Player")
                 {
-                
-
-                    if (hit.rigidbody != null && hit.transform.gameObject.tag == "Player")
+                    if (hit.transform.gameObject != this.gameObject)
                     {
-                            if (hit.transform.gameObject != this.gameObject)
-                            {
-                                hit.rigidbody.AddExplosionForce(force, explosionPos, radius, up);
-                                Debug.Log("I hit:" + hit.transform.gameObject.name);
-                            }
+                        Quaternion rot = Quaternion.Euler(-45, 0, 0);
+                        Vector3 forceDir = rot * Vector3.up;
+                        hit.rigidbody.AddForce(forceDir * upforce, ForceMode.Impulse);
+
+
+                        //hit.rigidbody.AddForce(transform.up * upforce);
+                        //hit.rigidbody.AddForce(transform.forward * forwardforce);
+                        Debug.Log("I hit:" + hit.transform.gameObject.name);
                     }
-                    
                 }
+
+            }
             base.Activate();
         }
 
