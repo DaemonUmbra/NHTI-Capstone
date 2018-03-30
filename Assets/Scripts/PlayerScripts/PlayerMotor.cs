@@ -49,7 +49,7 @@ public class PlayerMotor : Photon.MonoBehaviour
             JumpMultiplier = 2f;
             onJumpPad = false;
         }
-        Debug.Log("Jump!");
+        //Debug.Log("Jump!");
         Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.velocity = inverseJump;

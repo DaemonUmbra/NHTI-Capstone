@@ -27,6 +27,7 @@ public class PlayerController : Photon.MonoBehaviour
     private PlayerShoot pShoot;
     private AbilityManager abilityManager;
 
+    public bool canWallJump = false;
     private bool isGrounded = false;
     private bool debounce = false;
 
@@ -168,28 +169,33 @@ public class PlayerController : Photon.MonoBehaviour
         RaycastHit land;
         if (Physics.Raycast(transform.position, dwn, out land))
         {
-            if (land.distance < .3f)
+            if (land.distance < 0.3f)
             {
                 isGrounded = true;
                 jumpCount = 0;
             }
-            Debug.Log(land.transform.gameObject.name);
-            Debug.Log(land.distance);
         }
     }
-    private void OverHeadCheck()
+    private void OverHeadCheck(GameObject hitPart)
     {
+        
         Vector3 dir = transform.TransformDirection(Vector3.up);
         RaycastHit hit;
         if (Physics.Raycast(transform.position, dir, out hit))
         {
-            if (hit.distance < .3f)
+            if (hit.transform.gameObject != null)
             {
-                isGrounded = true;
-                jumpCount = 0;
+                if (hit.transform.gameObject != hitPart)
+                {
+                    isGrounded = true;
+                    jumpCount = 0;
+                }
             }
-            Debug.Log(hit.transform.gameObject.name);
-            Debug.Log(hit.distance);
+        }
+        else
+        {
+            isGrounded = true;
+            jumpCount = 0;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -197,7 +203,16 @@ public class PlayerController : Photon.MonoBehaviour
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
         if (collision.collider.gameObject.layer == groundLayer)
         {
-            GroundCheck();
+
+            if (canWallJump == true)
+            {
+                GameObject groundHit = collision.collider.gameObject;
+                //OverHeadCheck(groundHit);
+            }
+            else
+            {
+                GroundCheck();
+            }
             //print("Jump Reset");
         }
     }
