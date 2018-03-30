@@ -4,7 +4,6 @@ Write-Output("Repo Cleanup Script by Colby Prince")
 Write-Output("This script still in development")
 Write-Output("")
 
-:Tilde_Files
 Write-Output("Removing Tilde Files...")
 $FileNo = 0
 $Files = [System.Collections.ArrayList]::new()
