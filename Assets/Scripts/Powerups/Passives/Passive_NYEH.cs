@@ -33,36 +33,42 @@ namespace Powerups
         }
 
         [PunRPC]
-        protected void RPC_Activate_NYEH()
+        protected void RPC_Activate_NYEH1()
         {
-            {
-                Debug.Log(photonView.owner.NickName + ": NYEH!");
-                switch(Random.Range(1, 3))
-                {
-                    case 1:
-                        {
-                            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!", nyehVolume);
-                            break;
-                        }
-                    case 2:
-                        {
-                            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!2", nyehVolume);
-                            break;
-                        }
-                    default:
-                        {
-                            break;
-                        }
-                }
-                
-            }
+            Debug.Log(photonView.owner.NickName + ": NYEH!");
+            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!", nyehVolume);
+        }
+
+        [PunRPC]
+        protected void RPC_Activate_NYEH2()
+        {
+            Debug.Log(photonView.owner.NickName + ": NYEH!");
+            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!2", nyehVolume);
         }
 
         public void TryActivate()
         {
             if (photonView.isMine)
             {
-                photonView.RPC("RPC_Activate_NYEH", PhotonTargets.All);
+                switch (Random.Range(1, 3))
+                {
+                    case 1:
+                        {
+                            photonView.RPC("RPC_Activate_NYEH1", PhotonTargets.All);
+                            break;
+                        }
+                    case 2:
+                        {
+                            photonView.RPC("RPC_Activate_NYEH2", PhotonTargets.All);
+                            break;
+                        }
+                    default:
+                        {
+                            photonView.RPC("RPC_Activate_NYEH1", PhotonTargets.All);
+                            break;
+                        }
+                }
+                
             }
         }
     }
