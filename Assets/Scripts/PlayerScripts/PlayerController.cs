@@ -207,7 +207,7 @@ public class PlayerController : Photon.MonoBehaviour
             if (canWallJump == true)
             {
                 GameObject groundHit = collision.collider.gameObject;
-                //OverHeadCheck(groundHit);
+                OverHeadCheck(groundHit);
             }
             else
             {

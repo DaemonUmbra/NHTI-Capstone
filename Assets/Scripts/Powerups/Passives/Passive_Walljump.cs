@@ -11,7 +11,7 @@ namespace Powerups
     /// <para>Power-Up Description: Allows the player to reset their jumpcount off of walls.</para>
     /// </summary>
 
-    public class Powerup_Walljump : PassiveAbility
+    public class Passive_Walljump : PassiveAbility
     {
         public override void OnAbilityAdd()
         {

@@ -118,4 +118,5 @@ MonoBehaviour:
   - RPC_Activate_NYEH
   - RPC_Activate_Blink
   - RPC_TriggerAbility
+  - RPC_ResetStats
   DisableAutoOpenWizard: 1

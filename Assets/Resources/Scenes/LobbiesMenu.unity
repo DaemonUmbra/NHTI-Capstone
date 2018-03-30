@@ -2243,6 +2243,25 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 812664906}
+  - component: {fileID: 812664908}
+  - component: {fileID: 812664907}
+  - component: {fileID: 812664923}
+  - component: {fileID: 812664922}
+  - component: {fileID: 812664921}
+  - component: {fileID: 812664920}
+  - component: {fileID: 812664919}
+  - component: {fileID: 812664918}
+  - component: {fileID: 812664917}
+  - component: {fileID: 812664916}
+  - component: {fileID: 812664915}
+  - component: {fileID: 812664914}
+  - component: {fileID: 812664913}
+  - component: {fileID: 812664912}
+  - component: {fileID: 812664911}
+  - component: {fileID: 812664910}
+  - component: {fileID: 812664925}
+  - component: {fileID: 812664924}
+  - component: {fileID: 812664909}
   m_Layer: 0
   m_Name: SpawnPool_All
   m_TagString: Untagged
@@ -2263,6 +2282,392 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &812664907
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &812664908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e079e44f623e3784898e051c3c4726c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &812664909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84da6bae416ef9419cf7540a56a3a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  Cooldown: 0
+--- !u!114 &812664910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b289315b624a8468869f5172236186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+--- !u!114 &812664911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac3bd4ded8ff884db541b6f5dd6ed77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+--- !u!114 &812664912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6267d2dc2559ac04082f5539847aa98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 3b1ec7e4222b22a439a80f1ec615d487, type: 3}
+  pickUp: []
+  audioSource: {fileID: 0}
+  bleep: {fileID: 0}
+  DistanceCheck: 0
+  DistanceToTarget: 0
+  ElementsInArray: 0
+  Closest: 0
+--- !u!114 &812664913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6fbcc4ff5aac2546ae5ee2d1b0e3b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 478a85b05423ebf4c8e3db16dda903ac, type: 3}
+  PS: {fileID: 0}
+  WalkSpeed: 0
+  Health: 0
+  Instances: 0
+--- !u!114 &812664914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d964fcafcac2ac04d91dd99a6a4dc32f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 3ce26b22f893c4c408aaf364c31f8593, type: 3}
+  nyehVolume: 1
+--- !u!114 &812664915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6169fec5769c542afb1ac3995c7576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: fa337709a6c1d054d9ea0c5975db3e50, type: 3}
+  xChange: -0.5
+  yChange: 0.5
+  zChange: -0.5
+  crownOrSashTemplate: {fileID: 0}
+--- !u!114 &812664916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf0b4f3e3d657843835f20d1e130639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  JumpBoost: 2
+--- !u!114 &812664917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5537e6ce48fa04aac121ffcc238a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 33984ce0a0892754ea86276e7f9146cb, type: 3}
+  FootFall: {fileID: 0}
+  GrowthFactor: 2
+  DeadZone: 0.1
+  dmgMult: 0.5
+  dmgAdd: 0
+  LastFootfall: 0
+--- !u!114 &812664918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67e91171951265409473aaafec77836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  maxSpeed: 5
+--- !u!114 &812664919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a2604f3d07ef943993ac935af229d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+--- !u!114 &812664920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9268ed3c0d76a94a988d920281a0090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 64a95ddf8874be84e90396948a60ae78, type: 3}
+  PS: {fileID: 0}
+  Healing: 0
+--- !u!114 &812664921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e51a1419c802bbd4283bf271f98cc212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  xChange: 0.5
+  yChange: -0.5
+  zChange: 0.5
+--- !u!114 &812664922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec4d27c1c23da44e97c3ceaac35c697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  SpeedBoost: 0.25
+  DeadZone: 0.2
+--- !u!114 &812664923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e282cf0d711b944ebb6d6af9881a012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+--- !u!114 &812664924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee72687320590e74e9b9ceb6d3e1b1bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  Cooldown: 0
+  playercontrol: {fileID: 0}
+  BlinkDistance: 12
+  blinkVolume: 1
+--- !u!114 &812664925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 812664905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aae39b00474c02448041109d8748c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  Cooldown: 0
+  PS: {fileID: 0}
+  WalkSpeed: 0
+  Boosted: 0
 --- !u!1 &858774820
 GameObject:
   m_ObjectHideFlags: 0

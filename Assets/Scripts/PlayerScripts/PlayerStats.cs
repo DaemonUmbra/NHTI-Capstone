@@ -77,15 +77,14 @@ public class PlayerStats : Photon.MonoBehaviour
         _speedBoosts = new List<KeyValuePair<string, float>>();
         _speedMultipliers = new List<KeyValuePair<string, float>>();
         _healthBoosts = new List<KeyValuePair<string, float>>();
+        _transformsToScale = new List<Transform>();
+        _transformsToScale.Add(transform);
 
         // Starting Stats
         _maxHp = _baseMaxHp;
-        _walkSpeed = _baseWalkSpeed;
         _currentHp = _maxHp;
         _baseScale = transform.localScale;
-        _scaleMod = new Vector3(1f, 1f, 1f);
-        _transformsToScale = new List<Transform>();
-        _transformsToScale.Add(transform);
+        ResetStats();
     }
 
     // Update is called once per frame
@@ -234,6 +233,12 @@ public class PlayerStats : Photon.MonoBehaviour
             packagedEffects.Add(new EffectPackage(e));
         }
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID, packagedEffects);
+    }
+
+    // Reset all stats
+    public void ResetStats()
+    {
+        photonView.RPC("RPC_ResetStats", PhotonTargets.All);
     }
 
     // Increase the player's current hp
@@ -452,6 +457,27 @@ public class PlayerStats : Photon.MonoBehaviour
         Debug.Log("Player hp: " + CurrentHp);
     }
 
+    // Reset player stats
+    [PunRPC] private void RPC_ResetStats()
+    {
+        // Reset damage
+        _dmgBoosts.Clear();
+        _dmgMultipliers.Clear();
+        CalcDamage();
+
+        // Reset speed
+        _speedBoosts.Clear();
+        _speedMultipliers.Clear();
+        CalcSpeed();
+
+        // Reset scale
+        _scaleFactors.Clear();
+        CalcScale();
+
+        // Reset HP
+        _healthBoosts.Clear();
+        CalcHealth();
+    }
     // Health RPCs
     [PunRPC] private void RPC_GainHp(float amount)
     {
@@ -522,12 +548,12 @@ public class PlayerStats : Photon.MonoBehaviour
     [PunRPC] private void RPC_AddDamageMultiplier(string multName, float multiplier)
     {
         _dmgMultipliers.Add(new KeyValuePair<string, float>(multName, multiplier));
-        CalcNewDamage();
+        CalcDamage();
     }
     [PunRPC] private void RPC_AddDamageBoost(string boostName, float boost)
     {
         _dmgBoosts.Add(new KeyValuePair<string, float>(boostName, boost));
-        CalcNewDamage();
+        CalcDamage();
     }
     [PunRPC] private void RPC_RemoveDamageMultiplier(string multName)
     {
@@ -539,7 +565,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 break;
             }
         }
-        CalcNewDamage();
+        CalcDamage();
     }
     [PunRPC] private void RPC_RemoveDamageBoost(string boostName)
     {
@@ -551,7 +577,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 break;
             }
         }
-        CalcNewDamage();
+        CalcDamage();
     }
 
     // Scale RPCs
@@ -559,7 +585,7 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         // Add scale factor
         _scaleFactors.Add(new KeyValuePair<string, Vector3>(factorName, factor));
-        CalcNewScale();
+        CalcScale();
         // Calculate the new scale on the client only since transforms are synced
         if (photonView.isMine)
         {
@@ -576,7 +602,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 break;
             }
         }
-        CalcNewScale();
+        CalcScale();
         // Calculate the new scale on the client only since transforms are synced
         if(photonView.isMine)
         {
@@ -588,12 +614,12 @@ public class PlayerStats : Photon.MonoBehaviour
     [PunRPC] private void RPC_AddSpeedMultiplier(string multName, float multiplier)
     {
         _speedMultipliers.Add(new KeyValuePair<string, float>(multName, multiplier));
-        CalcNewSpeed();
+        CalcSpeed();
     }
     [PunRPC] private void RPC_AddSpeedBoost(string boostName, float boost)
     {
         _speedBoosts.Add(new KeyValuePair<string, float>(boostName, boost));
-        CalcNewSpeed();
+        CalcSpeed();
     }
     [PunRPC] private void RPC_RemoveSpeedMultiplier(string multName)
     {
@@ -605,7 +631,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 break;
             }
         }
-        CalcNewSpeed();
+        CalcSpeed();
     }
     [PunRPC] private void RPC_RemoveSpeedBoost(string boostName)
     {
@@ -617,14 +643,14 @@ public class PlayerStats : Photon.MonoBehaviour
                 break;
             }
         }
-        CalcNewSpeed();
+        CalcSpeed();
     }
 
     // Max Health RPCs
     [PunRPC] private void RPC_AddHealthBoost(string boostName, float boost)
     {
         _healthBoosts.Add(new KeyValuePair<string, float>(boostName, boost));
-        CalcNewHealth();
+        CalcHealth();
     }
     [PunRPC] private void RPC_RemoveHealthBoost(string boostName)
     {
@@ -636,7 +662,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 break;
             }
         }
-        CalcNewHealth();
+        CalcHealth();
     }
 
     #endregion Photon RPCs
@@ -662,7 +688,7 @@ public class PlayerStats : Photon.MonoBehaviour
         }
     }
     // Recalculate scale modifier
-    private void CalcNewScale()
+    private void CalcScale()
     {
         _scaleMod = new Vector3(1f, 1f, 1f);
         foreach (KeyValuePair<string, Vector3> f in _scaleFactors)
@@ -672,7 +698,8 @@ public class PlayerStats : Photon.MonoBehaviour
             _scaleMod.z *= f.Value.z;
         }
     }
-    private void CalcNewDamage()
+    // Recalculate damage
+    private void CalcDamage()
     {
         // Set damage to base
         _damage = _baseDmg;
@@ -689,7 +716,8 @@ public class PlayerStats : Photon.MonoBehaviour
             _damage += boostPair.Value;
         }
     }
-    private void CalcNewSpeed()
+    // Recalculate speed
+    private void CalcSpeed()
     {
         // Reset walk speed
         _walkSpeed = _baseWalkSpeed;
@@ -704,7 +732,8 @@ public class PlayerStats : Photon.MonoBehaviour
             _walkSpeed += boostPair.Value;
         }
     }
-    private void CalcNewHealth()
+    // Recalculate health
+    private void CalcHealth()
     {
         float newMaxHp = _baseMaxHp;
         foreach(KeyValuePair<string, float> boostPair in _healthBoosts)
@@ -719,6 +748,8 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp = _maxHp;
         }
     }
+
+    
 
     #endregion Private Methods
 }

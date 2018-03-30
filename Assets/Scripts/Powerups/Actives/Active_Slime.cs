@@ -14,7 +14,7 @@ Information
 
 namespace Powerups
 {
-    public class Powerup_Slime : ActiveAbility
+    public class Active_Slime : ActiveAbility
     {
         private float CDstart;
         private bool onCooldown = false, Active = false;
@@ -23,6 +23,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+            Cooldown = 7;
             // Set name
             Name = "Slime";
             Debug.Log(Name + " Added");
@@ -52,13 +53,13 @@ namespace Powerups
                     return;
                 }
                 Active = false;
-                onCooldown = true;
-                CDstart = Time.time;
+                //onCooldown = true;
+                //CDstart = Time.time;
             }
-            if (onCooldown)
+            /*if (onCooldown)
             {
                 CoolDown(Time.time, duration);
-            }
+            }*/
 
             base.OnUpdate();
         }
@@ -119,13 +120,13 @@ namespace Powerups
             base.Activate();
         }
 
-        private void CoolDown(float currentTime, float duration)
+        /*private void CoolDown(float currentTime, float duration)
         {
             if (currentTime >= CDstart + duration)
             {
                 Debug.Log("Slime is off cooldown");
                 onCooldown = false;
             }
-        }
+        }*/
     }
 }

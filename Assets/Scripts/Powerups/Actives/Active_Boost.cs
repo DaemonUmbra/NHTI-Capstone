@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_Boost : ActiveAbility
+    public class Active_Boost : ActiveAbility
     {
         [HideInInspector]
         public PlayerStats PS;
@@ -20,6 +20,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+            Cooldown = 5;
             Name = "Boost";
             Debug.Log(Name + "  Added");
             PS = GetComponent<PlayerStats>();
