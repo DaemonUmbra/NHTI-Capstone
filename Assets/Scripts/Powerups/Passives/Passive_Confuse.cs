@@ -2,7 +2,7 @@
 
 namespace Powerups
 {
-    public class Powerup_Confuse : PassiveAbility
+    public class Passive_Confuse : PassiveAbility
     {
 
         public override void OnAbilityAdd()

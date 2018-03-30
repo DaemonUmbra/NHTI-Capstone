@@ -1,6 +1,6 @@
 ﻿namespace Powerups  //Ian MacKenzie
 {
-    public class Powerup_AddJump : PassiveAbility
+    public class Passive_AddJump : PassiveAbility
     {
         private PlayerController playerController;
 

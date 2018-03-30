@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Powerups
 {
-    internal class Powerup_NYEH : PassiveAbility
+    internal class Passive_NYEH : PassiveAbility
     {
         private AudioManager audioManager;
         private AudioSource audioSource;

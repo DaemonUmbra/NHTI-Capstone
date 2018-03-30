@@ -2,7 +2,7 @@
 
 namespace Powerups
 {
-    public class Powerup_FeatherFall : PassiveAbility
+    public class Passive_FeatherFall : PassiveAbility
     {
         public float maxSpeed = 5f;
         private Rigidbody rb;

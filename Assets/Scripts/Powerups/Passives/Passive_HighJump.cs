@@ -4,13 +4,17 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_HighJump : PassiveAbility
+    public class Passive_HighJump : PassiveAbility
     {
         public float JumpBoost = 2;
 
-        public override void OnAbilityAdd()
+        private void Awake()
         {
             Name = "High Jump";
+        }
+        public override void OnAbilityAdd()
+        {
+            
             if (photonView.isMine)
             {
                 GetComponent<PlayerMotor>().JumpMultiplier += JumpBoost;

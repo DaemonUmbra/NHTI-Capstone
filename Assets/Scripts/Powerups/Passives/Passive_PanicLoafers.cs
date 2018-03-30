@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_PanicLoafers : PassiveAbility
+    public class Passive_PanicLoafers : PassiveAbility
     {
         [HideInInspector]
         public PlayerStats PS;

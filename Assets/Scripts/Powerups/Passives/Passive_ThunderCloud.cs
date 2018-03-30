@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Powerups;
 
 namespace Powerups
 {
 
-    public class Powerup_ThunderCloud : PassiveAbility
+    public class Passive_ThunderCloud : PassiveAbility
     {
         PlayerStats ps;
         private float timeLimit = 15.0f;
@@ -49,7 +50,7 @@ namespace Powerups
         private void OnCollisionEnter(Collision collision)
         {
             AbilityManager manager = collision.gameObject.GetComponent<AbilityManager>();
-            manager.AddAbility<Powerup_ThunderCloud>();
+            manager.AddAbility<Passive_ThunderCloud>();
 
             OnAbilityRemove();
         }

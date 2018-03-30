@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Powerups
 {
     [RequireComponent(typeof(AudioSource))]
-    public class Powerup_Coconuts : PassiveAbility
+    public class Passive_Coconuts : PassiveAbility
     {
 
         public float SpeedBoost = .25f;

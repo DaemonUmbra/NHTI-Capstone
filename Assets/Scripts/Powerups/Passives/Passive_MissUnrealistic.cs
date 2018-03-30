@@ -7,7 +7,7 @@ namespace Powerups
      * without permission, ask in the discord first
      **/
 
-    public class Powerup_MissUnrealistic : PassiveAbility
+    public class Passive_MissUnrealistic : PassiveAbility
     {
         PlayerStats playerStats;
         

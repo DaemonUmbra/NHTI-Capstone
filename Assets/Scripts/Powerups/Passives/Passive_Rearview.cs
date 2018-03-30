@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Powerups
 {
     [Serializable]
-    public class Powerup_Rearview : PassiveAbility
+    public class Passive_Rearview : PassiveAbility
     {
         //Camera Object
         private Vector3 cameraOffset = new Vector3(0, 2.26f, 0);

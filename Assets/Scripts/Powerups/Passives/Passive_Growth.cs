@@ -12,11 +12,12 @@ namespace Powerups
     /// </summary>
     
     [RequireComponent(typeof(AudioSource))]
-    public class Powerup_Growth : PassiveAbility
+    public class Passive_Growth : PassiveAbility
     {
         public AudioClip FootFall;
         public float GrowthFactor = 2;
         public float DeadZone = .1f;
+        
 
         private AudioManager AudioManager;
         private AudioSource AudioSource;
@@ -27,12 +28,16 @@ namespace Powerups
 
         public float LastFootfall = 0;
 
+        private void Awake()
+        {
+            Name = "Growth";
+            FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
+        }
+
         public override void OnAbilityAdd()
         {
             pStats = gameObject.GetComponent<PlayerStats>();
             AudioManager = GetComponent<AudioManager>();
-            FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
-            Name = "Growth";
             AudioSource = AudioManager.GetNewAudioSource(Name);
             // Only adjust scale on the controlling client because AddScaleFactor is networked
             if (photonView.isMine)
