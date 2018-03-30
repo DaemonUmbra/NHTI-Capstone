@@ -7,7 +7,7 @@ namespace Powerups
      * without permission, ask in the discord first
      **/
 
-    public class Powerup_Aliens : BaseAbility
+    public class Powerup_Aliens : PassiveAbility
     {
 
         PlayerStats playerStats;

@@ -279,7 +279,7 @@ public class AbilityManager : Photon.MonoBehaviour
         {
             UnregisterAbility((ActiveAbility)ability);
         }
-        else if (ability.GetType().BaseType == typeof(ActiveAbility))
+        else if (ability.GetType().BaseType == typeof(PassiveAbility))
         {
             UnregisterAbility((PassiveAbility)ability);
         }
