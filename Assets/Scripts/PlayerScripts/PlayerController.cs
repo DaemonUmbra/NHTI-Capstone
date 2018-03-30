@@ -153,31 +153,52 @@ public class PlayerController : Photon.MonoBehaviour
     [PunRPC]
     private void TryJump()
     {
-        Debug.Log("tryjump! " + maxJumpCount);
+        //Debug.Log("tryjump! " + maxJumpCount);
         if (jumpCount < maxJumpCount)
         {
-            Debug.Log("jump!");
+            //Debug.Log("jump!");
             lastJumpTime = Time.time;
             motor.Jump();
             jumpCount++;
         }
     }
-
+    private void GroundCheck()
+    {
+        Vector3 dwn = transform.TransformDirection(Vector3.down);
+        RaycastHit land;
+        if (Physics.Raycast(transform.position, dwn, out land))
+        {
+            if (land.distance < .3f)
+            {
+                isGrounded = true;
+                jumpCount = 0;
+            }
+            Debug.Log(land.transform.gameObject.name);
+            Debug.Log(land.distance);
+        }
+    }
+    private void OverHeadCheck()
+    {
+        Vector3 dir = transform.TransformDirection(Vector3.up);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, dir, out hit))
+        {
+            if (hit.distance < .3f)
+            {
+                isGrounded = true;
+                jumpCount = 0;
+            }
+            Debug.Log(hit.transform.gameObject.name);
+            Debug.Log(hit.distance);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
         if (collision.collider.gameObject.layer == groundLayer)
         {
-            isGrounded = true;
-            jumpCount = 0;
-            print("Jump Reset");
-        }
-        if (collision.gameObject.tag == "SlimeBall")
-        {
-            CCStartTime = Time.time;
-            duration = 1f;
-            CrowdControlled = true;
-            CCWearOff(Time.time, duration, true);
+            GroundCheck();
+            //print("Jump Reset");
         }
     }
 
