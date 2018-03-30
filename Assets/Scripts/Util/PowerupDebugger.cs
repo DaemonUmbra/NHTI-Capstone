@@ -20,7 +20,7 @@ public class PowerupDebugger : Photon.MonoBehaviour
     {
         if (Player && photonView.isMine)
         {
-            if (!Player.CanPickupAbility(ability))
+            if (Player.CanPickupAbility(ability))
             {
                 Player.AddAbility(ability);
             }
@@ -31,7 +31,7 @@ public class PowerupDebugger : Photon.MonoBehaviour
     {
         if (Player && photonView.isMine)
         {
-            if (Player.CanPickupAbility(ability))
+            if (!Player.CanPickupAbility(ability))
             {
                 Player.RemoveAbility(ability);
             }

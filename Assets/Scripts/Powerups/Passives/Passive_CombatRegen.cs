@@ -9,15 +9,17 @@ using UnityEngine;
 
 namespace Powerups
 {
-    public class Powerup_CombatRegen : PassiveAbility
+    public class Passive_CombatRegen : PassiveAbility
     {
         [HideInInspector]
         public PlayerStats PS;
         public bool Healing;
-
-        public override void OnAbilityAdd()
+        private void Awake()
         {
             Name = "Combat Regeneration";
+        }
+        public override void OnAbilityAdd()
+        {
             Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
             Healing = false;

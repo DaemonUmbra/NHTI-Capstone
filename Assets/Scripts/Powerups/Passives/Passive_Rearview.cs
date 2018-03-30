@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Powerups
 {
     [Serializable]
-    public class Powerup_Rearview : PassiveAbility
+    public class Passive_Rearview : PassiveAbility
     {
         //Camera Object
         private Vector3 cameraOffset = new Vector3(0, 2.26f, 0);
@@ -19,6 +19,10 @@ namespace Powerups
         private GameObject cameraDummy;
         new private Camera camera;
 
+        private void Awake()
+        {
+            Name = "Rearview";
+        }
         public override void OnAbilityAdd()
         {
             /*
@@ -27,7 +31,6 @@ namespace Powerups
             pv.RPC("Rearview_AddAbility", PhotonTargets.All);
             */
 
-            Name = "Rearview";
             //Created a camera dummy
             cameraDummy = new GameObject
             {

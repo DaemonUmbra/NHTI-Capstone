@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Powerups
 {
     [RequireComponent(typeof(AudioSource))]
-    public class Powerup_Coconuts : PassiveAbility
+    public class Passive_Coconuts : PassiveAbility
     {
 
         public float SpeedBoost = .25f;
@@ -14,7 +14,10 @@ namespace Powerups
         private AudioSource AudioSource;
         private AudioClip CoconutSound;
         private PlayerStats PlayerStats;
-
+        private void Awake()
+        {
+            Name = "Coconuts";
+        }
         public override void OnUpdate()
         {
             ////If moving

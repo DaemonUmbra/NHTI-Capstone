@@ -7,7 +7,7 @@ namespace Powerups
      * without permission, ask in the discord first
      **/
 
-    public class Powerup_MissUnrealistic : PassiveAbility
+    public class Passive_MissUnrealistic : PassiveAbility
     {
         PlayerStats playerStats;
         
@@ -30,7 +30,10 @@ namespace Powerups
 
         public Transform crownOrSashTemplate;
         private Transform crownOrSashInstance;
-        
+        private void Awake()
+        {
+            Name = "Miss Unrealistic";
+        }
         public override void OnAbilityAdd()
         {
             playerStats = GetComponent<PlayerStats>();
@@ -38,8 +41,6 @@ namespace Powerups
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);
             */
-
-            Name = "Miss Unrealistic";
             //If we don't have a template set in the editor
             if (!crownOrSashTemplate)
             {

@@ -29,6 +29,7 @@ public class Projectile : Photon.MonoBehaviour
     {
         GetShooter();
         Shoot();
+        onHitEffects = new List<Effect>();
     }
 
     public void Update()
@@ -40,6 +41,7 @@ public class Projectile : Photon.MonoBehaviour
                 PhotonNetwork.Destroy(photonView);
             }
         }
+        
     }
 
     // Find a reference to the shooter
