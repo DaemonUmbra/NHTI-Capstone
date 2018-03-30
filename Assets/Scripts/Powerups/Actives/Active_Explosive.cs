@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+namespace Powerups {
+    public class Active_Explosive : ActiveAbility {
 
-namespace Powerups
-{
-    public class Powerup_IceBall : ActiveAbility
-    {
         private PlayerShoot pShoot;
-        private Ice iceball;
 
         private void Awake()
         {
 
-            Name = "Ice Ball";
+            Name = "Explosion";
         }
 
         public override void OnAbilityAdd()
@@ -23,7 +20,7 @@ namespace Powerups
             pShoot = GetComponent<PlayerShoot>();
             if (pShoot)
             {
-                Debug.Log("Ice Ball Added to Shoot Delegate");
+                Debug.Log("Explosion Added to Shoot Delegate");
                 pShoot.shoot += TryActivate;
             }
             // Call base function
@@ -47,7 +44,7 @@ namespace Powerups
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Bullet 1", transform.position, transform.rotation, 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Explosive", transform.position, transform.rotation, 0);
             }
             base.Activate();
         }
