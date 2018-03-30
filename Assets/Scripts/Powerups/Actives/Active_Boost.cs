@@ -37,6 +37,8 @@ namespace Powerups
 
         protected override void Activate()
         {
+            Debug.Log("Activate Test - Boost");
+
             if (Boosted == false)
             {
                 StartCoroutine(FastTime());
@@ -45,7 +47,6 @@ namespace Powerups
             // Call base function
             base.Activate();
 
-            Debug.Log("Activate Test - Boost");
         }
 
         IEnumerator FastTime()
