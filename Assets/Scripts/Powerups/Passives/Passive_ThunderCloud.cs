@@ -11,9 +11,13 @@ namespace Powerups
         PlayerStats ps;
         private float timeLimit = 15.0f;
         private float timer;
-        public override void OnAbilityAdd()
+
+        private void Awake()
         {
             Name = "Thunder Cloud";
+        }
+        public override void OnAbilityAdd()
+        {
             ps = GetComponentInParent<PlayerStats>();
 
             ps.AddSpeedBoost(Name, 0.1f);

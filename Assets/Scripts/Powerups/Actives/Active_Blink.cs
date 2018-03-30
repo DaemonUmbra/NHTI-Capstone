@@ -24,14 +24,14 @@ namespace Powerups
         public float blinkVolume = 1f;
 
         // Use this for initialization
-        private void Start()
+        private void Awake()
         {
+            // Set name
+            Name = "Blink";
         }
 
         public override void OnAbilityAdd()
         {
-            // Set name
-            Name = "Blink";
             Debug.Log(Name + " Added");
             Cooldown = 2.0f;
 

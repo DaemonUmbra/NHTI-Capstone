@@ -19,6 +19,10 @@ namespace Powerups
         private GameObject cameraDummy;
         new private Camera camera;
 
+        private void Awake()
+        {
+            Name = "Rearview";
+        }
         public override void OnAbilityAdd()
         {
             /*
@@ -27,7 +31,6 @@ namespace Powerups
             pv.RPC("Rearview_AddAbility", PhotonTargets.All);
             */
 
-            Name = "Rearview";
             //Created a camera dummy
             cameraDummy = new GameObject
             {

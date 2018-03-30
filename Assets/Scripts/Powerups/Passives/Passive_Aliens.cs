@@ -21,7 +21,11 @@ namespace Powerups
 
         [SerializeField]
         private float zChange = 0.5f;
-        
+
+        private void Awake()
+        {
+            Name = "Aliens";
+        }
         public override void OnAbilityAdd()
         {
             playerStats = GetComponent<PlayerStats>();
@@ -29,8 +33,6 @@ namespace Powerups
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);
             */
-
-            Name = "Aliens";
 
             playerStats.AddScaleFactor(Name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
 

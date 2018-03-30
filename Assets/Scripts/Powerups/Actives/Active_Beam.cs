@@ -14,16 +14,20 @@ Information
 
 namespace Powerups
 {
-    public class Powerup_Beam : ActiveAbility
+    public class Active_Beam : ActiveAbility
     {
         private bool onCooldown = false, CurrentlyActive = false;
         private PlayerShoot pShoot;
         private GameObject rayOrigin;
 
-        public override void OnAbilityAdd()
+        private void Awake()
         {
             // Set name
             Name = "Beam";
+        }
+        public override void OnAbilityAdd()
+        {
+            
             Debug.Log(Name + " Added");
 
             // Add new shoot function to delegate
