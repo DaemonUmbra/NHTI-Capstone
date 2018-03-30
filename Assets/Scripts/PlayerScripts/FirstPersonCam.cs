@@ -16,13 +16,10 @@ public class FirstPersonCam : Photon.MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-            Cursor.lockState = CursorLockMode.Locked;
         yaw += speedH * Input.GetAxis("Mouse X");
         pitch -= speedV * Input.GetAxis("Mouse Y");
 

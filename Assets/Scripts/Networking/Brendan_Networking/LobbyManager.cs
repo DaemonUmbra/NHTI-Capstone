@@ -19,7 +19,7 @@ public class LobbyManager : Photon.PunBehaviour {
     public Button loginButton;
     public Text connectingText;
     #endregion
-    
+
 
     #region Access Variables
     public static LobbyState State { get { return _clientState; } }
@@ -37,6 +37,7 @@ public class LobbyManager : Photon.PunBehaviour {
             case LobbyState.LOGIN:
                 Debug.Log("Entered Login State");
                 _canvasManager.ChangeLobbyState(LobbyState.LOGIN);
+                if (PhotonNetwork.connected) { ChangeState(LobbyState.LOBBY); }
                 break;
 
             // Main Lobby
