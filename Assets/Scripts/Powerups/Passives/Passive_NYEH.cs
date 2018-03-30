@@ -37,7 +37,24 @@ namespace Powerups
         {
             {
                 Debug.Log(photonView.owner.NickName + ": NYEH!");
-                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!", nyehVolume);
+                switch(Random.Range(1, 3))
+                {
+                    case 1:
+                        {
+                            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!", nyehVolume);
+                            break;
+                        }
+                    case 2:
+                        {
+                            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!2", nyehVolume);
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+                
             }
         }
 

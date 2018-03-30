@@ -22,6 +22,7 @@ public partial class AudioManager : Photon.MonoBehaviour
     private void LoadClips()
     {
         clipRegistry.Add("NYEH!", Resources.Load<AudioClip>("Sounds/NYEH"));
+        clipRegistry.Add("NYEH!2", Resources.Load<AudioClip>("Sounds/NYEH2"));
         clipRegistry.Add("Blink", Resources.Load<AudioClip>("Sounds/blink"));
     }
 
