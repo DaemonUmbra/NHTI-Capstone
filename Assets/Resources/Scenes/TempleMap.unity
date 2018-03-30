@@ -1741,6 +1741,36 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114531513733949694, guid: c06e67e6fa715e740a11b490a93c8f1b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 86724791}
+    - target: {fileID: 114531513733949694, guid: c06e67e6fa715e740a11b490a93c8f1b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 114200715051922410, guid: c06e67e6fa715e740a11b490a93c8f1b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 86724791}
+    - target: {fileID: 114200715051922410, guid: c06e67e6fa715e740a11b490a93c8f1b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Lobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 114688532470137374, guid: c06e67e6fa715e740a11b490a93c8f1b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 86724791}
+    - target: {fileID: 114688532470137374, guid: c06e67e6fa715e740a11b490a93c8f1b,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c06e67e6fa715e740a11b490a93c8f1b, type: 2}
   m_IsPrefabParent: 0
