@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1857393854184106}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.412354, y: 18.549995, z: 62.424885}
+  m_LocalPosition: {x: 40, y: 1, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,8 +78,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396784752e783ca45bd68710dba3d7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvailablePowerupStrings: []
+  spawnPool: {fileID: 114362389737626934, guid: 700af569d0139a84eb191ccd6f3dcebf,
+    type: 2}
   MinDelay: 3
   MaxDelay: 10
   hasPickup: 0
-  pickUp: {fileID: 1431017886688766, guid: 588d6b97cdaa0664b91adfda4c708080, type: 2}
+  lastPickupTime: 0
+  pickupPrefab: {fileID: 1431017886688766, guid: 588d6b97cdaa0664b91adfda4c708080,
+    type: 2}

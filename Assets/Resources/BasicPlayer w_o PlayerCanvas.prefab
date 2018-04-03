@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 114852648514759674}
   - component: {fileID: 114525675898936844}
   - component: {fileID: 114275901328029248}
+  - component: {fileID: 114669762924275862}
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
@@ -537,6 +538,8 @@ MonoBehaviour:
     taken: 0
   - Icon: {fileID: 0}
     taken: 0
+  defaultActive: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  defaultPassive: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!114 &114572536733741510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -680,6 +683,17 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &114669762924275862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591509329833866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a521f97f990d5244f91e037228ae4ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114687540901405684
 MonoBehaviour:
   m_ObjectHideFlags: 1

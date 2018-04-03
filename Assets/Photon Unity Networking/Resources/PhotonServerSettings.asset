@@ -27,98 +27,52 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
-  - Activate
-  - AddAbility
-  - Chat
-  - Chat
-  - DestroyRpc
-  - InstantiateRpc
-  - Debugger_Remote_AddAbility
-  - Debugger_Remote_RemoveAbility
-  - DestroyRpc
-  - Growth_AddAbility
-  - Growth_RemoveAbility
-  - InstantiateRpc
-  - Miss_Unrealistic_AddAbility
-  - Miss_Unrealistic_RemoveAbility
-  - NYEH_Activate
-  - NYEH_AddAbility
-  - NYEH_RemoveAbility
-  - OnAbilityAdd
-  - OnAbilityRemove
-  - OnUpdate
-  - PickupItemInit
-  - PunPickup
-  - PunPickupSimple
-  - PunRespawn
-  - Rearview_AddAbility
-  - Rearview_RemoveAbility
-  - RemoveAbility
-  - RequestForPickupItems
-  - RequestForPickupTimes
-  - RPC_LoadedGameScene
-  - RPC_LoadGameOthers
-  - Shoot
-  - RequestForPickupItems
-  - RequestForPickupTimes
-  - Ring
-  - RPC_CreatePlayer
-  - RPC_LoadedGameScene
-  - RPC_LoadGameOthers
-  - RPC_NewHealth
-  - RPC_PerformTaunt
-  - Shoot
-  - AddAbility
-  - RegisterAbility
-  - RemoveAbility
-  - UnregisterAbility
-  - Activate
-  - OnAbilityAdd
-  - OnAbilityRemove
-  - OnUpdate
-  - RPC_Activate
-  - RPC_AddAbility
-  - RPC_RemoveAbility
-  - RPC_TakeDamage
-  - RPC_Destroy
-  - RPC_Die
-  - RPC_GainHp
-  - RPC_OnAbilityAdd
-  - RPC_OnAbilityRemove
-  - RPC_OnAbilityUpdate
-  - DestroyPickup
-  - RPC_IgnorePlayer
-  - RPC_ChangeLevel
-  - RPC_FireEvent
-  - RPC_ModifyMaxHp
-  - RPC_FirePrimary
-  - AddPickupAbility
-  - AbilityPickup
-  - PowerUpSpawn
-  - RPC_SpawnPowerup
-  - RPC_CollectPowerup
-  - TryJump
   - AM_PlayClip
   - AM_PlayOneShot
   - AM_SetClip
   - AM_SetVolume
   - AM_StopClip
-  - RPC_AddScaleFactor
-  - RPC_RemoveScaleFactor
+  - Chat
+  - DestroyRpc
+  - InstantiateRpc
+  - MM_SetModel
+  - PickupItemInit
+  - PunPickup
+  - PunPickupSimple
+  - PunRespawn
+  - RequestForPickupItems
+  - RequestForPickupTimes
+  - RPC_Activate_Blink
+  - RPC_Activate_NYEH1
+  - RPC_Activate_NYEH2
+  - RPC_AddAbility
   - RPC_AddDamageBoost
   - RPC_AddDamageMultiplier
   - RPC_AddHealthBoost
+  - RPC_AddScaleFactor
   - RPC_AddSpeedBoost
   - RPC_AddSpeedMultiplier
+  - RPC_ChangeLevel
+  - RPC_CollectPowerup
+  - RPC_CreatePlayer
+  - RPC_Die
+  - RPC_FirePrimary
+  - RPC_GainHp
+  - RPC_LoadedGameScene
+  - RPC_ModifyMaxHp
+  - RPC_OnAbilityAdd
+  - RPC_OnAbilityRemove
+  - RPC_RemoveAbility
   - RPC_RemoveDamageBoost
   - RPC_RemoveDamageMultiplier
   - RPC_RemoveHealthBoost
+  - RPC_RemoveScaleFactor
   - RPC_RemoveSpeedBoost
   - RPC_RemoveSpeedMultiplier
-  - RPC_Activate_NYEH
-  - RPC_Activate_Blink
-  - RPC_TriggerAbility
   - RPC_ResetStats
-  - RPC_Activate_NYEH1
-  - RPC_Activate_NYEH2
+  - RPC_SetSpawnPool
+  - RPC_SpawnPowerup
+  - RPC_TakeDamage
+  - RPC_TriggerAbility
+  - TryJump
   DisableAutoOpenWizard: 1

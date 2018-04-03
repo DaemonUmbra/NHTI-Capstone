@@ -1,6 +1,4 @@
 ﻿
-/*
- * Disabling Nova for now
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +28,6 @@ namespace Powerups {
             Explosion = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             PhotonView pv = Explosion.AddComponent<PhotonView>();
             PhotonTransformView ptv = Explosion.AddComponent<PhotonTransformView>();
-            ptv.
             pv.ObservedComponents.Add(ptv);
             Explosion.transform.position = transform.parent.localPosition;
             Explosion.SetActive(false);
@@ -82,4 +79,3 @@ namespace Powerups {
         }
     }
 }
-*/

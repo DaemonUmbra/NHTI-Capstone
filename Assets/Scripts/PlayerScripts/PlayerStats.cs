@@ -684,13 +684,13 @@ public class PlayerStats : Photon.MonoBehaviour
         // Scale each transform individually
         foreach (Transform t in _transformsToScale)
         {
-            t.localScale = new Vector3(_baseScale.x * _scaleMod.x, _baseScale.y * _scaleMod.y, _baseScale.z * _scaleMod.z);
+            t.localScale = new Vector3( _scaleMod.x, _scaleMod.y, _scaleMod.z);
         }
     }
     // Recalculate scale modifier
     private void CalcScale()
     {
-        _scaleMod = new Vector3(1f, 1f, 1f);
+        _scaleMod = _baseScale;
         foreach (KeyValuePair<string, Vector3> f in _scaleFactors)
         {
             _scaleMod.x *= f.Value.x;

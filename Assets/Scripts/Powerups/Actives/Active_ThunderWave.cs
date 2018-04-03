@@ -2,7 +2,7 @@
 
 namespace Powerups
 {
-    public class Powerup_ThunderWave : ActiveAbility
+    public class Active_ThunderWave : ActiveAbility
     {
         public float upforce = 15;
 
@@ -21,6 +21,17 @@ namespace Powerups
 
         private PlayerShoot pShoot;
 
+        public float shockwaveVolume = 3f;
+        public AudioManager audioManager;
+        private AudioSource audioSource;
+        private AudioClip thunderWave;
+
+        private void Awake()
+        {
+            Cooldown = 4.5f;
+            Name = "Thunder Wave";
+        }
+
         #region Abstract Methods
 
         /// <summary>
@@ -29,22 +40,26 @@ namespace Powerups
         /// </summary>
         public override void OnAbilityAdd()
         {
-            Cooldown = 2;
-            Name = "Thunder Wave";
+            
             Debug.Log(Name + " Added");
 
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
+            //pShoot = GetComponent<PlayerShoot>();
+            //if (pShoot)
+            //{
 
-                pShoot.shoot += TryActivate;
-            }
+            //    pShoot.shoot += TryActivate;
+            //}
+
+            audioManager = gameObject.GetComponent<AudioManager>();
+            audioSource = audioManager.GetNewAudioSource(Name);
+            audioSource.playOnAwake = false;
 
             base.OnAbilityAdd();
         }
 
         protected override void Activate() // Will need to be activated by something once we decide how players will trigger abilities.
         {
+            photonView.RPC("RPC_Activate_ThunderWave", PhotonTargets.All);
             origin = transform.position;
             direction = Vector3.forward;
 
@@ -71,7 +86,19 @@ namespace Powerups
                 }
 
             }
+
+           
+
             base.Activate();
+        }
+
+        [PunRPC]
+        protected void RPC_Activate_ThunderWave()
+        {
+            {
+                Debug.Log(photonView.owner.NickName + ": ThunderWave!");
+                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "Shockwave", shockwaveVolume);
+            }
         }
 
         public override void OnUpdate()
@@ -85,6 +112,7 @@ namespace Powerups
         /// </summary>
         public override void OnAbilityRemove()
         {
+            audioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }
 
