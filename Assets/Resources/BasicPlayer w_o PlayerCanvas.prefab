@@ -440,6 +440,7 @@ MonoBehaviour:
   groundLayer: 8
   jumpCooldown: 0
   maxJumpCount: 1
+  canWallJump: 0
   InvertX: 0
   InvertY: 0
 --- !u!114 &114123109819469288
@@ -595,6 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad15ab4e3fd1eae44906fe4c45f044c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpMultiplier: 1
 --- !u!114 &114587264979434446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -718,6 +720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityStrings: []
+  MaxActives: 4
 --- !u!114 &114958967302875398
 MonoBehaviour:
   m_ObjectHideFlags: 1

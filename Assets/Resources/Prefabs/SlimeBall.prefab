@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 135932256401071456}
   - component: {fileID: 23357375370215756}
   - component: {fileID: 54652473073916886}
-  - component: {fileID: 114463501366015230}
+  - component: {fileID: 114317190972651338}
   m_Layer: 0
   m_Name: SlimeBall
   m_TagString: SlimeBall
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745619102207772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: 0.88, z: -2.22}
+  m_LocalPosition: {x: 3.1942348, y: 1, z: 21.721027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +100,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114463501366015230
+--- !u!114 &114317190972651338
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1745619102207772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df65d21c1dc103b42a110bbb12aa7d99, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a1398658a5edaf4fa18abbc2632edf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135932256401071456
@@ -117,8 +117,8 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745619102207772}
-  m_Material: {fileID: 13400000, guid: 64251cac19a5a244698f5bf3a2bcf7ce, type: 2}
-  m_IsTrigger: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
