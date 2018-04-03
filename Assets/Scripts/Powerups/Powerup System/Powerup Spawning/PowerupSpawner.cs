@@ -7,32 +7,35 @@ using System;
 
 public class PowerupSpawner : Photon.MonoBehaviour
 {
-    
     float spawnDelay;
 
-    //private static bool IsSetup;
-    public List<string> AvailablePowerupStrings;
-
-
+    public SpawnPool spawnPool;
+    
     public float MinDelay = 3f;
     public float MaxDelay = 10f;
 
     public bool hasPickup;
     public float lastPickupTime;
-    public GameObject pickUp;
-    
-    
+    public GameObject pickupPrefab;
 
     // Use this for initialization
-   
     private void Start()
     {
         spawnDelay = UnityEngine.Random.Range(MinDelay, MaxDelay);
         lastPickupTime = Time.time - spawnDelay;
         hasPickup = false;
-    }
 
-    
+        if (PhotonNetwork.isMasterClient)
+        { 
+            if (spawnPool)
+            {
+                GameObject pool = PhotonNetwork.Instantiate(spawnPool.name, transform.position, transform.rotation, 0);
+                spawnPool.transform.SetParent(transform);
+                photonView.RPC("RPC_SetSpawnPool", PhotonTargets.All, spawnPool.photonView.viewID);
+            }
+
+        }   
+    }
 
     // Update is called once per frame
     private void Update()
@@ -59,47 +62,39 @@ public class PowerupSpawner : Photon.MonoBehaviour
             // Reset spawn delay
             spawnDelay = UnityEngine.Random.Range(MinDelay, MaxDelay);
 
-            // Choose a new powerup to spawn
-            AvailablePowerupStrings = new List<string>();
-
-            Type[] Types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
-            Dictionary<string, Type> AbilityDict = new Dictionary<string, Type>();
-            foreach (Type type in Types)
-            {
-                if (type.Namespace == "Powerups" && type.IsSubclassOf(typeof(BaseAbility)))
-                {
-                    AvailablePowerupStrings.Add(type.Name);
-                    // AbilityDict.Add(type.Name, type);
-                }
-            }
-            //Powers = AvailablePowerupStrings;
-            string powerName = AvailablePowerupStrings[UnityEngine.Random.Range(0, AvailablePowerupStrings.Count)];
+            BaseAbility powerup = spawnPool.RandomPowerup();
+            var pickup = PhotonNetwork.Instantiate(pickupPrefab.name, transform.position, transform.rotation, 0);
             
-            var pickup = PhotonNetwork.Instantiate(pickUp.name, transform.position, transform.rotation, 0);
 
-
-            photonView.RPC("RPC_SpawnPowerup", PhotonTargets.All, spawnDelay, pickup.GetPhotonView().viewID, powerName);
+            photonView.RPC("RPC_SpawnPowerup", PhotonTargets.All, spawnDelay, pickup.GetPhotonView().viewID, powerup.GetType().ToString());
         }
     }
     public void CollectPowerup()
     {
         photonView.RPC("RPC_CollectPowerup", PhotonTargets.All);
     }
+
     [PunRPC]
-    private void RPC_SpawnPowerup(float newDelay, int powerupId, string powerupName)
+    private void RPC_SetSpawnPool(int poolId)
+    {
+        PhotonView poolView = PhotonView.Find(poolId);
+        spawnPool = poolView.GetComponent<SpawnPool>();
+        spawnPool.Init();
+    }
+    private void RPC_SpawnPowerup(float newDelay, int powerupId, string powerupType)
     {
         spawnDelay = newDelay;
         lastPickupTime = Time.time;
-        Type thisType = ReflectionUtil.GetAbilityTypeFromName(powerupName);
+        Type thisType = Type.GetType(powerupType);
 
         // Find pickup by photon ID
         GameObject pickup = PhotonView.Find(powerupId).gameObject;
-        pickup.AddComponent(thisType);
-      
+        
 
         if (hasPickup == false)
         {
-            pickup.transform.SetParent(this.transform);
+            pickup.AddComponent(thisType);
+            pickup.transform.SetParent(transform);
             Pickup pUp = pickup.GetComponent<Pickup>();
             hasPickup = true;
         }

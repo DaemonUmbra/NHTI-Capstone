@@ -121,4 +121,7 @@ MonoBehaviour:
   - RPC_ResetStats
   - RPC_Activate_NYEH1
   - RPC_Activate_NYEH2
+  - RPC_CreatedSpawnPool
+  - SetSpawnPool
+  - RPC_SetSpawnPool
   DisableAutoOpenWizard: 1

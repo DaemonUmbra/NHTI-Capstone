@@ -2,7 +2,7 @@
 
 namespace Powerups
 {
-    public class Powerup_ThunderWave : ActiveAbility
+    public class Active_ThunderWave : ActiveAbility
     {
         public float upforce = 15;
 
@@ -21,6 +21,12 @@ namespace Powerups
 
         private PlayerShoot pShoot;
 
+        private void Awake()
+        {
+            Cooldown = 2;
+            Name = "Thunder Wave";
+        }
+
         #region Abstract Methods
 
         /// <summary>
@@ -29,8 +35,7 @@ namespace Powerups
         /// </summary>
         public override void OnAbilityAdd()
         {
-            Cooldown = 2;
-            Name = "Thunder Wave";
+            
             Debug.Log(Name + " Added");
 
             pShoot = GetComponent<PlayerShoot>();

@@ -1,0 +1,332 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1448783678235352}
+  m_IsPrefabParent: 1
+--- !u!1 &1448783678235352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4205576065589154}
+  - component: {fileID: 82756089042676584}
+  - component: {fileID: 114362389737626934}
+  - component: {fileID: 114699052265483116}
+  - component: {fileID: 114967197709090630}
+  - component: {fileID: 114702845066189922}
+  - component: {fileID: 114030457833768538}
+  - component: {fileID: 114790807715798698}
+  - component: {fileID: 114243053925318012}
+  - component: {fileID: 114909026455152130}
+  - component: {fileID: 114519763541101996}
+  - component: {fileID: 114961317063789870}
+  - component: {fileID: 114527550335790680}
+  - component: {fileID: 114060083960482952}
+  m_Layer: 0
+  m_Name: SpawnPool_Working
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4205576065589154
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82756089042676584
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &114030457833768538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6fbcc4ff5aac2546ae5ee2d1b0e3b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 478a85b05423ebf4c8e3db16dda903ac, type: 3}
+  PS: {fileID: 0}
+  WalkSpeed: 0
+  Health: 0
+  Instances: 0
+--- !u!114 &114060083960482952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffcf735d4eb73c449935c096b441b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  Cooldown: 0
+--- !u!114 &114243053925318012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d964fcafcac2ac04d91dd99a6a4dc32f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 3ce26b22f893c4c408aaf364c31f8593, type: 3}
+  nyehVolume: 1
+--- !u!114 &114362389737626934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e079e44f623e3784898e051c3c4726c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114519763541101996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6169fec5769c542afb1ac3995c7576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: fa337709a6c1d054d9ea0c5975db3e50, type: 3}
+  xChange: -0.5
+  yChange: 0.5
+  zChange: -0.5
+  crownOrSashTemplate: {fileID: 0}
+--- !u!114 &114527550335790680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7cd5960a6cafd4aab6a9d09e094f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  Cooldown: 0
+--- !u!114 &114699052265483116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9268ed3c0d76a94a988d920281a0090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 64a95ddf8874be84e90396948a60ae78, type: 3}
+  PS: {fileID: 0}
+  Healing: 0
+--- !u!114 &114702845066189922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5537e6ce48fa04aac121ffcc238a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 21300000, guid: 33984ce0a0892754ea86276e7f9146cb, type: 3}
+  FootFall: {fileID: 0}
+  GrowthFactor: 2
+  DeadZone: 0.1
+  dmgMult: 0.5
+  dmgAdd: 0
+  LastFootfall: 0
+--- !u!114 &114790807715798698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cf0b4f3e3d657843835f20d1e130639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  JumpBoost: 2
+--- !u!114 &114909026455152130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac3bd4ded8ff884db541b6f5dd6ed77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+--- !u!114 &114961317063789870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84da6bae416ef9419cf7540a56a3a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  Cooldown: 0
+--- !u!114 &114967197709090630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448783678235352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67e91171951265409473aaafec77836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: New Ability
+  active: 0
+  unique: 1
+  Icon: {fileID: 0}
+  maxSpeed: 5
