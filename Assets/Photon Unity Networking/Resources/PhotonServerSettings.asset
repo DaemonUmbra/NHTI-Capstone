@@ -124,4 +124,5 @@ MonoBehaviour:
   - RPC_CreatedSpawnPool
   - SetSpawnPool
   - RPC_SetSpawnPool
+  - RPC_Activate_ThunderWave
   DisableAutoOpenWizard: 1

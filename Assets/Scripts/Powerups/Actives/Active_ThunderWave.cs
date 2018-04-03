@@ -4,7 +4,7 @@ namespace Powerups
 {
     public class Active_ThunderWave : ActiveAbility
     {
-        public float upforce = 15;
+        public float upforce = 20;
 
         public float forwardforce = 500;
         public Vector3 explosionPos;
@@ -74,8 +74,8 @@ namespace Powerups
                 {
                     if (hit.transform.gameObject != this.gameObject)
                     {
-                        Quaternion rot = Quaternion.Euler(-45, 0, 0);
-                        Vector3 forceDir = rot * Vector3.up;
+                        Vector3 hitDir = hit.point;
+                        Vector3 forceDir = Quaternion.AngleAxis(0, hitDir) * Vector3.up;
                         hit.rigidbody.AddForce(forceDir * upforce, ForceMode.Impulse);
 
 
