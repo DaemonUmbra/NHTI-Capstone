@@ -9,18 +9,7 @@ namespace Powerups
 
     public class Passive_Aliens : PassiveAbility
     {
-
-        PlayerStats playerStats;
-
-        //TWEAKABLE
-        [SerializeField]
-        private float xChange = 0.5f;
-
-        [SerializeField]
-        private float yChange = -0.5f;
-
-        [SerializeField]
-        private float zChange = 0.5f;
+        ModelManager modelManager;
 
         private void Awake()
         {
@@ -28,20 +17,10 @@ namespace Powerups
         }
         public override void OnAbilityAdd()
         {
-            playerStats = GetComponent<PlayerStats>();
-            /*** Handled by base class ***
-            pv = PhotonView.Get(this);
-            pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);
-            */
-
-            playerStats.AddScaleFactor(Name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
+            modelManager = GetComponent<ModelManager>();
+            modelManager.SetModel("Aliens");
 
             base.OnAbilityAdd();
-        }
-
-        public void ApplyScaleChange()
-        {
-
         }
 
         /*** Handled by base class
@@ -106,7 +85,7 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            playerStats.RemoveScaleFactor(Name);
+            modelManager.SetModel("Default");
 
             base.OnAbilityRemove();
         }
