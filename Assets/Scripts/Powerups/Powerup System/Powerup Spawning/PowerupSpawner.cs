@@ -30,6 +30,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
             if (spawnPool)
             {
                 GameObject pool = PhotonNetwork.Instantiate(spawnPool.name, transform.position, transform.rotation, 0);
+                spawnPool = pool.GetComponent<SpawnPool>();
                 spawnPool.transform.SetParent(transform);
                 photonView.RPC("RPC_SetSpawnPool", PhotonTargets.All, spawnPool.photonView.viewID);
             }
@@ -81,6 +82,7 @@ public class PowerupSpawner : Photon.MonoBehaviour
         spawnPool = poolView.GetComponent<SpawnPool>();
         spawnPool.Init();
     }
+    [PunRPC]
     private void RPC_SpawnPowerup(float newDelay, int powerupId, string powerupType)
     {
         spawnDelay = newDelay;
