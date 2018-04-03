@@ -123,7 +123,7 @@ public class PowerupDebugger_Editor : Editor
             if (debugger.SelectedPlayerPowerup)
             {
                 //and it is valid
-                if (debugger.Player.CanPickupAbility(debugger.SelectedPlayerPowerup))
+                if (debugger.Player.HasAbility(debugger.SelectedPlayerPowerup))
                 {
                     //show a button to remove that powerup
                     if (GUILayout.Button("Remove Powerup"))

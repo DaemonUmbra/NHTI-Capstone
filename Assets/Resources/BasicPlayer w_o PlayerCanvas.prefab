@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 114852648514759674}
   - component: {fileID: 114525675898936844}
   - component: {fileID: 114275901328029248}
+  - component: {fileID: 114669762924275862}
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
@@ -440,6 +441,7 @@ MonoBehaviour:
   groundLayer: 8
   jumpCooldown: 0
   maxJumpCount: 1
+  canWallJump: 0
   InvertX: 0
   InvertY: 0
 --- !u!114 &114123109819469288
@@ -595,6 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad15ab4e3fd1eae44906fe4c45f044c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpMultiplier: 1
 --- !u!114 &114587264979434446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -678,6 +681,17 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &114669762924275862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591509329833866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a521f97f990d5244f91e037228ae4ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114687540901405684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -718,6 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityStrings: []
+  MaxActives: 4
 --- !u!114 &114958967302875398
 MonoBehaviour:
   m_ObjectHideFlags: 1
