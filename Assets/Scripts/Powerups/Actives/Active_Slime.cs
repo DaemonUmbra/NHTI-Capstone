@@ -27,15 +27,7 @@ namespace Powerups
             // Set name
             Name = "Slime";
             Debug.Log(Name + " Added");
-
-            // Add new shoot function to delegate
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
-                //Debug.Log("Slime Added to Shoot Delegate");
-                pShoot.shoot += TryActivate;
-            }
-
+            
             base.OnAbilityAdd();
         }
 
@@ -66,13 +58,6 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            // Remove shoot delegate
-            if (pShoot)
-            {
-                pShoot.shoot -= TryActivate;
-            }
-            pShoot = null;
-
             // Call base function
             base.OnAbilityRemove();
         }

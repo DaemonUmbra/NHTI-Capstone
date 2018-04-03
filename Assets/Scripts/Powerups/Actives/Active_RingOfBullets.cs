@@ -20,11 +20,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Debug.Log(Name + " Added");
-
-            // Add new shoot function to delegate
-            pShoot = GetComponent<PlayerShoot>();
             
-
             // Call base function
             base.OnAbilityAdd();
         }

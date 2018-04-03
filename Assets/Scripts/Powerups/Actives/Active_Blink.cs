@@ -41,13 +41,6 @@ namespace Powerups
             audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
 
-
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
-
-                pShoot.shoot += TryActivate;
-            }
             // Call base function
             base.OnAbilityAdd();
         }
@@ -55,13 +48,7 @@ namespace Powerups
         public override void OnAbilityRemove()
         {
             audioManager.DeleteAudioSource(Name);
-
-            if (pShoot)
-            {
-                pShoot.shoot -= TryActivate;
-            }
-            pShoot = null;
-
+            
             // Call base function
             base.OnAbilityRemove();
         }

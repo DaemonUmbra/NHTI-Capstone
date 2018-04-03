@@ -35,15 +35,7 @@ namespace Powerups
         /// </summary>
         public override void OnAbilityAdd()
         {
-            
             Debug.Log(Name + " Added");
-
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
-
-                pShoot.shoot += TryActivate;
-            }
 
             base.OnAbilityAdd();
         }

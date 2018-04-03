@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-/*namespace Powerups
+namespace Powerups
 {
     public class Active_ConjureSlime : ActiveAbility
     {
@@ -15,27 +15,12 @@ using UnityEngine;
             Name = "ConjureSlime";
             Debug.Log(Name + " Added");
 
-            // Add new shoot function to delegate
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
-                Debug.Log("Slime Added to Shoot Delegate");
-                pShoot.shoot += TryActivate;
-            }
-
             // Call base function
             base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
-            // Remove shoot delegate
-            if (pShoot)
-            {
-                pShoot.shoot -= TryActivate;
-            }
-            pShoot = null;
-
             // Call base function
             base.OnAbilityRemove();
         }
@@ -96,4 +81,3 @@ using UnityEngine;
         }
     }
 }
-*/
