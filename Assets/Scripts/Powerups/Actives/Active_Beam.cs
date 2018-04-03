@@ -24,6 +24,7 @@ namespace Powerups
         {
             // Set name
             Name = "Beam";
+            Icon = Resources.Load<Sprite>("Images/Beam");
         }
         public override void OnAbilityAdd()
         {

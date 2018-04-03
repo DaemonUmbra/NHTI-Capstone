@@ -22,6 +22,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Panic Loafers";
+            Icon = Resources.Load<Sprite>("Images/PanicLoafers");
         }
         public override void OnAbilityAdd()
         {

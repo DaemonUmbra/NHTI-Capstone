@@ -28,6 +28,7 @@ namespace Powerups
         {
             // Set name
             Name = "Blink";
+            Icon = Resources.Load<Sprite>("Images/Blink");
         }
 
         public override void OnAbilityAdd()

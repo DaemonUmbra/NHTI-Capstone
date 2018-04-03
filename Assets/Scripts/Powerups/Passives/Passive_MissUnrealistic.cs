@@ -33,6 +33,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Miss Unrealistic";
+            Icon = Resources.Load<Sprite>("Images/MissUnrealistic");
         }
         public override void OnAbilityAdd()
         {

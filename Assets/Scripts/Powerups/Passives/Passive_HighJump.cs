@@ -11,6 +11,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "High Jump";
+            Icon = Resources.Load<Sprite>("Images/High Jump");
         }
         public override void OnAbilityAdd()
         {

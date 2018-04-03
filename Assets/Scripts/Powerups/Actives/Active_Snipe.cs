@@ -27,7 +27,7 @@ namespace Powerups
             // Set name
             Name = "Snipe";
             //Set Sprite
-            Icon = Resources.Load<Sprite>("Sniper");
+            Icon = Resources.Load<Sprite>("Images/Sniper");
         }
 
 

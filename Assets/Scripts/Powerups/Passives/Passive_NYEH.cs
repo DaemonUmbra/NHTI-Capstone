@@ -13,6 +13,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "NYEH!";
+            Icon = Resources.Load<Sprite>("Images/NYEH");
         }
         public override void OnAbilityAdd()
         {

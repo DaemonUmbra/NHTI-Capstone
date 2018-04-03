@@ -26,6 +26,7 @@ namespace Powerups
             audioSource = GetComponent<AudioSource>();
             Closest = 0;
             Name = "Radar";
+            Icon = Resources.Load<Sprite>("Images/Radar");
         }
 
         public override void OnAbilityAdd() // Function for adding ability to player

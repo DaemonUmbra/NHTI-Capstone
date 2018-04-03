@@ -10,6 +10,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Feather Fall";
+            Icon = Resources.Load<Sprite>("Images/Featherfall");
         }
         public override void OnAbilityAdd()
         {

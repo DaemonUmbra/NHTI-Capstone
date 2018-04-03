@@ -17,6 +17,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Combat Regeneration";
+            Icon = Resources.Load<Sprite>("Images/CombatRegen");
         }
         public override void OnAbilityAdd()
         {
