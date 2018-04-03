@@ -42,12 +42,12 @@ namespace Powerups
             audioSource.playOnAwake = false;
 
 
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
+            //pShoot = GetComponent<PlayerShoot>();
+            //if (pShoot)
+            //{
 
-                pShoot.shoot += TryActivate;
-            }
+            //    pShoot.shoot += TryActivate;
+            //}
             // Call base function
             base.OnAbilityAdd();
         }
