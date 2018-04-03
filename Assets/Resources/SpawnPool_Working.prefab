@@ -108,7 +108,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -132,7 +132,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!114 &114030457833768538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,7 +308,7 @@ MonoBehaviour:
   Name: New Ability
   active: 0
   unique: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 75ea06ca32cb95e48869a6683662edbd, type: 3}
   JumpBoost: 2
 --- !u!114 &114909026455152130
 MonoBehaviour:
@@ -339,7 +339,7 @@ MonoBehaviour:
   Name: New Ability
   active: 0
   unique: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 66e6ba4464c4387478708fe0143d3f51, type: 3}
   Cooldown: 0
 --- !u!114 &114967197709090630
 MonoBehaviour:
@@ -355,5 +355,5 @@ MonoBehaviour:
   Name: New Ability
   active: 0
   unique: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 528163ce04b30c2469bee10e273458bc, type: 3}
   maxSpeed: 5

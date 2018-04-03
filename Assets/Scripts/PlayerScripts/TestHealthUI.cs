@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Powerups;
 
 [RequireComponent(typeof(PlayerStats))]
 public class TestHealthUI : Photon.MonoBehaviour {
@@ -11,12 +12,14 @@ public class TestHealthUI : Photon.MonoBehaviour {
 
     GameObject Player;
     private PlayerStats pstats;
-    private AbilityManager abilities;
+    private AbilityManager abilityManager;
     public Slider HealthBar;
     public Text Health;
     public Text powerups;
     public AbilitySlots[] slotsActive;
     public AbilitySlots[] slotsPassive;
+    public Sprite defaultActive;
+    public Sprite defaultPassive;
 
     // Use this for initialization
     void Start()
@@ -24,7 +27,7 @@ public class TestHealthUI : Photon.MonoBehaviour {
         if (photonView.isMine) {
             Player = photonView.gameObject;
             pstats = Player.GetComponent<PlayerStats>();
-            abilities = Player.GetComponent<AbilityManager>();
+            abilityManager = Player.GetComponent<AbilityManager>();
             HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
             GameObject.Find("HealthBar").GetComponent<TempHealthBar>().SetPlayer(gameObject);
             Health = GameObject.Find("HealthBar").transform.Find("Health").GetComponent<Text>();
@@ -54,18 +57,41 @@ public class TestHealthUI : Photon.MonoBehaviour {
             healthText.text = pstats.CurrentHp.ToString();
             Health.text = pstats.CurrentHp.ToString();
             powerups.text = "";
-            List<string> abilityNames = new List<string>(abilities.AbilityList.Keys);
+            List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
             foreach (var power in abilityNames)
             {
                 powerups.text += power + "\n";
             }
 
         }
+        UpdatePowerups();
     }
 
-    public void UpdateSlot(int slotID, Sprite pSprite)
+    public void UpdatePowerups()
     {
-        slotsPassive[slotID].Icon.sprite = pSprite;
+        List<ActiveAbility> actives = abilityManager.ActiveAbilities;
+        for(int i = 0; i < actives.Count; ++i)
+        {
+            slotsActive[i].Icon.sprite = actives[i].Icon;
+        }
+
+        List<PassiveAbility> passives = abilityManager.PassiveAbilities;
+        for (int i = 0; i < passives.Count; ++i)
+        {
+            slotsPassive[i].Icon.sprite = passives[i].Icon;
+        }
+    }
+
+    public void ResetPowerups()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            slotsActive[i].Icon.sprite = defaultActive;
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            slotsPassive[i].Icon.sprite = defaultPassive;
+        }
     }
 }
 
