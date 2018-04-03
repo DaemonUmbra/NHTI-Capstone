@@ -11,4 +11,124 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc38003c0e0db6641a4762d4f392de52, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  prefabs: []
+  prefabs:
+  - gameObject: {fileID: 177690, guid: 867c238da88e7c8498910fdc2f713784, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 107428, guid: cb5b2dd9db6d43149a59f38a3d00df0e, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 168092, guid: b0ef0c4d9594f1c4287a7e2fbbcd0c58, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 118418, guid: a79db51608448de4382f09bcc8b6b524, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 192608, guid: 8aa84974ac7105648a5cdf504917ca57, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 130668, guid: 50a7a65b52af4604e8ddaa70dcdefd5e, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 103660, guid: 8badd28226752ab47a95081cb3c6bd9d, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 111996, guid: 6fe23c582de924b46a6dbab58d540816, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 192050, guid: 46ba0d14f6f47ec45901b98d39a6954b, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 149646, guid: 8b1dcfabc80ffbf449fb79d6847b0348, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 141978, guid: a8835d25101f3414697d6b91fadbb0f8, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 101332, guid: 7e3d778799ce46f45b2b89aa19f08bb4, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 187642, guid: 9ea339c860a432a4ca3351dc61e3c85a, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 165404, guid: e68af5f67de43be4e8f50d4211e82bee, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 161852, guid: 1ffc6c9bfd10f444c99f0459d6ea4d5a, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 190056, guid: d6c5b61b3a95f1a4295afe1fd04252e8, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 171794, guid: 6f0a31dd1509ba14b8999aaa3f3cccee, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 169910, guid: 0b3de2eaf350bc34f9a948d6689c4e5c, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 137036, guid: cdf5aea938c42a342b85ac03019da394, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 110562, guid: d966129252a10d246a8cd3f4e197ebb6, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 114116, guid: 84a71a8bc10cd2747b8bee5359414e2c, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 109144, guid: e4bf2ec7712842242a48097a31d1c36a, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 145630, guid: fbbe7495a44cdee4c88fa7a98db14b38, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 116668, guid: 05b9b7f7f3e707c48a193ddad4740764, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 126490, guid: 16c9166a47e77d84b81b63dfa591616f, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 127406, guid: 48669f7b03ecd3d4c8688084f70c6f81, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 102124, guid: 4e24dfa0c80b4c540bcc27e1871b8510, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 137938, guid: 7460b0e8b307b2c4b8677626c9ec5eb7, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 188960, guid: 4eec5615fd36eed48816505fa7ffed55, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
+  - gameObject: {fileID: 198250, guid: 0e04f9a81ac7de54fa6a045960dfb651, type: 2}
+    settings:
+      rotationRange: {x: 0, y: 0}
+      scaleRange: {x: 0, y: 0}
