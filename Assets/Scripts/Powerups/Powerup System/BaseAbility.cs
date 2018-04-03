@@ -15,6 +15,21 @@ namespace Powerups
 
         public string GetName { get { return Name; } }
 
+        private PowerupTier tier = PowerupTier.Common;
+
+        public PowerupTier Tier
+        {
+            get
+            {
+                return tier;
+            }
+
+            protected set
+            {
+                tier = value;
+            }
+        }
+
         [SerializeField]
         protected bool active = false;
         [SerializeField]
@@ -79,5 +94,14 @@ namespace Powerups
         }
 
         #endregion Photon RPCs
+    }
+
+    public enum PowerupTier
+    {
+        Common,
+        Uncommon,
+        Rare,
+        Legendary,
+        OP
     }
 }
