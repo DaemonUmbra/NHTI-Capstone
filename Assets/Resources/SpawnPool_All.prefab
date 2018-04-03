@@ -235,7 +235,7 @@ MonoBehaviour:
   Name: New Ability
   active: 0
   unique: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 75ea06ca32cb95e48869a6683662edbd, type: 3}
   JumpBoost: 2
 --- !u!114 &114330360954311414
 MonoBehaviour:
@@ -251,7 +251,7 @@ MonoBehaviour:
   Name: New Ability
   active: 0
   unique: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 528163ce04b30c2469bee10e273458bc, type: 3}
   maxSpeed: 5
 --- !u!114 &114390535131941998
 MonoBehaviour:
@@ -421,7 +421,7 @@ MonoBehaviour:
   Name: New Ability
   active: 0
   unique: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 66e6ba4464c4387478708fe0143d3f51, type: 3}
   Cooldown: 0
 --- !u!114 &114656972104811000
 MonoBehaviour:
@@ -470,7 +470,7 @@ MonoBehaviour:
   Name: New Ability
   active: 0
   unique: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 9a0db6f25a984b348847bd6eca0e4e4e, type: 3}
   Cooldown: 0
 --- !u!114 &114736827022348682
 MonoBehaviour:

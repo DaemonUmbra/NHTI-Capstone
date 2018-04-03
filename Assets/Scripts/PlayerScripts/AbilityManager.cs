@@ -18,6 +18,9 @@ public class AbilityManager : Photon.MonoBehaviour
     private int MaxActives = 4;
     private List<ActiveAbility> _activeAbilities;
     private List<PassiveAbility> _passiveAbilities;
+
+    public List<ActiveAbility> ActiveAbilities { get { return _activeAbilities; } }
+    public List<PassiveAbility> PassiveAbilities { get { return _passiveAbilities; } }
     #endregion
 
 
