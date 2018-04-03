@@ -4,15 +4,16 @@ public class SlimeBall : MonoBehaviour
 {
     private float lifetime = 10f;
     private float force = 10f;
-
-    private float explosionForce = 300;
-
+    float kbStartTime;
+    GameObject plr;
+    private bool knockbacked = false;
     private Rigidbody rb;
+    Vector3 direction;
 
     // Use this for initialization
     private void Start()
     {
-        Destroy(gameObject, lifetime);
+        //Destroy(gameObject, lifetime);
         rb = gameObject.GetComponent<Rigidbody>();
 
         Vector3 mp = Input.mousePosition;
@@ -21,24 +22,43 @@ public class SlimeBall : MonoBehaviour
 
         transform.LookAt(mouseLocation);
 
-        rb.velocity = transform.forward * force;
+       // rb.velocity = transform.forward * force;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, .5f, Vector3.forward, 2f, 1);
-        foreach (RaycastHit hit in hits)
+        if (knockbacked)
         {
-            Rigidbody rb = hit.rigidbody;
-            if (rb != null)
-            {
-                if (hit.transform.gameObject.tag == "Player")
-                {
-                    Debug.Log("I hit :" + hit.transform.name);
-                    hit.rigidbody.AddExplosionForce(explosionForce, transform.position, 1, 1);
-                }
-            }
+            knockback(plr, direction, 20, 1);
+        }
+    }
+    private void knockback(GameObject player, Vector3 dir, float force, float duration)
+    {
+        float t = Time.time;
+        if (t < kbStartTime + duration)
+        {
+            player.transform.Translate(dir * force * Time.deltaTime);
+        }
+        else
+        {
+            knockbacked = false;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            direction = -(transform.position - other.transform.position);
+            direction = direction.normalized;
+            direction.y = Mathf.Abs(direction.y);
+
+            kbStartTime = Time.time;
+            plr = other.gameObject;
+            knockbacked = true;
         }
     }
 }
