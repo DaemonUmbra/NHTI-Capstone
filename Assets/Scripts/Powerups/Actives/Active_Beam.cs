@@ -27,17 +27,8 @@ namespace Powerups
         }
         public override void OnAbilityAdd()
         {
-            
             Debug.Log(Name + " Added");
-
-            // Add new shoot function to delegate
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
-                Debug.Log("Beam Added to Shoot Delegate");
-                pShoot.shoot += OnShoot;
-            }
-
+            
             // Call base function
             base.OnAbilityAdd();
         }
@@ -87,13 +78,6 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            // Remove shoot delegate
-            if (pShoot)
-            {
-                pShoot.shoot -= OnShoot;
-            }
-            pShoot = null;
-
             // Call base function
             base.OnAbilityRemove();
         }

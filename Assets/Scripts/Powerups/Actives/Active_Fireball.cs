@@ -21,26 +21,13 @@ namespace Powerups
         {
             
             Debug.Log(Name + " Added");
-
-            pShoot = GetComponent<PlayerShoot>();
-            if (pShoot)
-            {
-                Debug.Log("Fireball Added to Shoot Delegate");
-                pShoot.shoot += TryActivate;
-            }
+            
             // Call base function
             base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
-            // Remove shoot delegate
-            if (pShoot)
-            {
-                pShoot.shoot -= TryActivate;
-            }
-            pShoot = null;
-
             // Call base function
             base.OnAbilityRemove();
         }
