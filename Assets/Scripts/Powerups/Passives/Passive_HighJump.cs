@@ -28,7 +28,7 @@ namespace Powerups
             base.OnAbilityRemove();
             if (photonView.isMine)
             {
-                GetComponent<PlayerStats>().JumpPower -= JumpBoost;
+                GetComponent<PlayerMotor>().JumpMultiplier -= JumpBoost;
             }
         }
     }

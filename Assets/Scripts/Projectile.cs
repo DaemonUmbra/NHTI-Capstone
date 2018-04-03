@@ -101,6 +101,11 @@ public class Projectile : Photon.MonoBehaviour
         {
             onPlayerHit(other);
         }
+        if (other.tag == "Environment")
+        {
+            PhotonNetwork.Destroy(photonView);
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     protected virtual void onPlayerHit(Collider hitPlayer)
@@ -121,10 +126,6 @@ public class Projectile : Photon.MonoBehaviour
                 PhotonNetwork.Destroy(gameObject);
             }
         }
-        if (hit.tag == "Environment")
-        {
-            PhotonNetwork.Destroy(photonView);
-            PhotonNetwork.Destroy(gameObject);
-        }
+       
     }
 }
