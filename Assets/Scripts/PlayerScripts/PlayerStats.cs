@@ -305,7 +305,21 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All, factorName);
     }
-    
+    public void AddTransform(Transform trans)
+    {
+        int pId = trans.gameObject.GetPhotonView().viewID;
+        photonView.RPC("RPC_AddTransform", PhotonTargets.All, pId);
+    }
+    public void RemoveTransform(Transform trans)
+    {
+        int pId = trans.gameObject.GetPhotonView().viewID;
+        photonView.RPC("RPC_RemoveTransform", PhotonTargets.All, pId);
+    }
+    public bool HasTransform(Transform trans)
+    {
+        return (_transformsToScale.Contains(trans));
+    }
+
     // Public Speed Modifiers
     public void AddSpeedMultipler(string multName, float multiplier)
     {
@@ -609,7 +623,28 @@ public class PlayerStats : Photon.MonoBehaviour
             ApplyNewScale();
         }
     }
+    [PunRPC] private void RPC_AddTransform(int viewId)
+    {
+        Transform trans = PhotonView.Find(viewId).transform;
 
+        // Dupe check
+        if(!HasTransform(trans))
+        {
+            _transformsToScale.Add(trans);
+        }
+
+        // Calculate new scale
+        CalcScale();
+    }
+    [PunRPC] private void RPC_RemoveTransform(int viewId)
+    {
+        Transform trans = PhotonView.Find(viewId).transform;
+
+        _transformsToScale.Remove(trans);
+
+        // Calculate new scale
+        CalcScale();
+    }
     // Speed Modifier RPCs
     [PunRPC] private void RPC_AddSpeedMultiplier(string multName, float multiplier)
     {
