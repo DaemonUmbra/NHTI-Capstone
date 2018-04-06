@@ -31,7 +31,7 @@ public class ModelManager : Photon.MonoBehaviour
             Transform temp;
             if (modelRegistry.TryGetValue(modelName, out temp))
             {
-                if(pStats.hasTransform(transform.Find("Player Model")))
+                if(pStats.HasTransform(transform.Find("Player Model")))
                 {
                     ScaleAdjusted = true;
                 }
@@ -49,7 +49,7 @@ public class ModelManager : Photon.MonoBehaviour
     {
         if (scaleAdjusted)
         {
-            pStats.removeTransform(transform.Find("Player Model"));
+            pStats.RemoveTransform(transform.Find("Player Model"));
         }
         Debug.Log(photonView.owner + " requests change to model: " + modelName);
         Transform CurrentModel = transform.Find("Player Model");
@@ -58,7 +58,7 @@ public class ModelManager : Photon.MonoBehaviour
         model.name = "Player Model";
         if (scaleAdjusted)
         {
-            pStats.addTransform(model);
+            pStats.AddTransform(model);
         }
     }
     [PunRPC]
@@ -69,17 +69,5 @@ public class ModelManager : Photon.MonoBehaviour
         Destroy(CurrentModel.gameObject);
         Transform model = Instantiate(modelRegistry[modelName], transform);
         model.name = "Beam";
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
