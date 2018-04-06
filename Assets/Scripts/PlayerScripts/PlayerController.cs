@@ -163,6 +163,15 @@ public class PlayerController : Photon.MonoBehaviour
             jumpCount++;
         }
     }
+    [PunRPC]
+    public void ApplyKnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
+    {
+        direction = direction.normalized;
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
+
+        rb.AddForce(vel * force, ForceMode.Impulse);
+    }
     private void GroundCheck()
     {
         Vector3 dwn = transform.TransformDirection(Vector3.down);

@@ -18,8 +18,9 @@ public class ModelManager : Photon.MonoBehaviour
     private void LoadModels()
     {
         modelRegistry.Add("Default", Resources.Load<Transform>("PlayerModels/Default"));
+       // modelRegistry.Add("Gun", Resources.Load)
         modelRegistry.Add("Aliens", Resources.Load<Transform>("PlayerModels/UFO"));
-        modelRegistry.Add("Beam", Resources.Load<Transform>("PlayerModels/Beam"));
+        modelRegistry.Add("Beam", Resources.Load<Transform>("PlayerModels/DefaultBeam"));
     }
 
     public void SetModel(string modelName)
@@ -30,7 +31,7 @@ public class ModelManager : Photon.MonoBehaviour
             Transform temp;
             if (modelRegistry.TryGetValue(modelName, out temp))
             {
-                if(pStats.hasTransform(transform.Find("Player Model")))
+                if(pStats.HasTransform(transform.Find("Player Model")))
                 {
                     ScaleAdjusted = true;
                 }
@@ -48,7 +49,7 @@ public class ModelManager : Photon.MonoBehaviour
     {
         if (scaleAdjusted)
         {
-            pStats.removeTransform(transform.Find("Player Model"));
+            pStats.RemoveTransform(transform.Find("Player Model"));
         }
         Debug.Log(photonView.owner + " requests change to model: " + modelName);
         Transform CurrentModel = transform.Find("Player Model");
@@ -57,28 +58,16 @@ public class ModelManager : Photon.MonoBehaviour
         model.name = "Player Model";
         if (scaleAdjusted)
         {
-            pStats.addTransform(model);
+            pStats.AddTransform(model);
         }
     }
     [PunRPC]
     public void Beam_SetModel(string modelName)
     {
         Debug.Log(photonView.owner + " requests change to model: " + modelName);
-        Transform CurrentModel = transform.Find("Player Model/Gun");
+        Transform CurrentModel = transform.Find("Player Model");
         Destroy(CurrentModel.gameObject);
         Transform model = Instantiate(modelRegistry[modelName], transform);
         model.name = "Beam";
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -126,4 +126,8 @@ MonoBehaviour:
   - RPC_SetSpawnPool
   - RPC_Activate_ThunderWave
   - MM_SetModel
+  - Beam_SetModel
+  - ApplyKnockBack
+  - RPC_AddTransform
+  - RPC_RemoveTransform
   DisableAutoOpenWizard: 1

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 ///summary
  /*
-Developers and Contributors: Ian Cahoon
+Developers and Contributors: Ian Cahoon, Brodey Lajoie
 
 Information
     Name: Beam
@@ -20,10 +21,12 @@ namespace Powerups
         private PlayerShoot pShoot;
         private GameObject rayOrigin;
         ModelManager modelManager;
-
+        private GameObject beam;
+        
         private void Awake()
         {
             // Set name
+            Cooldown = 2f;
             Name = "Beam";
             Icon = Resources.Load<Sprite>("Images/Beam");
             Tier = PowerupTier.Rare;
@@ -31,53 +34,86 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Debug.Log(Name + " Added");
-            modelManager = GetComponent<ModelManager>();
-            modelManager.SetModel("Beam");
+            //modelManager = GetComponent<ModelManager>();
+            //modelManager.SetModel("Beam");
             // Call base function
             base.OnAbilityAdd();
         }
 
+        protected override void Activate()
+        {
+            StartCoroutine(Beam());
+            
+            base.Activate();
+        }
+        
         public override void OnUpdate()
         {
-            if (Input.GetMouseButtonUp(0))
-            {
-                CurrentlyActive = false;
-                LineRenderer Laser = GetLaser(rayOrigin);
-                Laser.enabled = false;
-            }
-            if (CurrentlyActive)
-            {
-                foreach (Transform child in transform)
-                {
-                    if (child.name == "Gun")
-                    {
-                        rayOrigin = child.gameObject;
-                    }
-                }
-                Vector3 mp = Input.mousePosition;
-                mp.z = 999;
-                Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
-                Vector3 targetVector = mouseLocation;
+            //if (Input.GetMouseButtonUp(0))
+            //{
+            //    CurrentlyActive = false;
+            //    LineRenderer Laser = GetLaser(rayOrigin);
+            //    Laser.enabled = false;
+            //}
+            //if (CurrentlyActive)
+            //{
+            //    foreach (Transform child in transform)
+            //    {
+            //        if (child.name == "Gun")
+            //        {
+            //            rayOrigin = child.gameObject;
+            //        }
+            //    }
+            //    Vector3 mp = Input.mousePosition;
+            //    mp.z = 999;
+            //    Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
+            //    Vector3 targetVector = mouseLocation;
 
-                Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //    Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                RaycastHit endPoint;
+            //    RaycastHit endPoint;
 
-                if (Physics.Raycast(snipeRay, out endPoint))
-                {
-                    Debug.Log(endPoint.transform.gameObject.name);
-                    targetVector = endPoint.point;
-                }
-                else
-                {
-                    Debug.Log("no object was hit");
-                }
+            //    if (Physics.Raycast(snipeRay, out endPoint))
+            //    {
+            //        Debug.Log(endPoint.transform.gameObject.name);
+            //        targetVector = endPoint.point;
+            //    }
+            //    else
+            //    {
+            //        Debug.Log("no object was hit");
+            //    }
 
-                VisualizeRaycast(rayOrigin, targetVector);
-            }
+            //    VisualizeRaycast(rayOrigin, targetVector);
+            //}
 
             // Call base function
             base.OnUpdate();
+        }
+        IEnumerator Beam()
+        {
+            modelManager = GetComponent<ModelManager>();
+            modelManager.SetModel("Beam");
+            if (photonView.isMine)
+            {
+                beam = GameObject.Find("Beam");
+            }
+            Collider col = beam.GetComponent<Collider>();
+            
+            RaycastHit[] hits = Physics.SphereCastAll(col.bounds.center, (col.bounds.size.x) / 2, Vector3.forward);
+            foreach(RaycastHit hit in hits)
+            {
+                Debug.Log(hit.transform.gameObject.name);
+                if(!photonView.isMine && hit.transform.tag == "Player")
+                {
+                    PlayerStats stats;
+                    stats = hit.transform.GetComponent<PlayerStats>();
+                    stats.TakeDamage(10, gameObject);
+                }
+            }
+              
+            yield return new WaitForSecondsRealtime(Cooldown);
+            modelManager.SetModel("Default");
+            
         }
 
         public override void OnAbilityRemove()
@@ -86,63 +122,12 @@ namespace Powerups
             modelManager.SetModel("Default");
             base.OnAbilityRemove();
         }
+        
 
-        protected override void Activate()
-        {
-            base.Activate();
-        }
+       
 
-        public void OnShoot()
-        {
-            if (!photonView.isMine)
-            {
-                return;
-            }
-            CurrentlyActive = true;
-            foreach (Transform child in transform)
-            {
-                if (child.name == "Gun")
-                {
-                    rayOrigin = child.gameObject;
-                }
-            }
-            //Debug.Log("Raycast Shot");
+       
 
-            Vector3 mp = Input.mousePosition;
-            mp.z = 999;
-            Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
-            Vector3 targetVector = mouseLocation;
-
-            Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit endPoint;
-
-            if (Physics.Raycast(snipeRay, out endPoint))
-            {
-                Debug.Log(endPoint.transform.gameObject.name);
-                targetVector = endPoint.point;
-            }
-            else
-            {
-                Debug.Log("no object was hit");
-            }
-
-            VisualizeRaycast(rayOrigin, targetVector);
-        }
-
-        private void VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
-        {
-            LineRenderer Laser = GetLaser(Origin);
-            Laser.SetPosition(0, Origin.transform.position);
-            Laser.SetPosition(1, targetLocation);
-
-            Laser.enabled = true;
-        }
-
-        private LineRenderer GetLaser(GameObject Origin)
-        {
-            LineRenderer Laser = Origin.GetComponent<LineRenderer>();
-            return Laser;
-        }
+       
     }
 }
