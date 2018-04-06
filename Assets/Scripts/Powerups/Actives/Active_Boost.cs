@@ -16,16 +16,21 @@ namespace Powerups
 
         public float WalkSpeed;
         public bool Boosted = false;
-        
+
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            Name = "Boost";
+            //TODO: Boost Icon
+            Tier = PowerupTier.Uncommon;
+        }
 
         public override void OnAbilityAdd()
         {
             Cooldown = 5;
-            Name = "Boost";
             Debug.Log(Name + "  Added");
             PS = GetComponent<PlayerStats>();
             Boosted = false;
-
             // Call base function
             base.OnAbilityAdd();
         }

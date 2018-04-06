@@ -15,8 +15,9 @@ namespace Powerups
 
         private void Awake()
         {
-
             Name = "Ice Ball";
+            //TODO: Iceball Icon
+            Tier = PowerupTier.Uncommon;
         }
 
         public override void OnAbilityAdd()

@@ -29,6 +29,7 @@ namespace Powerups
             // Set name
             Name = "Blink";
             Icon = Resources.Load<Sprite>("Images/Blink");
+            Tier = PowerupTier.Rare;
         }
 
         public override void OnAbilityAdd()

@@ -12,6 +12,7 @@ namespace Powerups
         {
             Name = "High Jump";
             Icon = Resources.Load<Sprite>("Images/High Jump");
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {

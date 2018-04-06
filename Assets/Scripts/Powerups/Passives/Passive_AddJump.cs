@@ -8,6 +8,8 @@
         private void Awake()
         {
             Name = "Add Jump";
+            //TODO: High Jump Icon
+            Tier = PowerupTier.Common;
         }
 
         public override void OnAbilityAdd()

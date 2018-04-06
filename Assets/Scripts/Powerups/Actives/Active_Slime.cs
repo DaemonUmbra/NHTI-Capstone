@@ -21,11 +21,19 @@ namespace Powerups
         private PlayerShoot pShoot;
         private float offset = 2, duration = 7f;
 
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            Name = "Slime";
+            //TODO: Slime Icon
+            Tier = PowerupTier.Uncommon;
+        }
+
+
+
         public override void OnAbilityAdd()
         {
             Cooldown = 7;
-            // Set name
-            Name = "Slime";
             Debug.Log(Name + " Added");
             
             base.OnAbilityAdd();

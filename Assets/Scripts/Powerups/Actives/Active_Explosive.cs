@@ -13,8 +13,9 @@ namespace Powerups {
 
         private void Awake()
         {
-
             Name = "Explosion";
+            //TODO: Explosive Icon
+            Tier = PowerupTier.Uncommon;
         }
 
         public override void OnAbilityAdd()

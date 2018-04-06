@@ -34,10 +34,12 @@ namespace Powerups
         {
             Name = "Miss Unrealistic";
             Icon = Resources.Load<Sprite>("Images/MissUnrealistic");
+            Tier = PowerupTier.Rare; //TODO: Refine this later
         }
         public override void OnAbilityAdd()
         {
             playerStats = GetComponent<PlayerStats>();
+            playerStats.addTransform(transform.Find("Player Model"));
             /*** Handled by base class ***
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);

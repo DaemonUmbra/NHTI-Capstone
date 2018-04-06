@@ -22,6 +22,8 @@ namespace Powerups
         private void Awake()
         {
             Name = "Rearview";
+            //TODO: Rearview Icon
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {

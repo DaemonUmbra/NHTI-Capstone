@@ -23,14 +23,15 @@ namespace Powerups
         // Use this for initialization
         private void Awake()
         {
-            audioSource = GetComponent<AudioSource>();
-            Closest = 0;
             Name = "Radar";
             Icon = Resources.Load<Sprite>("Images/Radar");
+            Tier = PowerupTier.Rare;
         }
 
         public override void OnAbilityAdd() // Function for adding ability to player
         {
+            audioSource = GetComponent<AudioSource>();
+            Closest = 0;
             Debug.Log(Name + " added!");
             base.OnAbilityAdd();
         }

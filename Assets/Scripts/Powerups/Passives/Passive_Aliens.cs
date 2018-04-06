@@ -14,6 +14,8 @@ namespace Powerups
         private void Awake()
         {
             Name = "Aliens";
+            //TODO: Aliens Icon
+            Tier = PowerupTier.Common;
         }
         public override void OnAbilityAdd()
         {
