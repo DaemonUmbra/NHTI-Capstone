@@ -3,7 +3,7 @@ using System.Collections;
 
 ///summary
  /*
-Developers and Contributors: Ian Cahoon
+Developers and Contributors: Ian Cahoon, Brodey Lajoie
 
 Information
     Name: Beam
@@ -21,11 +21,12 @@ namespace Powerups
         private PlayerShoot pShoot;
         private GameObject rayOrigin;
         ModelManager modelManager;
-        float lastActive = 0f;
+        private GameObject beam;
+        
         private void Awake()
         {
             // Set name
-            Cooldown = 4.5f;
+            Cooldown = 2f;
             Name = "Beam";
             Icon = Resources.Load<Sprite>("Images/Beam");
             Tier = PowerupTier.Rare;
@@ -92,6 +93,24 @@ namespace Powerups
         {
             modelManager = GetComponent<ModelManager>();
             modelManager.SetModel("Beam");
+            if (photonView.isMine)
+            {
+                beam = GameObject.Find("Beam");
+            }
+            Collider col = beam.GetComponent<Collider>();
+            
+            RaycastHit[] hits = Physics.SphereCastAll(col.bounds.center, (col.bounds.size.x) / 2, Vector3.forward);
+            foreach(RaycastHit hit in hits)
+            {
+                Debug.Log(hit.transform.gameObject.name);
+                if(!photonView.isMine && hit.transform.tag == "Player")
+                {
+                    PlayerStats stats;
+                    stats = hit.transform.GetComponent<PlayerStats>();
+                    stats.TakeDamage(10, gameObject);
+                }
+            }
+              
             yield return new WaitForSecondsRealtime(Cooldown);
             modelManager.SetModel("Default");
             
@@ -103,6 +122,7 @@ namespace Powerups
             modelManager.SetModel("Default");
             base.OnAbilityRemove();
         }
+        
 
        
 
