@@ -13,8 +13,9 @@ namespace Powerups
 
         private void Awake()
         {
-            
             Name = "Fireball";
+            //TODO: Fireball Icon
+            Tier = PowerupTier.Common;
         }
 
         public override void OnAbilityAdd()

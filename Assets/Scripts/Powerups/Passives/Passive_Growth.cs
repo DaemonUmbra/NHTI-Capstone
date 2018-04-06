@@ -33,6 +33,7 @@ namespace Powerups
             Name = "Growth";
             FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
             Icon = Resources.Load<Sprite>("Images/Growth");
+            Tier = PowerupTier.Uncommon;
         }
 
         public override void OnAbilityAdd()

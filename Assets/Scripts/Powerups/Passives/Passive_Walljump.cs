@@ -13,6 +13,15 @@ namespace Powerups
 
     public class Passive_Walljump : PassiveAbility
     {
+
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            Name = "Wall Jump";
+            //TODO: Walljump Icon
+            Tier = PowerupTier.Rare;
+        }
+
         public override void OnAbilityAdd()
         {
             PlayerController pc = gameObject.GetComponent<PlayerController>();

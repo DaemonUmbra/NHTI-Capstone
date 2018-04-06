@@ -17,6 +17,8 @@ namespace Powerups
         private void Awake()
         {
             Name = "Coconuts";
+            //TODO: Coconuts Icon
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnUpdate()
         {

@@ -15,6 +15,8 @@ namespace Powerups
         private void Awake()
         {
             Name = "Thunder Cloud";
+            //TODO: Thundercloud Icon
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {
