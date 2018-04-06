@@ -95,7 +95,6 @@ public class ModelManager : Photon.MonoBehaviour
     public void MM_AddSubModel(string subModelName)
     {
         Debug.Log(photonView.owner + " requests addition of " + subModelName + " to their model");
-        Transform CurrentModel = transform.Find("Player Model/Beam");
         Transform subModel = Instantiate(subModelRegistry[subModelName], transform);
         subModel.name = subModelName;
     }
