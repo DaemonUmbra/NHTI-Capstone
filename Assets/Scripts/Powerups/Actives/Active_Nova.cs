@@ -6,9 +6,9 @@ using UnityEngine;
 namespace Powerups {
     public class Powerup_Nova : ActiveAbility
     {
-        public float ExplosionSize = 2f;
+        public float ExplosionSize = 15f;
         public float ExplosionTime = 1f;
-        public float ScaleStep = .1f;
+        public float ScaleStep = .5f;
         public float ExplosionForce = 5f;
         public float ExplosionDamage = 5f;
         private AbilityManager AbilityManager;
@@ -35,14 +35,18 @@ namespace Powerups {
         protected override void Activate()
         {
             base.Activate();
+            photonView.RPC("RPC_Nova_Explosion", PhotonTargets.All);
+        }
+
+        [PunRPC]
+        public void RPC_Nova_Explosion()
+        {
             Explosion = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            PhotonView pv = Explosion.AddComponent<PhotonView>();
-            PhotonTransformView ptv = Explosion.AddComponent<PhotonTransformView>();
-            pv.ObservedComponents.Add(ptv);
-            Explosion.transform.position = transform.parent.localPosition;
             Explosion.SetActive(false);
+            Explosion.transform.position = transform.position;
             Explosion.name = "Nova Explosion";
-            Explosion.AddComponent<SphereCollider>();
+            Collider ExplosionCollider = Explosion.GetComponent<SphereCollider>();
+            ExplosionCollider.isTrigger = true;
             Explosion.transform.localScale = Vector3.zero;
             Explosion.SetActive(true);
             StartCoroutine(Explode(Explosion, ExplosionSize, ExplosionTime));
@@ -54,7 +58,6 @@ namespace Powerups {
             bool Stage1 = true;
             while (Exploding)
             {
-                Explosion.transform.position = transform.parent.localPosition;
                 if (Explosion.transform.localScale.magnitude < size && Stage1)
                 {
                     //Grow
@@ -73,18 +76,21 @@ namespace Powerups {
                 }
                 yield return new WaitForEndOfFrame();
             }
-            AbilityManager.RemoveAbility(this);
+            //AbilityManager.RemoveAbility(this);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.GetComponent<PlayerStats>() != null)
+            if (photonView.)
             {
-                other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, Explosion);
-            }
-            if (other.GetComponent<Rigidbody>() != null)
-            {
-                other.GetComponent<Rigidbody>().AddExplosionForce(ExplosionForce, Explosion.transform.position, ExplosionSize);
+                if (other.GetComponent<PlayerStats>() != null)
+                {
+                    other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, Explosion);
+                }
+                if (other.GetComponent<Rigidbody>() != null)
+                {
+                    other.GetComponent<Rigidbody>().AddExplosionForce(ExplosionForce, Explosion.transform.position, ExplosionSize);
+                }
             }
         }
     }
