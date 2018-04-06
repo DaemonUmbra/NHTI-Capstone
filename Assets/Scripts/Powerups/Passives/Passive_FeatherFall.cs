@@ -11,6 +11,7 @@ namespace Powerups
         {
             Name = "Feather Fall";
             Icon = Resources.Load<Sprite>("Images/Featherfall");
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {

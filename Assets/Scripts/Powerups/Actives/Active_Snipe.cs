@@ -28,6 +28,7 @@ namespace Powerups
             Name = "Snipe";
             //Set Sprite
             Icon = Resources.Load<Sprite>("Images/Sniper");
+            Tier = PowerupTier.Rare;
         }
 
 

@@ -14,6 +14,7 @@ namespace Powerups
         {
             Name = "NYEH!";
             Icon = Resources.Load<Sprite>("Images/NYEH");
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {

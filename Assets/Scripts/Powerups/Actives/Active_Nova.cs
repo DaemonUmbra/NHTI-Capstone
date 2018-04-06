@@ -16,6 +16,16 @@ namespace Powerups {
         private List<GameObject> Affected;
         private GameObject Explosion;
 
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            Name = "Nova";
+            //TODO: Nova Icon
+            Tier = PowerupTier.Rare;
+        }
+
+
+
         public override void OnAbilityAdd()
         {
             base.OnAbilityAdd();

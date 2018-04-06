@@ -26,6 +26,7 @@ namespace Powerups
             // Set name
             Name = "Beam";
             Icon = Resources.Load<Sprite>("Images/Beam");
+            Tier = PowerupTier.Rare;
         }
         public override void OnAbilityAdd()
         {

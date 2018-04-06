@@ -23,6 +23,7 @@ namespace Powerups
         {
             Name = "Panic Loafers";
             Icon = Resources.Load<Sprite>("Images/PanicLoafers");
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {

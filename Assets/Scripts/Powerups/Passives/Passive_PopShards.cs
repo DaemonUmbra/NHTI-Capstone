@@ -7,6 +7,14 @@ namespace Powerups
     public class Passive_PopShards : PassiveAbility
     {
 
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            Name = "Pop Shards";
+            //TODO: Pop Shards Icon
+            Tier = PowerupTier.Common;
+        }
+
         // Use this for initialization
         void Start()
         {

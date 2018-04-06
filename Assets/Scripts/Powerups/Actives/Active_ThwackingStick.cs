@@ -6,8 +6,16 @@ namespace Powerups
 { 
     public class Active_ThwackingStick : ActiveAbility {
 
-	    // Use this for initialization
-	    void Start () {
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            Name = "Thwacking Stick";
+            //TODO: Thwacking Stick Icon
+            Tier = PowerupTier.Uncommon;
+        }
+
+        // Use this for initialization
+        void Start () {
 		
 	    }
 	
