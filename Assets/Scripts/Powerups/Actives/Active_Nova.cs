@@ -24,8 +24,6 @@ namespace Powerups {
             Tier = PowerupTier.Rare;
         }
 
-
-
         public override void OnAbilityAdd()
         {
             base.OnAbilityAdd();
@@ -81,7 +79,7 @@ namespace Powerups {
 
         private void OnTriggerEnter(Collider other)
         {
-            if (photonView.)
+            if (photonView.isMine)
             {
                 if (other.GetComponent<PlayerStats>() != null)
                 {
