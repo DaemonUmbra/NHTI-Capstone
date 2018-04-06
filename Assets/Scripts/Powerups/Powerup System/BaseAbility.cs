@@ -38,17 +38,9 @@ namespace Powerups
         public bool IsActive { get { return active; } }
         public bool IsUnique { get { return unique; } }
 
-        public Sprite Icon;
+        public Sprite Icon; 
         protected string IconPath;
-
-        private void Awake()
-        {
-            // Load the icon if another doesn't already exist
-            if(Icon == null && IconPath != null)
-            {
-                Icon = Resources.Load<Sprite>(IconPath);
-            }
-        }
+        
 
         #region Virtual Methods
         /// <summary>
