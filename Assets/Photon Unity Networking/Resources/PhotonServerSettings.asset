@@ -130,4 +130,5 @@ MonoBehaviour:
   - ApplyKnockBack
   - RPC_AddTransform
   - RPC_RemoveTransform
+  - RPC_Nova_Explosion
   DisableAutoOpenWizard: 1

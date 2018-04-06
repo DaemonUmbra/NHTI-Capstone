@@ -31,10 +31,10 @@ public class ModelManager : Photon.MonoBehaviour
             Transform temp;
             if (modelRegistry.TryGetValue(modelName, out temp))
             {
-                if(pStats.HasTransform(transform.Find("Player Model")))
-                {
-                    ScaleAdjusted = true;
-                }
+                //if(pStats.HasTransform(transform.Find("Player Model")))
+                //{
+                //    ScaleAdjusted = true;
+                //}
                 photonView.RPC("MM_SetModel", PhotonTargets.All, modelName,ScaleAdjusted);
             }
             else if (modelRegistry.TryGetValue("Beam", out temp))
@@ -49,7 +49,7 @@ public class ModelManager : Photon.MonoBehaviour
     {
         if (scaleAdjusted)
         {
-            pStats.RemoveTransform(transform.Find("Player Model"));
+            //pStats.RemoveTransform(transform.Find("Player Model"));
         }
         Debug.Log(photonView.owner + " requests change to model: " + modelName);
         Transform CurrentModel = transform.Find("Player Model");
@@ -58,7 +58,7 @@ public class ModelManager : Photon.MonoBehaviour
         model.name = "Player Model";
         if (scaleAdjusted)
         {
-            pStats.AddTransform(model);
+            //pStats.AddTransform(model);
         }
     }
     [PunRPC]

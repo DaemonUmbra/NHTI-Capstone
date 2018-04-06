@@ -81,7 +81,7 @@ namespace Powerups {
 
         private void OnTriggerEnter(Collider other)
         {
-            if (photonView.)
+            if (photonView.isMine)
             {
                 if (other.GetComponent<PlayerStats>() != null)
                 {
