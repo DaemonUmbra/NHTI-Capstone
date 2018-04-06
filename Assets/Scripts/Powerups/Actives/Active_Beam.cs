@@ -19,6 +19,7 @@ namespace Powerups
         private bool onCooldown = false, CurrentlyActive = false;
         private PlayerShoot pShoot;
         private GameObject rayOrigin;
+        ModelManager modelManager;
 
         private void Awake()
         {
@@ -29,7 +30,8 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Debug.Log(Name + " Added");
-            
+            modelManager = GetComponent<ModelManager>();
+            modelManager.SetModel("Beam");
             // Call base function
             base.OnAbilityAdd();
         }
@@ -80,6 +82,7 @@ namespace Powerups
         public override void OnAbilityRemove()
         {
             // Call base function
+            modelManager.SetModel("Default");
             base.OnAbilityRemove();
         }
 
