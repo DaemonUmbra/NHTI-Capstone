@@ -16,8 +16,9 @@ public class ModelManager : Photon.MonoBehaviour
     private void LoadModels()
     {
         modelRegistry.Add("Default", Resources.Load<Transform>("PlayerModels/Default"));
+       // modelRegistry.Add("Gun", Resources.Load)
         modelRegistry.Add("Aliens", Resources.Load<Transform>("PlayerModels/UFO"));
-        modelRegistry.Add("Beam", Resources.Load<Transform>("PlayerModels/Beam"));
+        modelRegistry.Add("Beam", Resources.Load<Transform>("PlayerModels/DefaultBeam"));
     }
 
     public void SetModel(string modelName)
@@ -49,7 +50,7 @@ public class ModelManager : Photon.MonoBehaviour
     public void Beam_SetModel(string modelName)
     {
         Debug.Log(photonView.owner + " requests change to model: " + modelName);
-        Transform CurrentModel = transform.Find("Player Model/Gun");
+        Transform CurrentModel = transform.Find("Player Model");
         Destroy(CurrentModel.gameObject);
         Transform model = Instantiate(modelRegistry[modelName], transform);
         model.name = "Beam";
