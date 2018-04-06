@@ -58,7 +58,6 @@ public class ModelManager : Photon.MonoBehaviour
         if (scaleAdjusted)
         {
             pStats.addTransform(model);
-            pStats.CalcScale();
         }
     }
     [PunRPC]
