@@ -39,7 +39,6 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             playerStats = GetComponent<PlayerStats>();
-            playerStats.AddTransform(transform.Find("Player Model"));
             /*** Handled by base class ***
             pv = PhotonView.Get(this);
             pv.RPC("Miss_Unrealistic_AddAbility", PhotonTargets.All);

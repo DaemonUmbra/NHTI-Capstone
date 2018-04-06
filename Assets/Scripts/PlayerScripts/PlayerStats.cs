@@ -42,7 +42,8 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <summary>
     /// Transforms to be scaled with the player. For now it just includes the local transform which is added at runtime.
     /// </summary>
-    List<Transform> _transformsToScale;
+    //List<Transform> _transformsToScale;
+    Dictionary<Transform, Vector3> _lookupBaseScale;
 
     private PlayerSpawning pSpawn;
 
@@ -77,8 +78,6 @@ public class PlayerStats : Photon.MonoBehaviour
         _speedBoosts = new List<KeyValuePair<string, float>>();
         _speedMultipliers = new List<KeyValuePair<string, float>>();
         _healthBoosts = new List<KeyValuePair<string, float>>();
-        _transformsToScale = new List<Transform>();
-        _transformsToScale.Add(transform);
 
         // Starting Stats
         _maxHp = _baseMaxHp;
@@ -105,6 +104,7 @@ public class PlayerStats : Photon.MonoBehaviour
     }
 
     #endregion Unity Callbacks
+
 
 
     #region Public Methods
@@ -305,6 +305,7 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All, factorName);
     }
+    /* Changed the implementation of this to just scale the parent transform
     public void AddTransform(Transform trans)
     {
         int pId = trans.gameObject.GetPhotonView().viewID;
@@ -319,6 +320,7 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         return (_transformsToScale.Contains(trans));
     }
+    */
 
     // Public Speed Modifiers
     public void AddSpeedMultipler(string multName, float multiplier)
@@ -355,6 +357,7 @@ public class PlayerStats : Photon.MonoBehaviour
     }
 
     #endregion Public Methods
+
 
 
     #region Photon RPCs
@@ -623,6 +626,7 @@ public class PlayerStats : Photon.MonoBehaviour
             ApplyNewScale();
         }
     }
+    /* Changed the implementation of this to just scale the parent transform
     [PunRPC] private void RPC_AddTransform(int viewId)
     {
         Transform trans = PhotonView.Find(viewId).transform;
@@ -632,7 +636,7 @@ public class PlayerStats : Photon.MonoBehaviour
         {
             _transformsToScale.Add(trans);
         }
-
+        _lookupBaseScale[trans] = trans.localScale;
         // Calculate new scale
         CalcScale();
     }
@@ -645,6 +649,7 @@ public class PlayerStats : Photon.MonoBehaviour
         // Calculate new scale
         CalcScale();
     }
+    */
     // Speed Modifier RPCs
     [PunRPC] private void RPC_AddSpeedMultiplier(string multName, float multiplier)
     {
@@ -703,29 +708,26 @@ public class PlayerStats : Photon.MonoBehaviour
     #endregion Photon RPCs
 
 
-    #region Private Methods
 
+    #region Private Methods
+    // Kill the player
     private void Die()
     {
         photonView.RPC("RPC_Die", PhotonTargets.All);
     }
-
     private void Die(GameObject killer)
     {
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
+    // Apply new scale modifier
     private void ApplyNewScale()
     {
-        // Scale each transform individually
-        foreach (Transform t in _transformsToScale)
-        {
-            t.localScale = new Vector3( _scaleMod.x, _scaleMod.y, _scaleMod.z);
-        }
+        transform.localScale = new Vector3( _baseScale.x * _scaleMod.x, _baseScale.y * _scaleMod.y, _baseScale.z * _scaleMod.z);
     }
     // Recalculate scale modifier
     private void CalcScale()
     {
-        _scaleMod = _baseScale;
+        _scaleMod = new Vector3(1, 1, 1);
         foreach (KeyValuePair<string, Vector3> f in _scaleFactors)
         {
             _scaleMod.x *= f.Value.x;
@@ -783,8 +785,5 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp = _maxHp;
         }
     }
-
-    
-
     #endregion Private Methods
 }

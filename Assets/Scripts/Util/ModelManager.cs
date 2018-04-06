@@ -70,16 +70,4 @@ public class ModelManager : Photon.MonoBehaviour
         Transform model = Instantiate(modelRegistry[modelName], transform);
         model.name = "Beam";
     }
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
