@@ -5,6 +5,11 @@ namespace Powerups {
     public class Active_Explosive : ActiveAbility {
 
         private PlayerShoot pShoot;
+        
+
+        public readonly Vector3 PosOffset = new Vector3(0, 2, 0);
+
+        public readonly Vector3 RotOffset = new Vector3(0, 0, 0);
 
         private void Awake()
         {
@@ -31,7 +36,7 @@ namespace Powerups {
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Explosive", transform.position, transform.rotation, 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Bullet 2", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
             }
             base.Activate();
         }
