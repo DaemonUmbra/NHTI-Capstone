@@ -4,8 +4,10 @@ namespace Powerups
 {
     public class Passive_Confuse : PassiveAbility
     {
+        PlayerController movement;
+        private float timeLimit = 15.0f;
+        private float timer;
 
-        // Awake is called when the script instance is being loaded
         private void Awake()
         {
             Name = "Confuse";
@@ -15,11 +17,31 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+            movement = GetComponent<PlayerController>();
+            movement.InvertX = true;
+            movement.InvertY = true;
 
+            base.OnAbilityAdd();
         }
-        // Update is called once per frame
-        private void Update()
+
+        public override void OnAbilityRemove()
         {
+            movement = GetComponent<PlayerController>();
+            movement.InvertX = false;
+            movement.InvertY = false;
+
+            base.OnAbilityRemove();
+        }
+
+        public override void OnUpdate()
+        {
+            timer += Time.deltaTime;
+            if (timer >= timeLimit)
+            {
+                OnAbilityRemove();
+            }
+
+            base.OnUpdate();
         }
     }
 }

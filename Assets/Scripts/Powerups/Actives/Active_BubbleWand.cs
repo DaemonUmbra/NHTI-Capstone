@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Powerups {
-    public class Active_Explosive : ActiveAbility {
-
+namespace Powerups
+{
+    public class Active_BubbleWand : ActiveAbility
+    {
         private PlayerShoot pShoot;
-        private Bomb explosive;
+
 
         public readonly Vector3 PosOffset = new Vector3(0, 2, 0);
 
@@ -13,8 +14,8 @@ namespace Powerups {
 
         private void Awake()
         {
-            Name = "Explosion";
-            //TODO: Explosive Icon
+            Name = "Bubble Wand";
+            //TODO: Bubble Wand
             Tier = PowerupTier.Uncommon;
         }
 
@@ -37,7 +38,7 @@ namespace Powerups {
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Bullet 2", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Bullet 3", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
             }
             base.Activate();
         }
