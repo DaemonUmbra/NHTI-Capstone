@@ -56,6 +56,11 @@ namespace Powerups
                 {
                     StartCoroutine(PanicTime()); // Begin coroutine for timer
                 }
+
+                if (Instances > 3)
+                {
+                    Instances = 3;
+                }
             }
             else if (PS.CurrentHp > Health) // If player gains health
             {
