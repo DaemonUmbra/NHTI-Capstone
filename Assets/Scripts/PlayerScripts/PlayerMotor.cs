@@ -8,9 +8,9 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     private Rigidbody rb;
     private PlayerStats pStats;
-    private Vector3 _velocity = Vector3.zero;
+    private Vector2 _inputVelocity = Vector2.zero;
     public float JumpMultiplier = 1f;
-
+    
     // Use this for initialization
 
     private void Awake()
@@ -30,15 +30,28 @@ public class PlayerMotor : Photon.MonoBehaviour
     // Runs every physics update frame
     private void FixedUpdate()
     {
-        // Change rb velocity to local velocity
-        _velocity.y = rb.velocity.y;
-        rb.velocity = _velocity;
+        Vector3 currentVel = rb.velocity;
+        Vector3 newVel = new Vector3();
+
+        // Move horizontally only if current horizontal velocity is less than your input velocity
+        if(Mathf.Abs( rb.velocity.x) < Mathf.Abs(_inputVelocity.x))
+        {
+            newVel.x = _inputVelocity.x;
+        }
+        
+
     }
 
-    public void SetVelocity(Vector3 velocity)
+    public void SetInputVelocity(Vector2 inputVec)
     {
+        // Prevent diagonal speed increase
+        if(inputVec.magnitude > 1)
+        {
+            inputVec.Normalize();
+        }
+
         // Set local velocity
-        _velocity = velocity * pStats.WalkSpeed;
+        _inputVelocity = inputVec * pStats.WalkSpeed;
     }
 
     public void Jump()

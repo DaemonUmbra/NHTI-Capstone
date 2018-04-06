@@ -120,8 +120,8 @@ public class Projectile : Photon.MonoBehaviour
             if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
             {
                 // Apply damage to the player
-                List<Effect> onHits = _shooter.GetComponent<PlayerStats>().OnHitEffects;
-                hitStats.TakeDamage(damage, _shooter, onHits);
+                //List<Effect> onHits = _shooter.GetComponent<PlayerStats>().OnHitEffects;
+                hitStats.TakeDamage(damage, _shooter);
                 print("Player hit!");
                 PhotonNetwork.Destroy(photonView);
                 PhotonNetwork.Destroy(gameObject);

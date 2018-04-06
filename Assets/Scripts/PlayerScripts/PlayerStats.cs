@@ -16,6 +16,8 @@ public class PlayerStats : Photon.MonoBehaviour
     List<KeyValuePair<string, float>> _speedMultipliers;
     List<KeyValuePair<string, float>> _speedBoosts;
     float _walkSpeed;
+    float _acceleration;
+    float _deceleration;
 
     // Jump Power
     [SerializeField]
@@ -39,11 +41,6 @@ public class PlayerStats : Photon.MonoBehaviour
     Vector3 _scaleMod;
     Vector3 _baseScale;
     List<KeyValuePair<string, Vector3>> _scaleFactors;
-    /// <summary>
-    /// Transforms to be scaled with the player. For now it just includes the local transform which is added at runtime.
-    /// </summary>
-    //List<Transform> _transformsToScale;
-    Dictionary<Transform, Vector3> _lookupBaseScale;
 
     private PlayerSpawning pSpawn;
 
@@ -57,7 +54,8 @@ public class PlayerStats : Photon.MonoBehaviour
     public float Damage { get { return _damage; } } //TODO: Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     public float WalkSpeed { get { return _walkSpeed; } } //TODO: Calculate effective walk/movement speed
-    //public List<EffectPackage> PackagedEffects { get { return _packagedEffects; } }
+    public float Acceleration { get { return _acceleration; } }
+    public float Deceleration { get { return _deceleration; } }
     #endregion Access Variables
 
 
