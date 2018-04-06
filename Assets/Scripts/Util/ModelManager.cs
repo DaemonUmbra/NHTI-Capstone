@@ -95,8 +95,8 @@ public class ModelManager : Photon.MonoBehaviour
     public void MM_AddSubModel(string subModelName)
     {
         Debug.Log(photonView.owner + " requests addition of " + subModelName + " to their model");
-        Transform CurrentModel = transform.Find("Player Model");
-        Transform subModel = Instantiate(subModelRegistry[subModelName], CurrentModel);
+        Transform CurrentModel = transform.Find("Player Model/Beam");
+        Transform subModel = Instantiate(subModelRegistry[subModelName], transform);
         subModel.name = subModelName;
     }
 
@@ -113,11 +113,11 @@ public class ModelManager : Photon.MonoBehaviour
     {
         if (activeSubModels.Contains(subModelName))
         {
-            Transform CurrentModel = transform.Find("Player Model");
-            Transform submodel = CurrentModel.Find(subModelName);
+           
+            Transform submodel = transform.Find(subModelName);
             if (submodel != null)
             {
-                Destroy(submodel);
+                Destroy(submodel.gameObject);
             }
         }
     }

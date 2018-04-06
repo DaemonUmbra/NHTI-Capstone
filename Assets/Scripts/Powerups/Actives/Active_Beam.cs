@@ -92,7 +92,7 @@ namespace Powerups
         IEnumerator Beam()
         {
             modelManager = GetComponent<ModelManager>();
-            modelManager.SetModel("Beam");
+            modelManager.AddSubModel("Beam");
             if (photonView.isMine)
             {
                 beam = GameObject.Find("Beam");
@@ -112,7 +112,7 @@ namespace Powerups
             }
               
             yield return new WaitForSecondsRealtime(Cooldown);
-            modelManager.SetModel("Default");
+            modelManager.RemoveSubModel("Beam");
             
         }
 
