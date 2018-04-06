@@ -23,5 +23,28 @@ namespace Powerups
 	    void Update () {
 		
 	    }
+
+        public override void OnAbilityAdd()
+        {
+            Debug.Log(Name + " added!");
+            base.OnAbilityAdd();
+        }
+
+        public override void OnAbilityRemove()
+        {
+            base.OnAbilityRemove();
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+        }
+
+        protected override void Activate()
+        {
+            Debug.LogWarning("Stick");
+            base.Activate();
+        }
+
     }
 }
