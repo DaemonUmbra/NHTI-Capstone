@@ -20,80 +20,45 @@ namespace Powerups
         //private float CDstart;
         private bool CurrentlyActive = false;
         private PlayerShoot pShoot;
-        private GameObject rayOrigin;
+        ModelManager manager;
 
         private void Awake()
         {
             // Set name
+            Cooldown = 5f;
             Name = "Snipe";
             //Set Sprite
             Icon = Resources.Load<Sprite>("Images/Sniper");
             Tier = PowerupTier.Rare;
         }
-
-
         public override void OnAbilityAdd()
         {
-            Cooldown = 5;
             //Powerup added
             Debug.Log(Name + " Added");
-
+            manager = GetComponent<ModelManager>();
             base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
-            // Call base function
+            manager.SetModel("Default");
             base.OnAbilityRemove();
         }
-
         protected override void Activate()
         {
             if (!photonView.isMine)
             {
                 return;
             }
-            foreach (Transform child in transform)
-            {
-                if (child.name == "Gun")
-                {
-                    rayOrigin = child.gameObject;
-                }
-            }
 
-            Vector3 mp = Input.mousePosition;
-            mp.z = 999;
-            Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
-            Vector3 targetVector = mouseLocation;
-
-            Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit endPoint;
-
-            if (Physics.Raycast(snipeRay, out endPoint))
-            {
-                Debug.Log(endPoint.transform.gameObject.name);
-                targetVector = endPoint.point;
-            }
-            else
-            {
-                Debug.Log("no object was hit");
-            }
-
-            //StartCoroutine(VisualizeRaycast(rayOrigin, targetVector));
-
+            StartCoroutine(SnipeRay());
             base.Activate();
         }
-
-        //private IEnumerator VisualizeRaycast(GameObject Origin, Vector3 targetLocation)
-       // {
-            //LineRenderer snipeLaser = Origin.GetComponent<LineRenderer>();
-            //snipeLaser.SetPosition(0, Origin.transform.position);
-            //snipeLaser.SetPosition(1, targetLocation);
-
-            //snipeLaser.enabled = true;
-            //yield return new WaitForSeconds(.2f);
-            //snipeLaser.enabled = false;
-       // }
+        IEnumerator SnipeRay()
+        {
+            manager.SetModel("Beam");
+            yield return new WaitForSecondsRealtime(.5f);
+            manager.SetModel("Default");
+        }
     }
 }
