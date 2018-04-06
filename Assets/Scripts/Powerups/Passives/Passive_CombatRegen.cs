@@ -18,6 +18,7 @@ namespace Powerups
         {
             Name = "Combat Regeneration";
             Icon = Resources.Load<Sprite>("Images/CombatRegen");
+            Tier = PowerupTier.Rare;
         }
         public override void OnAbilityAdd()
         {
