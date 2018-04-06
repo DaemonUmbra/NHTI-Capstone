@@ -24,8 +24,6 @@ namespace Powerups {
             Tier = PowerupTier.Rare;
         }
 
-
-
         public override void OnAbilityAdd()
         {
             base.OnAbilityAdd();
