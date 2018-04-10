@@ -164,7 +164,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
     }
     [PunRPC]
-    void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
+    public void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
     {
         direction = direction.normalized;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
@@ -174,7 +174,7 @@ public class PlayerController : Photon.MonoBehaviour
     }
     public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
     {
-        photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20, mult);
+        photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
     }
     public void ApplyCrowdControl(float start, float duration)
     {
