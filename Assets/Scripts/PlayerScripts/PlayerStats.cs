@@ -16,8 +16,6 @@ public class PlayerStats : Photon.MonoBehaviour
     List<KeyValuePair<string, float>> _speedMultipliers;
     List<KeyValuePair<string, float>> _speedBoosts;
     float _walkSpeed;
-    float _acceleration;
-    float _deceleration;
 
     // Jump Power
     [SerializeField]
@@ -54,8 +52,6 @@ public class PlayerStats : Photon.MonoBehaviour
     public float Damage { get { return _damage; } } //TODO: Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     public float WalkSpeed { get { return _walkSpeed; } } //TODO: Calculate effective walk/movement speed
-    public float Acceleration { get { return _acceleration; } }
-    public float Deceleration { get { return _deceleration; } }
     #endregion Access Variables
 
 

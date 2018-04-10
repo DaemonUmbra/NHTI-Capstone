@@ -8,9 +8,12 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     private Rigidbody rb;
     private PlayerStats pStats;
-    private Vector2 _inputVelocity = Vector2.zero;
+    private Vector3 _input = Vector3.zero;
     public float JumpMultiplier = 1f;
-    
+
+    private float _acceleration;
+    private float _deceleration;
+
     // Use this for initialization
 
     private void Awake()
@@ -31,18 +34,15 @@ public class PlayerMotor : Photon.MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 currentVel = rb.velocity;
-        Vector3 newVel = new Vector3();
+        Vector3 newVelocity = Vector3.zero;
 
-        // Move horizontally only if current horizontal velocity is less than your input velocity
-        if(Mathf.Abs( rb.velocity.x) < Mathf.Abs(_inputVelocity.x))
+        if(_input.x > 0)
         {
-            newVel.x = _inputVelocity.x;
+            // Needs to be implemented again
         }
-        
-
     }
 
-    public void SetInputVelocity(Vector2 inputVec)
+    public void SetInput(Vector3 inputVec)
     {
         // Prevent diagonal speed increase
         if(inputVec.magnitude > 1)
@@ -51,17 +51,11 @@ public class PlayerMotor : Photon.MonoBehaviour
         }
 
         // Set local velocity
-        _inputVelocity = inputVec * pStats.WalkSpeed;
+        _input = inputVec;
     }
 
     public void Jump()
     {
-        
-        if (onJumpPad)
-        {
-            JumpMultiplier = 2f;
-            onJumpPad = false;
-        }
         //Debug.Log("Jump!");
         Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
@@ -71,9 +65,10 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onJumpPad = false;
+        
         if (other.gameObject.tag == "JumpPad")
         {
+            JumpMultiplier = 2f;
             onJumpPad = true;
         }
     }
@@ -82,6 +77,7 @@ public class PlayerMotor : Photon.MonoBehaviour
     {
         if (other.gameObject.tag == "JumpPad")
         {
+            JumpMultiplier = 1f;
             onJumpPad = false;
         }
     }

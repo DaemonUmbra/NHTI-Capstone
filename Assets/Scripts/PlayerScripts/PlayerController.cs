@@ -80,7 +80,7 @@ public class PlayerController : Photon.MonoBehaviour
 
         if (!CrowdControlled)
         {
-            motor.SetInputVelocity(inputVel); // Apply velocity
+            motor.SetInput(inputVel); // Apply velocity
         }
         else
         {
@@ -136,7 +136,7 @@ public class PlayerController : Photon.MonoBehaviour
 
     public void StopMomentum()
     {
-        motor.SetInputVelocity(Vector3.zero);
+        motor.SetInput(Vector3.zero);
     }
 
     private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
