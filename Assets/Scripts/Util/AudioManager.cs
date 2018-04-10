@@ -25,6 +25,7 @@ public partial class AudioManager : Photon.MonoBehaviour
         clipRegistry.Add("NYEH!2", Resources.Load<AudioClip>("Sounds/NYEH2"));
         clipRegistry.Add("Blink", Resources.Load<AudioClip>("Sounds/blink"));
         clipRegistry.Add("Shockwave", Resources.Load<AudioClip>("Sounds/ShockwaveTemp"));
+        clipRegistry.Add("Beam", Resources.Load<AudioClip>("Sounds/Beam4Sec"));
     }
 
     // Use this for initialization
