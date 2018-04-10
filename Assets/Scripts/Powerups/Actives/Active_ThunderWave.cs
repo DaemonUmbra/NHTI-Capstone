@@ -31,6 +31,7 @@ namespace Powerups
             Cooldown = 4.5f;
             Name = "Thunder Wave";
             Icon = Resources.Load<Sprite>("Images/ThunderWave");
+            Tier = PowerupTier.Rare;
         }
 
         #region Abstract Methods

@@ -9,12 +9,19 @@ namespace Powerups
         private bool onCooldown = false, CurrentlyActive = false;
         private PlayerShoot pShoot;
 
+        // Awake is called when the script instance is being loaded
+        private void Awake()
+        {
+            Name = "ConjureSlime";
+            //TODO: Conjure Slime Icon
+            Tier = PowerupTier.Uncommon;
+        }
+
+
+
         public override void OnAbilityAdd()
         {
-            // Set name
-            Name = "ConjureSlime";
             Debug.Log(Name + " Added");
-
             // Call base function
             base.OnAbilityAdd();
         }

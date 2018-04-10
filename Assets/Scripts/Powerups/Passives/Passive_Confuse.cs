@@ -4,14 +4,44 @@ namespace Powerups
 {
     public class Passive_Confuse : PassiveAbility
     {
+        PlayerController movement;
+        private float timeLimit = 15.0f;
+        private float timer;
+
+        private void Awake()
+        {
+            Name = "Confuse";
+            //TODO: Confuse Icon
+            Tier = PowerupTier.Rare;
+        }
 
         public override void OnAbilityAdd()
         {
-            Name = "Confuse";
+            movement = GetComponent<PlayerController>();
+            movement.InvertX = true;
+            movement.InvertY = true;
+
+            base.OnAbilityAdd();
         }
-        // Update is called once per frame
-        private void Update()
+
+        public override void OnAbilityRemove()
         {
+            movement = GetComponent<PlayerController>();
+            movement.InvertX = false;
+            movement.InvertY = false;
+
+            base.OnAbilityRemove();
+        }
+
+        public override void OnUpdate()
+        {
+            timer += Time.deltaTime;
+            if (timer >= timeLimit)
+            {
+                OnAbilityRemove();
+            }
+
+            base.OnUpdate();
         }
     }
 }

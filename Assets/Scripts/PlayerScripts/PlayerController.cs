@@ -80,7 +80,7 @@ public class PlayerController : Photon.MonoBehaviour
 
         if (!CrowdControlled)
         {
-            motor.SetVelocity(inputVel); // Apply velocity
+            motor.SetInput(inputVel); // Apply velocity
         }
         else
         {
@@ -136,7 +136,7 @@ public class PlayerController : Photon.MonoBehaviour
 
     public void StopMomentum()
     {
-        motor.SetVelocity(Vector3.zero);
+        motor.SetInput(Vector3.zero);
     }
 
     private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
@@ -162,6 +162,23 @@ public class PlayerController : Photon.MonoBehaviour
             motor.Jump();
             jumpCount++;
         }
+    }
+    [PunRPC]
+    public void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
+    {
+        direction = direction.normalized;
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
+
+        rb.AddForce(vel * force, ForceMode.Impulse);
+    }
+    public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
+    {
+        photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
+    }
+    public void ApplyCrowdControl(float start, float duration)
+    {
+
     }
     private void GroundCheck()
     {

@@ -21,17 +21,39 @@ public class Bomb : Projectile
             if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
             {
                 // Apply damage to the player
-                hitStats.TakeDamage(damage, hitStats.gameObject, onHitEffects);
+                hitStats.TakeDamage(damage, _shooter);
                 print("Player hit!");
 
-                
+                RaycastHit hits;
+
+                if(Physics.SphereCast(gameObject.transform.position, 5.0f, transform.forward, out hits, 5))
+                {
+                    PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
+                    newHitStats.TakeDamage((damage / 2.0f), _shooter);
+                }
 
                 PhotonNetwork.Destroy(photonView);
                 PhotonNetwork.Destroy(gameObject);
             }
         }
-        if (hit.tag == "Environment")
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
         {
+            onPlayerHit(other);
+        }
+        if (other.tag == "Environment")
+        {
+            RaycastHit hits;
+
+            if (Physics.SphereCast(gameObject.transform.position, 5.0f, transform.forward, out hits, 5))
+            {
+                PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
+                newHitStats.TakeDamage((damage / 2.0f), _shooter);
+            }
+
             PhotonNetwork.Destroy(photonView);
             PhotonNetwork.Destroy(gameObject);
         }

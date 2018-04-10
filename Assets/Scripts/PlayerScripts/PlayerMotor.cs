@@ -8,8 +8,11 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     private Rigidbody rb;
     private PlayerStats pStats;
-    private Vector3 _velocity = Vector3.zero;
+    private Vector3 _input = Vector3.zero;
     public float JumpMultiplier = 1f;
+
+    private float _acceleration;
+    private float _deceleration;
 
     // Use this for initialization
 
@@ -30,25 +33,30 @@ public class PlayerMotor : Photon.MonoBehaviour
     // Runs every physics update frame
     private void FixedUpdate()
     {
-        // Change rb velocity to local velocity
-        _velocity.y = rb.velocity.y;
-        rb.velocity = _velocity;
+        Vector3 currentVel = rb.velocity;
+        Vector3 newVelocity = Vector3.zero;
+
+        if(_input.x > 0)
+        {
+            // Needs to be implemented again
+        }
+        rb.MovePosition(transform.position + _input * Time.deltaTime * pStats.WalkSpeed);
     }
 
-    public void SetVelocity(Vector3 velocity)
+    public void SetInput(Vector3 inputVec)
     {
+        // Prevent diagonal speed increase
+        if(inputVec.magnitude > 1)
+        {
+            inputVec.Normalize();
+        }
+
         // Set local velocity
-        _velocity = velocity * pStats.WalkSpeed;
+        _input = inputVec;
     }
 
     public void Jump()
     {
-        
-        if (onJumpPad)
-        {
-            JumpMultiplier = 2f;
-            onJumpPad = false;
-        }
         //Debug.Log("Jump!");
         Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
@@ -58,9 +66,10 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onJumpPad = false;
+        
         if (other.gameObject.tag == "JumpPad")
         {
+            JumpMultiplier = 2f;
             onJumpPad = true;
         }
     }
@@ -69,6 +78,7 @@ public class PlayerMotor : Photon.MonoBehaviour
     {
         if (other.gameObject.tag == "JumpPad")
         {
+            JumpMultiplier = 1f;
             onJumpPad = false;
         }
     }

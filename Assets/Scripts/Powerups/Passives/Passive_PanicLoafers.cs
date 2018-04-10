@@ -23,6 +23,7 @@ namespace Powerups
         {
             Name = "Panic Loafers";
             Icon = Resources.Load<Sprite>("Images/PanicLoafers");
+            Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {
@@ -54,6 +55,11 @@ namespace Powerups
                 if (Instances == 1)
                 {
                     StartCoroutine(PanicTime()); // Begin coroutine for timer
+                }
+
+                if (Instances > 3)
+                {
+                    Instances = 3;
                 }
             }
             else if (PS.CurrentHp > Health) // If player gains health

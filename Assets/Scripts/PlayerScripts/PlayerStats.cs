@@ -39,10 +39,6 @@ public class PlayerStats : Photon.MonoBehaviour
     Vector3 _scaleMod;
     Vector3 _baseScale;
     List<KeyValuePair<string, Vector3>> _scaleFactors;
-    /// <summary>
-    /// Transforms to be scaled with the player. For now it just includes the local transform which is added at runtime.
-    /// </summary>
-    List<Transform> _transformsToScale;
 
     private PlayerSpawning pSpawn;
 
@@ -56,7 +52,6 @@ public class PlayerStats : Photon.MonoBehaviour
     public float Damage { get { return _damage; } } //TODO: Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     public float WalkSpeed { get { return _walkSpeed; } } //TODO: Calculate effective walk/movement speed
-    //public List<EffectPackage> PackagedEffects { get { return _packagedEffects; } }
     #endregion Access Variables
 
 
@@ -77,8 +72,6 @@ public class PlayerStats : Photon.MonoBehaviour
         _speedBoosts = new List<KeyValuePair<string, float>>();
         _speedMultipliers = new List<KeyValuePair<string, float>>();
         _healthBoosts = new List<KeyValuePair<string, float>>();
-        _transformsToScale = new List<Transform>();
-        _transformsToScale.Add(transform);
 
         // Starting Stats
         _maxHp = _baseMaxHp;
@@ -105,6 +98,7 @@ public class PlayerStats : Photon.MonoBehaviour
     }
 
     #endregion Unity Callbacks
+
 
 
     #region Public Methods
@@ -305,7 +299,23 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All, factorName);
     }
-    
+    /* Changed the implementation of this to just scale the parent transform
+    public void AddTransform(Transform trans)
+    {
+        int pId = trans.gameObject.GetPhotonView().viewID;
+        photonView.RPC("RPC_AddTransform", PhotonTargets.All, pId);
+    }
+    public void RemoveTransform(Transform trans)
+    {
+        int pId = trans.gameObject.GetPhotonView().viewID;
+        photonView.RPC("RPC_RemoveTransform", PhotonTargets.All, pId);
+    }
+    public bool HasTransform(Transform trans)
+    {
+        return (_transformsToScale.Contains(trans));
+    }
+    */
+
     // Public Speed Modifiers
     public void AddSpeedMultipler(string multName, float multiplier)
     {
@@ -341,6 +351,7 @@ public class PlayerStats : Photon.MonoBehaviour
     }
 
     #endregion Public Methods
+
 
 
     #region Photon RPCs
@@ -609,7 +620,30 @@ public class PlayerStats : Photon.MonoBehaviour
             ApplyNewScale();
         }
     }
+    /* Changed the implementation of this to just scale the parent transform
+    [PunRPC] private void RPC_AddTransform(int viewId)
+    {
+        Transform trans = PhotonView.Find(viewId).transform;
 
+        // Dupe check
+        if(!HasTransform(trans))
+        {
+            _transformsToScale.Add(trans);
+        }
+        _lookupBaseScale[trans] = trans.localScale;
+        // Calculate new scale
+        CalcScale();
+    }
+    [PunRPC] private void RPC_RemoveTransform(int viewId)
+    {
+        Transform trans = PhotonView.Find(viewId).transform;
+
+        _transformsToScale.Remove(trans);
+
+        // Calculate new scale
+        CalcScale();
+    }
+    */
     // Speed Modifier RPCs
     [PunRPC] private void RPC_AddSpeedMultiplier(string multName, float multiplier)
     {
@@ -668,29 +702,26 @@ public class PlayerStats : Photon.MonoBehaviour
     #endregion Photon RPCs
 
 
-    #region Private Methods
 
+    #region Private Methods
+    // Kill the player
     private void Die()
     {
         photonView.RPC("RPC_Die", PhotonTargets.All);
     }
-
     private void Die(GameObject killer)
     {
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
+    // Apply new scale modifier
     private void ApplyNewScale()
     {
-        // Scale each transform individually
-        foreach (Transform t in _transformsToScale)
-        {
-            t.localScale = new Vector3( _scaleMod.x, _scaleMod.y, _scaleMod.z);
-        }
+        transform.localScale = new Vector3( _baseScale.x * _scaleMod.x, _baseScale.y * _scaleMod.y, _baseScale.z * _scaleMod.z);
     }
     // Recalculate scale modifier
     private void CalcScale()
     {
-        _scaleMod = _baseScale;
+        _scaleMod = new Vector3(1, 1, 1);
         foreach (KeyValuePair<string, Vector3> f in _scaleFactors)
         {
             _scaleMod.x *= f.Value.x;
@@ -748,8 +779,5 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp = _maxHp;
         }
     }
-
-    
-
     #endregion Private Methods
 }

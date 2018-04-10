@@ -30,6 +30,7 @@ MonoBehaviour:
   - pbDefaultEntity
   - pbDefaultCollider
   - pbShadowCastingMode
+  - pbMirrorObjectScale
   m_Float_keys:
   - pbEditorScroll.x
   - pbEditorScroll.y
@@ -40,8 +41,13 @@ MonoBehaviour:
   m_Color_keys: []
   m_Material_keys:
   - pbDefaultMaterial
+<<<<<<< HEAD
   m_Bool_values: 000001010001010000
   m_Int_values: 0200000000000000020000000100000002000000000000000200000002000000
+=======
+  m_Bool_values: 000100010001010000
+  m_Int_values: 00000000000000000100000000000000020000000000000002000000020000000c000000
+>>>>>>> 90157454b590a32a6e33147b45dad4997677e10e
   m_Float_values:
   - 0
   - 0

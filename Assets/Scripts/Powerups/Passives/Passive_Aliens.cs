@@ -9,18 +9,31 @@ namespace Powerups
 
     public class Passive_Aliens : PassiveAbility
     {
+        AbilityManager abilityManager;
         ModelManager modelManager;
 
         private void Awake()
         {
             Name = "Aliens";
+            //TODO: Aliens Icon
+            Tier = PowerupTier.Common;
         }
         public override void OnAbilityAdd()
         {
+            modelManager.ModelChanged += ModelManager_ModelChanged;
+            abilityManager = GetComponent<AbilityManager>();
             modelManager = GetComponent<ModelManager>();
             modelManager.SetModel("Aliens");
 
             base.OnAbilityAdd();
+        }
+
+        private void ModelManager_ModelChanged(object sender, ModelManager.ModelChangeEventArgs e)
+        {
+            if(e.oldModelName == "Aliens")
+            {
+                abilityManager.RemoveAbility<Passive_Aliens>();
+            }
         }
 
         /*** Handled by base class

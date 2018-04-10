@@ -9,10 +9,15 @@ namespace Powerups
         private PlayerShoot pShoot;
         private Ice iceball;
 
+        public readonly Vector3 PosOffset = new Vector3(0, 2, 0);
+
+        public readonly Vector3 RotOffset = new Vector3(0, 0, 0);
+
         private void Awake()
         {
-
             Name = "Ice Ball";
+            //TODO: Iceball Icon
+            Tier = PowerupTier.Common;
         }
 
         public override void OnAbilityAdd()
@@ -33,7 +38,7 @@ namespace Powerups
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Bullet 1", transform.position, transform.rotation, 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Bullet 1", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
             }
             base.Activate();
         }
