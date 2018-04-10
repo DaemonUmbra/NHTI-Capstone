@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SlimeBall : MonoBehaviour
+public class SlimeBall : Photon.MonoBehaviour
 {
     private float lifetime = 10f;
     private float force = 10f;
