@@ -40,6 +40,7 @@ public class PlayerMotor : Photon.MonoBehaviour
         {
             // Needs to be implemented again
         }
+        rb.MovePosition(transform.position + _input * Time.deltaTime * pStats.WalkSpeed);
     }
 
     public void SetInput(Vector3 inputVec)
