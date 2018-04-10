@@ -53,7 +53,7 @@ Shader "Polybrush/Standard Texture Blend" {
             #pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
             #pragma multi_compile_fog
             #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
-            #pragma target 3.0
+            #pragma target 4.0
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _Metallic;
             uniform float _Gloss;
@@ -84,13 +84,12 @@ Shader "Polybrush/Standard Texture Blend" {
                 float4 pos : SV_POSITION;
                 float4 uv0 : TEXCOORD0;
                 float4 uv1 : TEXCOORD1;
-                //float4 uv2 : TEXCOORD2;
-                //float4 uv3 : TEXCOORD3;
+                float4 uv2 : TEXCOORD2;
+                float4 uv3 : TEXCOORD3;
                 float4 posWorld : TEXCOORD4;
                 float3 normalDir : TEXCOORD5;
                 float3 tangentDir : TEXCOORD6;
                 float3 bitangentDir : TEXCOORD7;
-				float4 uv2_3 : TEXCOORD8; //HACK
                 float4 vertexColor : COLOR;
                 LIGHTING_COORDS(8,9)
                 UNITY_FOG_COORDS(10)
@@ -102,9 +101,8 @@ Shader "Polybrush/Standard Texture Blend" {
                 VertexOutput o = (VertexOutput)0;
                 o.uv0 = v.texcoord0;
                 o.uv1 = v.texcoord1;
-                //o.uv2 = v.texcoord2;
-                //o.uv3 = v.texcoord3;
-				o.uv2_3 = float4(v.texcoord2, v.texcoord3);
+                o.uv2 = v.texcoord2;
+                o.uv3 = v.texcoord3;
                 o.vertexColor = v.vertexColor;
                 #ifdef LIGHTMAP_ON
                     o.ambientOrLightmapUV.xy = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
@@ -236,7 +234,7 @@ Shader "Polybrush/Standard Texture Blend" {
             #pragma multi_compile DYNAMICLIGHTMAP_OFF DYNAMICLIGHTMAP_ON
             #pragma multi_compile_fog
             #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
-            #pragma target 3.0
+            #pragma target 4.0
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _Metallic;
             uniform float _Gloss;
