@@ -36,6 +36,7 @@ public class PlayerController : Photon.MonoBehaviour
     private bool onRamp = false;
     private bool isGrounded = false;
     private bool debounce = false;
+    private bool wallCollide = false;
     
     // Controls
     /// <summary>
@@ -105,7 +106,6 @@ public class PlayerController : Photon.MonoBehaviour
     {
         // Validates the controls
         CheckControlType();
-
         // Get movement input
         Vector3 inputVel = Vector3.zero;
 
@@ -123,8 +123,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
         else
         {
-            CCWearOff(Time.time, duration, false);
-            return;
+            motor.SetInput(Vector3.zero);
         }
 
         // Check for jump
@@ -241,18 +240,6 @@ public class PlayerController : Photon.MonoBehaviour
         //motor.SetInput(Vector3.zero);
     }
 
-    private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
-    {
-        //Debug.Log("Crowd Control started: " + CCStartTime + " Current Time: " + currentTime);
-        if (stopsMomentum)
-        {
-            StopMomentum();
-        }
-        if (currentTime >= CCStartTime + CCDuration)//static value
-        {
-            CrowdControlled = false;
-        }
-    }
     [PunRPC]
     private void TryJump()
     {
@@ -268,19 +255,16 @@ public class PlayerController : Photon.MonoBehaviour
     [PunRPC]
     public void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
     {
+        CrowdControlled = true;
         direction = direction.normalized;
+        direction = direction * force/1.5f;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
-
-        rb.AddForce(vel * force, ForceMode.Impulse);
+        rb.AddForce(vel, ForceMode.Impulse);
     }
     public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
     {
         photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
-    }
-    public void ApplyCrowdControl(float start, float duration)
-    {
-
     }
     private void GroundCheck()
     {
@@ -292,6 +276,21 @@ public class PlayerController : Photon.MonoBehaviour
             {
                 isGrounded = true;
                 jumpCount = 0;
+            }
+        }
+    }
+    private void WallCheck(Vector3 dir)
+    {
+        dir = transform.TransformDirection(dir);
+        RaycastHit wall;
+        if (Physics.Raycast(transform.position, dir, out wall))
+        {
+            if (wall.distance < 0.2f)
+            {
+                if (!wallCollide)
+                {
+                    wallCollide = true;
+                } 
             }
         }
     }
@@ -320,6 +319,9 @@ public class PlayerController : Photon.MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        CrowdControlled = false;
         if (collision.collider.gameObject.layer == groundLayer)
         {
 
