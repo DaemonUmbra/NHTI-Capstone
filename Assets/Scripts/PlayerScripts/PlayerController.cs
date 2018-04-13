@@ -28,6 +28,7 @@ public class PlayerController : Photon.MonoBehaviour
     private AbilityManager abilityManager;
 
     public bool canWallJump = false;
+    private bool onRamp = false;
     private bool isGrounded = false;
     private bool debounce = false;
 
@@ -69,6 +70,7 @@ public class PlayerController : Photon.MonoBehaviour
         Vector3 inputVel = Vector3.zero;
 
         float xAxis = Input.GetAxis("Horizontal");
+        
         Vector3 xInput = xAxis * transform.right;
         if (InvertX) xInput *= -1;
 
@@ -77,10 +79,10 @@ public class PlayerController : Photon.MonoBehaviour
         if (InvertY) yInput *= -1;
 
         inputVel = xInput + yInput;
-
+        //Debug.Log(yAxis);
         if (!CrowdControlled)
         {
-            motor.SetInput(inputVel); // Apply velocity
+            motor.SetInput(inputVel, onRamp); // Apply velocity
         }
         else
         {
@@ -89,7 +91,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
 
         // Check for jump}
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             photonView.RPC("TryJump", PhotonTargets.All);
         }
@@ -136,7 +138,7 @@ public class PlayerController : Photon.MonoBehaviour
 
     public void StopMomentum()
     {
-        motor.SetInput(Vector3.zero);
+        //motor.SetInput(Vector3.zero);
     }
 
     private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
@@ -232,6 +234,15 @@ public class PlayerController : Photon.MonoBehaviour
             }
             //print("Jump Reset");
         }
+        if (collision.gameObject.tag == "Ramp")
+        {
+            Debug.Log("onramp");
+            onRamp = true;
+        }
+        else
+        {
+            onRamp = false;
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -240,6 +251,7 @@ public class PlayerController : Photon.MonoBehaviour
         {
             isGrounded = false;
         }
+        onRamp = false;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

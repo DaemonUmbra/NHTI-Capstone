@@ -10,6 +10,7 @@ public class PlayerMotor : Photon.MonoBehaviour
     private PlayerStats pStats;
     private Vector3 _input = Vector3.zero;
     public float JumpMultiplier = 1f;
+    private bool yMove = false;
 
     private float _acceleration;
     private float _deceleration;
@@ -40,12 +41,16 @@ public class PlayerMotor : Photon.MonoBehaviour
         {
             // Needs to be implemented again
         }
+        _input.y = 0;
         Vector3 moveVector = transform.position + _input * Time.deltaTime * pStats.WalkSpeed;
-        moveVector.y = 0;
+        if (!yMove)
+        {
+            //moveVector.y = rb.velocity.y;
+        }
         rb.MovePosition(moveVector);
     }
 
-    public void SetInput(Vector3 inputVec)
+    public void SetInput(Vector3 inputVec, bool allowYMovement)
     {
         // Prevent diagonal speed increase
         if(inputVec.magnitude > 1)
@@ -54,18 +59,31 @@ public class PlayerMotor : Photon.MonoBehaviour
         }
 
         // Set local velocity
+        //yMove = allowYMovement;
         _input = inputVec;
     }
 
     public void Jump()
     {
+        yMove = true;
         //Debug.Log("Jump!");
         Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.velocity = inverseJump;
         rb.AddForce(Vector3.up * pStats.JumpPower * JumpMultiplier);
     }
+    private void WallCheck()
+    {
+        Vector3 dir = transform.TransformDirection(Vector3.forward);
+        RaycastHit obj;
+        if (Physics.Raycast(transform.position, dir, out obj))
+        {
+            if (obj.transform.gameObject.tag != "Ramp")
+            {
 
+            }
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         
