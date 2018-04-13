@@ -101,11 +101,13 @@ public class Projectile : Photon.MonoBehaviour
         {
             onPlayerHit(other);
         }
-        if (other.tag == "Environment")
+        else
         {
             PhotonNetwork.Destroy(photonView);
             PhotonNetwork.Destroy(gameObject);
         }
+           
+        
     }
 
     protected virtual void onPlayerHit(Collider hitPlayer)
