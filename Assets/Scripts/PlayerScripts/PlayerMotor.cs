@@ -8,8 +8,9 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     private Rigidbody rb;
     private PlayerStats pStats;
-    private Vector3 _input = Vector3.zero;
+    private Vector2 _input = Vector3.zero;
     public float JumpMultiplier = 1f;
+    private bool yMove = false;
 
     private float _acceleration;
     private float _deceleration;
@@ -31,44 +32,41 @@ public class PlayerMotor : Photon.MonoBehaviour
     }
 
     // Runs every physics update frame
-    private void FixedUpdate()
+    private void Update()
     {
-        Vector3 currentVel = rb.velocity;
-        Vector3 newVelocity = Vector3.zero;
-
-        if(_input.x > 0)
-        {
-            // Needs to be implemented again
-        }
-        Vector3 moveVector = transform.position + _input * Time.deltaTime * pStats.WalkSpeed;
-        moveVector.y = 0;
-        rb.MovePosition(moveVector);
+        Debug.Log(transform.forward);
+        transform.position += transform.forward * _input.y * pStats.WalkSpeed * Time.deltaTime;
+        transform.position += transform.right * _input.x * pStats.WalkSpeed * Time.deltaTime;
     }
 
     public void SetInput(Vector3 inputVec)
     {
-        // Prevent diagonal speed increase
-        if(inputVec.magnitude > 1)
-        {
-            inputVec.Normalize();
-        }
-
-        // Set local velocity
         _input = inputVec;
     }
 
     public void Jump()
     {
+        yMove = true;
         //Debug.Log("Jump!");
         Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.velocity = inverseJump;
         rb.AddForce(Vector3.up * pStats.JumpPower * JumpMultiplier);
     }
+    private void WallCheck()
+    {
+        Vector3 dir = transform.TransformDirection(Vector3.forward);
+        RaycastHit obj;
+        if (Physics.Raycast(transform.position, dir, out obj))
+        {
+            if (obj.transform.gameObject.tag != "Ramp")
+            {
 
+            }
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.gameObject.tag == "JumpPad")
         {
             JumpMultiplier = 2f;

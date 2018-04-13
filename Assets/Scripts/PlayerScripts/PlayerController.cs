@@ -7,15 +7,18 @@
 [RequireComponent(typeof(AudioManager))]
 public class PlayerController : Photon.MonoBehaviour
 {
+    // Serialization stuff
     Vector3 position;
     Quaternion rotation;
 
+    // Crowd control
     private bool CrowdControlled = false;
     private float CCStartTime, duration;
-
+    // Layers
     [SerializeField]
     private int groundLayer = 8;
 
+    // Counts and cooldowns
     [SerializeField]
     private float jumpCooldown;
     private float lastJumpTime;
@@ -26,11 +29,15 @@ public class PlayerController : Photon.MonoBehaviour
     private PlayerMotor motor;
     private PlayerShoot pShoot;
     private AbilityManager abilityManager;
+    private CameraController camController;
 
+    // Flags
     public bool canWallJump = false;
+    private bool onRamp = false;
     private bool isGrounded = false;
     private bool debounce = false;
-
+    
+    // Controls
     /// <summary>
     /// Invert left and right controls
     /// </summary>
@@ -45,13 +52,35 @@ public class PlayerController : Photon.MonoBehaviour
     string AxisA2 = "ActiveTwo";
     string AxisA3 = "ActiveThree";
     string AxisA4 = "ActiveFour";
+    // Movement input axes names
+    string AxisHorizLook = "Mouse X";
+    string AxisVerticalLook = "Mouse Y";
+
+    /// <summary>
+    /// Horizontal look speed in degrees/second
+    /// </summary>
+    public float hLookSpeed = 20;
+    /// <summary>
+    /// Vertical look speed in degrees/second
+    /// </summary>
+    public float vLookSpeed = 20;
+    /// <summary>
+    /// Maximum vertical look angle in degrees. 90 means you can look completely up and down.
+    /// </summary>
+    public float maxVerticalLook = 80;
+
+    float hRot;
+    float vRot;
 
     private void Awake()
     {
         motor = GetComponent<PlayerMotor>();
         pShoot = GetComponent<PlayerShoot>();
         abilityManager = GetComponent<AbilityManager>();
+        camController = GetComponent<CameraController>();
         lastJumpTime = Time.time - jumpCooldown;
+        hRot = transform.rotation.eulerAngles.x;
+        vRot = transform.rotation.eulerAngles.y;
     }
     
 
@@ -69,18 +98,16 @@ public class PlayerController : Photon.MonoBehaviour
         Vector3 inputVel = Vector3.zero;
 
         float xAxis = Input.GetAxis("Horizontal");
-        Vector3 xInput = xAxis * transform.right;
-        if (InvertX) xInput *= -1;
+        if (InvertX) xAxis *= -1;
 
         float yAxis = Input.GetAxis("Vertical");
-        Vector3 yInput = yAxis * transform.forward;
-        if (InvertY) yInput *= -1;
+        if (InvertY) yAxis *= -1;
 
-        inputVel = xInput + yInput;
+        Vector2 input = new Vector2(xAxis, yAxis);
 
         if (!CrowdControlled)
         {
-            motor.SetInput(inputVel); // Apply velocity
+            motor.SetInput(input); // Apply input
         }
         else
         {
@@ -89,7 +116,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
 
         // Check for jump}
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             photonView.RPC("TryJump", PhotonTargets.All);
         }
@@ -105,6 +132,8 @@ public class PlayerController : Photon.MonoBehaviour
 
         // Check active ability input
         HandleAbilityInput();
+        // Check camera look input
+        HandleLookInput();
     }
 
     private void HandleAbilityInput()
@@ -126,6 +155,19 @@ public class PlayerController : Photon.MonoBehaviour
             abilityManager.TriggerAbility(3);
         }
     }
+    private void HandleLookInput()
+    {
+        float vLook = Input.GetAxis(AxisVerticalLook) * vLookSpeed * Time.deltaTime;
+        float hLook = Input.GetAxis(AxisHorizLook) * hLookSpeed * Time.deltaTime;
+
+        hRot += hLook;
+        vRot -= vLook;
+        Debug.Log(hLook + ":" + vLook);
+
+        transform.rotation = Quaternion.Euler(0, hRot, 0);
+        camController.cam.transform.rotation = Quaternion.Euler(vRot, hRot, 0);
+        
+    }
     [PunRPC]
     private void RPC_FirePrimary()
     {
@@ -136,7 +178,7 @@ public class PlayerController : Photon.MonoBehaviour
 
     public void StopMomentum()
     {
-        motor.SetInput(Vector3.zero);
+        //motor.SetInput(Vector3.zero);
     }
 
     private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
@@ -232,6 +274,15 @@ public class PlayerController : Photon.MonoBehaviour
             }
             //print("Jump Reset");
         }
+        if (collision.gameObject.tag == "Ramp")
+        {
+            Debug.Log("onramp");
+            onRamp = true;
+        }
+        else
+        {
+            onRamp = false;
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -240,6 +291,7 @@ public class PlayerController : Photon.MonoBehaviour
         {
             isGrounded = false;
         }
+        onRamp = false;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

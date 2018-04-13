@@ -69,6 +69,7 @@ public class TestHealthUI : Photon.MonoBehaviour {
 
     public void UpdatePowerups()
     {
+
         List<ActiveAbility> actives = abilityManager.ActiveAbilities;
         for(int i = 0; i < actives.Count; ++i)
         {
