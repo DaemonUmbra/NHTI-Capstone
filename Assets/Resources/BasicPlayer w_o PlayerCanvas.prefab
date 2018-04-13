@@ -868,11 +868,8 @@ GameObject:
   - component: {fileID: 114525675898936844}
   - component: {fileID: 114275901328029248}
   - component: {fileID: 114669762924275862}
-<<<<<<< HEAD
   - component: {fileID: 114743135251928870}
-=======
   - component: {fileID: 114669670588167690}
->>>>>>> c04b0258e405e0b1cb7c3768c18ebd9cb0b67fa2
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
