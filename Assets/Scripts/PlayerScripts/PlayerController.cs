@@ -147,18 +147,22 @@ public class PlayerController : Photon.MonoBehaviour
 
         if(joysticks.Length > 0)
         {
-            if(joysticks[0] == xboxName)
+            foreach (string j in joysticks)
             {
-                cType = ControlType.XBoxOne;
-                AxisHorizLook = "XboxRSHorizontal";
-                AxisVerticalLook = "XboxRSVertical";
+                if (j == xboxName)
+                {
+                    cType = ControlType.XBoxOne;
+                    AxisHorizLook = "XboxRSHorizontal";
+                    AxisVerticalLook = "XboxRSVertical";
+                }
+                else if (j == ps4Name)
+                {
+                    cType = ControlType.PS4;
+                    AxisHorizLook = "PS4RSHorizontal";
+                    AxisVerticalLook = "PS4RSVertical";
+                }
             }
-            else if(joysticks[0] == ps4Name)
-            {
-                cType = ControlType.PS4;
-                AxisHorizLook = "PS4RSHorizontal";
-                AxisVerticalLook = "PS4RSVertical";
-            }
+            
         }
         else
         {

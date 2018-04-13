@@ -34,7 +34,6 @@ public class PlayerMotor : Photon.MonoBehaviour
     // Runs every physics update frame
     private void Update()
     {
-        Debug.Log(transform.forward);
         transform.position += transform.forward * _input.y * pStats.WalkSpeed * Time.deltaTime;
         transform.position += transform.right * _input.x * pStats.WalkSpeed * Time.deltaTime;
     }
