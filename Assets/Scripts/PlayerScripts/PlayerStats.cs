@@ -229,6 +229,18 @@ public class PlayerStats : Photon.MonoBehaviour
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID, packagedEffects);
     }
 
+    // Insta-kill player
+    public void Kill()
+    {
+        photonView.RPC("RPC_Die", PhotonTargets.All);
+    }
+    public void Kill(GameObject source)
+    {
+        int id = source.GetPhotonView().viewID;
+
+        photonView.RPC("RPC_Die", PhotonTargets.All, id);
+    }
+
     // Reset all stats
     public void ResetStats()
     {
@@ -489,6 +501,7 @@ public class PlayerStats : Photon.MonoBehaviour
         _healthBoosts.Clear();
         CalcHealth();
     }
+
     // Health RPCs
     [PunRPC] private void RPC_GainHp(float amount)
     {
@@ -620,30 +633,7 @@ public class PlayerStats : Photon.MonoBehaviour
             ApplyNewScale();
         }
     }
-    /* Changed the implementation of this to just scale the parent transform
-    [PunRPC] private void RPC_AddTransform(int viewId)
-    {
-        Transform trans = PhotonView.Find(viewId).transform;
 
-        // Dupe check
-        if(!HasTransform(trans))
-        {
-            _transformsToScale.Add(trans);
-        }
-        _lookupBaseScale[trans] = trans.localScale;
-        // Calculate new scale
-        CalcScale();
-    }
-    [PunRPC] private void RPC_RemoveTransform(int viewId)
-    {
-        Transform trans = PhotonView.Find(viewId).transform;
-
-        _transformsToScale.Remove(trans);
-
-        // Calculate new scale
-        CalcScale();
-    }
-    */
     // Speed Modifier RPCs
     [PunRPC] private void RPC_AddSpeedMultiplier(string multName, float multiplier)
     {

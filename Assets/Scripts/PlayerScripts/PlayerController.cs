@@ -55,7 +55,7 @@ public class PlayerController : Photon.MonoBehaviour
     // Movement input axes names
     string AxisHorizLook = "Mouse X";
     string AxisVerticalLook = "Mouse Y";
-    // Controller type
+    // Controller input axes and type
     ControlType cType = ControlType.KeyboardMouse;
     string ps4Name = "Wireless Controller";
     string xboxName = "Controller (Xbox One For Windows)";
