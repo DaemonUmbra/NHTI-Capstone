@@ -55,6 +55,10 @@ public class PlayerController : Photon.MonoBehaviour
     // Movement input axes names
     string AxisHorizLook = "Mouse X";
     string AxisVerticalLook = "Mouse Y";
+    // Controller type
+    ControlType cType = ControlType.KeyboardMouse;
+    string ps4Name = "Wireless Controller";
+    string xboxName = "Controller (Xbox One For Windows)";
 
     /// <summary>
     /// Horizontal look speed in degrees/second
@@ -71,6 +75,8 @@ public class PlayerController : Photon.MonoBehaviour
 
     float hRot;
     float vRot;
+
+    
 
     private void Awake()
     {
@@ -94,6 +100,9 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void HandleInput()
     {
+        // Validates the controls
+        CheckControlType();
+
         // Get movement input
         Vector3 inputVel = Vector3.zero;
 
@@ -115,14 +124,10 @@ public class PlayerController : Photon.MonoBehaviour
             return;
         }
 
-        // Check for jump}
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Check for jump
+        if (Input.GetButtonDown("Jump"))
         {
             photonView.RPC("TryJump", PhotonTargets.All);
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StopMomentum();
         }
         // Check for shooting
         if (Input.GetButtonDown("Fire1"))
@@ -136,6 +141,32 @@ public class PlayerController : Photon.MonoBehaviour
         HandleLookInput();
     }
 
+    private void CheckControlType()
+    {
+        string[] joysticks = Input.GetJoystickNames();
+
+        if(joysticks.Length > 0)
+        {
+            if(joysticks[0] == xboxName)
+            {
+                cType = ControlType.XBoxOne;
+                AxisHorizLook = "XboxRSHorizontal";
+                AxisVerticalLook = "XboxRSVertical";
+            }
+            else if(joysticks[0] == ps4Name)
+            {
+                cType = ControlType.PS4;
+                AxisHorizLook = "PS4RSHorizontal";
+                AxisVerticalLook = "PS4RSVertical";
+            }
+        }
+        else
+        {
+            cType = ControlType.KeyboardMouse;
+            AxisHorizLook = "Mouse X";
+            AxisVerticalLook = "Mouse Y";
+        }
+    }
     private void HandleAbilityInput()
     {
         if(Input.GetButtonDown(AxisA1))
@@ -162,10 +193,16 @@ public class PlayerController : Photon.MonoBehaviour
 
         hRot += hLook;
         vRot -= vLook;
-        Debug.Log(hLook + ":" + vLook);
 
+        // Clamp vertical rotation
+        if (vRot > maxVerticalLook)
+            vRot = maxVerticalLook;
+        else if (vRot < -maxVerticalLook)
+            vRot = -maxVerticalLook;
+
+        // Rotate player and set camera rotation
         transform.rotation = Quaternion.Euler(0, hRot, 0);
-        camController.cam.transform.rotation = Quaternion.Euler(vRot, hRot, 0);
+        camController.camRotation = Quaternion.Euler(vRot, hRot, 0);
         
     }
     [PunRPC]
@@ -311,3 +348,6 @@ public class PlayerController : Photon.MonoBehaviour
         }
     }
 }
+
+
+public enum ControlType { KeyboardMouse, XBoxOne, PS4 }

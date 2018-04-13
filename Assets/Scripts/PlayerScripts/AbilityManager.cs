@@ -16,6 +16,8 @@ public class AbilityManager : Photon.MonoBehaviour
 
     [SerializeField]
     private int MaxActives = 4;
+    [SerializeField]
+    private int MaxPassives = 6;
     private List<ActiveAbility> _activeAbilities;
     private List<PassiveAbility> _passiveAbilities;
 
@@ -92,12 +94,21 @@ public class AbilityManager : Photon.MonoBehaviour
                 return false;
             }
         }
-        // Check that you don't have too many actives
+        // Check active capacity
         if (abilityType == typeof(ActiveAbility).ToString())
         {
             if (_activeAbilities.Count >= MaxActives)
             {
                 Debug.LogWarning("Too many actives. Drop logic will be added soon.");
+                return false;
+            }
+        }
+        // Check passive capacity
+        else if(abilityType == typeof(PassiveAbility).ToString())
+        {
+            if(_passiveAbilities.Capacity >= MaxPassives)
+            {
+                Debug.LogWarning("Too many passives. Drop logic will be added soon.");
                 return false;
             }
         }
