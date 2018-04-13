@@ -14,6 +14,6 @@ public class AnimatorSettings : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        //gameObject.transform.Translate(Vector3.forward * 0.05f);
+        gameObject.transform.Translate(Vector3.forward * 0.05f);
     }
 }

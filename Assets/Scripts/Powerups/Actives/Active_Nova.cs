@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Powerups {
-    public class Active_Nova : ActiveAbility
+    public class Powerup_Nova : ActiveAbility
     {
         public float ExplosionSize = 15f;
         public float ExplosionTime = 1f;
-        public float ScaleStep = 1f;
+        public float ScaleStep = .5f;
         public float ExplosionForce = 5f;
         public float ExplosionDamage = 5f;
         private AbilityManager AbilityManager;
         private Vector3 ScaleStepVector;
+        private List<GameObject> Affected;
         private GameObject Explosion;
-        private List<Transform> Affected = new List<Transform>();
 
         // Awake is called when the script instance is being loaded
         private void Awake()
@@ -33,18 +33,13 @@ namespace Powerups {
         protected override void Activate()
         {
             base.Activate();
-            if (photonView.isMine)
-            {
-                photonView.RPC("RPC_Nova_Explosion", PhotonTargets.All);
-            }
+            photonView.RPC("RPC_Nova_Explosion", PhotonTargets.All);
         }
 
         [PunRPC]
         public void RPC_Nova_Explosion()
         {
             Explosion = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            NovaDummy dummy = Explosion.AddComponent<NovaDummy>();
-            dummy.SetDetonator(transform);
             Explosion.SetActive(false);
             Explosion.transform.position = transform.position;
             Explosion.name = "Nova Explosion";
@@ -70,7 +65,6 @@ namespace Powerups {
                 {
                     if(Explosion.transform.localScale == Vector3.zero)
                     {
-                        Affected.Clear();
                         Destroy(Explosion);
                         Exploding = false;
                     }
@@ -83,14 +77,13 @@ namespace Powerups {
             //AbilityManager.RemoveAbility(this);
         }
 
-        public void OnHitPlayer(Transform other)
+        private void OnTriggerEnter(Collider other)
         {
             if (photonView.isMine)
             {
                 if (other.GetComponent<PlayerStats>() != null)
                 {
-                    other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, gameObject);
-                    Affected.Add(other.transform);
+                    other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, Explosion);
                 }
                 if (other.GetComponent<Rigidbody>() != null)
                 {

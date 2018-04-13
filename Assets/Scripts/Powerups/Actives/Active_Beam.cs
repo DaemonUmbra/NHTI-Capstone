@@ -22,17 +22,11 @@ namespace Powerups
         private GameObject rayOrigin;
         ModelManager modelManager;
         private GameObject beam;
-
-        private AudioManager audioManager;
-        private AudioSource audioSource;
-        private AudioClip beamClip;
-
-        public float beamVolume = 1f;
-
+        
         private void Awake()
         {
             // Set name
-            Cooldown = 5f;
+            Cooldown = 2f;
             Name = "Beam";
             Icon = Resources.Load<Sprite>("Images/Beam");
             Tier = PowerupTier.Rare;
@@ -40,9 +34,6 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Debug.Log(Name + " Added");
-            audioManager = gameObject.GetComponent<AudioManager>();
-            audioSource = audioManager.GetNewAudioSource(Name);
-            audioSource.playOnAwake = false;
             //modelManager = GetComponent<ModelManager>();
             //modelManager.SetModel("Beam");
             // Call base function
@@ -100,7 +91,6 @@ namespace Powerups
         }
         IEnumerator Beam()
         {
-            photonView.RPC("RPC_Activate_Beam", PhotonTargets.All);
             modelManager = GetComponent<ModelManager>();
             modelManager.AddSubModel("Beam");
             if (photonView.isMine)
@@ -121,7 +111,7 @@ namespace Powerups
                 }
             }
               
-            yield return new WaitForSecondsRealtime(4);
+            yield return new WaitForSecondsRealtime(Cooldown);
             modelManager.RemoveSubModel("Beam");
             
         }
@@ -129,23 +119,15 @@ namespace Powerups
         public override void OnAbilityRemove()
         {
             // Call base function
-            audioManager.DeleteAudioSource(Name);
             modelManager.SetModel("Default");
             base.OnAbilityRemove();
         }
+        
 
+       
 
+       
 
-        [PunRPC]
-        protected void RPC_Activate_Beam()
-        {
-            {
-                Debug.Log(photonView.owner.NickName + ": Beam!");
-                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "Beam", beamVolume);
-            }
-        }
-
-
-
+       
     }
 }

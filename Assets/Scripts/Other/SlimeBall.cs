@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SlimeBall : Photon.MonoBehaviour
+public class SlimeBall : MonoBehaviour
 {
     private float lifetime = 10f;
     private float force = 10f;
@@ -37,8 +37,7 @@ public class SlimeBall : Photon.MonoBehaviour
             plr = collision.gameObject;
             PlayerController hitController = plr.GetComponent<PlayerController>();
             Vector3 mult = Vector3.one;
-            mult.y = 2;
-            hitController.ApplyKnockBack(direction, 4, mult);
+            hitController.ApplyKnockBack(direction, 20, mult);
         }
     }
 }

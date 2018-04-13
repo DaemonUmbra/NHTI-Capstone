@@ -114,7 +114,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
 
         // Check for jump}
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             photonView.RPC("TryJump", PhotonTargets.All);
         }
@@ -204,21 +204,13 @@ public class PlayerController : Photon.MonoBehaviour
         }
     }
     [PunRPC]
-    public void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
+    public void ApplyKnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
     {
         direction = direction.normalized;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
 
         rb.AddForce(vel * force, ForceMode.Impulse);
-    }
-    public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
-    {
-        photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
-    }
-    public void ApplyCrowdControl(float start, float duration)
-    {
-
     }
     private void GroundCheck()
     {

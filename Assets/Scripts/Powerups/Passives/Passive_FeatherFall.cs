@@ -28,6 +28,7 @@ namespace Powerups
                 Vector3 ogVelocity = rb.velocity;
 
                 Vector3 clamp = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+                Debug.Log("Da bug Check");
                 rb.velocity = new Vector3(ogVelocity.x, clamp.y, ogVelocity.z);
             }
             // Call base function

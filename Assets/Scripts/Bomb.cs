@@ -14,8 +14,6 @@ public class Bomb : Projectile
         GameObject hit = hitPlayer.gameObject;
         PhotonView hitView = hit.GetPhotonView();
         PlayerStats hitStats = hit.GetComponent<PlayerStats>();
-        ParticleSystem explosion = gameObject.GetComponent<ParticleSystem>();
-
         // Verify hit photon view
         if (hitView)
         {
@@ -26,19 +24,12 @@ public class Bomb : Projectile
                 hitStats.TakeDamage(damage, _shooter);
                 print("Player hit!");
 
-                explosion.Play();
-
                 RaycastHit hits;
 
                 if(Physics.SphereCast(gameObject.transform.position, 5.0f, transform.forward, out hits, 5))
                 {
-                    if (!hitView)
-                    {
-                        PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
-                        newHitStats.TakeDamage((damage / 2.0f), _shooter);
-                        PlayerController knockback = hits.transform.gameObject.GetComponent<PlayerController>();
-                        knockback.RPC_KnockBack(Vector3.back, 5.0f, Vector3.one);
-                    }
+                    PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
+                    newHitStats.TakeDamage((damage / 2.0f), _shooter);
                 }
 
                 PhotonNetwork.Destroy(photonView);

@@ -56,9 +56,9 @@ namespace Powerups
         }
         IEnumerator SnipeRay()
         {
-            manager.AddSubModel("Beam");
+            manager.SetModel("Beam");
             yield return new WaitForSecondsRealtime(.5f);
-            manager.RemoveSubModel("Beam");
+            manager.SetModel("Default");
         }
     }
 }
