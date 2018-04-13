@@ -54,7 +54,14 @@ namespace Powerups {
             Explosion.SetActive(true);
             StartCoroutine(Explode(Explosion, ExplosionSize, ExplosionTime));
         }
-        
+
+
+        public override void OnAbilityRemove()
+        {
+            base.OnAbilityRemove();
+            //HACK
+            Destroy(Explosion);
+        }
         IEnumerator Explode(GameObject Explosion, float size, float time)
         {
             bool Exploding = true;
