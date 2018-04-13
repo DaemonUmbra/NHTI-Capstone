@@ -13,22 +13,25 @@ public class OptionsMenu : MonoBehaviour {
         Names = Input.GetJoystickNames();
         size = Names.Length;
 
-        if (Names[size - 1] == "Wireless Controller")
+        if (size > 0)
         {
-            if (Input.GetButtonDown("PS4Pause"))
+            if (Names[size - 1] == "Wireless Controller")
             {
-                if (optionsCanvas.active)
+                if (Input.GetButtonDown("PS4Pause"))
                 {
-                    optionsCanvas.SetActive(false);
-                }
-                else
-                {
-                    optionsCanvas.SetActive(true);
+                    if (optionsCanvas.active)
+                    {
+                        optionsCanvas.SetActive(false);
+                    }
+                    else
+                    {
+                        optionsCanvas.SetActive(true);
+                    }
                 }
             }
         }
 
-       else
+        else
         {
             if (Input.GetButtonDown("Cancel"))
             {
