@@ -32,7 +32,7 @@ public class TestHealthUI : Photon.MonoBehaviour {
             GameObject.Find("HealthBar").GetComponent<TempHealthBar>().SetPlayer(gameObject);
             Health = GameObject.Find("HealthBar").transform.Find("Health").GetComponent<Text>();
             powerups = GameObject.Find("Powerups").GetComponent<Text>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 4; i++)
             {
                 string slotName = "Active_" + i;
                 slotsActive[i].Icon = GameObject.Find(slotName).GetComponent<Image>();
