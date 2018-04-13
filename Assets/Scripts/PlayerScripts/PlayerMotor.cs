@@ -8,7 +8,7 @@ public class PlayerMotor : Photon.MonoBehaviour
 
     private Rigidbody rb;
     private PlayerStats pStats;
-    private Vector3 _input = Vector3.zero;
+    private Vector2 _input = Vector3.zero;
     public float JumpMultiplier = 1f;
     private bool yMove = false;
 
@@ -32,8 +32,9 @@ public class PlayerMotor : Photon.MonoBehaviour
     }
 
     // Runs every physics update frame
-    private void FixedUpdate()
+    private void Update()
     {
+<<<<<<< HEAD
         Vector3 currentVel = rb.velocity;
         Vector3 newVelocity = Vector3.zero;
 
@@ -48,16 +49,15 @@ public class PlayerMotor : Photon.MonoBehaviour
             //moveVector.y = rb.velocity.y;
         }
         rb.MovePosition(moveVector);
+=======
+        Debug.Log(transform.forward);
+        transform.position += transform.forward * _input.y * pStats.WalkSpeed * Time.deltaTime;
+        transform.position += transform.right * _input.x * pStats.WalkSpeed * Time.deltaTime;
+>>>>>>> de78ae266cfbd7b6d0de7ad6f49d276b0dd453b2
     }
 
     public void SetInput(Vector3 inputVec, bool allowYMovement)
     {
-        // Prevent diagonal speed increase
-        if(inputVec.magnitude > 1)
-        {
-            inputVec.Normalize();
-        }
-
         // Set local velocity
         //yMove = allowYMovement;
         _input = inputVec;
@@ -86,7 +86,6 @@ public class PlayerMotor : Photon.MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        
         if (other.gameObject.tag == "JumpPad")
         {
             JumpMultiplier = 2f;
