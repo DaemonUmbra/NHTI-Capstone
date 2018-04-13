@@ -11,7 +11,7 @@ public class OptionsMenu : MonoBehaviour {
     {
         Names = Input.GetJoystickNames();
 
-        if (Names[1] != "Wireless Controller")
+        if (Names[0] != "Wireless Controller")
         {
             if (Input.GetButtonDown("Cancel"))
             {
@@ -26,7 +26,7 @@ public class OptionsMenu : MonoBehaviour {
             }
         }
 
-        if (Names[1] == "Wireless Controller")
+        if (Names[0] == "Wireless Controller")
         {
             if (Input.GetButtonDown("PS4Pause"))
             {

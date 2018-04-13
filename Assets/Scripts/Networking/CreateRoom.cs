@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class CreateRoom : MonoBehaviour
 {
+    public GameObject lobbyManager;
     //Finished
     [SerializeField]
     private Text _roomName;
@@ -26,6 +27,7 @@ public class CreateRoom : MonoBehaviour
         else
         {
             Debug.Log("Failed to create room!");
+            lobbyManager.GetComponent<LobbyManager>().ChangeState(LobbyState.LOBBY);
         }
     }
 
@@ -37,5 +39,6 @@ public class CreateRoom : MonoBehaviour
     private void OnCreatedRoom()
     {
         Debug.Log("Created room successfully!");
+        
     }
 }
