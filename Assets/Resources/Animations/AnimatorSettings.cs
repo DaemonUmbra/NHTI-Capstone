@@ -2,18 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorSettings : MonoBehaviour {
+public class AnimatorSettings : Photon.MonoBehaviour
+{
 
-
-	// Use this for initialization
-	void Start ()
+    Animator anim;
+    Animation an;
+    // Use this for initialization
+    void Start()
     {
+        if (photonView.isMine)
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        //gameObject.transform.Translate(Vector3.forward * 0.05f);
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S))
+        {
+            anim.SetBool("IsWalking", true);
+
+        }
+        else 
+        {
+            anim.SetBool("IsWalking", false);
+        }
     }
 }

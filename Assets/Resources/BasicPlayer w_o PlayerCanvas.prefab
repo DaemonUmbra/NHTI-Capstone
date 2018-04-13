@@ -903,6 +903,7 @@ GameObject:
   - component: {fileID: 114525675898936844}
   - component: {fileID: 114275901328029248}
   - component: {fileID: 114669762924275862}
+  - component: {fileID: 114743135251928870}
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
@@ -2616,7 +2617,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 237d3255f0ce94444b1acdfe7dc228a4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2736,7 +2737,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: IsWalking
+  - Type: 4
+    SynchronizeType: 2
+    Name: IsIdle
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -2970,11 +2977,23 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 95350016085036792}
+  - {fileID: 114495754926241650}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!114 &114743135251928870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591509329833866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5bc7dc0903378147b63e80ce4f48806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114852648514759674
 MonoBehaviour:
   m_ObjectHideFlags: 1
