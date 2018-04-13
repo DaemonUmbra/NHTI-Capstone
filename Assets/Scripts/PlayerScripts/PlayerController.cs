@@ -97,30 +97,16 @@ public class PlayerController : Photon.MonoBehaviour
         Vector3 inputVel = Vector3.zero;
 
         float xAxis = Input.GetAxis("Horizontal");
-<<<<<<< HEAD
-        
-        Vector3 xInput = xAxis * transform.right;
-        if (InvertX) xInput *= -1;
-=======
         if (InvertX) xAxis *= -1;
->>>>>>> de78ae266cfbd7b6d0de7ad6f49d276b0dd453b2
 
         float yAxis = Input.GetAxis("Vertical");
         if (InvertY) yAxis *= -1;
 
-<<<<<<< HEAD
-        inputVel = xInput + yInput;
-        //Debug.Log(yAxis);
-        if (!CrowdControlled)
-        {
-            motor.SetInput(inputVel, onRamp); // Apply velocity
-=======
         Vector2 input = new Vector2(xAxis, yAxis);
 
         if (!CrowdControlled)
         {
             motor.SetInput(input); // Apply input
->>>>>>> de78ae266cfbd7b6d0de7ad6f49d276b0dd453b2
         }
         else
         {
