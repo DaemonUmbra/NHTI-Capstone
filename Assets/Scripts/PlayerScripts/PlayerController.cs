@@ -29,7 +29,7 @@ public class PlayerController : Photon.MonoBehaviour
     private PlayerMotor motor;
     private PlayerShoot pShoot;
     private AbilityManager abilityManager;
-    [SerializeField] private Camera cam;
+    private CameraController camController;
 
     // Flags
     public bool canWallJump = false;
@@ -77,6 +77,7 @@ public class PlayerController : Photon.MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         pShoot = GetComponent<PlayerShoot>();
         abilityManager = GetComponent<AbilityManager>();
+        camController = GetComponent<CameraController>();
         lastJumpTime = Time.time - jumpCooldown;
         hRot = transform.rotation.eulerAngles.x;
         vRot = transform.rotation.eulerAngles.y;
@@ -164,7 +165,7 @@ public class PlayerController : Photon.MonoBehaviour
         Debug.Log(hLook + ":" + vLook);
 
         transform.rotation = Quaternion.Euler(0, hRot, 0);
-        cam.transform.rotation = Quaternion.Euler(vRot, hRot, 0);
+        camController.cam.transform.rotation = Quaternion.Euler(vRot, hRot, 0);
         
     }
     [PunRPC]
