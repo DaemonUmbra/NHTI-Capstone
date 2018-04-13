@@ -89,7 +89,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
 
         // Check for jump}
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             photonView.RPC("TryJump", PhotonTargets.All);
         }
