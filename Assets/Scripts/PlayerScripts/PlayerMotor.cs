@@ -39,10 +39,8 @@ public class PlayerMotor : Photon.MonoBehaviour
         transform.position += transform.right * _input.x * pStats.WalkSpeed * Time.deltaTime;
     }
 
-    public void SetInput(Vector3 inputVec, bool allowYMovement)
+    public void SetInput(Vector3 inputVec)
     {
-        // Set local velocity
-        //yMove = allowYMovement;
         _input = inputVec;
     }
 
