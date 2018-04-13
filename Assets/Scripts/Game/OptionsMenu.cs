@@ -5,18 +5,42 @@ using UnityEngine;
 public class OptionsMenu : MonoBehaviour {
 
     public GameObject optionsCanvas;
+    public string [] Names;
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        Names = Input.GetJoystickNames();
+
+        if (Names[1] != "Wireless Controller")
         {
-            if(optionsCanvas.active)
+            if (Input.GetButtonDown("Cancel"))
             {
-                optionsCanvas.SetActive(false);
-            } else {
-                optionsCanvas.SetActive(true);
+                if (optionsCanvas.active)
+                {
+                    optionsCanvas.SetActive(false);
+                }
+                else
+                {
+                    optionsCanvas.SetActive(true);
+                }
             }
         }
+
+        if (Names[1] == "Wireless Controller")
+        {
+            if (Input.GetButtonDown("PS4Pause"))
+            {
+                if (optionsCanvas.active)
+                {
+                    optionsCanvas.SetActive(false);
+                }
+                else
+                {
+                    optionsCanvas.SetActive(true);
+                }
+            }
+        }
+
         if (optionsCanvas.active)
         {
             Cursor.visible = true;
