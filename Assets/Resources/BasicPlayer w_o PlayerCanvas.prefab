@@ -441,9 +441,13 @@ MonoBehaviour:
   groundLayer: 8
   jumpCooldown: 0
   maxJumpCount: 1
+  cam: {fileID: 20056865647188686}
   canWallJump: 0
   InvertX: 0
   InvertY: 0
+  hLookSpeed: 50
+  vLookSpeed: 50
+  maxVerticalLook: 80
 --- !u!114 &114123109819469288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -503,7 +507,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591509329833866}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55d5661066316eb4aacd823e99578137, type: 3}
   m_Name: 
@@ -741,13 +745,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591509329833866}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b693d3bda6ed9ab4fb6b86ce8a2e16a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedH: 2
-  speedV: 2
+  playerCam: {fileID: 0}
+  maxVerticalLook: 90
 --- !u!114 &114969051257937048
 MonoBehaviour:
   m_ObjectHideFlags: 1
