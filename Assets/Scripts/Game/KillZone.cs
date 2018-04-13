@@ -15,6 +15,12 @@ public class KillZone : MonoBehaviour {
 	}
     private void OnCollisionEnter(Collision collision)
     {
-        
+        GameObject player = collision.gameObject;
+        PhotonView playerView = player.GetPhotonView();
+        PlayerStats pStats = player.GetComponent<PlayerStats>();
+        if (playerView && pStats)
+        {
+            pStats.Kill();
+        }
     }
 }

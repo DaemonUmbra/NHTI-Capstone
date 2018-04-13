@@ -552,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionsCanvas: {fileID: 458506516}
   Names: []
+  size: 0
 --- !u!1 &92940716
 GameObject:
   m_ObjectHideFlags: 0
@@ -4016,7 +4017,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: febf21b0a490a524b873df3c05eecddf, type: 3}
@@ -7168,7 +7169,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: febf21b0a490a524b873df3c05eecddf, type: 3}
