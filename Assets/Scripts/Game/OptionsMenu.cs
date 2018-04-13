@@ -6,14 +6,16 @@ public class OptionsMenu : MonoBehaviour {
 
     public GameObject optionsCanvas;
     public string [] Names;
+    public int size;
 
     public void Update()
     {
         Names = Input.GetJoystickNames();
+        size = Names.Length;
 
-        if (Names[0] != "Wireless Controller")
+        if (Names[size - 1] == "Wireless Controller")
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("PS4Pause"))
             {
                 if (optionsCanvas.active)
                 {
@@ -26,9 +28,9 @@ public class OptionsMenu : MonoBehaviour {
             }
         }
 
-        if (Names[0] == "Wireless Controller")
+       else
         {
-            if (Input.GetButtonDown("PS4Pause"))
+            if (Input.GetButtonDown("Cancel"))
             {
                 if (optionsCanvas.active)
                 {
