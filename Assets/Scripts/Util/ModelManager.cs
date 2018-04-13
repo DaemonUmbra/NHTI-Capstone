@@ -116,6 +116,7 @@ public class ModelManager : Photon.MonoBehaviour
             Transform submodel = transform.Find(subModelName);
             if (submodel != null)
             {
+                PhotonNetwork.Destroy(submodel.gameObject);
                 Destroy(submodel.gameObject);
             }
         }

@@ -34,7 +34,7 @@ public class PlayerController : Photon.MonoBehaviour
     // Flags
     public bool canWallJump = false;
     private bool onRamp = false;
-    private bool isGrounded = false;
+    public bool isGrounded = false;
     private bool debounce = false;
     
     // Controls
