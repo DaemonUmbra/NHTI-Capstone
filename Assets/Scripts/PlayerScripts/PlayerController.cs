@@ -73,6 +73,9 @@ public class PlayerController : Photon.MonoBehaviour
     /// </summary>
     public float maxVerticalLook = 80;
 
+    private float mLookSpeed = 20;
+    private float jLookSpeed = 100;
+
     float hRot;
     float vRot;
 
@@ -154,12 +157,16 @@ public class PlayerController : Photon.MonoBehaviour
                     cType = ControlType.XBoxOne;
                     AxisHorizLook = "XboxRSHorizontal";
                     AxisVerticalLook = "XboxRSVertical";
+                    hLookSpeed = jLookSpeed;
+                    vLookSpeed = jLookSpeed;
                 }
                 else if (j == ps4Name)
                 {
                     cType = ControlType.PS4;
                     AxisHorizLook = "PS4RSHorizontal";
                     AxisVerticalLook = "PS4RSVertical";
+                    hLookSpeed = jLookSpeed;
+                    vLookSpeed = jLookSpeed;
                 }
             }
             
@@ -169,6 +176,8 @@ public class PlayerController : Photon.MonoBehaviour
             cType = ControlType.KeyboardMouse;
             AxisHorizLook = "Mouse X";
             AxisVerticalLook = "Mouse Y";
+            hLookSpeed = mLookSpeed;
+            vLookSpeed = mLookSpeed;
         }
     }
     private void HandleAbilityInput()
@@ -192,11 +201,21 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void HandleLookInput()
     {
+        Debug.Log("Horizontal Axis: " + Input.GetAxis(AxisVerticalLook));
+        Debug.Log("Vertical: " + Input.GetAxis(AxisHorizLook));
         float vLook = Input.GetAxis(AxisVerticalLook) * vLookSpeed * Time.deltaTime;
         float hLook = Input.GetAxis(AxisHorizLook) * hLookSpeed * Time.deltaTime;
 
         hRot += hLook;
-        vRot -= vLook;
+        if(cType == ControlType.KeyboardMouse)
+        {
+            vRot -= vLook;
+        }
+        else
+        {
+            vRot += vLook;
+        }
+        
 
         // Clamp vertical rotation
         if (vRot > maxVerticalLook)
