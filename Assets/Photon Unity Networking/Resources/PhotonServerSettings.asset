@@ -81,4 +81,5 @@ MonoBehaviour:
   - RPC_TriggerAbility
   - TryJump
   - RPC_Activate_Beam
+  - RPC_Activate_HighJump
   DisableAutoOpenWizard: 1
