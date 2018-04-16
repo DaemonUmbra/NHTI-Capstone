@@ -200,8 +200,8 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void HandleLookInput()
     {
-        Debug.Log("Horizontal Axis: " + Input.GetAxis(AxisVerticalLook));
-        Debug.Log("Vertical: " + Input.GetAxis(AxisHorizLook));
+        //Debug.Log("Horizontal Axis: " + Input.GetAxis(AxisVerticalLook));
+        //Debug.Log("Vertical: " + Input.GetAxis(AxisHorizLook));
         float vLook = Input.GetAxis(AxisVerticalLook) * vLookSpeed * Time.deltaTime;
         float hLook = Input.GetAxis(AxisHorizLook) * hLookSpeed * Time.deltaTime;
 

@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 114359696607058296}
   - component: {fileID: 114273388652972974}
   - component: {fileID: 114018751422911142}
+  - component: {fileID: 114023556686942768}
   m_Layer: 0
   m_Name: BasicPlayer
   m_TagString: Player
@@ -971,6 +972,21 @@ MonoBehaviour:
   HealthBar: {fileID: 114048010708889690}
   Health: {fileID: 114885646201131840}
   powerups: {fileID: 114565652137508772}
+  slotsActive: []
+  slotsPassive: []
+  defaultActive: {fileID: 0}
+  defaultPassive: {fileID: 0}
+--- !u!114 &114023556686942768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637758222917410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebcb03cee4b0bbd40b67fa5581836ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114035340513413636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1363,8 +1379,13 @@ MonoBehaviour:
   groundLayer: 8
   jumpCooldown: 0
   maxJumpCount: 0
+  canWallJump: 0
+  isGrounded: 0
   InvertX: 0
   InvertY: 0
+  hLookSpeed: 20
+  vLookSpeed: 20
+  maxVerticalLook: 80
 --- !u!114 &114375688266018862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1484,8 +1505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b693d3bda6ed9ab4fb6b86ce8a2e16a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedH: 2
-  speedV: 2
+  playerCam: {fileID: 0}
+  maxVerticalLook: 90
 --- !u!114 &114438225493363778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1552,6 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad15ab4e3fd1eae44906fe4c45f044c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpMultiplier: 1
 --- !u!114 &114501809415805318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1749,6 +1771,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b79226708e4f42428be7e4d295c7ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _abilityStrings: []
+  MaxActives: 4
+  MaxPassives: 6
 --- !u!114 &114631073577075048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2118,12 +2143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d4114445e5cde48b327727c8ccf361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkSpeed: 10
+  _baseWalkSpeed: 10
   JumpPower: 10
-  _maxHp: 100
+  _baseMaxHp: 100
   _baseDmg: 10
-  dmgMult: 1
-  dmgAdd: 0
 --- !u!114 &114851144876761928
 MonoBehaviour:
   m_ObjectHideFlags: 1

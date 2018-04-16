@@ -54,7 +54,7 @@ public class TestHealthUI : Photon.MonoBehaviour {
         if (photonView.isMine)
         {
             HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
-            healthText.text = pstats.CurrentHp.ToString();
+            //healthText.text = pstats.CurrentHp.ToString();
             Health.text = pstats.CurrentHp.ToString();
             powerups.text = "";
             List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
