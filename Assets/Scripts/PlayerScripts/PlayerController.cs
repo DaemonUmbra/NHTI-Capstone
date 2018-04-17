@@ -37,12 +37,9 @@ public class PlayerController : Photon.MonoBehaviour
     private bool onRamp = false;
     private bool isGrounded = false;
     private bool debounce = false;
-<<<<<<< HEAD
     private bool OnWall = false;
     private char wallDir;
     private GameObject wall;
-=======
->>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
     
     // Controls
     /// <summary>
@@ -147,7 +144,6 @@ public class PlayerController : Photon.MonoBehaviour
         }
         else
         {
-<<<<<<< HEAD
             if (!CrowdControlled)
             {
                 //Debug.Log("Direction of wall: " + wallDir);
@@ -187,10 +183,8 @@ public class PlayerController : Photon.MonoBehaviour
             {
                 motor.SetInput(Vector3.zero);
             }       
-=======
             CCWearOff(Time.time, duration, false);
             return;
->>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
         }
 
         // Check for jump
@@ -341,13 +335,10 @@ public class PlayerController : Photon.MonoBehaviour
         direction = direction.normalized;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
-<<<<<<< HEAD
         rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(vel, ForceMode.Impulse);
-=======
 
         rb.AddForce(vel * force, ForceMode.Impulse);
->>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
     }
     public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
     {
@@ -370,7 +361,6 @@ public class PlayerController : Photon.MonoBehaviour
             }
         }
     }
-<<<<<<< HEAD
     private bool WallCheck(GameObject hitObj)
     {
         if (hitObj == null)
@@ -421,8 +411,6 @@ public class PlayerController : Photon.MonoBehaviour
         }
         return false;
     }
-=======
->>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
     private void OverHeadCheck(GameObject hitPart)
     {
         
@@ -449,15 +437,12 @@ public class PlayerController : Photon.MonoBehaviour
     {
         GameObject hit = collision.gameObject;
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
-<<<<<<< HEAD
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         CrowdControlled = false;
         OnWall = WallCheck(hit);
         if (collision.gameObject.layer == groundLayer)
-=======
         if (collision.collider.gameObject.layer == groundLayer)
->>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
         {
 
             if (canWallJump == true)
