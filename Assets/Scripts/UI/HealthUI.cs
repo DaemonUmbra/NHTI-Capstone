@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Powerups;
+<<<<<<< HEAD:Assets/Scripts/UI/HealthUI.cs
 public class HealthUI : Photon.MonoBehaviour {
 
     //set in editor
     public Text healthText;
 
     GameObject Player;
+=======
+public class PlayerUI : Photon.MonoBehaviour {
+
+    GameObject player;
+>>>>>>> 021b0cc552aa4304870a28e3df6d6e80a9d9819a:Assets/Scripts/UI/PlayerUI.cs
     private PlayerStats pstats;
     private AbilityManager abilityManager;
     public Slider HealthBar;

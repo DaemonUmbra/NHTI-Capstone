@@ -24,7 +24,12 @@ namespace Powerups
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
+<<<<<<< HEAD
             Name = "Slime";
+=======
+            Cooldown = 7;
+            _name = "Slime";
+>>>>>>> 021b0cc552aa4304870a28e3df6d6e80a9d9819a
             //TODO: Slime Icon
             Tier = PowerupTier.Uncommon;
         }
@@ -33,8 +38,13 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
+<<<<<<< HEAD
             Cooldown = 7;
             Debug.Log(Name + " Added");
+=======
+            
+            Debug.Log(_name + " Added");
+>>>>>>> 021b0cc552aa4304870a28e3df6d6e80a9d9819a
             
             base.OnAbilityAdd();
         }
