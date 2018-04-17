@@ -13,9 +13,9 @@ public class GameStateUI : MonoBehaviour {
     // Text fields
     [SerializeField]
     Text txtGameState;
-    [SerializeField]
+    [SerializeField][HideInInspector]
     Text txtGameMode;
-    [SerializeField]
+    [SerializeField][HideInInspector]
     Text txtGameTime;
     [SerializeField]
     Text txtStateTime;
@@ -117,7 +117,6 @@ public class GameStateUI : MonoBehaviour {
     {
         float gTime = manager.gameTime;
         float sTime = manager.stateTimeLeft;
-        txtGameTime.text = TimeToString(gTime);
         txtStateTime.text = TimeToString(sTime);
 
         // Set time text color
