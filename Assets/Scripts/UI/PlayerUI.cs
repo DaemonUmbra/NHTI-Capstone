@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Powerups;
-public class HealthUI : Photon.MonoBehaviour {
-
-    //set in editor
-    public Text healthText;
-
+public class PlayerUI : Photon.MonoBehaviour {
+    
     GameObject player;
     private PlayerStats pstats;
     private AbilityManager abilityManager;
     public Slider HealthBar;
-    public Text Health;
+    public Text txtHealth;
     public Text powerups;
     public AbilitySlot[] slotsActive;
     public AbilitySlot[] slotsPassive;
@@ -53,22 +50,19 @@ public class HealthUI : Photon.MonoBehaviour {
             slotsPassive[i] = new AbilitySlot(GameObject.Find(slotName).GetComponent<Image>(), false);
         }
     }
-	
-	void LateUpdate ()
-    {
-        if (photonView.isMine)
-        {
-            HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
-            healthText.text = pstats.CurrentHp.ToString();
-            Health.text = pstats.CurrentHp.ToString();
-            powerups.text = "";
-            List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
-            foreach (var power in abilityNames)
-            {
-                powerups.text += power + "\n";
-            }
 
+    void LateUpdate()
+    {
+        HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
+        //healthText.text = pstats.CurrentHp.ToString();
+        txtHealth.text = pstats.CurrentHp.ToString();
+        powerups.text = "";
+        List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
+        foreach (var power in abilityNames)
+        {
+            powerups.text += power + "\n";
         }
+
         UpdatePowerups();
     }
      
