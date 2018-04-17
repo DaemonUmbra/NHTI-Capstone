@@ -26,8 +26,6 @@ public partial class AudioManager : Photon.MonoBehaviour
         clipRegistry.Add("Blink", Resources.Load<AudioClip>("Sounds/blink"));
         clipRegistry.Add("Shockwave", Resources.Load<AudioClip>("Sounds/ShockwaveTemp"));
         clipRegistry.Add("Beam", Resources.Load<AudioClip>("Sounds/Beam4Sec"));
-        clipRegistry.Add("Highjump", Resources.Load<AudioClip>("Sounds/HighJump"));
-    
     }
 
     // Use this for initialization

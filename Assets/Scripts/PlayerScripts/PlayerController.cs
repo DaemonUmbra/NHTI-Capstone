@@ -35,11 +35,14 @@ public class PlayerController : Photon.MonoBehaviour
     // Flags
     public bool canWallJump = false;
     private bool onRamp = false;
-    public bool isGrounded = false;
+    private bool isGrounded = false;
     private bool debounce = false;
+<<<<<<< HEAD
     private bool OnWall = false;
     private char wallDir;
     private GameObject wall;
+=======
+>>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
     
     // Controls
     /// <summary>
@@ -110,6 +113,7 @@ public class PlayerController : Photon.MonoBehaviour
     {
         // Validates the controls
         CheckControlType();
+
         // Get movement input
         Vector3 inputVel = Vector3.zero;
 
@@ -143,6 +147,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
         else
         {
+<<<<<<< HEAD
             if (!CrowdControlled)
             {
                 //Debug.Log("Direction of wall: " + wallDir);
@@ -182,6 +187,10 @@ public class PlayerController : Photon.MonoBehaviour
             {
                 motor.SetInput(Vector3.zero);
             }       
+=======
+            CCWearOff(Time.time, duration, false);
+            return;
+>>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
         }
 
         // Check for jump
@@ -259,8 +268,8 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void HandleLookInput()
     {
-        //Debug.Log("Horizontal Axis: " + Input.GetAxis(AxisVerticalLook));
-        //Debug.Log("Vertical: " + Input.GetAxis(AxisHorizLook));
+        Debug.Log("Horizontal Axis: " + Input.GetAxis(AxisVerticalLook));
+        Debug.Log("Vertical: " + Input.GetAxis(AxisHorizLook));
         float vLook = Input.GetAxis(AxisVerticalLook) * vLookSpeed * Time.deltaTime;
         float hLook = Input.GetAxis(AxisHorizLook) * hLookSpeed * Time.deltaTime;
 
@@ -299,6 +308,18 @@ public class PlayerController : Photon.MonoBehaviour
         //motor.SetInput(Vector3.zero);
     }
 
+    private void CCWearOff(float currentTime, float CCDuration, bool stopsMomentum)
+    {
+        //Debug.Log("Crowd Control started: " + CCStartTime + " Current Time: " + currentTime);
+        if (stopsMomentum)
+        {
+            StopMomentum();
+        }
+        if (currentTime >= CCStartTime + CCDuration)//static value
+        {
+            CrowdControlled = false;
+        }
+    }
     [PunRPC]
     private void TryJump()
     {
@@ -317,17 +338,24 @@ public class PlayerController : Photon.MonoBehaviour
     [PunRPC]
     public void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
     {
-        CrowdControlled = true;
         direction = direction.normalized;
-        direction = direction * force/1.5f;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
+<<<<<<< HEAD
         rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(vel, ForceMode.Impulse);
+=======
+
+        rb.AddForce(vel * force, ForceMode.Impulse);
+>>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
     }
     public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
     {
         photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
+    }
+    public void ApplyCrowdControl(float start, float duration)
+    {
+
     }
     private void GroundCheck()
     {
@@ -342,6 +370,7 @@ public class PlayerController : Photon.MonoBehaviour
             }
         }
     }
+<<<<<<< HEAD
     private bool WallCheck(GameObject hitObj)
     {
         if (hitObj == null)
@@ -392,6 +421,8 @@ public class PlayerController : Photon.MonoBehaviour
         }
         return false;
     }
+=======
+>>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
     private void OverHeadCheck(GameObject hitPart)
     {
         
@@ -418,11 +449,15 @@ public class PlayerController : Photon.MonoBehaviour
     {
         GameObject hit = collision.gameObject;
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
+<<<<<<< HEAD
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         CrowdControlled = false;
         OnWall = WallCheck(hit);
         if (collision.gameObject.layer == groundLayer)
+=======
+        if (collision.collider.gameObject.layer == groundLayer)
+>>>>>>> 7269adcff004d2163ecd2da9704f56cea9bb6df3
         {
 
             if (canWallJump == true)

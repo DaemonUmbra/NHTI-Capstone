@@ -14,7 +14,7 @@ namespace Powerups
 
         private void Awake()
         {
-            Name = "Thunder Cloud";
+            Name = "Magic Overload";
             //TODO: Thundercloud Icon
             Tier = PowerupTier.Uncommon;
         }
@@ -38,8 +38,9 @@ namespace Powerups
             ps.JumpPower -= 1.0f;
             ps.RemoveDmgBoost(Name);
             ps.ChangeMaxHp(-10.0f);
-
-            base.OnAbilityRemove();
+            
+            AbilityManager manage = gameObject.GetComponent<AbilityManager>();
+            manage.RemoveAbility<Passive_ThunderCloud>();
         }
 
         public override void OnUpdate()
@@ -47,7 +48,12 @@ namespace Powerups
             timer += Time.deltaTime;
             if (timer >= timeLimit)
             {
-                OnAbilityRemove();
+                //Take damage if player doesn't get rid of powerup in time
+                PlayerStats ps = gameObject.GetComponent<PlayerStats>();
+                ps.TakeDamage(20.0f);
+
+                AbilityManager manage = gameObject.GetComponent<AbilityManager>();
+                manage.RemoveAbility<Passive_ThunderCloud>();
             }
 
             base.OnUpdate();
@@ -58,7 +64,8 @@ namespace Powerups
             AbilityManager manager = collision.gameObject.GetComponent<AbilityManager>();
             manager.AddAbility<Passive_ThunderCloud>();
 
-            OnAbilityRemove();
+            AbilityManager manage = gameObject.GetComponent<AbilityManager>();
+            manage.RemoveAbility<Passive_ThunderCloud>();
         }
     }
 }

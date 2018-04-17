@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class CreateRoom : MonoBehaviour
 {
+    /*** Moved to Lobby Manager (Brendan) ***
+
     public GameObject lobbyManager;
     //Finished
     [SerializeField]
@@ -41,4 +43,5 @@ public class CreateRoom : MonoBehaviour
         Debug.Log("Created room successfully!");
         
     }
+    */
 }

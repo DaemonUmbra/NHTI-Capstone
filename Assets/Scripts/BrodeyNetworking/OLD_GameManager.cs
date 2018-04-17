@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 namespace PUNTutorial
 {
-    public class GameManager : Photon.PunBehaviour
+    public class OLD_GameManager : Photon.PunBehaviour
     {
-        public static GameManager instance;
+        public static OLD_GameManager instance;
         public static GameObject localPlayer;
         private GameObject defaultSpawnPoint;
 

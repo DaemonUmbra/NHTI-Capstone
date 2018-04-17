@@ -21,7 +21,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Boost";
-            //TODO: Boost Icon
+            Icon = Resources.Load<Sprite>("Images/Boost");
             Tier = PowerupTier.Uncommon;
         }
 

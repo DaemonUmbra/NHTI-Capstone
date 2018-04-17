@@ -11,7 +11,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Confuse";
-            //TODO: Confuse Icon
+            Icon = Resources.Load<Sprite>("Images/Confuse");
             Tier = PowerupTier.Rare;
         }
 
@@ -29,8 +29,9 @@ namespace Powerups
             movement = GetComponent<PlayerController>();
             movement.InvertX = false;
             movement.InvertY = false;
-
-            base.OnAbilityRemove();
+            
+            AbilityManager manage = gameObject.GetComponent<AbilityManager>();
+            manage.RemoveAbility<Passive_ThunderCloud>();
         }
 
         public override void OnUpdate()

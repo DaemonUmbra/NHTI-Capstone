@@ -14,7 +14,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Fireball";
-            //TODO: Fireball Icon
+            Icon = Resources.Load<Sprite>("Images/Fireball");
             Tier = PowerupTier.Common;
         }
 
