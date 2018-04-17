@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 
 public class AnimatorSettings : Photon.MonoBehaviour
 {
 
     Animator anim;
     Animation an;
+    AnimatorControllerLayer[] layers;
+
     // Use this for initialization
     void Start()
     {
@@ -24,10 +27,21 @@ public class AnimatorSettings : Photon.MonoBehaviour
         {
             anim.SetBool("IsWalking", true);
 
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                anim.SetBool("IsAttacking", true);
+            }
+            else
+            {
+                anim.SetBool("IsAttacking", false);
+            }
+
         }
         else 
         {
             anim.SetBool("IsWalking", false);
         }
+
+        
     }
 }
