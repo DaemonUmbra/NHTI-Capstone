@@ -2547,6 +2547,7 @@ MonoBehaviour:
   jumpCooldown: 0
   maxJumpCount: 1
   canWallJump: 0
+  isGrounded: 0
   InvertX: 0
   InvertY: 0
   hLookSpeed: 50
@@ -2650,15 +2651,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d5661066316eb4aacd823e99578137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 114572536733741510}
+  Player: {fileID: 0}
+  Canvas: {fileID: 0}
   HealthBar: {fileID: 0}
   Health: {fileID: 0}
   powerups: {fileID: 0}
   slotsActive:
-  - Icon: {fileID: 0}
-    taken: 0
-  - Icon: {fileID: 0}
-    taken: 0
   - Icon: {fileID: 0}
     taken: 0
   - Icon: {fileID: 0}
@@ -2839,6 +2837,7 @@ MonoBehaviour:
   camPrefab: {fileID: 20262033296123736, guid: 5b8d4ef291dd1ed4bb348b4610955427, type: 2}
   cam: {fileID: 0}
   camOffset: {x: 1, y: 3, z: 3}
+  camRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114669762924275862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2929,6 +2928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityStrings: []
   MaxActives: 4
+  MaxPassives: 6
 --- !u!114 &114969051257937048
 MonoBehaviour:
   m_ObjectHideFlags: 1

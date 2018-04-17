@@ -14,7 +14,7 @@ namespace Powerups {
         private void Awake()
         {
             Name = "Explosion";
-            //TODO: Explosive Icon
+            Icon = Resources.Load<Sprite>("Images/Explosive Rounds");
             Tier = PowerupTier.Uncommon;
         }
 

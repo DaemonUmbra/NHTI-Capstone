@@ -17,7 +17,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Combat Regeneration";
-            Icon = Resources.Load<Sprite>("Images/CombatRegen");
+            Icon = Resources.Load<Sprite>("Images/Combat Regen");
             Tier = PowerupTier.Rare;
         }
         public override void OnAbilityAdd()
