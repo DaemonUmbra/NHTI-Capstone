@@ -8,46 +8,53 @@ public class HealthUI : Photon.MonoBehaviour {
     //set in editor
     public Text healthText;
 
-    GameObject Player;
+    GameObject player;
     private PlayerStats pstats;
     private AbilityManager abilityManager;
     public Slider HealthBar;
     public Text Health;
     public Text powerups;
-    public AbilitySlots[] slotsActive;
-    public AbilitySlots[] slotsPassive;
+    public AbilitySlot[] slotsActive;
+    public AbilitySlot[] slotsPassive;
     public Sprite defaultActive;
     public Sprite defaultPassive;
+
+    private int maxActives = 4;
+    private int maxPassives = 6;
 
     // Use this for initialization
     void Start()
     {
-        if (photonView.isMine) {
-            Player = photonView.gameObject;
-            pstats = Player.GetComponent<PlayerStats>();
-            abilityManager = Player.GetComponent<AbilityManager>();
-            HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
-            GameObject.Find("HealthBar").GetComponent<HealthBar>().SetPlayer(gameObject);
-            Health = GameObject.Find("Health").GetComponent<Text>();
-            powerups = GameObject.Find("Powerups").GetComponent<Text>();
-            for (int i = 0; i < 6; i++)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        slotsActive = new AbilitySlot[maxActives];
+        slotsPassive = new AbilitySlot[maxPassives];
+
+        // Find local player
+        foreach(GameObject p in players)
+        {
+            if(p.GetPhotonView().isMine)
             {
-                string slotName = "Active_" + i;
-                slotsActive[i].Icon = GameObject.Find(slotName).GetComponent<Image>();
-                slotsActive[i].taken = false;
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                string slotName = "Passive_" + i;
-                slotsPassive[i].Icon = GameObject.Find(slotName).GetComponent<Image>();
-                slotsPassive[i].taken = false;
+                player = p;
             }
         }
 
-}
+        pstats = player.GetComponent<PlayerStats>();
+        abilityManager = player.GetComponent<AbilityManager>();
+        
+        // Ability UI setup
+        for (int i = 0; i < maxActives; i++)
+        {
+            string slotName = "Active_" + i;
+            slotsActive[i] = new AbilitySlot(GameObject.Find(slotName).GetComponent<Image>(), false);
+        }
+        for (int i = 0; i < maxPassives; i++)
+        {
+            string slotName = "Passive_" + i;
+            slotsPassive[i] = new AbilitySlot(GameObject.Find(slotName).GetComponent<Image>(), false);
+        }
+    }
 	
-	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
     {
         if (photonView.isMine)
         {
@@ -64,20 +71,41 @@ public class HealthUI : Photon.MonoBehaviour {
         }
         UpdatePowerups();
     }
+     
 
     public void UpdatePowerups()
     {
-
+        // Update active ability icons
         List<ActiveAbility> actives = abilityManager.ActiveAbilities;
-        for(int i = 0; i < actives.Count; ++i)
+        for(int i = 0; i < maxActives; ++i)
         {
-            slotsActive[i].Icon.sprite = actives[i].Icon;
+            if(i < actives.Count)
+            {
+                slotsActive[i].Icon.sprite = actives[i].Icon;
+                slotsActive[i].Taken = true;
+            }
+            else
+            {
+                slotsActive[i].Icon.sprite = defaultActive;
+                slotsActive[i].Taken = false;
+            }
+            
         }
-
+        // Update passive ability icons
         List<PassiveAbility> passives = abilityManager.PassiveAbilities;
-        for (int i = 0; i < passives.Count; ++i)
+        for (int i = 0; i < maxPassives; ++i)
         {
-            slotsPassive[i].Icon.sprite = passives[i].Icon;
+            if (i < passives.Count)
+            {
+                slotsPassive[i].Icon.sprite = passives[i].Icon;
+                slotsPassive[i].Taken = true;
+            }
+            else
+            {
+                slotsPassive[i].Icon.sprite = defaultPassive;
+                slotsPassive[i].Taken = false;
+            }
+            
         }
     }
 
@@ -86,17 +114,29 @@ public class HealthUI : Photon.MonoBehaviour {
         for (int i = 0; i < 4; i++)
         {
             slotsActive[i].Icon.sprite = defaultActive;
+            slotsActive[i].Taken = false;
         }
         for (int i = 0; i < 6; i++)
         {
             slotsPassive[i].Icon.sprite = defaultPassive;
+            slotsPassive[i].Taken = false;
         }
     }
 }
 
 [System.Serializable]
-public class AbilitySlots
+public class AbilitySlot
 {
     public Image Icon;
-    public bool taken;
+    public bool Taken;
+
+    public AbilitySlot(Image icon, bool taken)
+    {
+        Icon = icon;
+        Taken = taken;
+    }
+
+    public AbilitySlot()
+    {
+    }
 }

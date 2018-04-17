@@ -152,7 +152,7 @@ ModelImporter:
     4300008: Belt
     4300010: pCylinder3
     4300012: BaseChar
-    7400000: Idle
+    7400000: Idle_Test
     9500000: //RootNode
     13700000: BaseChar
     13700002: Belt
@@ -194,7 +194,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Idle_Test
       takeName: Take 001
       firstFrame: 1
       lastFrame: 140

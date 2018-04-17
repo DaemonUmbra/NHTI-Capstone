@@ -121,6 +121,7 @@ public class PlayerController : Photon.MonoBehaviour
         if (InvertY) yAxis *= -1;
 
         rig.constraints = RigidbodyConstraints.None;
+        rig.constraints = RigidbodyConstraints.FreezeRotation;
 
         Vector2 input = new Vector2(xAxis, yAxis);
         if (input == Vector2.zero)
@@ -321,6 +322,7 @@ public class PlayerController : Photon.MonoBehaviour
     {
         //Debug.Log("tryjump! " + maxJumpCount);
         rig.constraints = RigidbodyConstraints.None;
+        rig.constraints = RigidbodyConstraints.FreezeRotation;
         onRamp = false;
         if (jumpCount < maxJumpCount)
         {
@@ -339,6 +341,7 @@ public class PlayerController : Photon.MonoBehaviour
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
         rb.constraints = RigidbodyConstraints.None;
+        rig.constraints = RigidbodyConstraints.FreezeRotation;
         rb.AddForce(vel, ForceMode.Impulse);
 
         rb.AddForce(vel * force, ForceMode.Impulse);

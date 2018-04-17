@@ -68,22 +68,22 @@ public class LobbyManager : Photon.PunBehaviour {
     }
     public float stateStartTime
     {
-        get { return (float)_room.CustomProperties["stateStartTime"]; }
+        get { return (float)_room.CustomProperties["StateStartTime"]; }
         private set { _room.SetCustomProperties(new Hashtable() { { "stateStartTime", value } }); }
     }
     public float prepTime
     {
-        get { return (float)_room.CustomProperties["prepTime"]; }
+        get { return (float)_room.CustomProperties["PrepTime"]; }
         private set { _room.SetCustomProperties(new Hashtable() { { "prepTime", value } }); }
     }
     public float brawlTime
     {
-        get { return (float)_room.CustomProperties["brawlTime"]; }
+        get { return (float)_room.CustomProperties["BrawlTime"]; }
         private set { _room.SetCustomProperties(new Hashtable() { { "brawlTime", value } }); }
     }
     public float royaleTime
     {
-        get { return (float)_room.CustomProperties["royaleTime"]; }
+        get { return (float)_room.CustomProperties["RoyaleTime"]; }
         private set { _room.SetCustomProperties(new Hashtable() { { "royaleTime", value } }); }
     }
     public int playersLeft
@@ -151,11 +151,11 @@ public class LobbyManager : Photon.PunBehaviour {
             MaxPlayers = byte.Parse(TxtPlayerCount.text)
         };
         roomOptions.CustomRoomProperties = CustomProperties;
-
-        if (PhotonNetwork.CreateRoom(TxtRoomName.text, roomOptions, TypedLobby.Default))
+        string roomName = TxtRoomName.text;
+        Debug.Log("Room: " + roomName);
+        if (PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default))
         {
-            _room = PhotonNetwork.room;
-            Debug.Log("Room: " + TxtRoomName.text + " created!");
+            Debug.Log("Room: " + roomName + " created!");
         }
         else
         {
@@ -164,7 +164,6 @@ public class LobbyManager : Photon.PunBehaviour {
         }
         ChangeState(LobbyState.ROOM);
     }
-
     public void StartGame()
     {
         if (!PhotonNetwork.isMasterClient)
@@ -266,6 +265,7 @@ public class LobbyManager : Photon.PunBehaviour {
     public override void OnJoinedRoom()
     {
         print("Joined room.");
+        _room = PhotonNetwork.room; 
         ChangeState(LobbyState.ROOM);
         base.OnJoinedRoom();
     }

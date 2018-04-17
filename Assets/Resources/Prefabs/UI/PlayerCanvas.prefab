@@ -1718,10 +1718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d5661066316eb4aacd823e99578137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 0}
-  HealthBar: {fileID: 0}
-  Health: {fileID: 0}
-  powerups: {fileID: 0}
+  HealthBar: {fileID: 114628641683953160}
+  txtHealth: {fileID: 0}
+  powerups: {fileID: 114311587525572906}
   slotsActive: []
   slotsPassive: []
   defaultActive: {fileID: 0}

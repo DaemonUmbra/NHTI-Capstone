@@ -8,6 +8,7 @@ public enum GameMode { Royale, Brawl };
 public class GameManager : Photon.PunBehaviour {
 
     #region Private Variables
+    [SerializeField]
     GameStateUI UI;
     #endregion
 
@@ -64,34 +65,34 @@ public class GameManager : Photon.PunBehaviour {
     }
     public float stateStartTime
     {
-        get { return (float)PhotonNetwork.room.CustomProperties["stateStartTime"]; }
-        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "stateStartTime", value } }); }
+        get { return (float)PhotonNetwork.room.CustomProperties["StateStartTime"]; }
+        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "StateStartTime", value } }); }
     }
     public float prepTime
     {
-        get { return (float)PhotonNetwork.room.CustomProperties["prepTime"]; }
-        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "prepTime", value } }); }
+        get { return (float)PhotonNetwork.room.CustomProperties["PrepTime"]; }
+        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "PrepTime", value } }); }
     }
     public float brawlTime
     {
-        get { return (float)PhotonNetwork.room.CustomProperties["brawlTime"]; }
-        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "brawlTime", value } }); }
+        get { return (float)PhotonNetwork.room.CustomProperties["BrawlTime"]; }
+        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "BrawlTime", value } }); }
     }
     public float royaleTime
     {
-        get { return (float)PhotonNetwork.room.CustomProperties["royaleTime"]; }
-        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "royaleTime", value } }); }
+        get { return (float)PhotonNetwork.room.CustomProperties["RoyaleTime"]; }
+        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "RoyaleTime", value } }); }
     }
     public int playersLeft
     {
         get { return (int)PhotonNetwork.room.CustomProperties["PlayersLeft"]; }
-        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "playersLeft", value } }); }
+        private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "PlayersLeft", value } }); }
     }
     #endregion
 
     private void Awake()
     {
-        UI = GetComponent<GameStateUI>();
+        UI = GameObject.Find("PlayerCanvas").GetComponent<GameStateUI>();
 
         if (PhotonNetwork.isMasterClient)
         {
