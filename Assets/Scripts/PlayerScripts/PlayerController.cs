@@ -30,12 +30,16 @@ public class PlayerController : Photon.MonoBehaviour
     private PlayerShoot pShoot;
     private AbilityManager abilityManager;
     private CameraController camController;
+    private Rigidbody rig;
 
     // Flags
     public bool canWallJump = false;
     private bool onRamp = false;
     private bool isGrounded = false;
     private bool debounce = false;
+    private bool OnWall = false;
+    private char wallDir;
+    private GameObject wall;
     
     // Controls
     /// <summary>
@@ -90,6 +94,7 @@ public class PlayerController : Photon.MonoBehaviour
         lastJumpTime = Time.time - jumpCooldown;
         hRot = transform.rotation.eulerAngles.x;
         vRot = transform.rotation.eulerAngles.y;
+        rig = transform.GetComponent<Rigidbody>();
     }
     
 
@@ -115,14 +120,69 @@ public class PlayerController : Photon.MonoBehaviour
         float yAxis = Input.GetAxis("Vertical");
         if (InvertY) yAxis *= -1;
 
-        Vector2 input = new Vector2(xAxis, yAxis);
+        rig.constraints = RigidbodyConstraints.None;
 
-        if (!CrowdControlled)
+        Vector2 input = new Vector2(xAxis, yAxis);
+        if (input == Vector2.zero)
         {
-            motor.SetInput(input); // Apply input
+            if(isGrounded && onRamp)
+            {
+                
+                rig.constraints = RigidbodyConstraints.FreezePosition;
+            }
+        }
+        if (!OnWall)
+        {
+            if (!CrowdControlled)
+            {
+                motor.SetInput(input); // Apply input
+            }
+            else
+            {
+                motor.SetInput(Vector3.zero);
+            }
         }
         else
         {
+            if (!CrowdControlled)
+            {
+                //Debug.Log("Direction of wall: " + wallDir);
+                //motor.SetInput(Vector3.zero);
+                OnWall = WallCheck(wall);
+                switch (wallDir)
+                {
+                    case 'f':
+                        //Debug.Log(input.y);
+                        if (input.y > 0)
+                        {
+                            input.y = 0;
+                        }
+                        break;
+                    case 'b':
+                        if (input.y < 0)
+                        {
+                            input.y = 0;
+                        }
+                        break;
+                    case 'r':
+                        if (input.x > 0)
+                        {
+                            input.x = 0;
+                        }
+                        break;
+                    case 'l':
+                        if (input.x < 0)
+                        {
+                            input.x = 0;
+                        }
+                        break;
+                }
+                motor.SetInput(input);
+            }
+            else
+            {
+                motor.SetInput(Vector3.zero);
+            }       
             CCWearOff(Time.time, duration, false);
             return;
         }
@@ -130,6 +190,7 @@ public class PlayerController : Photon.MonoBehaviour
         // Check for jump
         if (Input.GetButtonDown("Jump"))
         {
+            
             photonView.RPC("TryJump", PhotonTargets.All);
         }
         // Check for shooting
@@ -259,10 +320,13 @@ public class PlayerController : Photon.MonoBehaviour
     private void TryJump()
     {
         //Debug.Log("tryjump! " + maxJumpCount);
+        rig.constraints = RigidbodyConstraints.None;
+        onRamp = false;
         if (jumpCount < maxJumpCount)
         {
             //Debug.Log("jump!");
             lastJumpTime = Time.time;
+            isGrounded = false;
             motor.Jump();
             jumpCount++;
         }
@@ -273,6 +337,8 @@ public class PlayerController : Photon.MonoBehaviour
         direction = direction.normalized;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
+        rb.constraints = RigidbodyConstraints.None;
+        rb.AddForce(vel, ForceMode.Impulse);
 
         rb.AddForce(vel * force, ForceMode.Impulse);
     }
@@ -296,6 +362,56 @@ public class PlayerController : Photon.MonoBehaviour
                 jumpCount = 0;
             }
         }
+    }
+    private bool WallCheck(GameObject hitObj)
+    {
+        if (hitObj == null)
+        {
+            return false;
+        }
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        Vector3 bk = transform.TransformDirection(Vector3.back);
+        Vector3 rgt = transform.TransformDirection(Vector3.right);
+        Vector3 lft = transform.TransformDirection(Vector3.left);
+        float dist = 2;
+        RaycastHit ter;
+        if (Physics.Raycast(transform.position, fwd, out ter, dist))
+        {
+            if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
+            {
+                wallDir = 'f';
+                wall = hitObj;
+                return true;
+            }
+        }
+        if (Physics.Raycast(transform.position, bk, out ter, dist))
+        {
+            if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
+            {
+                wallDir = 'b';
+                wall = hitObj;
+                return true;
+            }
+        }
+        if (Physics.Raycast(transform.position, rgt, out ter, dist))
+        {
+            if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
+            {
+                wallDir = 'r';
+                wall = hitObj;
+                return true;
+            }
+        }
+        if (Physics.Raycast(transform.position, lft, out ter, dist))
+        {
+            if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
+            {
+                wallDir = 'l';
+                wall = hitObj;
+                return true;
+            }
+        }
+        return false;
     }
     private void OverHeadCheck(GameObject hitPart)
     {
@@ -321,7 +437,13 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject hit = collision.gameObject;
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
+        Rigidbody rb = transform.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        CrowdControlled = false;
+        OnWall = WallCheck(hit);
+        if (collision.gameObject.layer == groundLayer)
         if (collision.collider.gameObject.layer == groundLayer)
         {
 
@@ -336,9 +458,13 @@ public class PlayerController : Photon.MonoBehaviour
             }
             //print("Jump Reset");
         }
+        
+    }
+    private void OnCollisionStay(Collision collision)
+    {
         if (collision.gameObject.tag == "Ramp")
         {
-            Debug.Log("onramp");
+            //Debug.Log("onramp");
             onRamp = true;
         }
         else
@@ -346,7 +472,6 @@ public class PlayerController : Photon.MonoBehaviour
             onRamp = false;
         }
     }
-
     private void OnCollisionExit(Collision collision)
     {
         if (collision.collider.gameObject.layer == groundLayer)
@@ -354,6 +479,7 @@ public class PlayerController : Photon.MonoBehaviour
             isGrounded = false;
         }
         onRamp = false;
+        OnWall = false;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
