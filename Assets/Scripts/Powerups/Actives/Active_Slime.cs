@@ -76,50 +76,9 @@ namespace Powerups
             {
                 return;
             }
-            if (Active)
-            {
-                return;
-            }
-            if (onCooldown)
-            {
-                float remaining = duration - (Time.time - CDstart);
-                Debug.Log("Slime is on cooldown, time remaining: " + remaining);
-                return;
-            }
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            Debug.Log(player.name);
-            GameObject slime = Resources.Load("Prefabs/SlimePool") as GameObject;
 
-            //Instantiate(slime, (player.transform.forward * offset) + player.transform.position, transform.rotation);
-            GameObject rayOrigin = GameObject.Find("BasicPlayer/Gun"); //Needs to be changed to local player when networked
-            Vector3 mp = Input.mousePosition;
-            mp.z = 10;
-            Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
-            Vector3 targetVector = mouseLocation;
-
-            Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit endPoint;
-            if (Physics.Raycast(snipeRay, out endPoint))
-            {
-                Debug.Log(endPoint.transform.gameObject.name);
-                GameObject slimepool = Instantiate(slime, endPoint.point, transform.rotation);
-                slimepool.transform.localEulerAngles = Vector3.zero;
-                slimepool.name = "SP";
-                Destroy(slimepool, 7f);
-                Active = true;
-            }
 
             base.Activate();
         }
-
-        /*private void CoolDown(float currentTime, float duration)
-        {
-            if (currentTime >= CDstart + duration)
-            {
-                Debug.Log("Slime is off cooldown");
-                onCooldown = false;
-            }
-        }*/
     }
 }

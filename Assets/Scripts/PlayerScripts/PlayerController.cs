@@ -35,7 +35,7 @@ public class PlayerController : Photon.MonoBehaviour
     // Flags
     public bool canWallJump = false;
     private bool onRamp = false;
-    private bool isGrounded = false;
+    public bool isGrounded = false;
     private bool debounce = false;
     private bool OnWall = false;
     private char wallDir;
@@ -334,6 +334,7 @@ public class PlayerController : Photon.MonoBehaviour
     [PunRPC]
     public void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
     {
+        CrowdControlled = true;
         direction = direction.normalized;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
@@ -437,6 +438,7 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        CrowdControlled = false;
         GameObject hit = collision.gameObject;
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
         Rigidbody rb = transform.GetComponent<Rigidbody>();
