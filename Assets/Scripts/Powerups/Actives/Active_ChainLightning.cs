@@ -15,7 +15,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Chain Lightning";
-            //TODO: Bubble Wand
+            Icon = Resources.Load<Sprite>("Images/Chain Lightning");
             Tier = PowerupTier.Uncommon;
         }
 

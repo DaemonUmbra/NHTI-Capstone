@@ -30,7 +30,7 @@ namespace Powerups
         {
             Cooldown = 4.5f;
             Name = "Thunder Wave";
-            Icon = Resources.Load<Sprite>("Images/ThunderWave");
+            Icon = Resources.Load<Sprite>("Images/Thunder Wave");
             Tier = PowerupTier.Rare;
         }
 

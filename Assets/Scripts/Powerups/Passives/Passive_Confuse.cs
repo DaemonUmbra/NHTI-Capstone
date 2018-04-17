@@ -11,7 +11,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Confuse";
-            //TODO: Confuse Icon
+            Icon = Resources.Load<Sprite>("Images/Confuse");
             Tier = PowerupTier.Rare;
         }
 
