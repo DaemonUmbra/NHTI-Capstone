@@ -29,8 +29,9 @@ namespace Powerups
             movement = GetComponent<PlayerController>();
             movement.InvertX = false;
             movement.InvertY = false;
-
-            base.OnAbilityRemove();
+            
+            AbilityManager manage = gameObject.GetComponent<AbilityManager>();
+            manage.RemoveAbility<Passive_ThunderCloud>();
         }
 
         public override void OnUpdate()
