@@ -40,7 +40,7 @@ public class SlimeBall : Photon.MonoBehaviour
             mult.y = 2;
             mult.x = mult.z = .5f;
             hitController.ApplyKnockBack(direction, 2, mult);
-            hitController.ApplyKnockBack(direction, 4, mult);
+            //hitController.ApplyKnockBack(direction, 4, mult);
         }
     }
 }
