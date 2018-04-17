@@ -54,6 +54,7 @@ public class PlayerMotor : Photon.MonoBehaviour
     }
     private void WallCheck()
     {
+        /*
         Vector3 dir = transform.TransformDirection(Vector3.forward);
         RaycastHit obj;
         if (Physics.Raycast(transform.position, dir, out obj))
@@ -62,7 +63,7 @@ public class PlayerMotor : Photon.MonoBehaviour
             {
 
             }
-        }
+        }*/
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Powerups;
-
-[RequireComponent(typeof(PlayerStats))]
-public class TestHealthUI : Photon.MonoBehaviour {
+public class HealthUI : Photon.MonoBehaviour {
 
     //set in editor
     public Text healthText;
@@ -29,8 +27,8 @@ public class TestHealthUI : Photon.MonoBehaviour {
             pstats = Player.GetComponent<PlayerStats>();
             abilityManager = Player.GetComponent<AbilityManager>();
             HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
-            GameObject.Find("HealthBar").GetComponent<TempHealthBar>().SetPlayer(gameObject);
-            Health = GameObject.Find("HealthBar").transform.Find("Health").GetComponent<Text>();
+            GameObject.Find("HealthBar").GetComponent<HealthBar>().SetPlayer(gameObject);
+            Health = GameObject.Find("Health").GetComponent<Text>();
             powerups = GameObject.Find("Powerups").GetComponent<Text>();
             for (int i = 0; i < 6; i++)
             {

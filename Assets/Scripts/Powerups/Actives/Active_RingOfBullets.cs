@@ -3,11 +3,10 @@ using UnityEngine;
 
 namespace Powerups
 {
-    //TODO: REMOVE RING OF BULLETS
     public class Active_RingOfBullets : ActiveAbility
     {
         // Number of bullets to shoot out
-        private int BulletCount = 40;
+        private int BulletCount = 20;
 
         private PlayerShoot pShoot;
 

@@ -201,8 +201,8 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void HandleLookInput()
     {
-        Debug.Log("Horizontal Axis: " + Input.GetAxis(AxisVerticalLook));
-        Debug.Log("Vertical: " + Input.GetAxis(AxisHorizLook));
+        //Debug.Log("Horizontal Axis: " + Input.GetAxis(AxisVerticalLook));
+        //Debug.Log("Vertical: " + Input.GetAxis(AxisHorizLook));
         float vLook = Input.GetAxis(AxisVerticalLook) * vLookSpeed * Time.deltaTime;
         float hLook = Input.GetAxis(AxisHorizLook) * hLookSpeed * Time.deltaTime;
 
@@ -226,7 +226,9 @@ public class PlayerController : Photon.MonoBehaviour
         // Rotate player and set camera rotation
         transform.rotation = Quaternion.Euler(0, hRot, 0);
         camController.camRotation = Quaternion.Euler(vRot, hRot, 0);
-        
+
+        // Rotate the player shoot point
+        pShoot.OffsetPoint.rotation = Quaternion.Euler(vRot, 0, 0);
     }
     [PunRPC]
     private void RPC_FirePrimary()

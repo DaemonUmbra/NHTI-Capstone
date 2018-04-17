@@ -596,6 +596,9 @@ GameObject:
   - component: {fileID: 223854295270529138}
   - component: {fileID: 114564574610276392}
   - component: {fileID: 114072126135496176}
+  - component: {fileID: 114459876208824022}
+  - component: {fileID: 114099813098822400}
+  - component: {fileID: 114113404951534464}
   m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: Untagged
@@ -1691,6 +1694,38 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114099813098822400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481340424019272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e342f20adee558a43b8a05c6b12585c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpSlider: {fileID: 0}
+  Health: {fileID: 0}
+--- !u!114 &114113404951534464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481340424019272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d5661066316eb4aacd823e99578137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthText: {fileID: 0}
+  HealthBar: {fileID: 0}
+  Health: {fileID: 0}
+  powerups: {fileID: 0}
+  slotsActive: []
+  slotsPassive: []
+  defaultActive: {fileID: 0}
+  defaultPassive: {fileID: 0}
 --- !u!114 &114113546504837002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1729,7 +1764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e342f20adee558a43b8a05c6b12585c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthBar: {fileID: 114628641683953160}
+  hpSlider: {fileID: 0}
   Health: {fileID: 114278346998816444}
 --- !u!114 &114126357049054550
 MonoBehaviour:
@@ -1823,7 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ce6c45ef359384aadbff66fcb2dd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUI: {fileID: 0}
+  manager: {fileID: 0}
   txtGameState: {fileID: 0}
   txtGameMode: {fileID: 0}
   txtGameTime: {fileID: 0}
@@ -2198,7 +2233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ce6c45ef359384aadbff66fcb2dd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUI: {fileID: 0}
+  manager: {fileID: 0}
   txtGameState: {fileID: 0}
   txtGameMode: {fileID: 0}
   txtGameTime: {fileID: 0}
@@ -2570,6 +2605,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114459876208824022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481340424019272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ce6c45ef359384aadbff66fcb2dd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 114627699156416312, guid: 4a003fc51f847064a9da989d21c56e32, type: 2}
+  txtGameState: {fileID: 114161551701098388}
+  txtGameMode: {fileID: 0}
+  txtGameTime: {fileID: 0}
+  txtStateTime: {fileID: 114892284947826152}
+  txtPlayersLeft: {fileID: 0}
+  txtKills: {fileID: 0}
+  fontMin: 0
+  fontMax: 0
 --- !u!114 &114468097686024992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2581,7 +2636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ce6c45ef359384aadbff66fcb2dd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUI: {fileID: 0}
+  manager: {fileID: 0}
   txtGameState: {fileID: 0}
   txtGameMode: {fileID: 0}
   txtGameTime: {fileID: 0}
