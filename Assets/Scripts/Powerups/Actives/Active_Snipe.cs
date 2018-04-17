@@ -26,7 +26,7 @@ namespace Powerups
         {
             // Set name
             Cooldown = 5f;
-            Name = "Snipe";
+            _name = "Snipe";
             //Set Sprite
             Icon = Resources.Load<Sprite>("Images/Sniper");
             Tier = PowerupTier.Rare;
@@ -34,7 +34,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             //Powerup added
-            Debug.Log(Name + " Added");
+            Debug.Log(_name + " Added");
             manager = GetComponent<ModelManager>();
             base.OnAbilityAdd();
         }

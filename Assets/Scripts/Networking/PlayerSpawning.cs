@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerSpawning : Photon.PunBehaviour {
-
-    public static PlayerSpawning Instance;
+    
     private PhotonView PhotonView;
     private GameObject defaultSpawnPoint;
     public static GameObject localPlayer;
@@ -13,7 +12,6 @@ public class PlayerSpawning : Photon.PunBehaviour {
 
     // Use this for initialization
     void Awake () {
-        Instance = this;
         PhotonView = GetComponent<PhotonView>();
 
         PhotonNetwork.sendRate = 60;

@@ -14,7 +14,7 @@ namespace Powerups
 
         private void Awake()
         {
-            Name = "Magic Overload";
+            _name = "Magic Overload";
             //TODO: Thundercloud Icon
             Tier = PowerupTier.Uncommon;
         }
@@ -22,9 +22,9 @@ namespace Powerups
         {
             ps = GetComponentInParent<PlayerStats>();
 
-            ps.AddSpeedBoost(Name, 0.1f);
+            ps.AddSpeedBoost(_name, 0.1f);
             ps.JumpPower += 1.0f;
-            ps.AddDmgBoost(Name, 2.0f);
+            ps.AddDmgBoost(_name, 2.0f);
             ps.ChangeMaxHp(10.0f);
 
             base.OnAbilityAdd();
@@ -34,9 +34,9 @@ namespace Powerups
         {
             ps = GetComponentInParent<PlayerStats>();
 
-            ps.RemoveSpeedBoost(Name);
+            ps.RemoveSpeedBoost(_name);
             ps.JumpPower -= 1.0f;
-            ps.RemoveDmgBoost(Name);
+            ps.RemoveDmgBoost(_name);
             ps.ChangeMaxHp(-10.0f);
             
             AbilityManager manage = gameObject.GetComponent<AbilityManager>();

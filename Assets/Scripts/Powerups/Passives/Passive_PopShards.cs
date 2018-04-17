@@ -10,7 +10,7 @@ namespace Powerups
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            Name = "Pop Shards";
+            _name = "Pop Shards";
             //TODO: Pop Shards Icon
             Tier = PowerupTier.Common;
         }

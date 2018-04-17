@@ -8,12 +8,12 @@ namespace Powerups
 
         private void Awake()
         {
-            Name = "SingleShot";
+            _name = "SingleShot";
         }
         public override void OnAbilityAdd()
         {
             // Set name
-            Debug.Log(Name + " Added");
+            Debug.Log(_name + " Added");
 
             // Add new shoot function to delegate
             pShoot = GetComponent<PlayerShoot>();

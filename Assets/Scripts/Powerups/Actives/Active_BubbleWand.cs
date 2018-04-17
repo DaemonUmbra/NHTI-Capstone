@@ -14,7 +14,7 @@ namespace Powerups
 
         private void Awake()
         {
-            Name = "Bubble Wand";
+            _name = "Bubble Wand";
             Icon = Resources.Load<Sprite>("Images/Bubble Wand");
             Tier = PowerupTier.Uncommon;
         }
@@ -22,7 +22,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
 
-            Debug.Log(Name + " Added");
+            Debug.Log(_name + " Added");
 
             // Call base function
             base.OnAbilityAdd();
