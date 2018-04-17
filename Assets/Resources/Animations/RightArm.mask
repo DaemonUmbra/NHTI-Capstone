@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: RightArm
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: BaseChar
+    m_Weight: 0
+  - m_Path: Belt
+    m_Weight: 0
+  - m_Path: Boots
+    m_Weight: 0
+  - m_Path: Boots/Boot1
+    m_Weight: 0
+  - m_Path: Boots/Boot2
+    m_Weight: 0
+  - m_Path: Hat
+    m_Weight: 0
+  - m_Path: MasterControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/LeftHipControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/LeftHipControl/LeftHip
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/LeftHipControl/LeftHip/LeftKneeControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/LeftHipControl/LeftHip/LeftKneeControl/LeftKnee
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/LeftHipControl/LeftHip/LeftKneeControl/LeftKnee/LeftHeel
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/LeftHipControl/LeftHip/LeftKneeControl/LeftKnee/LeftHeel/LeftHeel
+      1
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/LeftHipControl/LeftHip/LeftKneeControl/LeftKnee/LeftHeel/LeftHeel
+      1/LeftToes
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/RightHipControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/RightHipControl/RightHip
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/RightHipControl/RightHip/RightKneeControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/RightHipControl/RightHip/RightKneeControl/RightKnee
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/RightHipControl/RightHip/RightKneeControl/RightKnee/RightHeel1
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/RightHipControl/RightHip/RightKneeControl/RightKnee/RightHeel1/RightHeel
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/RightHipControl/RightHip/RightKneeControl/RightKnee/RightHeel1/RightHeel/RightToes
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LHandControl1
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LHandControl1/LeftHand
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LHandControl1/LeftHand/LFingersControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LHandControl1/LeftHand/LFingersControl/LeftFingers
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LHandControl1/LeftHand/LFingersControl/LeftFingers/LeftFingerTips
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LThumbBaseControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LThumbBaseControl/LThumb1
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LThumbBaseControl/LThumb1/LThumbMidControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LThumbBaseControl/LThumb1/LThumbMidControl/LThumbMid
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/LShoulderControl/LeftShoulder/LElbowControl/LeftElbow/LeftWristControl/LeftWrist/LThumbBaseControl/LThumb1/LThumbMidControl/LThumbMid/LThumpTip
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/NeckControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/NeckControl/Neck
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/NeckControl/Neck/HeadControl
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/NeckControl/Neck/HeadControl/Head
+    m_Weight: 0
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RHandControl1
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RHandControl1/RightHand
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RHandControl1/RightHand/RFingersControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RHandControl1/RightHand/RFingersControl/RightFingers
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RHandControl1/RightHand/RFingersControl/RightFingers/RightFingerTips
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RThumbBaseControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RThumbBaseControl/RThumb1
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RThumbBaseControl/RThumb1/RThumbMidControl
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RThumbBaseControl/RThumb1/RThumbMidControl/RThumbMid
+    m_Weight: 1
+  - m_Path: MasterControl/WaistControl/Waist/Spine1Control/Spine1/Spine2Control/Spine2/Spine3Control/Spine3/ChestControl/Chest/RShoulderControl/RightShoulder1/RElbowControl/RightElbow/RightWristControl/RightWrist/RThumbBaseControl/RThumb1/RThumbMidControl/RThumbMid/RThumbTip
+    m_Weight: 1
+  - m_Path: pCylinder3
+    m_Weight: 0
+  - m_Path: Shirt
+    m_Weight: 0

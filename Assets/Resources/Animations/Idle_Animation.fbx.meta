@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 4b2e3674c284e4443b147f59947ca2c4
-timeCreated: 1523040361
-licenseType: Free
+guid: f222bb5097f434f4c855ae06166ed7f0
+timeCreated: 1524000123
+licenseType: Pro
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -152,7 +152,7 @@ ModelImporter:
     4300008: Belt
     4300010: pCylinder3
     4300012: BaseChar
-    7400000: Idle_Test
+    7400000: Idle_0.1
     9500000: //RootNode
     13700000: BaseChar
     13700002: Belt
@@ -162,6 +162,11 @@ ModelImporter:
     13700010: pCylinder3
     13700012: Shirt
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn2
+    second: {fileID: 2100000, guid: d8304ca5ec5113a45856e91977c70c45, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -194,14 +199,14 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle_Test
+      name: Idle_0.1
       takeName: Take 001
       firstFrame: 1
       lastFrame: 140
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
-      cycleOffset: 0
+      cycleOffset: 1
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
