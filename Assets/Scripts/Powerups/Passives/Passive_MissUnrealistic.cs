@@ -32,7 +32,7 @@ namespace Powerups
         private Transform crownOrSashInstance;
         private void Awake()
         {
-            _name = "Miss Unrealistic";
+            Name = "Miss Unrealistic";
             Icon = Resources.Load<Sprite>("Images/MissUnrealistic");
             Tier = PowerupTier.Rare; //TODO: Refine this later
         }
@@ -64,7 +64,7 @@ namespace Powerups
                 Debug.LogWarning("No Crown or Sash prefab set, could not apply to model");
             }
 
-            playerStats.AddScaleFactor(_name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
+            playerStats.AddScaleFactor(Name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
 
             //If we have a template
             if (crownOrSashTemplate)
@@ -150,7 +150,7 @@ namespace Powerups
             Destroy(crownOrSashInstance);
 
             //And undo our changes to the player's scale
-            playerStats.RemoveScaleFactor(_name);
+            playerStats.RemoveScaleFactor(Name);
             base.OnAbilityRemove();
         }
     }

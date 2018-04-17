@@ -13,7 +13,7 @@ namespace Powerups
 
         private void Awake()
         {
-            _name = "Fireball";
+            Name = "Fireball";
             Icon = Resources.Load<Sprite>("Images/Fireball");
             Tier = PowerupTier.Common;
         }
@@ -21,7 +21,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
             
             // Call base function
             base.OnAbilityAdd();

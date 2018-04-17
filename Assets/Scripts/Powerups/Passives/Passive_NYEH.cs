@@ -12,14 +12,14 @@ namespace Powerups
         public float nyehVolume = 1f;
         private void Awake()
         {
-            _name = "NYEH!";
+            Name = "NYEH!";
             Icon = Resources.Load<Sprite>("Images/NYEH");
             Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {
             audioManager = gameObject.GetComponent<AudioManager>();
-            audioSource = audioManager.GetNewAudioSource(_name);
+            audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
             pShoot.shoot += TryActivate;
@@ -28,7 +28,7 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            audioManager.DeleteAudioSource(_name);
+            audioManager.DeleteAudioSource(Name);
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
             pShoot.shoot -= TryActivate;
             base.OnAbilityRemove();
@@ -38,14 +38,14 @@ namespace Powerups
         protected void RPC_Activate_NYEH1()
         {
             Debug.Log(photonView.owner.NickName + ": NYEH!");
-            gameObject.GetComponent<AudioManager>().PlayOneShot(_name, "NYEH!", nyehVolume);
+            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!", nyehVolume);
         }
 
         [PunRPC]
         protected void RPC_Activate_NYEH2()
         {
             Debug.Log(photonView.owner.NickName + ": NYEH!");
-            gameObject.GetComponent<AudioManager>().PlayOneShot(_name, "NYEH!2", nyehVolume);
+            gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "NYEH!2", nyehVolume);
         }
 
         public void TryActivate()

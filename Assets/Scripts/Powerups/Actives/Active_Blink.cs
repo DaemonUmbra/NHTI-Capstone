@@ -27,20 +27,20 @@ namespace Powerups
         private void Awake()
         {
             // Set name
-            _name = "Blink";
+            Name = "Blink";
             Icon = Resources.Load<Sprite>("Images/Blink");
             Tier = PowerupTier.Rare;
         }
 
         public override void OnAbilityAdd()
         {
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
             Cooldown = 3.0f;
 
             playercontrol = GetComponent<PlayerController>();
 
             audioManager = gameObject.GetComponent<AudioManager>();
-            audioSource = audioManager.GetNewAudioSource(_name);
+            audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
 
 
@@ -56,7 +56,7 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            audioManager.DeleteAudioSource(_name);
+            audioManager.DeleteAudioSource(Name);
 
             if (pShoot)
             {
@@ -116,7 +116,7 @@ namespace Powerups
         {
             {
                 Debug.Log(photonView.owner.NickName + ": Blink!");
-                gameObject.GetComponent<AudioManager>().PlayOneShot(_name, "Blink", blinkVolume);
+                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "Blink", blinkVolume);
             }
         }
 

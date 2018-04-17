@@ -30,7 +30,7 @@ namespace Powerups
 
         private void Awake()
         {
-            _name = "Growth";
+            Name = "Growth";
             FootFall = Resources.Load<AudioClip>("Audio/Growth_FootFall");
             Icon = Resources.Load<Sprite>("Images/Growth");
             Tier = PowerupTier.Uncommon;
@@ -40,11 +40,11 @@ namespace Powerups
         {
             pStats = gameObject.GetComponent<PlayerStats>();
             AudioManager = GetComponent<AudioManager>();
-            AudioSource = AudioManager.GetNewAudioSource(_name);
+            AudioSource = AudioManager.GetNewAudioSource(Name);
             // Only adjust scale on the controlling client because AddScaleFactor is networked
             if (photonView.isMine)
             {
-                pStats.AddScaleFactor(_name, GrowthFactor);
+                pStats.AddScaleFactor(Name, GrowthFactor);
                 //pStats.AddDmgMultiplier(Name, dmgMult);
                 //pStats.AddDmgBoost(Name, dmgAdd);
             }
@@ -77,12 +77,12 @@ namespace Powerups
         
         public override void OnAbilityRemove()
         {
-            pStats.RemoveDmgMultiplier(_name);
-            pStats.RemoveDmgBoost(_name);
+            pStats.RemoveDmgMultiplier(Name);
+            pStats.RemoveDmgBoost(Name);
             // Only adjust scale on the controlling client because RemoveScaleFactor is networked
             if(photonView.isMine)
-                pStats.RemoveScaleFactor(_name);
-            AudioManager.DeleteAudioSource(_name);
+                pStats.RemoveScaleFactor(Name);
+            AudioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }
     }

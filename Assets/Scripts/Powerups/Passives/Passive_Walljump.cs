@@ -17,7 +17,7 @@ namespace Powerups
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            _name = "Wall Jump";
+            Name = "Wall Jump";
             //TODO: Walljump Icon
             Tier = PowerupTier.Rare;
         }

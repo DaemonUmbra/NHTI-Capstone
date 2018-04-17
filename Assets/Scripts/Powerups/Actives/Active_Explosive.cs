@@ -13,7 +13,7 @@ namespace Powerups {
 
         private void Awake()
         {
-            _name = "Explosion";
+            Name = "Explosion";
             Icon = Resources.Load<Sprite>("Images/Explosive Rounds");
             Tier = PowerupTier.Uncommon;
         }
@@ -21,7 +21,7 @@ namespace Powerups {
         public override void OnAbilityAdd()
         {
 
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
 
             // Call base function
             base.OnAbilityAdd();

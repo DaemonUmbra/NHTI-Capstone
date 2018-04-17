@@ -14,7 +14,7 @@ namespace Powerups
 
         private void Awake()
         {
-            _name = "Chain Lightning";
+            Name = "Chain Lightning";
             Icon = Resources.Load<Sprite>("Images/Chain Lightning");
             Tier = PowerupTier.Uncommon;
         }
@@ -22,7 +22,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
 
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
 
             // Call base function
             base.OnAbilityAdd();

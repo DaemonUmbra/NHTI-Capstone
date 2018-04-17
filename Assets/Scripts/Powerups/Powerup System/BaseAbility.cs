@@ -11,9 +11,9 @@ namespace Powerups
     public abstract class BaseAbility : Photon.MonoBehaviour
     {
         [SerializeField]
-        protected string _name = "New Ability";
+        protected string Name = "New Ability";
 
-        public string AbilityName { get { return _name; } }
+        public string GetName { get { return Name; } }
 
         private PowerupTier tier = PowerupTier.Common;
 

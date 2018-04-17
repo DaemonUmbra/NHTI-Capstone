@@ -16,13 +16,13 @@ namespace Powerups
         public bool Healing;
         private void Awake()
         {
-            _name = "Combat Regeneration";
+            Name = "Combat Regeneration";
             Icon = Resources.Load<Sprite>("Images/Combat Regen");
             Tier = PowerupTier.Rare;
         }
         public override void OnAbilityAdd()
         {
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
             Healing = false;
 

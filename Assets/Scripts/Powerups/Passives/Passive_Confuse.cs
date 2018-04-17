@@ -10,7 +10,7 @@ namespace Powerups
 
         private void Awake()
         {
-            _name = "Confuse";
+            Name = "Confuse";
             Icon = Resources.Load<Sprite>("Images/Confuse");
             Tier = PowerupTier.Rare;
         }

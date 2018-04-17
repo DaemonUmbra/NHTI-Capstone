@@ -21,13 +21,13 @@ namespace Powerups
         public int Instances;
         private void Awake()
         {
-            _name = "Panic Loafers";
+            Name = "Panic Loafers";
             Icon = Resources.Load<Sprite>("Images/PanicLoafers");
             Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()
         {
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
             PS = GetComponent<PlayerStats>();
             WalkSpeed = PS.WalkSpeed; // Get current walkspeed to save for later use
             Health = PS.CurrentHp; // Get current health to keep track of damage
@@ -37,7 +37,7 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            PS.RemoveSpeedBoost(_name); // In the event the powerup is removed part way through Panic Time
+            PS.RemoveSpeedBoost(Name); // In the event the powerup is removed part way through Panic Time
             base.OnAbilityRemove(); // Remove the ability
         }
 
@@ -50,7 +50,7 @@ namespace Powerups
                 {
                     WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
                 }
-                PS.AddSpeedBoost(_name, 6); 
+                PS.AddSpeedBoost(Name, 6); 
                 Instances = Instances + 1; // Adds 1 to instances
                 if (Instances == 1)
                 {
@@ -77,7 +77,7 @@ namespace Powerups
                 yield return new WaitForSecondsRealtime(2); // Wait for 2 seconds
             }
             Instances = 0;
-            PS.RemoveSpeedBoost(_name); // Set player walkspeed back to normal
+            PS.RemoveSpeedBoost(Name); // Set player walkspeed back to normal
         }
     }
 }

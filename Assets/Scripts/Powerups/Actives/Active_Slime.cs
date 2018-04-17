@@ -7,7 +7,7 @@ Developers and Contributors: Ian Cahoon
 Information
     Name: Slime
     Type: Active
-    Effect: creates a small ball of slime that knocks back players;
+    Effect: creates a small puddle of slime that plays can bounce off of
     Tier: Uncommon
   */
 ///summary
@@ -20,12 +20,10 @@ namespace Powerups
         private bool onCooldown = false, Active = false;
         private PlayerShoot pShoot;
         private float offset = 2, duration = 7f;
-        private Vector3 Offset = new Vector3(0, 2, 0);
 
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            Cooldown = 7;
             Name = "Slime";
             //TODO: Slime Icon
             Tier = PowerupTier.Uncommon;
@@ -35,7 +33,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
-            
+            Cooldown = 7;
             Debug.Log(Name + " Added");
             
             base.OnAbilityAdd();
@@ -78,7 +76,39 @@ namespace Powerups
             {
                 return;
             }
-            GameObject slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + Offset, Quaternion.identity, 0);
+            if (Active)
+            {
+                return;
+            }
+            if (onCooldown)
+            {
+                float remaining = duration - (Time.time - CDstart);
+                Debug.Log("Slime is on cooldown, time remaining: " + remaining);
+                return;
+            }
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log(player.name);
+            GameObject slime = Resources.Load("Prefabs/SlimePool") as GameObject;
+
+            //Instantiate(slime, (player.transform.forward * offset) + player.transform.position, transform.rotation);
+            GameObject rayOrigin = GameObject.Find("BasicPlayer/Gun"); //Needs to be changed to local player when networked
+            Vector3 mp = Input.mousePosition;
+            mp.z = 10;
+            Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
+            Vector3 targetVector = mouseLocation;
+
+            Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit endPoint;
+            if (Physics.Raycast(snipeRay, out endPoint))
+            {
+                Debug.Log(endPoint.transform.gameObject.name);
+                GameObject slimepool = Instantiate(slime, endPoint.point, transform.rotation);
+                slimepool.transform.localEulerAngles = Vector3.zero;
+                slimepool.name = "SP";
+                Destroy(slimepool, 7f);
+                Active = true;
+            }
 
             base.Activate();
         }

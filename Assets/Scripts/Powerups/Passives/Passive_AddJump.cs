@@ -7,7 +7,7 @@
         // Use this for initialization
         private void Awake()
         {
-            _name = "Add Jump";
+            Name = "Add Jump";
             //TODO: High Jump Icon
             Tier = PowerupTier.Common;
         }

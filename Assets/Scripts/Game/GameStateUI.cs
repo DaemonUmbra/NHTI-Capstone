@@ -40,7 +40,7 @@ public class GameStateUI : MonoBehaviour {
     private void Update()
     {
         UpdateTimeText();
-        UpdatePlayerText();
+        //UpdatePlayerText();
     }
 
     #region Public Methods
@@ -115,13 +115,16 @@ public class GameStateUI : MonoBehaviour {
     }
     public void UpdateTimeText()
     {
-        //txtGameTime.text = TimeToString(manager.gameTime);
+        txtGameTime.text = TimeToString(manager.gameTime);
         txtStateTime.text = TimeToString(manager.stateTimeLeft);
 
         // Set time text color
         if(manager.stateTimeLeft < 10)
         {
             txtStateTime.color = Color.red;
+
+            // Countdown effect
+            //Debug.Log(manager.gameTime % 1);
         }
         else
         {

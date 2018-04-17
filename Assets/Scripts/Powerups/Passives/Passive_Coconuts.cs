@@ -16,7 +16,7 @@ namespace Powerups
         private PlayerStats PlayerStats;
         private void Awake()
         {
-            _name = "Coconuts";
+            Name = "Coconuts";
             //TODO: Coconuts Icon
             Tier = PowerupTier.Uncommon;
         }
@@ -45,11 +45,11 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
-            _name = "A Lovely Pair of Coconuts";
+            Name = "A Lovely Pair of Coconuts";
             CoconutSound = Resources.Load<AudioClip>("Audio/Coconuts");
             AudioSource = GetComponent<AudioSource>();
             PlayerStats = GetComponent<PlayerStats>();
-            PlayerStats.AddSpeedBoost(_name, SpeedBoost);
+            PlayerStats.AddSpeedBoost(Name, SpeedBoost);
             AudioSource.loop = true;
             AudioSource.clip = CoconutSound;
             AudioSource.Play();
@@ -59,7 +59,7 @@ namespace Powerups
         public override void OnAbilityRemove()
         {
             AudioSource.Stop();
-            PlayerStats.RemoveSpeedBoost(_name);
+            PlayerStats.RemoveSpeedBoost(Name);
             base.OnAbilityRemove();
         }
     }

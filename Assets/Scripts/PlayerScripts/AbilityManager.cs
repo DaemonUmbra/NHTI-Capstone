@@ -210,7 +210,7 @@ public class AbilityManager : Photon.MonoBehaviour
             // Add ability to player and register it
             BaseAbility newAbility = (BaseAbility)gameObject.AddComponent(t);
             RegisterAbility(newAbility);
-            Debug.Log("Ability added: " + newAbility.AbilityName);
+            Debug.Log("Ability added: " + newAbility.GetName);
         }
         else
         {
@@ -227,12 +227,12 @@ public class AbilityManager : Photon.MonoBehaviour
         {
             // Unregister ability and destroy it
             UnregisterAbility(ability);
-            Debug.Log("Ability removed: " + ability.AbilityName);
+            Debug.Log("Ability removed: " + ability.GetName);
             Destroy(ability);
         }
         else
         {
-            Debug.LogError("Ability not owned. Unable to remove " + ability.AbilityName);
+            Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
         }
     }
     [PunRPC] private void RPC_TriggerAbility(int index)

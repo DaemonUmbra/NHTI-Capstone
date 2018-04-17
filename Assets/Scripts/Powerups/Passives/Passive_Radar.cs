@@ -23,7 +23,7 @@ namespace Powerups
         // Use this for initialization
         private void Awake()
         {
-            _name = "Radar";
+            Name = "Radar";
             Icon = Resources.Load<Sprite>("Images/Radar");
             Tier = PowerupTier.Rare;
         }
@@ -32,7 +32,7 @@ namespace Powerups
         {
             audioSource = GetComponent<AudioSource>();
             Closest = 0;
-            Debug.Log(_name + " added!");
+            Debug.Log(Name + " added!");
             base.OnAbilityAdd();
         }
 

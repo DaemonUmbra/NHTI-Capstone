@@ -13,7 +13,7 @@ namespace Powerups
         private void Awake()
         {
             // Set name
-            _name = "Ring Of Bullets";
+            Name = "Ring Of Bullets";
             //TODO: Ring of Bullets Icon
             Tier = PowerupTier.OP;
         }
@@ -21,7 +21,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Cooldown = 5f;
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
             
             // Call base function
             base.OnAbilityAdd();

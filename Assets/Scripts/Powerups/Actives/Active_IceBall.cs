@@ -15,14 +15,14 @@ namespace Powerups
 
         private void Awake()
         {
-            _name = "Ice Ball";
+            Name = "Ice Ball";
             Icon = Resources.Load<Sprite>("Images/Ice Ball");
             Tier = PowerupTier.Common;
         }
 
         public override void OnAbilityAdd()
         {
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
 
             // Call base function
             base.OnAbilityAdd();
