@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -798,7 +798,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 193233846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.098358154, z: 0}
+  m_LocalPosition: {x: 0, y: 0.09835492, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 213563399}
@@ -1834,8 +1834,8 @@ MonoBehaviour:
   _canvasManager: {fileID: 46054748}
   loginButton: {fileID: 978971248}
   connectingText: {fileID: 1185843920}
-  TxtRoomName: {fileID: 1023312607}
-  TxtPlayerCount: {fileID: 964948856}
+  TxtRoomName: {fileID: 0}
+  TxtPlayerCount: {fileID: 0}
 --- !u!4 &568463035
 Transform:
   m_ObjectHideFlags: 0
@@ -2571,6 +2571,7 @@ GameObject:
   - component: {fileID: 894357122}
   - component: {fileID: 894357121}
   - component: {fileID: 894357120}
+  - component: {fileID: 894357123}
   m_Layer: 5
   m_Name: CreateRoom
   m_TagString: Untagged
@@ -2693,10 +2694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640cad8a43b95294b8a3da1fab682259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 0}
-  _roomName: {fileID: 1023312607}
-  Playercount: {fileID: 964948856}
-  playerAmt: 0
 --- !u!1 &964948854
 GameObject:
   m_ObjectHideFlags: 0
@@ -3188,10 +3185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640cad8a43b95294b8a3da1fab682259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 0}
-  _roomName: {fileID: 1023312607}
-  Playercount: {fileID: 964948856}
-  playerAmt: 0
 --- !u!114 &1095357515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3505,7 +3498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1224708267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3563,7 +3556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1416969201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5094,10 +5087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640cad8a43b95294b8a3da1fab682259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 0}
-  _roomName: {fileID: 1023312607}
-  Playercount: {fileID: 964948856}
-  playerAmt: 0
 --- !u!114 &2030778075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5382,7 +5371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2051121182
 RectTransform:
   m_ObjectHideFlags: 0

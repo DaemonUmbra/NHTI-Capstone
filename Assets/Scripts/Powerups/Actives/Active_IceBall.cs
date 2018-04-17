@@ -16,7 +16,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Ice Ball";
-            //TODO: Iceball Icon
+            Icon = Resources.Load<Sprite>("Images/Ice Ball");
             Tier = PowerupTier.Common;
         }
 
