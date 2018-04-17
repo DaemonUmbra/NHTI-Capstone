@@ -130,7 +130,6 @@ namespace Powerups
         {
             // Call base function
             audioManager.DeleteAudioSource(Name);
-            modelManager.SetModel("Default");
             base.OnAbilityRemove();
         }
 

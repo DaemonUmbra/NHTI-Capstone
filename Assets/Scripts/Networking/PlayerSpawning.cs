@@ -18,16 +18,11 @@ public class PlayerSpawning : Photon.PunBehaviour {
 
         PhotonNetwork.sendRate = 60;
         PhotonNetwork.sendRateOnSerialize = 30;
-        
-    }
-    private void OnEnable()
-    {
+
         SceneManager.sceneLoaded += OnSceneFinishedLoading;
+        //PhotonNetwork.automaticallySyncScene = true;
     }
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneFinishedLoading;
-    }
+
     private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         Scene currentScene = SceneManager.GetActiveScene();
@@ -68,7 +63,6 @@ public class PlayerSpawning : Photon.PunBehaviour {
     {
         var spawnPoint = GetRandomSpawnPoint();
         localPlayer = PhotonNetwork.Instantiate("BasicPlayer w_o PlayerCanvas", spawnPoint.position, spawnPoint.rotation, 0);
-        Debug.Log("Created Player" + localPlayer.GetPhotonView().viewID);
     }
 
     public static List<GameObject> GetAllObjectsOfTypeInScene<T>()
