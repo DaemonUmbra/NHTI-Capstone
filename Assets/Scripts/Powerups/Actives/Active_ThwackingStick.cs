@@ -10,7 +10,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Thwacking Stick";
-            //TODO: Thwacking Stick Icon
+            Icon = Resources.Load<Sprite>("Images/Thwacking Stick");
             Tier = PowerupTier.Uncommon;
         }
 
