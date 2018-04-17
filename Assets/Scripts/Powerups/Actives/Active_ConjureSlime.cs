@@ -12,7 +12,7 @@ namespace Powerups
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            _name = "ConjureSlime";
+            Name = "ConjureSlime";
             //TODO: Conjure Slime Icon
             Tier = PowerupTier.Uncommon;
         }
@@ -21,7 +21,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
-            Debug.Log(_name + " Added");
+            Debug.Log(Name + " Added");
             // Call base function
             base.OnAbilityAdd();
         }
