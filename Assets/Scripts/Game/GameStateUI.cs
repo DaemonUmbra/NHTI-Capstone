@@ -115,8 +115,10 @@ public class GameStateUI : MonoBehaviour {
     }
     public void UpdateTimeText()
     {
-        txtGameTime.text = TimeToString(manager.gameTime);
-        txtStateTime.text = TimeToString(manager.stateTimeLeft);
+        float gTime = manager.gameTime;
+        float sTime = manager.stateTimeLeft;
+        txtGameTime.text = TimeToString(gTime);
+        txtStateTime.text = TimeToString(sTime);
 
         // Set time text color
         if(manager.stateTimeLeft < 10)

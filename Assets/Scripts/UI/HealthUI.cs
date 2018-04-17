@@ -40,21 +40,17 @@ public class HealthUI : Photon.MonoBehaviour {
 
         pstats = player.GetComponent<PlayerStats>();
         abilityManager = player.GetComponent<AbilityManager>();
-
-
+        
+        // Ability UI setup
         for (int i = 0; i < maxActives; i++)
         {
             string slotName = "Active_" + i;
-            slotsActive[i] = new AbilitySlot();
-            slotsActive[i].Icon = GameObject.Find(slotName).GetComponent<Image>();
-            slotsActive[i].Taken = false;
+            slotsActive[i] = new AbilitySlot(GameObject.Find(slotName).GetComponent<Image>(), false);
         }
         for (int i = 0; i < maxPassives; i++)
         {
             string slotName = "Passive_" + i;
-            slotsPassive[i] = new AbilitySlot();
-            slotsPassive[i].Icon = GameObject.Find(slotName).GetComponent<Image>();
-            slotsPassive[i].Taken = false;
+            slotsPassive[i] = new AbilitySlot(GameObject.Find(slotName).GetComponent<Image>(), false);
         }
     }
 	
@@ -79,7 +75,7 @@ public class HealthUI : Photon.MonoBehaviour {
 
     public void UpdatePowerups()
     {
-
+        // Update active ability icons
         List<ActiveAbility> actives = abilityManager.ActiveAbilities;
         for(int i = 0; i < maxActives; ++i)
         {
@@ -91,15 +87,25 @@ public class HealthUI : Photon.MonoBehaviour {
             else
             {
                 slotsActive[i].Icon.sprite = defaultActive;
+                slotsActive[i].Taken = false;
             }
             
         }
-
+        // Update passive ability icons
         List<PassiveAbility> passives = abilityManager.PassiveAbilities;
-        for (int i = 0; i < passives.Count; ++i)
+        for (int i = 0; i < maxPassives; ++i)
         {
-            slotsPassive[i].Icon.sprite = passives[i].Icon;
-            slotsPassive[i].Taken = true;
+            if (i < passives.Count)
+            {
+                slotsPassive[i].Icon.sprite = passives[i].Icon;
+                slotsPassive[i].Taken = true;
+            }
+            else
+            {
+                slotsPassive[i].Icon.sprite = defaultPassive;
+                slotsPassive[i].Taken = false;
+            }
+            
         }
     }
 
