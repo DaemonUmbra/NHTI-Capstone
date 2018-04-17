@@ -45,22 +45,6 @@ namespace Powerups
             {
                 return;
             }
-            if (Active)
-            {
-                GameObject pool = GameObject.Find("SP");
-                if (pool != null)
-                {
-                    return;
-                }
-                Active = false;
-                //onCooldown = true;
-                //CDstart = Time.time;
-            }
-            /*if (onCooldown)
-            {
-                CoolDown(Time.time, duration);
-            }*/
-
             base.OnUpdate();
         }
 
@@ -76,7 +60,11 @@ namespace Powerups
             {
                 return;
             }
-
+            Vector3 mp = Input.mousePosition;
+            Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
+            Camera cam = transform.GetComponent<CameraController>().cam;
+            GameObject _slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + Vector3.forward, Quaternion.identity, 0);
+            _slime.transform.LookAt(mouseLocation);
 
             base.Activate();
         }
