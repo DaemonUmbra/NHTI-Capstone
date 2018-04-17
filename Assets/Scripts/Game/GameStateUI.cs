@@ -34,7 +34,7 @@ public class GameStateUI : MonoBehaviour {
 
     private void Start()
     {
-        manager = GameObject.Find(manager.name).GetComponent<GameManager>();
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
