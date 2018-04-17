@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ExitGames.Client.Photon;
 
 public enum LobbyState { LOGIN, LOBBY, ROOM, GAME, MAP }
 public class LobbyManager : Photon.PunBehaviour {
@@ -11,15 +11,87 @@ public class LobbyManager : Photon.PunBehaviour {
     [SerializeField]
     MainCanvasManager _canvasManager;
     private int level = 1;
+    private Room _room;
     #endregion
 
 
     #region Public Variables
     public static bool HideFullRoom = true;
     public Button loginButton;
+    // Room Settings
+    public Hashtable CustomProperties = new Hashtable() {
+        { "GameMode", GameMode.Royale },
+        { "GameState", GameState.Preparation },
+        { "GameTime", 0f },
+        { "Map", 1 },
+        { "StartTime", 0f },
+        { "StateStartTime", 0f },
+        { "PrepTime", 30f },
+        { "BrawlTime", 120f },
+        { "RoyaleTime", 300f },
+        { "PlayersLeft", 0 }
+    };
+
+    // Text fields
     public Text connectingText;
+    public Text TxtRoomName;
+    public Text TxtPlayerCount;
     #endregion
 
+    #region Room Options
+    // Access variables for Room Properties.
+    // Automatically synced across the network
+    public GameMode gameMode
+    {
+        get { return (GameMode)_room.CustomProperties["GameMode"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "GameMode", value } }); }
+    }
+    public GameState gameState
+    {
+        get { return (GameState)_room.CustomProperties["GameState"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "GameState", value } }); }
+    }
+    public float gameTime
+    {
+        get { return (float)_room.CustomProperties["GameTime"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "GameTime", value } }); }
+    }
+    public int Map
+    {
+        get { return (int)_room.CustomProperties["Map"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "Map", value } }); }
+    }
+    public float startTime
+    {
+        get { return (float)_room.CustomProperties["StartTime"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "StartTime", value } }); }
+    }
+    public float stateStartTime
+    {
+        get { return (float)_room.CustomProperties["stateStartTime"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "stateStartTime", value } }); }
+    }
+    public float prepTime
+    {
+        get { return (float)_room.CustomProperties["prepTime"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "prepTime", value } }); }
+    }
+    public float brawlTime
+    {
+        get { return (float)_room.CustomProperties["brawlTime"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "brawlTime", value } }); }
+    }
+    public float royaleTime
+    {
+        get { return (float)_room.CustomProperties["royaleTime"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "royaleTime", value } }); }
+    }
+    public int playersLeft
+    {
+        get { return (int)_room.CustomProperties["PlayersLeft"]; }
+        private set { _room.SetCustomProperties(new Hashtable() { { "playersLeft", value } }); }
+    }
+    #endregion
 
     #region Access Variables
     public static LobbyState State { get { return _clientState; } }
@@ -27,7 +99,7 @@ public class LobbyManager : Photon.PunBehaviour {
     
     #endregion
 
-  
+
     #region Public Methods
     public void ChangeState(LobbyState newState)
     {
@@ -72,6 +144,24 @@ public class LobbyManager : Photon.PunBehaviour {
     }
     public void CreateRoom()
     {
+        // Set room options
+        RoomOptions roomOptions = new RoomOptions() {
+            IsVisible = true,
+            IsOpen = true,
+            MaxPlayers = byte.Parse(TxtPlayerCount.text)
+        };
+        roomOptions.CustomRoomProperties = CustomProperties;
+
+        if (PhotonNetwork.CreateRoom(TxtRoomName.text, roomOptions, TypedLobby.Default))
+        {
+            _room = PhotonNetwork.room;
+            Debug.Log("Room: " + TxtRoomName.text + " created!");
+        }
+        else
+        {
+            Debug.Log("Failed to create room!");
+            ChangeState(LobbyState.LOBBY);
+        }
         ChangeState(LobbyState.ROOM);
     }
 
@@ -123,6 +213,10 @@ public class LobbyManager : Photon.PunBehaviour {
 
         PhotonNetwork.room.IsOpen = !PhotonNetwork.room.IsOpen;
         PhotonNetwork.room.IsVisible = PhotonNetwork.room.IsOpen;
+    }
+    public void OnClick_CreateRoom()
+    {
+        CreateRoom();
     }
     public void OnClickLeaveRoom()
     {
