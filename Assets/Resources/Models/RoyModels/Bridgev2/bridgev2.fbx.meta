@@ -1,0 +1,316 @@
+fileFormatVersion: 2
+guid: c66f26473f0e93542a83306002962e57
+timeCreated: 1524009401
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: bridgeArcUnder1
+    100002: bridgeArcUnder2
+    100004: bridgeBase
+    100006: bridgeBlock1
+    100008: bridgeBlock1 1
+    100010: bridgeBlock10
+    100012: bridgeBlock10 1
+    100014: bridgeBlock11
+    100016: bridgeBlock11 1
+    100018: bridgeBlock12
+    100020: bridgeBlock12 1
+    100022: bridgeBlock13
+    100024: bridgeBlock13 1
+    100026: bridgeBlock2
+    100028: bridgeBlock2 1
+    100030: bridgeBlock3
+    100032: bridgeBlock3 1
+    100034: bridgeBlock4
+    100036: bridgeBlock4 1
+    100038: bridgeBlock5
+    100040: bridgeBlock5 1
+    100042: bridgeBlock6
+    100044: bridgeBlock6 1
+    100046: bridgeBlock7
+    100048: bridgeBlock7 1
+    100050: bridgeBlock8
+    100052: bridgeBlock8 1
+    100054: bridgeBlock9
+    100056: bridgeBlock9 1
+    100058: bridgeBlocks1
+    100060: bridgeBlocks2
+    100062: bridgeUndertrim
+    100064: //RootNode
+    100066: Rune1
+    100068: Rune2
+    100070: Rune3
+    100072: Rune4
+    100074: Rune5
+    100076: Rune6
+    100078: Runes
+    400000: bridgeArcUnder1
+    400002: bridgeArcUnder2
+    400004: bridgeBase
+    400006: bridgeBlock1
+    400008: bridgeBlock1 1
+    400010: bridgeBlock10
+    400012: bridgeBlock10 1
+    400014: bridgeBlock11
+    400016: bridgeBlock11 1
+    400018: bridgeBlock12
+    400020: bridgeBlock12 1
+    400022: bridgeBlock13
+    400024: bridgeBlock13 1
+    400026: bridgeBlock2
+    400028: bridgeBlock2 1
+    400030: bridgeBlock3
+    400032: bridgeBlock3 1
+    400034: bridgeBlock4
+    400036: bridgeBlock4 1
+    400038: bridgeBlock5
+    400040: bridgeBlock5 1
+    400042: bridgeBlock6
+    400044: bridgeBlock6 1
+    400046: bridgeBlock7
+    400048: bridgeBlock7 1
+    400050: bridgeBlock8
+    400052: bridgeBlock8 1
+    400054: bridgeBlock9
+    400056: bridgeBlock9 1
+    400058: bridgeBlocks1
+    400060: bridgeBlocks2
+    400062: bridgeUndertrim
+    400064: //RootNode
+    400066: Rune1
+    400068: Rune2
+    400070: Rune3
+    400072: Rune4
+    400074: Rune5
+    400076: Rune6
+    400078: Runes
+    2300000: bridgeArcUnder1
+    2300002: bridgeArcUnder2
+    2300004: bridgeBase
+    2300006: bridgeBlock1
+    2300008: bridgeBlock1 1
+    2300010: bridgeBlock10
+    2300012: bridgeBlock10 1
+    2300014: bridgeBlock11
+    2300016: bridgeBlock11 1
+    2300018: bridgeBlock12
+    2300020: bridgeBlock12 1
+    2300022: bridgeBlock13
+    2300024: bridgeBlock13 1
+    2300026: bridgeBlock2
+    2300028: bridgeBlock2 1
+    2300030: bridgeBlock3
+    2300032: bridgeBlock3 1
+    2300034: bridgeBlock4
+    2300036: bridgeBlock4 1
+    2300038: bridgeBlock5
+    2300040: bridgeBlock5 1
+    2300042: bridgeBlock6
+    2300044: bridgeBlock6 1
+    2300046: bridgeBlock7
+    2300048: bridgeBlock7 1
+    2300050: bridgeBlock8
+    2300052: bridgeBlock8 1
+    2300054: bridgeBlock9
+    2300056: bridgeBlock9 1
+    2300058: Rune1
+    2300060: Rune2
+    2300062: Rune3
+    2300064: Rune4
+    2300066: Rune5
+    2300068: Rune6
+    3300000: bridgeArcUnder1
+    3300002: bridgeArcUnder2
+    3300004: bridgeBase
+    3300006: bridgeBlock1
+    3300008: bridgeBlock1 1
+    3300010: bridgeBlock10
+    3300012: bridgeBlock10 1
+    3300014: bridgeBlock11
+    3300016: bridgeBlock11 1
+    3300018: bridgeBlock12
+    3300020: bridgeBlock12 1
+    3300022: bridgeBlock13
+    3300024: bridgeBlock13 1
+    3300026: bridgeBlock2
+    3300028: bridgeBlock2 1
+    3300030: bridgeBlock3
+    3300032: bridgeBlock3 1
+    3300034: bridgeBlock4
+    3300036: bridgeBlock4 1
+    3300038: bridgeBlock5
+    3300040: bridgeBlock5 1
+    3300042: bridgeBlock6
+    3300044: bridgeBlock6 1
+    3300046: bridgeBlock7
+    3300048: bridgeBlock7 1
+    3300050: bridgeBlock8
+    3300052: bridgeBlock8 1
+    3300054: bridgeBlock9
+    3300056: bridgeBlock9 1
+    3300058: Rune1
+    3300060: Rune2
+    3300062: Rune3
+    3300064: Rune4
+    3300066: Rune5
+    3300068: Rune6
+    4300000: bridgeBase
+    4300002: bridgeBlock1
+    4300004: bridgeBlock2
+    4300006: bridgeBlock3
+    4300008: bridgeBlock4
+    4300010: bridgeBlock5
+    4300012: bridgeBlock6
+    4300014: bridgeBlock7
+    4300016: bridgeBlock8
+    4300018: bridgeBlock9
+    4300020: bridgeBlock10
+    4300022: bridgeBlock11
+    4300024: bridgeBlock12
+    4300026: bridgeBlock13
+    4300028: bridgeBlock1
+    4300030: bridgeBlock2
+    4300032: bridgeBlock3
+    4300034: bridgeBlock4
+    4300036: bridgeBlock5
+    4300038: bridgeBlock6
+    4300040: bridgeBlock7
+    4300042: bridgeBlock8
+    4300044: bridgeBlock9
+    4300046: bridgeBlock10
+    4300048: bridgeBlock11
+    4300050: bridgeBlock12
+    4300052: bridgeBlock13
+    4300054: Rune1
+    4300056: Rune2
+    4300058: Rune3
+    4300060: Rune4
+    4300062: Rune5
+    4300064: Rune6
+    4300066: bridgeArcUnder1
+    4300068: bridgeArcUnder2
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridgeArcUnder_mat
+    second: {fileID: 2100000, guid: 00c8af53ac4cd634281069c452e67eac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridgeBase_mat
+    second: {fileID: 2100000, guid: 34ee22bab5abe2e44baee52edaa7cad8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bridgeBlocks_mat
+    second: {fileID: 2100000, guid: 3698871e4957776448962e44a3cff1ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rune_mat1
+    second: {fileID: 2100000, guid: 2ec8ae61d12510248b971578a9b45043, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rune_mat2
+    second: {fileID: 2100000, guid: 367193e63e1607b42b576565f42fc232, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rune_mat3
+    second: {fileID: 2100000, guid: 04175a0d3bb8ac84cba4d311c17a6206, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rune_mat4
+    second: {fileID: 2100000, guid: 6778feb5714bb58448d146fd65de2525, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rune_mat5
+    second: {fileID: 2100000, guid: 6191ac8f43e81974fb7c5312c431a2df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rune_mat6
+    second: {fileID: 2100000, guid: 07ceee7fe9c7a2c4e9aebd872396329f, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

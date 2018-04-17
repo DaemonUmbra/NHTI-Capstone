@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: 5cce17588ce46374dbf90ab1fdf98048
+timeCreated: 1524009399
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Gem_Piece1
+    100002: Gem_Piece2
+    100004: Wand
+    100006: Wand_Base
+    100008: Wand_Core
+    100010: Wand_Core 1
+    100012: Wand_Top
+    100014: Wand_Top_Rotator
+    100016: Wand_Top_Rotator_v2
+    100018: //RootNode
+    400000: Gem_Piece1
+    400002: Gem_Piece2
+    400004: Wand
+    400006: Wand_Base
+    400008: Wand_Core
+    400010: Wand_Core 1
+    400012: Wand_Top
+    400014: Wand_Top_Rotator
+    400016: Wand_Top_Rotator_v2
+    400018: //RootNode
+    2300000: Gem_Piece1
+    2300002: Gem_Piece2
+    2300004: Wand_Base
+    2300006: Wand_Core 1
+    2300008: Wand_Top_Rotator
+    2300010: Wand_Top_Rotator_v2
+    3300000: Gem_Piece1
+    3300002: Gem_Piece2
+    3300004: Wand_Base
+    3300006: Wand_Core 1
+    3300008: Wand_Top_Rotator
+    3300010: Wand_Top_Rotator_v2
+    4300000: Wand_Top_Rotator
+    4300002: Gem_Piece2
+    4300004: Gem_Piece1
+    4300006: Wand_Core
+    4300008: Wand_Base
+    4300010: Wand_Top_Rotator_v2
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: base_Material
+    second: {fileID: 2100000, guid: a00068a12b8caf045bcda13724ff9467, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: core_Material
+    second: {fileID: 2100000, guid: 4015e5ea6d1b3244faad61cb991dd304, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gems_Material
+    second: {fileID: 2100000, guid: 37f659c8e9ac2934c96341b9bb45106f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grip_Base
+    second: {fileID: 2100000, guid: 3bbad49d6b600c94680d939347b50dc0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grip_Bottom
+    second: {fileID: 2100000, guid: 36f19d367230dd9409e36d65bceefb13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grip_tertiary
+    second: {fileID: 2100000, guid: 2dcf5cba75d53904fb6b76d36fb01cf1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wandtop_Material
+    second: {fileID: 2100000, guid: 75748b90d94ba854fa0afd2c871aab61, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
