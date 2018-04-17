@@ -132,15 +132,3 @@ MonoBehaviour:
     settings:
       rotationRange: {x: 0, y: 0}
       scaleRange: {x: 0, y: 0}
-  - gameObject: {fileID: 153888, guid: 6591aa4bc57a0014dbb3c668abd53e63, type: 2}
-    settings:
-      rotationRange: {x: 0, y: 0}
-      scaleRange: {x: 0, y: 0}
-  - gameObject: {fileID: 147742, guid: 1b67bfc7de2477f4684859bc18b11aed, type: 2}
-    settings:
-      rotationRange: {x: 0, y: 0}
-      scaleRange: {x: 0, y: 0}
-  - gameObject: {fileID: 118742, guid: 8255044bd5d15e44c827c70ea9b5aead, type: 2}
-    settings:
-      rotationRange: {x: 0, y: 0}
-      scaleRange: {x: 0, y: 0}

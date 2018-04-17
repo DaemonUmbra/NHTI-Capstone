@@ -41,7 +41,6 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
-            manager.SetModel("Default");
             base.OnAbilityRemove();
         }
         protected override void Activate()
