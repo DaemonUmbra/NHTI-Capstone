@@ -341,6 +341,7 @@ public class PlayerController : Photon.MonoBehaviour
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
         rb.constraints = RigidbodyConstraints.None;
+        rig.constraints = RigidbodyConstraints.FreezeRotation;
         rb.AddForce(vel, ForceMode.Impulse);
 
         rb.AddForce(vel * force, ForceMode.Impulse);
