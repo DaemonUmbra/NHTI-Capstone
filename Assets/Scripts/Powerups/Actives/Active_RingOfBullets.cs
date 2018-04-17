@@ -3,18 +3,17 @@ using UnityEngine;
 
 namespace Powerups
 {
-    //TODO: REMOVE RING OF BULLETS
     public class Active_RingOfBullets : ActiveAbility
     {
         // Number of bullets to shoot out
-        private int BulletCount = 40;
+        private int BulletCount = 20;
 
         private PlayerShoot pShoot;
 
         private void Awake()
         {
             // Set name
-            Name = "Ring Of Bullets";
+            _name = "Ring Of Bullets";
             //TODO: Ring of Bullets Icon
             Tier = PowerupTier.OP;
         }
@@ -22,7 +21,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Cooldown = 5f;
-            Debug.Log(Name + " Added");
+            Debug.Log(_name + " Added");
             
             // Call base function
             base.OnAbilityAdd();

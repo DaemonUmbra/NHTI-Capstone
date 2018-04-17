@@ -13,7 +13,7 @@ namespace Powerups {
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            Name = "Nova";
+            _name = "Nova";
             //TODO: Nova Icon
             Tier = PowerupTier.Rare;
         }

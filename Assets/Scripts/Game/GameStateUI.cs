@@ -7,9 +7,8 @@ using UnityEngine.UI;
 public class GameStateUI : MonoBehaviour {
 
     #region Private Fields
-    GameManager manager;
     [SerializeField]
-    Canvas playerUI;
+    GameManager manager;
     
     // Text fields
     [SerializeField]
@@ -31,23 +30,17 @@ public class GameStateUI : MonoBehaviour {
     public int fontMax;
     
     //private float refreshRate = 0.1f;
+    
 
-    private void Awake()
-    {
-        manager = GetComponent<GameManager>();
-        
-    }
     private void Start()
     {
-        // Search for the canvas prefab in the scene
-        GameObject goUI = GameObject.Find(playerUI.name);
-        playerUI = goUI.GetComponent<Canvas>();
+        manager = GameObject.Find(manager.name).GetComponent<GameManager>();
     }
 
     private void Update()
     {
         UpdateTimeText();
-        //UpdatePlayerText();
+        UpdatePlayerText();
     }
 
     #region Public Methods
@@ -122,16 +115,13 @@ public class GameStateUI : MonoBehaviour {
     }
     public void UpdateTimeText()
     {
-        txtGameTime.text = TimeToString(manager.gameTime);
+        //txtGameTime.text = TimeToString(manager.gameTime);
         txtStateTime.text = TimeToString(manager.stateTimeLeft);
 
         // Set time text color
         if(manager.stateTimeLeft < 10)
         {
             txtStateTime.color = Color.red;
-
-            // Countdown effect
-            Debug.Log(manager.gameTime % 1);
         }
         else
         {

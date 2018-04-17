@@ -29,7 +29,7 @@ namespace Powerups
         private void Awake()
         {
             Cooldown = 4.5f;
-            Name = "Thunder Wave";
+            _name = "Thunder Wave";
             Icon = Resources.Load<Sprite>("Images/Thunder Wave");
             Tier = PowerupTier.Rare;
         }
@@ -43,7 +43,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             
-            Debug.Log(Name + " Added");
+            Debug.Log(_name + " Added");
 
             //pShoot = GetComponent<PlayerShoot>();
             //if (pShoot)
@@ -53,7 +53,7 @@ namespace Powerups
             //}
 
             audioManager = gameObject.GetComponent<AudioManager>();
-            audioSource = audioManager.GetNewAudioSource(Name);
+            audioSource = audioManager.GetNewAudioSource(_name);
             audioSource.playOnAwake = false;
 
             base.OnAbilityAdd();
@@ -99,7 +99,7 @@ namespace Powerups
         {
             {
                 Debug.Log(photonView.owner.NickName + ": ThunderWave!");
-                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "Shockwave", shockwaveVolume);
+                gameObject.GetComponent<AudioManager>().PlayOneShot(_name, "Shockwave", shockwaveVolume);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Powerups
         /// </summary>
         public override void OnAbilityRemove()
         {
-            audioManager.DeleteAudioSource(Name);
+            audioManager.DeleteAudioSource(_name);
             base.OnAbilityRemove();
         }
 

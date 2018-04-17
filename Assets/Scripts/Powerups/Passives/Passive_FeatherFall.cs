@@ -9,7 +9,7 @@ namespace Powerups
         
         private void Awake()
         {
-            Name = "Feather Fall";
+            _name = "Feather Fall";
             Icon = Resources.Load<Sprite>("Images/Featherfall");
             Tier = PowerupTier.Uncommon;
         }

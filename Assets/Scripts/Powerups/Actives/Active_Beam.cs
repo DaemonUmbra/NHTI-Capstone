@@ -33,15 +33,15 @@ namespace Powerups
         {
             // Set name
             Cooldown = 5f;
-            Name = "Beam";
+            _name = "Beam";
             Icon = Resources.Load<Sprite>("Images/Beam");
             Tier = PowerupTier.Rare;
         }
         public override void OnAbilityAdd()
         {
-            Debug.Log(Name + " Added");
+            Debug.Log(_name + " Added");
             audioManager = gameObject.GetComponent<AudioManager>();
-            audioSource = audioManager.GetNewAudioSource(Name);
+            audioSource = audioManager.GetNewAudioSource(_name);
             audioSource.playOnAwake = false;
             //modelManager = GetComponent<ModelManager>();
             //modelManager.SetModel("Beam");
@@ -129,7 +129,7 @@ namespace Powerups
         public override void OnAbilityRemove()
         {
             // Call base function
-            audioManager.DeleteAudioSource(Name);
+            audioManager.DeleteAudioSource(_name);
             base.OnAbilityRemove();
         }
 
@@ -140,7 +140,7 @@ namespace Powerups
         {
             {
                 Debug.Log(photonView.owner.NickName + ": Beam!");
-                gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "Beam", beamVolume);
+                gameObject.GetComponent<AudioManager>().PlayOneShot(_name, "Beam", beamVolume);
             }
         }
 

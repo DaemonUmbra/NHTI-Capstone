@@ -10,7 +10,7 @@ namespace Powerups
 
         private void Awake()
         {
-            Name = "High Jump";
+            _name = "High Jump";
             Icon = Resources.Load<Sprite>("Images/High Jump");
             Tier = PowerupTier.Uncommon;
         }

@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Powerups;
-
-[RequireComponent(typeof(PlayerStats))]
-public class TestHealthUI : Photon.MonoBehaviour {
-
-    //set in editor
-    public Text healthText;
-
-    GameObject Player;
+public class PlayerUI : Photon.MonoBehaviour {
+    GameObject player;
     private PlayerStats pstats;
     private AbilityManager abilityManager;
     public Slider HealthBar;
-    public Text Health;
+    public Text txtHealth;
     public Text powerups;
     public AbilitySlots[] slotsActive;
     public AbilitySlots[] slotsPassive;
@@ -24,14 +18,23 @@ public class TestHealthUI : Photon.MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        // Find local player
+        foreach(GameObject p in players)
+        {
+            if(p.GetPhotonView().isMine)
+            {
+                player = p;
+            }
+        }
+
+        pstats = player.GetComponent<PlayerStats>();
+        abilityManager = player.GetComponent<AbilityManager>();
+
+
+
         if (photonView.isMine) {
-            Player = photonView.gameObject;
-            pstats = Player.GetComponent<PlayerStats>();
-            abilityManager = Player.GetComponent<AbilityManager>();
-            HealthBar = GameObject.Find("HealthBar").GetComponent<Slider>();
-            GameObject.Find("HealthBar").GetComponent<TempHealthBar>().SetPlayer(gameObject);
-            Health = GameObject.Find("HealthBar").transform.Find("Health").GetComponent<Text>();
-            powerups = GameObject.Find("Powerups").GetComponent<Text>();
             for (int i = 0; i < 6; i++)
             {
                 string slotName = "Active_" + i;
@@ -53,16 +56,14 @@ public class TestHealthUI : Photon.MonoBehaviour {
     {
         if (photonView.isMine)
         {
-            HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
-            healthText.text = pstats.CurrentHp.ToString();
-            Health.text = pstats.CurrentHp.ToString();
+            HealthBar.value = (pstats.GetComponent<PlayerStats>().CurrentHp / pstats.GetComponent<PlayerStats>().MaxHp);
+            txtHealth.text = pstats.CurrentHp.ToString();
             powerups.text = "";
-            List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
-            foreach (var power in abilityNames)
+            
+            foreach (BaseAbility ab in abilityManager.AbilityList.Values)
             {
-                powerups.text += power + "\n";
+                powerups.text += ab.AbilityName + "\n";
             }
-
         }
         UpdatePowerups();
     }
@@ -74,12 +75,14 @@ public class TestHealthUI : Photon.MonoBehaviour {
         for(int i = 0; i < actives.Count; ++i)
         {
             slotsActive[i].Icon.sprite = actives[i].Icon;
+            slotsActive[i].taken = true;
         }
 
         List<PassiveAbility> passives = abilityManager.PassiveAbilities;
         for (int i = 0; i < passives.Count; ++i)
         {
             slotsPassive[i].Icon.sprite = passives[i].Icon;
+            slotsPassive[i].taken = true;
         }
     }
 
@@ -88,10 +91,12 @@ public class TestHealthUI : Photon.MonoBehaviour {
         for (int i = 0; i < 4; i++)
         {
             slotsActive[i].Icon.sprite = defaultActive;
+            slotsActive[i].taken = false;
         }
         for (int i = 0; i < 6; i++)
         {
             slotsPassive[i].Icon.sprite = defaultPassive;
+            slotsPassive[i].taken = false;
         }
     }
 }

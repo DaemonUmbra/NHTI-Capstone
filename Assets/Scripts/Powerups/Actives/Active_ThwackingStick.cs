@@ -9,7 +9,7 @@ namespace Powerups
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            Name = "Thwacking Stick";
+            _name = "Thwacking Stick";
             Icon = Resources.Load<Sprite>("Images/Thwacking Stick");
             Tier = PowerupTier.Uncommon;
         }
@@ -26,7 +26,7 @@ namespace Powerups
 
         public override void OnAbilityAdd()
         {
-            Debug.Log(Name + " added!");
+            Debug.Log(_name + " added!");
             base.OnAbilityAdd();
         }
 

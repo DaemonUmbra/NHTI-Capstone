@@ -10,9 +10,7 @@ public class PlayerShoot : Photon.MonoBehaviour
 
     public GameObject projectile;
 
-    public readonly Vector3 PosOffset = new Vector3(0, 2, 0);
-
-    public readonly Vector3 RotOffset = new Vector3(0, 0, 0);
+    public Transform OffsetPoint;
     
     private void Awake()
     {
@@ -23,7 +21,7 @@ public class PlayerShoot : Photon.MonoBehaviour
     {
         if (photonView.isMine)
         {
-            GameObject _proj = PhotonNetwork.Instantiate(projectile.name, transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
+            GameObject _proj = PhotonNetwork.Instantiate(projectile.name, OffsetPoint.position, OffsetPoint.rotation, 0);
         }
     }
 }

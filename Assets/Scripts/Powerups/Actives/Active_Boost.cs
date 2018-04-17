@@ -20,7 +20,7 @@ namespace Powerups
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
-            Name = "Boost";
+            _name = "Boost";
             Icon = Resources.Load<Sprite>("Images/Boost");
             Tier = PowerupTier.Uncommon;
         }
@@ -28,7 +28,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             Cooldown = 5;
-            Debug.Log(Name + "  Added");
+            Debug.Log(_name + "  Added");
             PS = GetComponent<PlayerStats>();
             Boosted = false;
             // Call base function
@@ -59,9 +59,9 @@ namespace Powerups
         {
             Boosted = true;
             WalkSpeed = PS.WalkSpeed;
-            PS.AddSpeedMultipler(Name, 2);
+            PS.AddSpeedMultipler(_name, 2);
             yield return new WaitForSecondsRealtime(1.0f);
-            PS.RemoveSpeedMultiplier(Name);
+            PS.RemoveSpeedMultiplier(_name);
             yield return new WaitForSecondsRealtime(3.0f);
             Boosted = false;            
         }

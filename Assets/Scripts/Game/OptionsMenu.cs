@@ -14,9 +14,9 @@ public class OptionsMenu : MonoBehaviour {
         size = Names.Length;
 
 
-    if (Input.GetButtonDown("Cancel"))
-    {
-            if (optionsCanvas.active)
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (optionsCanvas.GetActive())
             {
                 optionsCanvas.SetActive(false);
             }
@@ -24,9 +24,9 @@ public class OptionsMenu : MonoBehaviour {
             {
                     optionsCanvas.SetActive(true);
             }
-    }
+        }
 
-        if (optionsCanvas.active)
+        if (optionsCanvas.GetActive())
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

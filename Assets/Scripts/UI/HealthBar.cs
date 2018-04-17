@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(PlayerStats))]
-public class TempHealthBar : Photon.MonoBehaviour {
+public class HealthBar : Photon.MonoBehaviour {
 
-    public Slider HealthBar;
+    public Slider hpSlider;
     public Text Health;
     private GameObject Player;
     private PlayerStats pstats;
@@ -20,7 +19,7 @@ public class TempHealthBar : Photon.MonoBehaviour {
         //Health.text = pstats.CurrentHp.ToString();
         if (Player != null)
         {
-            HealthBar.value = (Player.GetComponent<PlayerStats>().CurrentHp / Player.GetComponent<PlayerStats>().MaxHp);
+            hpSlider.value = (Player.GetComponent<PlayerStats>().CurrentHp / Player.GetComponent<PlayerStats>().MaxHp);
         }
     }
 
