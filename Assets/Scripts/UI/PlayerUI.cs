@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Powerups;
 public class PlayerUI : Photon.MonoBehaviour {
+
     GameObject player;
     private PlayerStats pstats;
     private AbilityManager abilityManager;

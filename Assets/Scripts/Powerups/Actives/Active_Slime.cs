@@ -26,7 +26,7 @@ namespace Powerups
         private void Awake()
         {
             Cooldown = 7;
-            Name = "Slime";
+            _name = "Slime";
             //TODO: Slime Icon
             Tier = PowerupTier.Uncommon;
         }
@@ -36,7 +36,7 @@ namespace Powerups
         public override void OnAbilityAdd()
         {
             
-            Debug.Log(Name + " Added");
+            Debug.Log(_name + " Added");
             
             base.OnAbilityAdd();
         }
