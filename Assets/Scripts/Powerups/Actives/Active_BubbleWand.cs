@@ -15,7 +15,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Bubble Wand";
-            //TODO: Bubble Wand
+            Icon = Resources.Load<Sprite>("Images/Bubble Wand");
             Tier = PowerupTier.Uncommon;
         }
 
