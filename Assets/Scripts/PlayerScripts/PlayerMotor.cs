@@ -36,6 +36,7 @@ public class PlayerMotor : Photon.MonoBehaviour
     {
         transform.position += transform.forward * _input.y * pStats.WalkSpeed * Time.deltaTime;
         transform.position += transform.right * _input.x * pStats.WalkSpeed * Time.deltaTime;
+        
     }
 
     public void SetInput(Vector3 inputVec)
@@ -50,19 +51,8 @@ public class PlayerMotor : Photon.MonoBehaviour
         Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
         rb.velocity = inverseJump;
+        //rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(Vector3.up * pStats.JumpPower * JumpMultiplier);
-    }
-    private void WallCheck()
-    {
-        Vector3 dir = transform.TransformDirection(Vector3.forward);
-        RaycastHit obj;
-        if (Physics.Raycast(transform.position, dir, out obj))
-        {
-            if (obj.transform.gameObject.tag != "Ramp")
-            {
-
-            }
-        }
     }
     private void OnTriggerEnter(Collider other)
     {
