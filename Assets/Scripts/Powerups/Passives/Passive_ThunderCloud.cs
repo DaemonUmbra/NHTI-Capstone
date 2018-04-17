@@ -14,7 +14,7 @@ namespace Powerups
 
         private void Awake()
         {
-            Name = "Thunder Cloud";
+            Name = "Magic Overload";
             //TODO: Thundercloud Icon
             Tier = PowerupTier.Uncommon;
         }
@@ -47,6 +47,10 @@ namespace Powerups
             timer += Time.deltaTime;
             if (timer >= timeLimit)
             {
+                //Take damage if player doesn't get rid of powerup in time
+                PlayerStats ps = gameObject.GetComponent<PlayerStats>();
+                ps.TakeDamage(20.0f);
+
                 OnAbilityRemove();
             }
 
