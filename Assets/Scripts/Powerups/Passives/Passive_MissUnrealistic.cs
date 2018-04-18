@@ -33,7 +33,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Miss Unrealistic";
-            Icon = Resources.Load<Sprite>("Images/MissUnrealistic");
+            Icon = Resources.Load<Sprite>("Images/Miss Unrealistic");
             Tier = PowerupTier.Rare; //TODO: Refine this later
         }
         public override void OnAbilityAdd()

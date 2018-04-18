@@ -15,7 +15,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Magic Overload";
-            //TODO: Thundercloud Icon
+            Icon = Resources.Load<Sprite>("Magic Overload");
             Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()

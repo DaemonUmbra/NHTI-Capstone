@@ -15,7 +15,7 @@ namespace Powerups {
         private void Awake()
         {
             Name = "Nova";
-            //TODO: Nova Icon
+            Icon = Resources.Load<Sprite>("Images/Nova");
             Tier = PowerupTier.Rare;
         }
 
