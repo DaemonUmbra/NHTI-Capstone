@@ -30,7 +30,6 @@ GameObject:
   - component: {fileID: 114494515097403336}
   - component: {fileID: 114428692104897924}
   - component: {fileID: 114860975946726128}
-  - component: {fileID: 114390535131941998}
   - component: {fileID: 114462636117639536}
   - component: {fileID: 114532516218664254}
   - component: {fileID: 114409680166148850}
@@ -296,21 +295,6 @@ MonoBehaviour:
   unique: 1
   Icon: {fileID: 21300000, guid: 528163ce04b30c2469bee10e273458bc, type: 3}
   maxSpeed: 5
---- !u!114 &114390535131941998
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1268865882483258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92b289315b624a8468869f5172236186, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: New Ability
-  active: 0
-  unique: 1
-  Icon: {fileID: 0}
 --- !u!114 &114409680166148850
 MonoBehaviour:
   m_ObjectHideFlags: 1
