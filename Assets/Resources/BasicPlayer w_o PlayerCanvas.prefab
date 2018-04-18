@@ -2746,8 +2746,6 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114615487829130432}
-  - {fileID: 114575158898530276}
-  - {fileID: 114932071336122592}
   - {fileID: 114838225558233264}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
