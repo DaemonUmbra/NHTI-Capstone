@@ -1720,7 +1720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 114628641683953160}
-  txtHealth: {fileID: 0}
+  txtHealth: {fileID: 114278346998816444}
   powerups: {fileID: 114311587525572906}
   slotsActive: []
   slotsPassive: []
