@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 
 public class FloatingRocks : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 5f;
     public float rateOfFire = -1.0f;
     float nextFire = 1.0f;
     
