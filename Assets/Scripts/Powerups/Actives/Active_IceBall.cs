@@ -38,7 +38,7 @@ namespace Powerups
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Bullet 1", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Iceball", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
             }
             base.Activate();
         }
