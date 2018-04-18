@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
+
 
 public class AnimatorSettings : Photon.MonoBehaviour
 {
 
     Animator anim;
     Animation an;
-    AnimatorControllerLayer[] layers;
+    
 
     // Use this for initialization
     void Start()

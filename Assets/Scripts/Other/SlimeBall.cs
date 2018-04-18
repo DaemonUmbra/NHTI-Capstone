@@ -2,7 +2,7 @@
 
 public class SlimeBall : Photon.MonoBehaviour
 {
-    private float lifetime = 7f;
+    private float lifetime = 5f;
     
     GameObject plr;
     Vector3 direction;
@@ -30,7 +30,7 @@ public class SlimeBall : Photon.MonoBehaviour
             plr = collision.gameObject;
             PlayerController hitController = plr.GetComponent<PlayerController>();
             Vector3 mult = Vector3.one;
-            mult.y = .5f;
+            mult.y = .7f;
             mult.x = mult.z = .3f;
             hitController.ApplyKnockBack(direction, 2, mult);
         }

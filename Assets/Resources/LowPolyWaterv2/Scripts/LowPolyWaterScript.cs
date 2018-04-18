@@ -104,7 +104,7 @@ namespace LPWAsset {
         }
         #endregion
 
-        void CleanUp(bool destroy= false) {
+        void CleanUp(bool destroy = false) {
             // clear all previous objects
             var chunks = GetComponentsInChildren<LPWWaterChunk>();
             for (int i = 0; i < chunks.Length; i++) {

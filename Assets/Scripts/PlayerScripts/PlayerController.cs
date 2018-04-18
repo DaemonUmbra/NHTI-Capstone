@@ -383,7 +383,8 @@ public class PlayerController : Photon.MonoBehaviour
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                if (ter.distance <.2f)
+                
+                if (ter.distance <.78f)
                 {
                     wallDir = 'f';
                     wall = hitObj;
@@ -395,7 +396,8 @@ public class PlayerController : Photon.MonoBehaviour
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                if (ter.distance < .2f)
+                
+                if (ter.distance < .78f)
                 {
                     wallDir = 'b';
                     wall = hitObj;
@@ -407,7 +409,8 @@ public class PlayerController : Photon.MonoBehaviour
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                if (ter.distance < .2f)
+                Debug.Log(ter.distance);
+                if (ter.distance < .78f)
                 {
                     wallDir = 'r';
                     wall = hitObj;
@@ -419,7 +422,7 @@ public class PlayerController : Photon.MonoBehaviour
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                if (ter.distance < .2f)
+                if (ter.distance < .78f)
                 {
                     wallDir = 'l';
                     wall = hitObj;
@@ -453,14 +456,13 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        CrowdControlled = false;
+        
         GameObject hit = collision.gameObject;
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-        CrowdControlled = false;
+        
         OnWall = WallCheck(hit);
-        if (collision.gameObject.layer == groundLayer)
         if (collision.collider.gameObject.layer == groundLayer)
         {
 
@@ -474,6 +476,10 @@ public class PlayerController : Photon.MonoBehaviour
                 GroundCheck();
             }
             //print("Jump Reset");
+        }
+        if (collision.gameObject.tag != "SlimeBall")
+        {
+            CrowdControlled = false;
         }
         
     }
