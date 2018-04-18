@@ -85,4 +85,5 @@ MonoBehaviour:
   - RPC_ChangeGameState
   - RPC_CanRespawn
   - RPC_SetInvulnerable
+  - RPC_UpdateTimeUI
   DisableAutoOpenWizard: 1
