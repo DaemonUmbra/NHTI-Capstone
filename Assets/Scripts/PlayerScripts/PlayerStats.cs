@@ -592,6 +592,13 @@ public class PlayerStats : Photon.MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if(!_dead && !_canRespawn)
+            {
+                _dead = true;
+            }
+        }
         
     }
     [PunRPC] private void RPC_Die(int srcId)
@@ -627,7 +634,6 @@ public class PlayerStats : Photon.MonoBehaviour
                 {
                     BecomeGhost(killer);
                 }
-
             }
         }
     }
