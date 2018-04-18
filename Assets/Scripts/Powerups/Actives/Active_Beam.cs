@@ -107,21 +107,7 @@ namespace Powerups
             {
                 beam = GameObject.Find("Beam");
             }
-            Collider col = beam.GetComponent<Collider>();
-            
-            RaycastHit[] hits = Physics.SphereCastAll(col.bounds.center, (col.bounds.size.x) / 2, Vector3.forward);
-            
-            foreach(RaycastHit hit in hits)
-            {
-                
-                if(hit.transform.tag == "Player" && !hit.transform.gameObject.GetComponent<PhotonView>().isMine)
-                {
-                    PlayerStats stats;
-                    stats = hit.transform.GetComponent<PlayerStats>();
-                    stats.TakeDamage(10, gameObject);
-                }
-            }
-              
+           
             yield return new WaitForSecondsRealtime(4);
            photonView.GetComponent<ModelManager>().RemoveSubModel("Beam");
             
