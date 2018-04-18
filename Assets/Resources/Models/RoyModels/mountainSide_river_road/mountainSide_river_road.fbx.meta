@@ -1,0 +1,384 @@
+fileFormatVersion: 2
+guid: 53f982bf9602fc143928dae6445bb88f
+timeCreated: 1524011563
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: grate
+    100002: grate1
+    100004: grate10
+    100006: grate2
+    100008: grate3
+    100010: grate4
+    100012: grate5
+    100014: grate6
+    100016: grate7
+    100018: grate8
+    100020: grate9
+    100022: //RootNode
+    100024: mountainWall_river_road
+    100026: wallBrick1
+    100028: wallBrick1 1
+    100030: wallBrick10
+    100032: wallBrick10 1
+    100034: wallBrick11
+    100036: wallBrick11 1
+    100038: wallBrick12
+    100040: wallBrick12 1
+    100042: wallBrick15
+    100044: wallBrick15 1
+    100046: wallBrick16
+    100048: wallBrick16 1
+    100050: wallBrick17
+    100052: wallBrick17 1
+    100054: wallBrick18
+    100056: wallBrick18 1
+    100058: wallBrick19
+    100060: wallBrick19 1
+    100062: wallBrick2
+    100064: wallBrick2 1
+    100066: wallBrick20
+    100068: wallBrick20 1
+    100070: wallBrick21
+    100072: wallBrick21 1
+    100074: wallBrick22
+    100076: wallBrick22 1
+    100078: wallBrick23
+    100080: wallBrick23 1
+    100082: wallBrick24
+    100084: wallBrick24 1
+    100086: wallBrick3
+    100088: wallBrick3 1
+    100090: wallBrick4
+    100092: wallBrick4 1
+    100094: wallBrick5
+    100096: wallBrick5 1
+    100098: wallBrick6
+    100100: wallBrick6 1
+    100102: wallBrick7
+    100104: wallBrick7 1
+    100106: wallBrick8
+    100108: wallBrick8 1
+    100110: wallBrick9
+    100112: wallBrick9 1
+    100114: wallBricks1
+    100116: wallBricks2
+    400000: grate
+    400002: grate1
+    400004: grate10
+    400006: grate2
+    400008: grate3
+    400010: grate4
+    400012: grate5
+    400014: grate6
+    400016: grate7
+    400018: grate8
+    400020: grate9
+    400022: //RootNode
+    400024: mountainWall_river_road
+    400026: wallBrick1
+    400028: wallBrick1 1
+    400030: wallBrick10
+    400032: wallBrick10 1
+    400034: wallBrick11
+    400036: wallBrick11 1
+    400038: wallBrick12
+    400040: wallBrick12 1
+    400042: wallBrick15
+    400044: wallBrick15 1
+    400046: wallBrick16
+    400048: wallBrick16 1
+    400050: wallBrick17
+    400052: wallBrick17 1
+    400054: wallBrick18
+    400056: wallBrick18 1
+    400058: wallBrick19
+    400060: wallBrick19 1
+    400062: wallBrick2
+    400064: wallBrick2 1
+    400066: wallBrick20
+    400068: wallBrick20 1
+    400070: wallBrick21
+    400072: wallBrick21 1
+    400074: wallBrick22
+    400076: wallBrick22 1
+    400078: wallBrick23
+    400080: wallBrick23 1
+    400082: wallBrick24
+    400084: wallBrick24 1
+    400086: wallBrick3
+    400088: wallBrick3 1
+    400090: wallBrick4
+    400092: wallBrick4 1
+    400094: wallBrick5
+    400096: wallBrick5 1
+    400098: wallBrick6
+    400100: wallBrick6 1
+    400102: wallBrick7
+    400104: wallBrick7 1
+    400106: wallBrick8
+    400108: wallBrick8 1
+    400110: wallBrick9
+    400112: wallBrick9 1
+    400114: wallBricks1
+    400116: wallBricks2
+    2300000: grate1
+    2300002: grate10
+    2300004: grate2
+    2300006: grate3
+    2300008: grate4
+    2300010: grate5
+    2300012: grate6
+    2300014: grate7
+    2300016: grate8
+    2300018: grate9
+    2300020: mountainWall_river_road
+    2300022: wallBrick1
+    2300024: wallBrick1 1
+    2300026: wallBrick10
+    2300028: wallBrick10 1
+    2300030: wallBrick11
+    2300032: wallBrick11 1
+    2300034: wallBrick12
+    2300036: wallBrick12 1
+    2300038: wallBrick15
+    2300040: wallBrick15 1
+    2300042: wallBrick16
+    2300044: wallBrick16 1
+    2300046: wallBrick17
+    2300048: wallBrick17 1
+    2300050: wallBrick18
+    2300052: wallBrick18 1
+    2300054: wallBrick19
+    2300056: wallBrick19 1
+    2300058: wallBrick2
+    2300060: wallBrick2 1
+    2300062: wallBrick20
+    2300064: wallBrick20 1
+    2300066: wallBrick21
+    2300068: wallBrick21 1
+    2300070: wallBrick22
+    2300072: wallBrick22 1
+    2300074: wallBrick23
+    2300076: wallBrick23 1
+    2300078: wallBrick24
+    2300080: wallBrick24 1
+    2300082: wallBrick3
+    2300084: wallBrick3 1
+    2300086: wallBrick4
+    2300088: wallBrick4 1
+    2300090: wallBrick5
+    2300092: wallBrick5 1
+    2300094: wallBrick6
+    2300096: wallBrick6 1
+    2300098: wallBrick7
+    2300100: wallBrick7 1
+    2300102: wallBrick8
+    2300104: wallBrick8 1
+    2300106: wallBrick9
+    2300108: wallBrick9 1
+    3300000: grate1
+    3300002: grate10
+    3300004: grate2
+    3300006: grate3
+    3300008: grate4
+    3300010: grate5
+    3300012: grate6
+    3300014: grate7
+    3300016: grate8
+    3300018: grate9
+    3300020: mountainWall_river_road
+    3300022: wallBrick1
+    3300024: wallBrick1 1
+    3300026: wallBrick10
+    3300028: wallBrick10 1
+    3300030: wallBrick11
+    3300032: wallBrick11 1
+    3300034: wallBrick12
+    3300036: wallBrick12 1
+    3300038: wallBrick15
+    3300040: wallBrick15 1
+    3300042: wallBrick16
+    3300044: wallBrick16 1
+    3300046: wallBrick17
+    3300048: wallBrick17 1
+    3300050: wallBrick18
+    3300052: wallBrick18 1
+    3300054: wallBrick19
+    3300056: wallBrick19 1
+    3300058: wallBrick2
+    3300060: wallBrick2 1
+    3300062: wallBrick20
+    3300064: wallBrick20 1
+    3300066: wallBrick21
+    3300068: wallBrick21 1
+    3300070: wallBrick22
+    3300072: wallBrick22 1
+    3300074: wallBrick23
+    3300076: wallBrick23 1
+    3300078: wallBrick24
+    3300080: wallBrick24 1
+    3300082: wallBrick3
+    3300084: wallBrick3 1
+    3300086: wallBrick4
+    3300088: wallBrick4 1
+    3300090: wallBrick5
+    3300092: wallBrick5 1
+    3300094: wallBrick6
+    3300096: wallBrick6 1
+    3300098: wallBrick7
+    3300100: wallBrick7 1
+    3300102: wallBrick8
+    3300104: wallBrick8 1
+    3300106: wallBrick9
+    3300108: wallBrick9 1
+    4300000: mountainWall_river_road
+    4300002: grate1
+    4300004: grate2
+    4300006: grate3
+    4300008: grate4
+    4300010: grate5
+    4300012: grate6
+    4300014: grate7
+    4300016: grate8
+    4300018: grate9
+    4300020: grate10
+    4300022: wallBrick1
+    4300024: wallBrick2
+    4300026: wallBrick3
+    4300028: wallBrick4
+    4300030: wallBrick5
+    4300032: wallBrick6
+    4300034: wallBrick7
+    4300036: wallBrick8
+    4300038: wallBrick9
+    4300040: wallBrick10
+    4300042: wallBrick11
+    4300044: wallBrick12
+    4300046: wallBrick15
+    4300048: wallBrick16
+    4300050: wallBrick17
+    4300052: wallBrick18
+    4300054: wallBrick19
+    4300056: wallBrick20
+    4300058: wallBrick21
+    4300060: wallBrick22
+    4300062: wallBrick23
+    4300064: wallBrick24
+    4300066: wallBrick1
+    4300068: wallBrick2
+    4300070: wallBrick3
+    4300072: wallBrick4
+    4300074: wallBrick5
+    4300076: wallBrick6
+    4300078: wallBrick7
+    4300080: wallBrick8
+    4300082: wallBrick9
+    4300084: wallBrick10
+    4300086: wallBrick11
+    4300088: wallBrick12
+    4300090: wallBrick15
+    4300092: wallBrick16
+    4300094: wallBrick17
+    4300096: wallBrick18
+    4300098: wallBrick19
+    4300100: wallBrick20
+    4300102: wallBrick21
+    4300104: wallBrick22
+    4300106: wallBrick23
+    4300108: wallBrick24
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gate_mat
+    second: {fileID: 2100000, guid: 299e891879381944ebe7acc6f8a096b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wallBrick_mat
+    second: {fileID: 2100000, guid: 4e32b3cffece9424bbc7531785cc2975, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall_mat
+    second: {fileID: 2100000, guid: 836e7a202a23fe045859677cc113ad88, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
