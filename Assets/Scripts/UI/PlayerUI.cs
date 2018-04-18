@@ -27,7 +27,7 @@ public class PlayerUI : Photon.PunBehaviour {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         slotsActive = new AbilitySlot[maxActives];
         slotsPassive = new AbilitySlot[maxPassives];
-
+        Debug.Log(players.Length);
         // Find local player
         foreach (GameObject p in players)
         {
