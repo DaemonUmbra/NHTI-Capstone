@@ -120,7 +120,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -310,6 +310,7 @@ MonoBehaviour:
   unique: 1
   Icon: {fileID: 21300000, guid: 75ea06ca32cb95e48869a6683662edbd, type: 3}
   JumpBoost: 2
+  jumpVolume: 1
 --- !u!114 &114909026455152130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,6 +342,7 @@ MonoBehaviour:
   unique: 1
   Icon: {fileID: 21300000, guid: 66e6ba4464c4387478708fe0143d3f51, type: 3}
   Cooldown: 0
+  beamVolume: 1
 --- !u!114 &114967197709090630
 MonoBehaviour:
   m_ObjectHideFlags: 1

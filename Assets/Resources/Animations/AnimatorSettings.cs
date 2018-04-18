@@ -26,22 +26,21 @@ public class AnimatorSettings : Photon.MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S))
         {
             anim.SetBool("IsWalking", true);
-
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                anim.SetBool("IsAttacking", true);
-            }
-            else
-            {
-                anim.SetBool("IsAttacking", false);
-            }
-
         }
         else 
         {
             anim.SetBool("IsWalking", false);
         }
 
-        
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            anim.SetBool("IsAttacking", true);
+        }
+        else
+        {
+            anim.SetBool("IsAttacking", false);
+        }
+
+
     }
 }
