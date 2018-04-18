@@ -6,6 +6,9 @@ public class NovaDummy : Photon.MonoBehaviour
 {
     private List<Transform> Affected = new List<Transform>();
     private Vector3 ScaleStepVector;
+    private AudioSource audioSource;
+    private AudioManager audioManager;
+
     public float ExplosionSize = 15f;
     public float ExplosionTime = 1f;
     public float ScaleStep = 1f;
@@ -15,9 +18,12 @@ public class NovaDummy : Photon.MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        audioManager = gameObject.GetComponent<AudioManager>();
+        audioSource = audioManager.GetNewAudioSource("Nova");
+        audioManager.PlayOneShot("Nova", "NovaExplosion",.5f);
         ScaleStepVector = new Vector3(ScaleStep, ScaleStep, ScaleStep);
         transform.localScale = Vector3.zero;
-        StartCoroutine(Explode(ExplosionSize,ExplosionTime));
+        StartCoroutine(Explode(ExplosionSize));
     }
 
     // Update is called once per frame
@@ -26,7 +32,7 @@ public class NovaDummy : Photon.MonoBehaviour
 
     }
 
-    IEnumerator Explode(float size, float time)
+    IEnumerator Explode(float size)
     {
         bool Exploding = true;
         bool Stage1 = true;
@@ -42,7 +48,8 @@ public class NovaDummy : Photon.MonoBehaviour
                 if (transform.localScale == Vector3.zero)
                 {
                     Affected.Clear();
-                    Destroy(gameObject);
+                    Exploding = false;
+                    StartCoroutine(WaitForSound());
                 }
                 if (transform.localScale.magnitude >= size) { Stage1 = false; }
                 //Shrink
@@ -50,6 +57,16 @@ public class NovaDummy : Photon.MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    IEnumerator WaitForSound()
+    {
+        float StartTime = Time.time;
+        while(Time.time <= StartTime + audioManager.ClipRegistry["NovaExplosion"].length)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
