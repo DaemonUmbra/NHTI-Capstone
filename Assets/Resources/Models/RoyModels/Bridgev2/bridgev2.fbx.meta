@@ -190,6 +190,41 @@ ModelImporter:
     4300064: Rune6
     4300066: bridgeArcUnder1
     4300068: bridgeArcUnder2
+    6400000: bridgeArcUnder1
+    6400002: bridgeArcUnder2
+    6400004: bridgeBase
+    6400006: bridgeBlock1
+    6400008: bridgeBlock1 1
+    6400010: bridgeBlock10
+    6400012: bridgeBlock10 1
+    6400014: bridgeBlock11
+    6400016: bridgeBlock11 1
+    6400018: bridgeBlock12
+    6400020: bridgeBlock12 1
+    6400022: bridgeBlock13
+    6400024: bridgeBlock13 1
+    6400026: bridgeBlock2
+    6400028: bridgeBlock2 1
+    6400030: bridgeBlock3
+    6400032: bridgeBlock3 1
+    6400034: bridgeBlock4
+    6400036: bridgeBlock4 1
+    6400038: bridgeBlock5
+    6400040: bridgeBlock5 1
+    6400042: bridgeBlock6
+    6400044: bridgeBlock6 1
+    6400046: bridgeBlock7
+    6400048: bridgeBlock7 1
+    6400050: bridgeBlock8
+    6400052: bridgeBlock8 1
+    6400054: bridgeBlock9
+    6400056: bridgeBlock9 1
+    6400058: Rune1
+    6400060: Rune2
+    6400062: Rune3
+    6400064: Rune4
+    6400066: Rune5
+    6400068: Rune6
     9500000: //RootNode
   externalObjects:
   - first:
@@ -268,7 +303,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

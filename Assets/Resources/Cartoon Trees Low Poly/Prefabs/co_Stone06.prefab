@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - component: {fileID: 453888}
   - component: {fileID: 20553894}
+  - component: {fileID: 64967650948448790}
   m_Layer: 0
   m_Name: co_Stone06
   m_TagString: Untagged
@@ -281,3 +282,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153888}
   m_IsPrefabParent: 1
+--- !u!64 &64967650948448790
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153888}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300004, guid: cc06530228d6ac0469cd267b43a43ac0, type: 3}
