@@ -7,11 +7,6 @@ namespace Powerups
     {
         private PlayerShoot pShoot;
 
-
-        public readonly Vector3 PosOffset = new Vector3(0, 2, 0);
-
-        public readonly Vector3 RotOffset = new Vector3(0, 0, 0);
-
         private void Awake()
         {
             Name = "Bubble Wand";
@@ -23,7 +18,7 @@ namespace Powerups
         {
 
             Debug.Log(Name + " Added");
-
+            pShoot = GetComponent<PlayerShoot>();
             // Call base function
             base.OnAbilityAdd();
         }
@@ -38,7 +33,7 @@ namespace Powerups
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Bubble", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Bubble", pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation, 0);
             }
             base.Activate();
         }

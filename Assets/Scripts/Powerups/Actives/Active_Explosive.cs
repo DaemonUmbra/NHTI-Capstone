@@ -7,22 +7,19 @@ namespace Powerups {
         private PlayerShoot pShoot;
         private Bomb explosive;
 
-        public readonly Vector3 PosOffset = new Vector3(0, 2, 0);
-
-        public readonly Vector3 RotOffset = new Vector3(0, 0, 0);
-
         private void Awake()
         {
             Name = "Explosion";
             Icon = Resources.Load<Sprite>("Images/Explosive Rounds");
             Tier = PowerupTier.Uncommon;
+            Cooldown = 2f;
         }
 
         public override void OnAbilityAdd()
         {
 
             Debug.Log(Name + " Added");
-
+            pShoot = GetComponent<PlayerShoot>();
             // Call base function
             base.OnAbilityAdd();
         }
@@ -37,7 +34,7 @@ namespace Powerups {
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Bomb", transform.position + PosOffset, Quaternion.LookRotation(transform.rotation.eulerAngles + RotOffset), 0);
+                GameObject _proj = PhotonNetwork.Instantiate("Bomb", pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation, 0);
             }
             base.Activate();
         }
