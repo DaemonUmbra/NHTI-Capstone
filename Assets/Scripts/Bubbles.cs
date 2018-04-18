@@ -15,7 +15,7 @@ public class Bubbles : Projectile
         {
             if(other.gameObject.tag == "Bullet")
             {
-                PhotonNetwork.Destroy(other.gameObject.GetPhotonView());
+                //PhotonNetwork.Destroy(other.gameObject.GetPhotonView());
             }
         }
     }

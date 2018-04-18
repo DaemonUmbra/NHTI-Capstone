@@ -63,8 +63,8 @@ namespace Powerups
                 //Log a warning
                 Debug.LogWarning("No Crown or Sash prefab set, could not apply to model");
             }
-
-            playerStats.AddScaleFactor(Name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
+            if(photonView.isMine)
+                playerStats.AddScaleFactor(Name, new Vector3(1 + xChange, 1 + yChange, 1 + zChange));
 
             //If we have a template
             if (crownOrSashTemplate)

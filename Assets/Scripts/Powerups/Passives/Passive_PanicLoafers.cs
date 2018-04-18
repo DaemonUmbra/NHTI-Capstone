@@ -50,6 +50,7 @@ namespace Powerups
                 {
                     WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
                 }
+                if(photonView.isMine)
                 PS.AddSpeedBoost(Name, 6); 
                 Instances = Instances + 1; // Adds 1 to instances
                 if (Instances == 1)
@@ -77,6 +78,7 @@ namespace Powerups
                 yield return new WaitForSecondsRealtime(2); // Wait for 2 seconds
             }
             Instances = 0;
+            if(photonView.isMine)
             PS.RemoveSpeedBoost(Name); // Set player walkspeed back to normal
         }
     }
