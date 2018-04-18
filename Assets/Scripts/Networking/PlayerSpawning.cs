@@ -42,11 +42,11 @@ public class PlayerSpawning : Photon.PunBehaviour {
     private void MasterLoadedGame()
     {
         PhotonView.RPC("RPC_LoadedGameScene", PhotonTargets.MasterClient, PhotonNetwork.player);
-       // PhotonView.RPC("RPC_LoadGameOthers", PhotonTargets.Others);
+        //PhotonView.RPC("RPC_LoadGameOthers", PhotonTargets.Others);
     }
     private void NonMasterLoadedGame()
     {
-       // PhotonView.RPC("RPC_LoadedGameScene", PhotonTargets.MasterClient, PhotonNetwork.player);
+        //PhotonView.RPC("RPC_LoadedGameScene", PhotonTargets.MasterClient, PhotonNetwork.player);
 
     }
 
@@ -68,6 +68,9 @@ public class PlayerSpawning : Photon.PunBehaviour {
         var spawnPoint = GetRandomSpawnPoint();
         localPlayer = PhotonNetwork.Instantiate("BasicPlayer w_o PlayerCanvas", spawnPoint.position, spawnPoint.rotation, 0);
         Debug.Log(localPlayer.GetPhotonView().owner);
+
+        PlayerUI ui = FindObjectOfType<PlayerUI>();
+        ui.SetupUI();
     }
 
     public static List<GameObject> GetAllObjectsOfTypeInScene<T>()
