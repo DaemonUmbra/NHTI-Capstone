@@ -75,22 +75,30 @@ public class GameStateUI : Photon.MonoBehaviour {
 
         if (currentState == GameState.Preparation)
         {
+            txtGameState.color = Color.blue;
             strState = "Prepare For Battle!";
         }
         else if (currentState == GameState.Brawl)
         {
-            strState = "Fight For Supplies!";
+            txtGameState.color = Color.green;
+            if (manager.gameMode == GameMode.Brawl)
+                strState = "Deathmatch";
+            else
+                strState = "Fight For Supplies!";
         }
         else if (currentState == GameState.Royale)
         {
+            txtGameState.color = Color.yellow;
             strState = "Fight To Survive!";
         }
         else if (currentState == GameState.SuddenDeath)
         {
+            txtGameState.color = Color.red;
             strState = "SUDDEN DEATH!";
         }
         else if (currentState == GameState.GameOver)
         {
+            txtGameState.color = Color.red;
             strState = "Game Over";
         }
 
@@ -121,6 +129,15 @@ public class GameStateUI : Photon.MonoBehaviour {
             float sTime = manager.stateTimeLeft;
 
             txtStateTime.text = TimeToString(sTime);
+
+            if(sTime < 10)
+            {
+                txtStateTime.color = Color.red;
+            }
+            else
+            {
+                txtStateTime.color = Color.black;
+            }
         }
     }
     public void UpdatePlayerText()

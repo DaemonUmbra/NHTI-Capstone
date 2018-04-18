@@ -5,8 +5,8 @@ public class PlayerShoot : Photon.MonoBehaviour
 {
     // Shooting delegate
     public delegate void Shoot();
-
     public Shoot shoot;
+
     Camera cam;
 
     public GameObject projectile;

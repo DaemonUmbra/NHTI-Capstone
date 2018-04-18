@@ -16,11 +16,11 @@ namespace Powerups
             Name = "Ring Of Bullets";
             //TODO: Ring of Bullets Icon
             Tier = PowerupTier.OP;
+            Cooldown = 5f;
         }
         // Called when ability is added to player
         public override void OnAbilityAdd()
         {
-            Cooldown = 5f;
             Debug.Log(Name + " Added");
             
             // Call base function
@@ -44,7 +44,11 @@ namespace Powerups
         protected override void Activate()
         {
             base.Activate();
-
+            photonView.RPC("RPC_ActivateRing", PhotonTargets.All);
+        }
+        [PunRPC]
+        private void RPC_ActivateRing()
+        {
             if (photonView.isMine)
             {
                 Debug.Log("Trying to Shoot a Ring!");
@@ -65,7 +69,7 @@ namespace Powerups
                     bullets.Add(b);
                 }
             }
-
+            
         }
     }
 }
