@@ -63,7 +63,7 @@ namespace Powerups
             Vector3 mp = Input.mousePosition;
             Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
             Camera cam = transform.GetComponent<CameraController>().cam;
-            GameObject _slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + Vector3.forward, Quaternion.identity, 0);
+            GameObject _slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + ((transform.forward + transform.up)* 2), Quaternion.identity, 0);
             _slime.transform.LookAt(mouseLocation);
 
             base.Activate();

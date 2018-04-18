@@ -13,7 +13,7 @@ public class SlimeBall : Photon.MonoBehaviour
         //Destroy(gameObject, lifetime);
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
 
-        rb.velocity = transform.forward * force;
+        //rb.velocity = transform.forward * force;
     }
 
     // Update is called once per frame
