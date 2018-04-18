@@ -15,7 +15,7 @@ public class AnimatorSettings : Photon.MonoBehaviour
     {
         if (photonView.isMine)
         {
-            anim = GetComponentInChildren<Animator>();
+            anim = GetComponent<Animator>();
         }
 
     }
