@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 53f982bf9602fc143928dae6445bb88f
+timeCreated: 1524011563
+licenseType: Pro
+=======
 guid: 683287ee51531ba459c31491be6dd199
 timeCreated: 1524011525
 licenseType: Free
+>>>>>>> cf3f18611bc028b0f5b126c54f3adc821dd00e0a
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -294,17 +300,29 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: gate_mat
+<<<<<<< HEAD
+    second: {fileID: 2100000, guid: 299e891879381944ebe7acc6f8a096b9, type: 2}
+=======
     second: {fileID: 2100000, guid: 3555a673c840a8a449bf8926994372b6, type: 2}
+>>>>>>> cf3f18611bc028b0f5b126c54f3adc821dd00e0a
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: wallBrick_mat
+<<<<<<< HEAD
+    second: {fileID: 2100000, guid: 4e32b3cffece9424bbc7531785cc2975, type: 2}
+=======
     second: {fileID: 2100000, guid: 8e79222ed78970f4c90c57221b0a7d64, type: 2}
+>>>>>>> cf3f18611bc028b0f5b126c54f3adc821dd00e0a
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: wall_mat
+<<<<<<< HEAD
+    second: {fileID: 2100000, guid: 836e7a202a23fe045859677cc113ad88, type: 2}
+=======
     second: {fileID: 2100000, guid: a0b9a93453b032e4da4126eaaba20c94, type: 2}
+>>>>>>> cf3f18611bc028b0f5b126c54f3adc821dd00e0a
   materials:
     importMaterials: 1
     materialName: 0

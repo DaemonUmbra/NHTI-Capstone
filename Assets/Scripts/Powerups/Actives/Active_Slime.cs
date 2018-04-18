@@ -16,9 +16,11 @@ namespace Powerups
 {
     public class Active_Slime : ActiveAbility
     {
+
         private float CDstart;
         private bool onCooldown = false, Active = false;
         private PlayerShoot pShoot;
+        private float force = 30f;
         private float offset = 2, duration = 7f;
 
         // Awake is called when the script instance is being loaded
@@ -63,8 +65,11 @@ namespace Powerups
             Vector3 mp = Input.mousePosition;
             Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
             Camera cam = transform.GetComponent<CameraController>().cam;
-            GameObject _slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + ((transform.forward + transform.up)* 2), Quaternion.identity, 0);
+            GameObject _slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + (transform.up * 2) + (transform.forward * 3), Quaternion.identity, 0);
             _slime.transform.LookAt(mouseLocation);
+            Rigidbody rb = _slime.GetComponent<Rigidbody>();
+
+            rb.velocity = -_slime.transform.forward * force;
 
             base.Activate();
         }

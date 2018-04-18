@@ -3,17 +3,15 @@
 public class SlimeBall : Photon.MonoBehaviour
 {
     private float lifetime = 7f;
-    private float force = 10f;
+    
     GameObject plr;
     Vector3 direction;
 
     // Use this for initialization
     private void Start()
     {
-        //Destroy(gameObject, lifetime);
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-
-        //rb.velocity = transform.forward * force;
+        Destroy(gameObject, lifetime);
+        
     }
 
     // Update is called once per frame
@@ -32,10 +30,9 @@ public class SlimeBall : Photon.MonoBehaviour
             plr = collision.gameObject;
             PlayerController hitController = plr.GetComponent<PlayerController>();
             Vector3 mult = Vector3.one;
-            mult.y = 1;
+            mult.y = .5f;
             mult.x = mult.z = .3f;
             hitController.ApplyKnockBack(direction, 2, mult);
-            //hitController.ApplyKnockBack(direction, 4, mult);
         }
     }
 }
