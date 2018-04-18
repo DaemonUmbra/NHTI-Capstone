@@ -154,7 +154,10 @@ public class GameManager : Photon.PunBehaviour {
     public void UpdateGameTime()
     {
         // Update game time
-        gameTime = Time.time - startTime;
+        if(PhotonNetwork.isMasterClient)
+        {
+            gameTime = Time.time - startTime;
+        }
     }
 
     private void ToggleInvulnerability(bool inv)

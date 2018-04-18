@@ -191,7 +191,7 @@ public class PlayerController : Photon.MonoBehaviour
         // Check for jump
         if (Input.GetButtonDown("Jump"))
         {
-            photonView.RPC("TryJump", PhotonTargets.All);
+            TryJump();
         }
         // Check for shooting
         if (Input.GetButtonDown("Fire1"))
@@ -320,8 +320,8 @@ public class PlayerController : Photon.MonoBehaviour
     private void TryJump()
     {
         //Debug.Log("tryjump! " + maxJumpCount);
-        rig.constraints = RigidbodyConstraints.None;
-        rig.constraints = RigidbodyConstraints.FreezeRotation;
+        //rig.constraints = RigidbodyConstraints.None;
+        //rig.constraints = RigidbodyConstraints.FreezeRotation;
         onRamp = false;
         if (jumpCount < maxJumpCount)
         {
