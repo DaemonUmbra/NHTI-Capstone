@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class GameStateUI : MonoBehaviour {
+public class GameStateUI : Photon.MonoBehaviour {
 
     #region Private Fields
     [SerializeField]
@@ -116,17 +116,11 @@ public class GameStateUI : MonoBehaviour {
     }
     public void UpdateTimeText()
     {
-        float sTime = manager.stateTimeLeft;
-        txtStateTime.text = TimeToString(sTime);
+        if (PhotonNetwork.isMasterClient)
+        {
+            float sTime = manager.stateTimeLeft;
 
-        // Set time text color
-        if(manager.stateTimeLeft < 10)
-        {
-            txtStateTime.color = Color.red;
-        }
-        else
-        {
-            txtStateTime.color = Color.black;
+            photonView.RPC("RPC_UpdateTimeUI", PhotonTargets.All, sTime);
         }
     }
     public void UpdatePlayerText()
@@ -139,6 +133,21 @@ public class GameStateUI : MonoBehaviour {
     }
     #endregion
 
+    [PunRPC]
+    private void RPC_UpdateTimeUI(float time)
+    {
+        txtStateTime.text = TimeToString(time);
+
+        // Set time text color
+        if (manager.stateTimeLeft < 10)
+        {
+            txtStateTime.color = Color.red;
+        }
+        else
+        {
+            txtStateTime.color = Color.black;
+        }
+    }
 
 
     /*

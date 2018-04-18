@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Bomb : Projectile
 {
-    private new void Awake()
-    {
-        base.Awake();
-    }
-
     protected override void onPlayerHit(Collider hitPlayer)
     {
         GameObject hit = hitPlayer.gameObject;
@@ -42,7 +37,6 @@ public class Bomb : Projectile
                 }
 
                 PhotonNetwork.Destroy(photonView);
-                PhotonNetwork.Destroy(gameObject);
             }
         }
     }
