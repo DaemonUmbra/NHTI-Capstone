@@ -102,6 +102,8 @@ public class GameManager : Photon.PunBehaviour {
         }
     }
 
+  
+
     // Update is called once per frame
     void Update () {
 
@@ -182,7 +184,7 @@ public class GameManager : Photon.PunBehaviour {
     // Change the current game state
     public void ChangeGameState(GameState newState)
     {
-        gameState = (GameState)newState;
+        gameState = newState;
         stateStartTime = Time.time;
 
         if(gameState == GameState.Preparation)

@@ -68,9 +68,15 @@ public class PlayerSpawning : Photon.PunBehaviour {
         var spawnPoint = GetRandomSpawnPoint();
         localPlayer = PhotonNetwork.Instantiate("BasicPlayer w_o PlayerCanvas", spawnPoint.position, spawnPoint.rotation, 0);
         Debug.Log(localPlayer.GetPhotonView().owner);
-
+        
+        // Setup UI
         PlayerUI ui = FindObjectOfType<PlayerUI>();
         ui.SetupUI();
+
+        // HACK
+        PlayerStats ps = localPlayer.GetComponent<PlayerStats>();
+        ps.Invulnerable = true;
+        ps.CanRespawn = true;
     }
 
     public static List<GameObject> GetAllObjectsOfTypeInScene<T>()
