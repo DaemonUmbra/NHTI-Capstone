@@ -120,7 +120,7 @@ public class GameStateUI : Photon.MonoBehaviour {
         {
             float sTime = manager.stateTimeLeft;
 
-            photonView.RPC("RPC_UpdateTimeUI", PhotonTargets.All, sTime);
+            txtStateTime.text = TimeToString(sTime);
         }
     }
     public void UpdatePlayerText()
@@ -133,21 +133,7 @@ public class GameStateUI : Photon.MonoBehaviour {
     }
     #endregion
 
-    [PunRPC]
-    private void RPC_UpdateTimeUI(float time)
-    {
-        txtStateTime.text = TimeToString(time);
-
-        // Set time text color
-        if (manager.stateTimeLeft < 10)
-        {
-            txtStateTime.color = Color.red;
-        }
-        else
-        {
-            txtStateTime.color = Color.black;
-        }
-    }
+    
 
 
     /*
