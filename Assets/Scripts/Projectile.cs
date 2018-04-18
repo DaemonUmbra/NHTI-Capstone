@@ -12,6 +12,8 @@ public class Projectile : Photon.MonoBehaviour
     protected GameObject _shooter;
 
     protected PlayerStats shooterStats;
+    protected PlayerShoot pShoot;
+    
 
     //[SerializeField]
     //protected ProjectileType type;
@@ -30,6 +32,8 @@ public class Projectile : Photon.MonoBehaviour
         GetShooter();
         Shoot();
         onHitEffects = new List<Effect>();
+
+        rb = GetComponent<Rigidbody>();
     }
 
     public void Update()
@@ -62,10 +66,11 @@ public class Projectile : Photon.MonoBehaviour
     private void SetShooter(GameObject shooter)
     {
         _shooter = shooter;
-        //HACK: Fixes mismatched rotation, but not correctly
-        transform.localRotation = _shooter.transform.rotation;
-        Physics.IgnoreCollision(_shooter.transform.Find("Player Model").GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
         shooterStats = _shooter.GetComponent<PlayerStats>();
+        pShoot = _shooter.GetComponent<PlayerShoot>();
+        //Debug.Log("Offset Rotation: " + pShoot.OffsetPoint.rotation.eulerAngles);
+
         onHitEffects = shooterStats.OnHitEffects;
     }
 
@@ -87,10 +92,12 @@ public class Projectile : Photon.MonoBehaviour
         // Set the start time of the bullet
         startTime = Time.time;
 
-        // Get rigidbody reference
-        rb = gameObject.GetComponent<Rigidbody>();
-
+        Debug.Log(_shooter);
+        pShoot = _shooter.GetComponent<PlayerShoot>();
+        transform.rotation = pShoot.OffsetPoint.rotation;
         // Apply velocity
+        rb = GetComponent<Rigidbody>();
+        if(rb)
         rb.velocity = transform.forward * speed;
     }
 

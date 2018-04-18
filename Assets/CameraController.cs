@@ -10,6 +10,8 @@ public class CameraController : Photon.MonoBehaviour {
     public Vector3 camOffset;
     public Quaternion camRotation;
 
+    Transform following;
+
 	// Use this for initialization
 	void Awake () {
 		// Load camera prefab
@@ -17,7 +19,7 @@ public class CameraController : Photon.MonoBehaviour {
         {
             cam = Instantiate(camPrefab);
         }
-        
+        FollowTransform(transform);
 	}
 	
 	// Update is called once per frame
@@ -25,13 +27,17 @@ public class CameraController : Photon.MonoBehaviour {
         if (cam)
         {
             // Follow player
-            cam.transform.position = transform.position
-                + transform.right * camOffset.x
-                + transform.up * camOffset.y
-                - transform.forward * camOffset.z;
+            cam.transform.position = following.position
+                + following.right * camOffset.x
+                + following.up * camOffset.y
+                - following.forward * camOffset.z;
             // Rotate cam
             cam.transform.rotation = camRotation;
         }
-        
 	}
+
+    public void FollowTransform(Transform follow)
+    {
+        following = follow;
+    }
 }

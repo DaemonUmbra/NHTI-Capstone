@@ -775,7 +775,6 @@ GameObject:
   - component: {fileID: 114669670588167690}
   - component: {fileID: 114838225558233264}
   - component: {fileID: 95032052263857242}
-  - component: {fileID: 114822574403759132}
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
@@ -2422,7 +2421,7 @@ MonoBehaviour:
   InvertY: 0
   hLookSpeed: 50
   vLookSpeed: 50
-  maxVerticalLook: 80
+  maxVerticalLook: 45
 --- !u!114 &114123109819469288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2436,6 +2435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1930332314063190, guid: d216057aafb3ae14c8db7f20c67f516f, type: 2}
   OffsetPoint: {fileID: 4411293768615640}
+  AimPoint: {fileID: 0}
 --- !u!114 &114275901328029248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2633,7 +2633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPrefab: {fileID: 20262033296123736, guid: 5b8d4ef291dd1ed4bb348b4610955427, type: 2}
   cam: {fileID: 0}
-  camOffset: {x: 1, y: 3, z: 3}
+  camOffset: {x: 1, y: 3, z: 1.75}
   camRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114669762924275862
 MonoBehaviour:
@@ -2669,34 +2669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bc7dc0903378147b63e80ce4f48806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114822574403759132
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1591509329833866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7fdff886d5fa544a3baba40f5e60e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsWalking
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsAttacking
-  - Type: 4
-    SynchronizeType: 1
-    Name: IsIdle
-  m_SynchronizeLayers:
-  - SynchronizeType: 1
-    LayerIndex: 0
-  - SynchronizeType: 1
-    LayerIndex: 1
 --- !u!114 &114838225558233264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2776,7 +2748,7 @@ MonoBehaviour:
   - {fileID: 114615487829130432}
   - {fileID: 114575158898530276}
   - {fileID: 114932071336122592}
-  - {fileID: 114822574403759132}
+  - {fileID: 114838225558233264}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

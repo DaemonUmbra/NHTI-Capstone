@@ -8,13 +8,14 @@ namespace Powerups {
     {
         private AbilityManager AbilityManager;
         private GameObject Explosion;
+        private AudioSource audioSource;
 
 
         // Awake is called when the script instance is being loaded
         private void Awake()
         {
             Name = "Nova";
-            //TODO: Nova Icon
+            Icon = Resources.Load<Sprite>("Images/Nova");
             Tier = PowerupTier.Rare;
         }
 

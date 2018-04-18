@@ -8,6 +8,20 @@ using System.IO;
 public partial class AudioManager : Photon.MonoBehaviour
 {
     public Dictionary<string, AudioSource> AudioSources { get; private set; }
+
+    public Dictionary<string, AudioClip> ClipRegistry
+    {
+        get
+        {
+            return clipRegistry;
+        }
+
+        private set
+        {
+            clipRegistry = value;
+        }
+    }
+
     public const float defaultVolume = 0.5f;
 
     //HACK: Wasteful in terms of memory, every player object has an instance of every sound
@@ -16,23 +30,25 @@ public partial class AudioManager : Photon.MonoBehaviour
     // Awake is called when the script instance is being loaded
     private void Awake()
     {
+        AudioSources = new Dictionary<string, AudioSource>();
         LoadClips();
     }
 
     private void LoadClips()
     {
-        clipRegistry.Add("NYEH!", Resources.Load<AudioClip>("Sounds/NYEH"));
-        clipRegistry.Add("NYEH!2", Resources.Load<AudioClip>("Sounds/NYEH2"));
-        clipRegistry.Add("Blink", Resources.Load<AudioClip>("Sounds/blink"));
-        clipRegistry.Add("Shockwave", Resources.Load<AudioClip>("Sounds/ShockwaveTemp"));
-        clipRegistry.Add("Beam", Resources.Load<AudioClip>("Sounds/Beam4Sec"));
-        clipRegistry.Add("Jump", Resources.Load<AudioClip>("Sounds/HighJump"));
+        ClipRegistry.Add("NYEH!", Resources.Load<AudioClip>("Sounds/NYEH"));
+        ClipRegistry.Add("NYEH!2", Resources.Load<AudioClip>("Sounds/NYEH2"));
+        ClipRegistry.Add("Blink", Resources.Load<AudioClip>("Sounds/blink"));
+        ClipRegistry.Add("Shockwave", Resources.Load<AudioClip>("Sounds/ShockwaveTemp"));
+        ClipRegistry.Add("Beam", Resources.Load<AudioClip>("Sounds/Beam4Sec"));
+        ClipRegistry.Add("Jump", Resources.Load<AudioClip>("Sounds/HighJump"));
+        ClipRegistry.Add("NovaExplosion", Resources.Load<AudioClip>("Sounds/Grenade"));
     }
 
     // Use this for initialization
     void Start()
     {
-        AudioSources = new Dictionary<string, AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -110,7 +126,7 @@ public partial class AudioManager : Photon.MonoBehaviour
     {
         try
         {
-            GetExistingAudioSource(name).clip = clipRegistry[clipName];
+            GetExistingAudioSource(name).clip = ClipRegistry[clipName];
         }
         catch (Exception ex)
         {
@@ -173,7 +189,7 @@ public partial class AudioManager : Photon.MonoBehaviour
     {
         try
         {
-            GetExistingAudioSource(name).PlayOneShot(clipRegistry[clipName], volume);
+            GetExistingAudioSource(name).PlayOneShot(ClipRegistry[clipName], volume);
         }
         catch (Exception ex)
         {

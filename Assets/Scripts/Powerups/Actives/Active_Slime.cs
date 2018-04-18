@@ -28,7 +28,9 @@ namespace Powerups
         {
             Name = "Slime";
             //TODO: Slime Icon
+            Icon = Resources.Load<Sprite>("Images/Slime");
             Tier = PowerupTier.Uncommon;
+
         }
 
 
@@ -69,7 +71,7 @@ namespace Powerups
             _slime.transform.LookAt(mouseLocation);
             Rigidbody rb = _slime.GetComponent<Rigidbody>();
 
-            rb.velocity = -_slime.transform.forward * force;
+            rb.velocity = (-_slime.transform.forward + (_slime.transform.up / 4)) * force;
 
             base.Activate();
         }

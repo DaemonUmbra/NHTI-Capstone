@@ -150,11 +150,62 @@ public class GameManager : Photon.PunBehaviour {
         gameTime += Time.deltaTime;
     }
 
-    
+    private void ToggleInvulnerability(bool inv)
+    {
+        PlayerStats[] players = FindObjectsOfType<PlayerStats>();
+
+        foreach(PlayerStats ps in players)
+        {
+            ps.Invulnerable = inv;
+        }
+    }
+
+    private void ToggleRespawn(bool canRespawn)
+    {
+        PlayerStats[] players = FindObjectsOfType<PlayerStats>();
+
+        foreach (PlayerStats ps in players)
+        {
+            ps.CanRespawn = canRespawn;
+        }
+    }
+
+    public void RegisterDeath(GameObject deadPlayer, GameObject killer)
+    {
+        playersLeft--;
+    }
+    public void RegisterDeath(GameObject deadPlayer)
+    {
+        playersLeft--;
+    }
     
     // Change the current game state
     public void ChangeGameState(GameState newState)
     {
+        gameState = (GameState)newState;
+        stateStartTime = Time.time;
+
+        if(gameState == GameState.Preparation)
+        {
+            ToggleInvulnerability(true);
+            ToggleRespawn(true);
+        }
+        else if(gameState == GameState.Brawl)
+        {
+            ToggleInvulnerability(false);
+            ToggleRespawn(true);
+        }
+        else if(gameState == GameState.Royale)
+        {
+            ToggleInvulnerability(false);
+            ToggleRespawn(false);
+        }
+        else if(gameState == GameState.SuddenDeath)
+        {
+            ToggleInvulnerability(false);
+            ToggleRespawn(false);
+        }
+
         photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)newState); 
     }
 
@@ -162,12 +213,6 @@ public class GameManager : Photon.PunBehaviour {
     [PunRPC]
     private void RPC_ChangeGameState(byte newState)
     {
-        // Master updates server properties
-        if(PhotonNetwork.isMasterClient)
-        {
-            gameState = (GameState)newState;
-            stateStartTime = Time.time;
-        }
         // Update game state UI
         UI.UpdateStateText();
     }

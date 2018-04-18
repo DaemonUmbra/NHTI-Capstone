@@ -22,7 +22,7 @@ namespace Powerups
         private void Awake()
         {
             Name = "Rearview";
-            //TODO: Rearview Icon
+            Icon = Resources.Load<Sprite>("Images/Rearview");
             Tier = PowerupTier.Uncommon;
         }
         public override void OnAbilityAdd()

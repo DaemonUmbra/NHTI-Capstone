@@ -27,6 +27,9 @@ public class PlayerStats : Photon.MonoBehaviour
     List<KeyValuePair<string, float>> _healthBoosts;
     private float _maxHp;
     private float _currentHp;
+    bool _invulnerable;
+    bool _canRespawn;
+    bool _dead;
 
     // Damage
     [SerializeField]
@@ -39,9 +42,6 @@ public class PlayerStats : Photon.MonoBehaviour
     Vector3 _scaleMod;
     Vector3 _baseScale;
     List<KeyValuePair<string, Vector3>> _scaleFactors;
-
-    private PlayerSpawning pSpawn;
-
     #endregion Class Variables
 
 
@@ -52,6 +52,9 @@ public class PlayerStats : Photon.MonoBehaviour
     public float Damage { get { return _damage; } } //TODO: Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     public float WalkSpeed { get { return _walkSpeed; } } //TODO: Calculate effective walk/movement speed
+    public bool Invulnerable { get { return _invulnerable; } set { photonView.RPC("RPC_SetInvulerable", PhotonTargets.All, value); } }
+    public bool CanRespawn { get { return _canRespawn; } set { photonView.RPC("RPC_CanRespawn", PhotonTargets.All, value); } }
+    public bool Dead { get { return _dead; } }
     #endregion Access Variables
 
 
@@ -371,113 +374,141 @@ public class PlayerStats : Photon.MonoBehaviour
     // Damage RPCs
     [PunRPC] private void RPC_TakeDamage(float amount)
     {
-        // Validate the damage amount
-        if (amount < 0)
+        if (_invulnerable)
         {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
+            Debug.Log("Player is invulnerable");
         }
-        // Reduce hp by amount
-        _currentHp -= amount;
-        // Kill if hp is zero or less
-        if (_currentHp <= 0)
+        else
         {
-            Debug.Log(gameObject.name + " hp <= 0");
-            Die();
+            // Validate the damage amount
+            if (amount < 0)
+            {
+                Debug.LogWarning("Cannot take negative damage.");
+                return;
+            }
+            // Reduce hp by amount
+            _currentHp -= amount;
+            // Kill if hp is zero or less
+            if (_currentHp <= 0)
+            {
+                Debug.Log(gameObject.name + " hp <= 0");
+                Die();
+            }
+            Debug.Log("Player hp: " + CurrentHp);
         }
-        Debug.Log("Player hp: " + CurrentHp);
     }
     [PunRPC] private void RPC_TakeDamage(float amount, int srcViewId)
     {
-        // Find the source gameobject from it's view id
-        PhotonView srcView = PhotonView.Find(srcViewId);
-        GameObject srcObj = null;
-        if (srcView != null)
-            srcObj = srcView.gameObject;
+        if (_invulnerable)
+        {
+            Debug.Log("Player is invulnerable");
+        }
+        else
+        {
+            // Find the source gameobject from it's view id
+            PhotonView srcView = PhotonView.Find(srcViewId);
+            GameObject srcObj = null;
+            if (srcView != null)
+                srcObj = srcView.gameObject;
 
-        // Validate the damage amount
-        if (amount < 0)
-        {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
+            // Validate the damage amount
+            if (amount < 0)
+            {
+                Debug.LogWarning("Cannot take negative damage.");
+                return;
+            }
+            // Reduce hp by amount
+            _currentHp -= amount;
+            // Kill if hp is zero or less
+            if (_currentHp <= 0)
+            {
+                Debug.Log(gameObject.name + " hp <= 0");
+                if (srcObj)
+                    Die(srcObj);
+                else
+                    Die();
+            }
+            Debug.Log("Player hp: " + CurrentHp);
         }
-        // Reduce hp by amount
-        _currentHp -= amount;
-        // Kill if hp is zero or less
-        if (_currentHp <= 0)
-        {
-            Debug.Log(gameObject.name + " hp <= 0");
-            if (srcObj)
-                Die(srcObj);
-            else
-                Die();
-        }
-        Debug.Log("Player hp: " + CurrentHp);
     }
     [PunRPC] private void RPC_TakeDamage(float amount, List<EffectPackage> effects)
     {
-        // Apply effects
-        if (effects != null)
+        if (_invulnerable)
         {
-            // Unpack and add effects to player
-            foreach (EffectPackage ePack in effects)
+            Debug.Log("Player is invulnerable");
+        }
+        else
+        {
+            // Apply effects
+            if (effects != null)
             {
-                Effect eff = ePack.PackedEffect;
-                eff.ApplyEffect(gameObject);
+                // Unpack and add effects to player
+                foreach (EffectPackage ePack in effects)
+                {
+                    Effect eff = ePack.PackedEffect;
+                    eff.ApplyEffect(gameObject);
+                }
             }
+            // Validate the damage amount
+            if (amount < 0)
+            {
+                Debug.LogWarning("Cannot take negative damage.");
+                return;
+            }
+            // Reduce hp by amount
+            _currentHp -= amount;
+            // Kill if hp is zero or less
+            if (_currentHp <= 0)
+            {
+                Debug.Log(gameObject.name + " hp <= 0");
+                Die();
+            }
+            Debug.Log("Player hp: " + CurrentHp);
         }
-        // Validate the damage amount
-        if (amount < 0)
-        {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
-        }
-        // Reduce hp by amount
-        _currentHp -= amount;
-        // Kill if hp is zero or less
-        if (_currentHp <= 0)
-        {
-            Debug.Log(gameObject.name + " hp <= 0");
-            Die();
-        }
-        Debug.Log("Player hp: " + CurrentHp);
     }
     [PunRPC] private void RPC_TakeDamage(float amount, int srcViewId, List<EffectPackage> effects)
     {
-        // Find the source gameobject from it's view id
-        PhotonView srcView = PhotonView.Find(srcViewId);
-        GameObject srcObj = null;
-        if (srcView != null)
-            srcObj = srcView.gameObject;
+        if (_invulnerable)
+        {
+            Debug.Log("Player is invulnerable");
+        }
+        else
+        {
+            // Find the source gameobject from it's view id
+            PhotonView srcView = PhotonView.Find(srcViewId);
+            GameObject srcObj = null;
+            if (srcView != null)
+                srcObj = srcView.gameObject;
 
-        // Apply effects
-        if (effects != null)
-        {
-            // Unpack and add effects to player
-            foreach (EffectPackage ePack in effects)
+            // Apply effects
+            if (effects != null)
             {
-                Effect eff = ePack.PackedEffect;
-                eff.ApplyEffect(gameObject);
+                // Unpack and add effects to player
+                foreach (EffectPackage ePack in effects)
+                {
+                    Effect eff = ePack.PackedEffect;
+                    eff.ApplyEffect(gameObject);
+                }
             }
+            // Validate the damage amount
+            if (amount < 0)
+            {
+                Debug.LogWarning("Cannot take negative damage.");
+                return;
+            }
+            // Reduce hp by amount
+            _currentHp -= amount;
+            // Kill if hp is zero or less
+            if (_currentHp <= 0)
+            {
+                Debug.Log(gameObject.name + " hp <= 0");
+                if (srcObj)
+                    Die(srcObj);
+                else
+                    Die();
+            }
+            Debug.Log("Player hp: " + CurrentHp);
         }
-        // Validate the damage amount
-        if (amount < 0)
-        {
-            Debug.LogWarning("Cannot take negative damage.");
-            return;
-        }
-        // Reduce hp by amount
-        _currentHp -= amount;
-        // Kill if hp is zero or less
-        if (_currentHp <= 0)
-        {
-            Debug.Log(gameObject.name + " hp <= 0");
-            if (srcObj)
-                Die(srcObj);
-            else
-                Die();
-        }
-        Debug.Log("Player hp: " + CurrentHp);
     }
 
     // Reset player stats
@@ -535,15 +566,31 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         Debug.Log(gameObject.name + " has died.");
 
-        // Respawn Player
-        GameObject gameMng = FindObjectOfType<PlayerSpawning>().gameObject;
-        var Mng = gameMng.GetComponent<PlayerSpawning>();
-        Transform respawn = Mng.GetRandomSpawnPoint();
-        gameObject.transform.position = respawn.position;
-        // Reset abilities
-        AbilityManager abilityManager = GetComponent<AbilityManager>();
-        abilityManager.ResetAbilities();
-        _currentHp = _maxHp; // Resets hp
+        if (_canRespawn)
+        {
+            // Respawn Player
+            GameObject gameMng = FindObjectOfType<PlayerSpawning>().gameObject;
+            var Mng = gameMng.GetComponent<PlayerSpawning>();
+            Transform respawn = Mng.GetRandomSpawnPoint();
+            gameObject.transform.position = respawn.position;
+            // Reset abilities
+            AbilityManager abilityManager = GetComponent<AbilityManager>();
+            abilityManager.ResetAbilities();
+            _currentHp = _maxHp; // Resets hp
+        }
+        else
+        {
+            if(!_dead)
+            {
+                _dead = true;
+                if(photonView.isMine)
+                {
+                    BecomeGhost();
+                }
+                
+            }
+        }
+        
     }
     [PunRPC] private void RPC_Die(int srcId)
     {
@@ -558,14 +605,29 @@ public class PlayerStats : Photon.MonoBehaviour
             Debug.Log(gameObject.name + " has died of mysterious causes.");
         }
 
-        // Respawn Player
-        PlayerSpawning Mng = FindObjectOfType<PlayerSpawning>();
-        Transform respawn = Mng.GetRandomSpawnPoint();
-        gameObject.transform.position = respawn.position;
-        // Reset abilities
-        AbilityManager abilityManager = GetComponent<AbilityManager>();
-        abilityManager.ResetAbilities();
-        _currentHp = _maxHp; // Resets hp
+        if (_canRespawn)
+        {
+            // Respawn Player
+            PlayerSpawning Mng = FindObjectOfType<PlayerSpawning>();
+            Transform respawn = Mng.GetRandomSpawnPoint();
+            gameObject.transform.position = respawn.position;
+            // Reset abilities
+            AbilityManager abilityManager = GetComponent<AbilityManager>();
+            abilityManager.ResetAbilities();
+            _currentHp = _maxHp; // Resets hp
+        }
+        else
+        {
+            if (!_dead)
+            {
+                _dead = true;
+                if (photonView.isMine)
+                {
+                    BecomeGhost(killer);
+                }
+
+            }
+        }
     }
 
     // Damage Modifier RPCs
@@ -689,6 +751,16 @@ public class PlayerStats : Photon.MonoBehaviour
         CalcHealth();
     }
 
+    // Set Invulnerability
+    [PunRPC] private void RPC_SetInvulnerable(bool inv)
+    {
+        _invulnerable = inv;
+    }
+    [PunRPC] private void RPC_CanRespawn(bool canSpawn)
+    {
+        _canRespawn = canSpawn;
+    }
+
     #endregion Photon RPCs
 
 
@@ -768,6 +840,24 @@ public class PlayerStats : Photon.MonoBehaviour
         {
             _currentHp = _maxHp;
         }
+    }
+
+    private void BecomeGhost(GameObject killer)
+    {
+        // Register with manager
+        GameManager gm = GetComponent<GameManager>();
+        gm.RegisterDeath(gameObject, killer);
+
+        GetComponent<CameraController>().FollowTransform(killer.transform);
+        GetComponent<Collider>().enabled = false;
+    }
+    private void BecomeGhost()
+    {
+        // Register with manager
+        GameManager gm = GetComponent<GameManager>();
+        gm.RegisterDeath(gameObject);
+
+        GetComponent<Collider>().enabled = false;
     }
     #endregion Private Methods
 }

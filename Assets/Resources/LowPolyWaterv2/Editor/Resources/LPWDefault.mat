@@ -41,7 +41,11 @@ Material:
     m_Floats:
     - _Absorption: 5
     - _BumpScale: 35
+<<<<<<< HEAD
     - _BumpScale_: 22.735851
+=======
+    - _BumpScale_: 35
+>>>>>>> fcd73b8a711d8ef546de4d318880117529037c71
     - _BumpSpeed: 0.2
     - _Cull: 0
     - _Cull_: 2
@@ -57,13 +61,18 @@ Material:
     - _FresPower: 1.5
     - _HQFoam: 0
     - _Height: 0.5
+<<<<<<< HEAD
     - _Height_: 0.32479787
+=======
+    - _Height_: 0.5
+>>>>>>> fcd73b8a711d8ef546de4d318880117529037c71
     - _Length: 4
     - _LightAbs: 0
     - _NormalOffset: 1
     - _Opacity: 0.7
     - _PointLights: 0
     - _RHeight: 0.25
+<<<<<<< HEAD
     - _RHeight_: 0.16239893
     - _RSpeed: 1
     - _RSpeed_: 0.64959574
@@ -71,26 +80,52 @@ Material:
     - _Refraction: 2
     - _Scale: 1
     - _Scale_: 0.64959574
+=======
+    - _RHeight_: 0.25
+    - _RSpeed: 1
+    - _RSpeed_: 1
+    - _Reflection: 1.2
+    - _Refraction: 2
+    - _Scale: 1
+    - _Scale_: 1
+>>>>>>> fcd73b8a711d8ef546de4d318880117529037c71
     - _Shading: 0
     - _Shadow: 0.7
     - _ShoreDistance: 0.5
     - _ShoreIntensity: 1
     - _Specular: 70
     - _Speed: 0.5
+<<<<<<< HEAD
     - _Speed_: 0.32479787
     - _Steepness: 0.2
     - _Stretch: 10
     - _TexSize_: 41.574127
     - _Time_: 0
     - _TransformScale_: 0.64959574
+=======
+    - _Speed_: 0.5
+    - _Steepness: 0.2
+    - _Stretch: 10
+    - _TexSize_: 64
+    - _Time_: 0
+    - _TransformScale_: 1
+>>>>>>> fcd73b8a711d8ef546de4d318880117529037c71
     - _Waves: 2
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 0, g: 0.5, b: 0.7, a: 1}
     - _DeepColor: {r: 0, g: 0.1, b: 0.2, a: 1}
+<<<<<<< HEAD
     - _Direction_: {r: -1, g: -0.00000008742278, b: -0.5196766, a: -0.000000045431573}
     - _FresColor: {r: 0.305, g: 0.371, b: 0.395, a: 1}
     - _ShoreColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.703, g: 0.676, b: 0.438, a: 1}
     - _Sun: {r: 0.39419317, g: 0.7617057, b: 0.5142143, a: 0}
+=======
+    - _Direction_: {r: -1, g: -0.00000008742278, b: -0.8, a: -0.000000069938224}
+    - _FresColor: {r: 0.305, g: 0.371, b: 0.395, a: 1}
+    - _ShoreColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0.703, g: 0.676, b: 0.438, a: 1}
+    - _Sun: {r: 0.5487927, g: 0.77820015, b: 0.3053379, a: 0}
+>>>>>>> fcd73b8a711d8ef546de4d318880117529037c71
     - _SunColor: {r: 1, g: 0.99036515, b: 0.8602941, a: 1}
