@@ -7,16 +7,28 @@ public class PlayerShoot : Photon.MonoBehaviour
     public delegate void Shoot();
 
     public Shoot shoot;
+    Camera cam;
 
     public GameObject projectile;
 
     public Transform OffsetPoint;
+    public Transform AimPoint;
     
     private void Awake()
     {
         shoot += DefaultShoot;
     }
+    private void Start()
+    {
+        cam = GetComponent<CameraController>().cam;
+        AimPoint = Instantiate(OffsetPoint, cam.transform);
+        AimPoint.localPosition = new Vector3(0, 0, 20);
+    }
 
+    private void Update()
+    {
+        OffsetPoint.LookAt(AimPoint);
+    }
     public void DefaultShoot()
     {
         if (photonView.isMine)
