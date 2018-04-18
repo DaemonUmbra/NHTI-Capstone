@@ -20,13 +20,11 @@ public class Ice : Projectile
         if (hitView)
         {
             // Make sure the bullet isn't hitting it's own player
-            if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
+            if (hitPlayer != _shooter && hitStats)
             {
-                // Apply damage to the player
-                //List<Effect> onHits = _shooter.GetComponent<PlayerStats>().OnHitEffects;
                 hitStats.TakeDamage(damage, _shooter, "chill");
                 print("Player hit!");
-                PhotonNetwork.Destroy(photonView);
+                Destroy(gameObject);
             }
         }
 

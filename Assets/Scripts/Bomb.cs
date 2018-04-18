@@ -15,7 +15,7 @@ public class Bomb : Projectile
         if (hitView)
         {
             // Make sure the bullet isn't hitting it's own player
-            if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
+            if (hitPlayer != _shooter && hitStats)
             {
                 // Apply damage to the player
                 hitStats.TakeDamage(damage, _shooter);
@@ -27,16 +27,14 @@ public class Bomb : Projectile
 
                 if(Physics.SphereCast(gameObject.transform.position, 5.0f, transform.forward, out hits, 5))
                 {
-                    if (!hitView)
-                    {
                         PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
                         newHitStats.TakeDamage((damage / 2.0f), _shooter);
-                        PlayerController knockback = hits.transform.gameObject.GetComponent<PlayerController>();
-                        knockback.RPC_KnockBack(Vector3.back, 5.0f, Vector3.one);
-                    }
+                        //PlayerController knockback = hits.transform.gameObject.GetComponent<PlayerController>();
+                        //knockback.RPC_KnockBack(Vector3.back, 5.0f, Vector3.one);
+                    
                 }
 
-                PhotonNetwork.Destroy(photonView);
+                Destroy(gameObject);
             }
         }
     }

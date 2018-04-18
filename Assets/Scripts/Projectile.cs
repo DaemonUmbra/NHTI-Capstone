@@ -29,71 +29,25 @@ public class Projectile : Photon.MonoBehaviour
 
     public void Awake()
     {
-        GetShooter();
-        Shoot();
-        onHitEffects = new List<Effect>();
-
+        //onHitEffects = new List<Effect>();
         rb = GetComponent<Rigidbody>();
-    }
 
-    public void Update()
-    {
-        if (PhotonNetwork.isMasterClient)
-        {
-            if (Time.time >= startTime + lifetime)
-            {
-                PhotonNetwork.Destroy(photonView);
-            }
-        }
-        
+        Destroy(gameObject, lifetime);
     }
+    
 
-    // Find a reference to the shooter
-    private void GetShooter()
+    public void Shoot(GameObject shooter)
     {
-        // Finds tagged player who has the same owner as this bullet
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            if (player.GetPhotonView().owner == photonView.owner)
-            {
-                SetShooter(player);
-                //print("Shooter found: " + player.GetPhotonView().owner);
-            }
-        }
-    }
-    // Set the shooter reference
-    private void SetShooter(GameObject shooter)
-    {
+        // Get shooter info
         _shooter = shooter;
-        Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
-        shooterStats = _shooter.GetComponent<PlayerStats>();
+        shooterStats = shooter.GetComponent<PlayerStats>();
         pShoot = _shooter.GetComponent<PlayerShoot>();
-        //Debug.Log("Offset Rotation: " + pShoot.OffsetPoint.rotation.eulerAngles);
-
-        onHitEffects = shooterStats.OnHitEffects;
-    }
-
-    private void Shoot()
-    {
-        // Set shooterStats if shooter was set in inspector
-        if (_shooter)
-        {
-            if (shooterStats)
-            {
-                damage = shooterStats.Damage;
-            }
-            else
-            {
-                Debug.LogError("No player stats found on shooter.");
-            }
-        }
-
+        Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
+        damage = shooterStats.Damage;
         // Set the start time of the bullet
         startTime = Time.time;
 
         //Debug.Log(_shooter);
-        pShoot = _shooter.GetComponent<PlayerShoot>();
         transform.rotation = pShoot.OffsetPoint.rotation;
         // Apply velocity
         rb = GetComponent<Rigidbody>();
@@ -104,20 +58,18 @@ public class Projectile : Photon.MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (PhotonNetwork.isMasterClient)
+        // Only deal damage on the shooter client
+        if (_shooter.GetPhotonView().isMine)
         {
             if (other.gameObject.tag == "Player")
             {
                 onPlayerHit(other);
             }
-            else
-            {
-                PhotonNetwork.Destroy(photonView);
-            }
         }
-        
-           
-        
+        else
+        {
+            Destroy(gameObject);
+        }        
     }
 
     protected virtual void onPlayerHit(Collider hitPlayer)
@@ -129,13 +81,11 @@ public class Projectile : Photon.MonoBehaviour
         if (hitView)
         {
             // Make sure the bullet isn't hitting it's own player
-            if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
+            if (hitPlayer != _shooter && hitStats)
             {
-                // Apply damage to the player
-                //List<Effect> onHits = _shooter.GetComponent<PlayerStats>().OnHitEffects;
                 hitStats.TakeDamage(damage, _shooter);
                 print("Player hit!");
-                PhotonNetwork.Destroy(photonView);
+                Destroy(gameObject);
             }
         }
        

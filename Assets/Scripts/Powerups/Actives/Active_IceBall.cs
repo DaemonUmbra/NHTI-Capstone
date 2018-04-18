@@ -13,6 +13,7 @@ namespace Powerups
         {
             Name = "Ice Ball";
             Icon = Resources.Load<Sprite>("Images/Ice Ball");
+            iceball = Resources.Load<Ice>("Iceball");
             Tier = PowerupTier.Common;
             Cooldown = 2f;
         }
@@ -35,9 +36,18 @@ namespace Powerups
         {
             if (photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Iceball", pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation, 0);
+                //GameObject _proj = PhotonNetwork.Instantiate("Iceball", pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation, 0);
+                photonView.RPC("RPC_ShootIceball", PhotonTargets.All, pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation.eulerAngles);
             }
             base.Activate();
+        }
+
+        [PunRPC]
+        private void RPC_ShootIceball(Vector3 position, Vector3 rotation)
+        {
+
+            Ice ice = Instantiate(iceball, position, Quaternion.Euler(rotation));
+            ice.Shoot(gameObject);
         }
     }
 }

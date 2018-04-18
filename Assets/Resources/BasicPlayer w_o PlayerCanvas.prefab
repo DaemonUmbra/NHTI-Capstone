@@ -2433,7 +2433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20cff4f1e3b0ca4dbdf6d190d52f97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1930332314063190, guid: d216057aafb3ae14c8db7f20c67f516f, type: 2}
+  projectile: {fileID: 114722332653809624, guid: d216057aafb3ae14c8db7f20c67f516f,
+    type: 2}
   OffsetPoint: {fileID: 4411293768615640}
   AimPoint: {fileID: 0}
 --- !u!114 &114275901328029248

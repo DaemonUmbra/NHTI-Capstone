@@ -9,7 +9,7 @@ public class PlayerShoot : Photon.MonoBehaviour
 
     Camera cam;
 
-    public GameObject projectile;
+    public Projectile projectile;
 
     public Transform OffsetPoint;
     public Transform AimPoint;
@@ -17,11 +17,13 @@ public class PlayerShoot : Photon.MonoBehaviour
     
     private void OnEnable()
     {
-        shoot += DefaultShoot;
+        if(photonView.isMine)
+            shoot += DefaultShoot;
     }
     private void OnDisable()
     {
-        shoot -= DefaultShoot;
+        if (photonView.isMine)
+            shoot -= DefaultShoot;
     }
     private void Start()
     {
@@ -43,9 +45,13 @@ public class PlayerShoot : Photon.MonoBehaviour
     }
     public void DefaultShoot()
     {
-        if (photonView.isMine)
-        {
-            GameObject _proj = PhotonNetwork.Instantiate(projectile.name, OffsetPoint.position, OffsetPoint.rotation, 0);
-        }
+        photonView.RPC("RPC_Shoot", PhotonTargets.All, OffsetPoint.position, OffsetPoint.rotation.eulerAngles);
+    }
+
+    [PunRPC]
+    private void RPC_Shoot(Vector3 position, Vector3 rotation)
+    {
+        Projectile proj = Instantiate(projectile, position, Quaternion.Euler(rotation));
+        proj.Shoot(gameObject);
     }
 }

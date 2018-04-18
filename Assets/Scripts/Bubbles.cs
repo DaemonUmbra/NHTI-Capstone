@@ -6,7 +6,7 @@ public class Bubbles : Projectile
 {
     private new void Awake()
     {
-        speed /= 4;
+        speed /= 5;
         base.Awake();
     }
     protected override void OnTriggerEnter(Collider other)

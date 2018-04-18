@@ -91,4 +91,8 @@ MonoBehaviour:
   - RPC_RegisterKill
   - RPC_RegisterLoss
   - RPC_RegisterWin
+  - RPC_Shoot
+  - RPC_ShootBomb
+  - RPC_ShootFireball
+  - RPC_ShootIceball
   DisableAutoOpenWizard: 1

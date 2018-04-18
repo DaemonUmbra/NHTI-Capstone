@@ -15,13 +15,13 @@ namespace Powerups
         {
             Name = "Fireball";
             Icon = Resources.Load<Sprite>("Images/Fireball");
+            fireball = Resources.Load<Fireball>("Fireball");
             Tier = PowerupTier.Common;
             Cooldown = 2f;
         }
 
         public override void OnAbilityAdd()
         {
-            
             Debug.Log(Name + " Added");
             pShoot = GetComponent<PlayerShoot>();
             // Call base function
@@ -36,15 +36,19 @@ namespace Powerups
 
         protected override void Activate()
         {
-            //fireball = Resources.Load<Projectile_Fireball>("Fireball");
-            // Call base function
-            
-
             if(photonView.isMine)
             {
-                GameObject _proj = PhotonNetwork.Instantiate("Fireball", pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation, 0);
+                photonView.RPC("RPC_ShootFireball", PhotonTargets.All, pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation.eulerAngles);
             }
             base.Activate();
+        }
+
+        [PunRPC]
+        private void RPC_ShootFireball(Vector3 position, Vector3 rotation)
+        {
+
+            Fireball fb = Instantiate(fireball, position, Quaternion.Euler(rotation));
+            fb.Shoot(gameObject);
         }
     }
 }
