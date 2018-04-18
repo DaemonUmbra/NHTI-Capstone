@@ -2669,7 +2669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bc7dc0903378147b63e80ce4f48806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 95032052263857242}
 --- !u!114 &114838225558233264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2746,8 +2746,6 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 114615487829130432}
-  - {fileID: 114575158898530276}
-  - {fileID: 114932071336122592}
   - {fileID: 114838225558233264}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0

@@ -16,7 +16,7 @@ public class Pickup : Photon.PunBehaviour
         //HACK NullReferenceExceptions galore without this check
         if (pv == null)
             return;
-        if (pv.isMine)
+        if (PhotonNetwork.isMasterClient)
         {
             BaseAbility ability = GetComponent<BaseAbility>();
             Debug.Log(ability);

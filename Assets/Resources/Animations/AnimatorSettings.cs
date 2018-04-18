@@ -12,16 +12,18 @@ public class AnimatorSettings : Photon.MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (photonView.isMine)
-        {
-            anim = GetComponent<Animator>();
-        }
+       
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (photonView.isMine)
+        {
+            anim = GetComponent<Animator>();
+        }
+
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S))
         {
             anim.SetBool("IsWalking", true);
