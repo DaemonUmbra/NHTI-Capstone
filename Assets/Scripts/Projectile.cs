@@ -38,7 +38,7 @@ public class Projectile : Photon.MonoBehaviour
 
     public void Update()
     {
-        if (photonView.isMine)
+        if (PhotonNetwork.isMasterClient)
         {
             if (Time.time >= startTime + lifetime)
             {
