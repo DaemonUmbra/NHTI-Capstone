@@ -92,7 +92,7 @@ public class Projectile : Photon.MonoBehaviour
         // Set the start time of the bullet
         startTime = Time.time;
 
-        Debug.Log(_shooter);
+        //Debug.Log(_shooter);
         pShoot = _shooter.GetComponent<PlayerShoot>();
         transform.rotation = pShoot.OffsetPoint.rotation;
         // Apply velocity

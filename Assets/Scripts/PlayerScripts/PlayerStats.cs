@@ -52,7 +52,7 @@ public class PlayerStats : Photon.MonoBehaviour
     public float Damage { get { return _damage; } } //TODO: Calculate effective damage with dmg mods
     public List<Effect> OnHitEffects { get { return _onHitEffects; } }
     public float WalkSpeed { get { return _walkSpeed; } } //TODO: Calculate effective walk/movement speed
-    public bool Invulnerable { get { return _invulnerable; } set { photonView.RPC("RPC_SetInvulerable", PhotonTargets.All, value); } }
+    public bool Invulnerable { get { return _invulnerable; } set { photonView.RPC("RPC_SetInvulnerable", PhotonTargets.All, value); } }
     public bool CanRespawn { get { return _canRespawn; } set { photonView.RPC("RPC_CanRespawn", PhotonTargets.All, value); } }
     public bool Dead { get { return _dead; } }
     #endregion Access Variables
