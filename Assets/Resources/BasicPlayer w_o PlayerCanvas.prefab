@@ -2435,6 +2435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1930332314063190, guid: d216057aafb3ae14c8db7f20c67f516f, type: 2}
   OffsetPoint: {fileID: 4411293768615640}
+  AimPoint: {fileID: 0}
 --- !u!114 &114275901328029248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2747,10 +2748,10 @@ MonoBehaviour:
   - {fileID: 114615487829130432}
   - {fileID: 114575158898530276}
   - {fileID: 114932071336122592}
-  - {fileID: 0}
+  - {fileID: 114838225558233264}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 4
+  instantiationId: 4
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!120 &120508235077153456
