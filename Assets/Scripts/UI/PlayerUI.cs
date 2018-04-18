@@ -61,13 +61,6 @@ public class PlayerUI : Photon.PunBehaviour {
             HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
             //healthText.text = pstats.CurrentHp.ToString();
             txtHealth.text = pstats.CurrentHp.ToString();
-            powerups.text = "";
-            List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
-            foreach (var power in abilityNames)
-            {
-                powerups.text += power + "\n";
-            }
-
             UpdatePowerups();
         }
     }
