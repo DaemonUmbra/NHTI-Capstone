@@ -72,7 +72,7 @@ namespace Powerups
             {
 
 
-                if (hit.rigidbody != null && hit.transform.gameObject.tag == "Player")
+                if (hit.rigidbody != null && hit.transform.gameObject.tag == "Player" && !hit.transform.gameObject.GetComponent<PhotonView>().isMine)
                 {
                     if (hit.transform.gameObject != this.gameObject)
                     {
@@ -85,7 +85,7 @@ namespace Powerups
                         //hit.rigidbody.AddForce(transform.forward * forwardforce);
                         PlayerStats stats;
                         stats = hit.transform.GetComponent<PlayerStats>();
-                        stats.TakeDamage(5, transform.parent.gameObject);
+                        stats.TakeDamage(5, gameObject);
                     }
                 }
 
