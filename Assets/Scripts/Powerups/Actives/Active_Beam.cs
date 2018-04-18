@@ -113,8 +113,8 @@ namespace Powerups
             
             foreach(RaycastHit hit in hits)
             {
-                Debug.Log(hit.transform.gameObject.name);
-                if(!hit.transform.gameObject.GetPhotonView().isMine && hit.transform.tag == "Player")
+                
+                if(hit.transform.tag == "Player" && !hit.transform.gameObject.GetComponent<PhotonView>().isMine)
                 {
                     PlayerStats stats;
                     stats = hit.transform.GetComponent<PlayerStats>();
