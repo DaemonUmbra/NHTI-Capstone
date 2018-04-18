@@ -19,6 +19,7 @@ public class Beam : MonoBehaviour {
         {
             if (other.transform.tag == "Player" && !other.transform.gameObject.GetComponent<PhotonView>().isMine)
             {
+                Debug.Log("hIT WITH BEAM");
                 PlayerStats stats;
                 stats = other.transform.GetComponent<PlayerStats>();
                 stats.TakeDamage(10, gameObject);
