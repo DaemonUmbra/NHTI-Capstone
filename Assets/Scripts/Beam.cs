@@ -21,10 +21,13 @@ public class Beam : MonoBehaviour {
             {
                 Debug.Log("hIT WITH BEAM");
                 PlayerStats stats;
+                
                 stats = other.transform.GetComponent<PlayerStats>();
-                stats.TakeDamage(10, gameObject);
+                stats.TakeDamage(10, transform.parent.gameObject);
             }
             lastHitTime = Time.time;
         }
     }
+
+    
 }
