@@ -72,8 +72,10 @@ namespace Powerups
             {
 
 
-                if (hit.rigidbody != null && hit.transform.gameObject.tag == "Player" && !hit.transform.gameObject.GetComponent<PhotonView>().isMine)
+                if (hit.rigidbody != null && hit.transform.gameObject.tag == "Player")
                 {
+                    if (hit.transform.gameObject != this.gameObject)
+                    {
                         Vector3 hitDir = hit.point;
                         Vector3 forceDir = Quaternion.AngleAxis(0, hitDir) * Vector3.up;
                         hit.rigidbody.AddForce(forceDir * upforce, ForceMode.Impulse);
@@ -84,7 +86,7 @@ namespace Powerups
                         PlayerStats stats;
                         stats = hit.transform.GetComponent<PlayerStats>();
                         stats.TakeDamage(5, gameObject);
-                    
+                    }
                 }
 
             }
