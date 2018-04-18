@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Powerups;
-public class PlayerUI : Photon.MonoBehaviour {
+using UnityEngine.SceneManagement;
+public class PlayerUI : Photon.PunBehaviour {
     
     GameObject player;
     private PlayerStats pstats;
@@ -25,6 +26,8 @@ public class PlayerUI : Photon.MonoBehaviour {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         slotsActive = new AbilitySlot[maxActives];
         slotsPassive = new AbilitySlot[maxPassives];
+
+        Debug.Log("Player count: " + players.Length);
 
         // Find local player
         foreach(GameObject p in players)
@@ -65,7 +68,7 @@ public class PlayerUI : Photon.MonoBehaviour {
 
         UpdatePowerups();
     }
-     
+
 
     public void UpdatePowerups()
     {
