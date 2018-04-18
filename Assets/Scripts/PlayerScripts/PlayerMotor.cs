@@ -48,9 +48,9 @@ public class PlayerMotor : Photon.MonoBehaviour
     {
         yMove = true;
         //Debug.Log("Jump!");
-        Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        //Vector3 inverseJump = new Vector3(rb.velocity.x, 0, rb.velocity.z);
 
-        rb.velocity = inverseJump;
+        //rb.velocity = inverseJump;
         //rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(Vector3.up * pStats.JumpPower * JumpMultiplier);
     }

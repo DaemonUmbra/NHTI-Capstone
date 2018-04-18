@@ -49,22 +49,24 @@ public class Bomb : Projectile
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (PhotonNetwork.isMasterClient)
         {
-            onPlayerHit(other);
-        }
-        if (other.tag == "Environment")
-        {
-            RaycastHit hits;
-
-            if (Physics.SphereCast(gameObject.transform.position, 5.0f, transform.forward, out hits, 5))
+            if (other.gameObject.tag == "Player")
             {
-                PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
-                newHitStats.TakeDamage((damage / 2.0f), _shooter);
+                onPlayerHit(other);
             }
+            if (other.tag == "Environment")
+            {
+                RaycastHit hits;
 
-            PhotonNetwork.Destroy(photonView);
-            PhotonNetwork.Destroy(gameObject);
+                if (Physics.SphereCast(gameObject.transform.position, 5.0f, transform.forward, out hits, 0))
+                {
+                    PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
+                    newHitStats.TakeDamage((damage / 2.0f), _shooter);
+                }
+
+                PhotonNetwork.Destroy(photonView);
+            }
         }
     }
 }

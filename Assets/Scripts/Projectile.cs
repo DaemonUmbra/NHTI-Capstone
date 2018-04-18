@@ -104,7 +104,7 @@ public class Projectile : Photon.MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (photonView.isMine)
+        if (PhotonNetwork.isMasterClient)
         {
             if (other.gameObject.tag == "Player")
             {

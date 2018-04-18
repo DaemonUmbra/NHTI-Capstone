@@ -232,7 +232,7 @@ public class AbilityManager : Photon.MonoBehaviour
         }
         else
         {
-            Debug.LogError("Ability not owned. Unable to remove " + ability.GetName);
+            Debug.LogError("Ability not owned. Unable to remove.");
         }
     }
     [PunRPC] private void RPC_TriggerAbility(int index)
