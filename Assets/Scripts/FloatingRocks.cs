@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[ExecuteInEditMode] coolest shit ever
+//[ExecuteInEditMode] //coolest shit ever
 
 public class FloatingRocks : MonoBehaviour
 {
