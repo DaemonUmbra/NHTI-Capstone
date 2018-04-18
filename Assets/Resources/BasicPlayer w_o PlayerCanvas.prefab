@@ -773,8 +773,9 @@ GameObject:
   - component: {fileID: 114669762924275862}
   - component: {fileID: 114743135251928870}
   - component: {fileID: 114669670588167690}
-  - component: {fileID: 95136446863807138}
   - component: {fileID: 114838225558233264}
+  - component: {fileID: 95032052263857242}
+  - component: {fileID: 114822574403759132}
   m_Layer: 0
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
@@ -2363,7 +2364,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95136446863807138
+--- !u!95 &95032052263857242
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -2668,6 +2669,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bc7dc0903378147b63e80ce4f48806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114822574403759132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591509329833866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7fdff886d5fa544a3baba40f5e60e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsWalking
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsAttacking
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsIdle
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
+  - SynchronizeType: 1
+    LayerIndex: 1
 --- !u!114 &114838225558233264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2747,10 +2776,10 @@ MonoBehaviour:
   - {fileID: 114615487829130432}
   - {fileID: 114575158898530276}
   - {fileID: 114932071336122592}
-  - {fileID: 114838225558233264}
+  - {fileID: 114822574403759132}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 4
+  instantiationId: 4
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!120 &120508235077153456
