@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /*
- * Programmer Assigned: Steven Zachary
+ * Programmer Assigned: Steven Zachary, Brodey Lajoie
  * Power-up: Blink
  * Description: On button press the player teleports forward
  */
@@ -12,9 +12,6 @@ namespace Powerups
     {
         [HideInInspector]
         public PlayerController playercontrol;
-
-        private PlayerShoot pShoot;
-
         public float BlinkDistance = 12; // For debugging purposes. Once this has been determined, will be set to HideInInspector
 
         private AudioManager audioManager;
@@ -30,39 +27,22 @@ namespace Powerups
             Name = "Blink";
             Icon = Resources.Load<Sprite>("Images/Blink");
             Tier = PowerupTier.Rare;
+            Cooldown = 1f;
         }
 
         public override void OnAbilityAdd()
         {
-            Debug.Log(Name + " Added");
-            Cooldown = 3.0f;
-
             playercontrol = GetComponent<PlayerController>();
-
             audioManager = gameObject.GetComponent<AudioManager>();
             audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
 
-
-            //pShoot = GetComponent<PlayerShoot>();
-            //if (pShoot)
-            //{
-
-            //    pShoot.shoot += TryActivate;
-            //}
-            // Call base function
             base.OnAbilityAdd();
         }
 
         public override void OnAbilityRemove()
         {
             audioManager.DeleteAudioSource(Name);
-
-            if (pShoot)
-            {
-                pShoot.shoot -= TryActivate;
-            }
-            pShoot = null;
 
             // Call base function
             base.OnAbilityRemove();
@@ -71,15 +51,13 @@ namespace Powerups
         public override void OnUpdate()
         {
             // Call base function
-            base.OnAbilityAdd();
+            base.OnUpdate();
         }
 
         protected override void Activate()
         {
-            Debug.Log("Blink!");
+            base.Activate();
             // Checks if player is blocked by a wall or player, only allows activate if the raycast returns false
-            if (photonView.isMine)
-            {
                 Vector3 destination = transform.position + transform.forward * BlinkDistance;
                 RaycastHit hit;
                 if (Physics.Linecast(transform.position, destination, out hit))
@@ -105,8 +83,6 @@ namespace Powerups
 
                 //}
                 photonView.RPC("RPC_Activate_Blink", PhotonTargets.All);
-            }
-                base.Activate();
             
         }
 
@@ -115,7 +91,7 @@ namespace Powerups
         protected void RPC_Activate_Blink()
         {
             {
-                Debug.Log(photonView.owner.NickName + ": Blink!");
+                
                 gameObject.GetComponent<AudioManager>().PlayOneShot(Name, "Blink", blinkVolume);
             }
         }
