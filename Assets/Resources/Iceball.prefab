@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114074124897742402}
   - component: {fileID: 114295968751834338}
   m_Layer: 0
-  m_Name: Bullet 1
+  m_Name: Iceball
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,8 +222,8 @@ MonoBehaviour:
   - {fileID: 114010834543265448}
   - {fileID: 114074124897742402}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 10
-  instantiationId: 10
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114074124897742402
