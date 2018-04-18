@@ -296,6 +296,14 @@ public class LobbyManager : Photon.PunBehaviour {
         ChangeState(LobbyState.ROOM);
         base.OnJoinedRoom();
     }
+
+    private void OnDestroy()
+    {
+        if(PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.Destroy(photonView);
+        }
+    }
     #endregion
 }
 
