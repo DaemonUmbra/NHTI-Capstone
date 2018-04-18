@@ -25,10 +25,10 @@ namespace Powerups
         public AudioManager audioManager;
         private AudioSource audioSource;
         private AudioClip thunderWave;
-
+        
         private void Awake()
         {
-            Cooldown = 4.5f;
+            Cooldown = 5f;
             Name = "Thunder Wave";
             Icon = Resources.Load<Sprite>("Images/Thunder Wave");
             Tier = PowerupTier.Rare;
@@ -44,13 +44,6 @@ namespace Powerups
         {
             
             Debug.Log(Name + " Added");
-
-            //pShoot = GetComponent<PlayerShoot>();
-            //if (pShoot)
-            //{
-
-            //    pShoot.shoot += TryActivate;
-            //}
 
             audioManager = gameObject.GetComponent<AudioManager>();
             audioSource = audioManager.GetNewAudioSource(Name);
