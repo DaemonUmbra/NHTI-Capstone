@@ -2421,7 +2421,7 @@ MonoBehaviour:
   InvertY: 0
   hLookSpeed: 50
   vLookSpeed: 50
-  maxVerticalLook: 80
+  maxVerticalLook: 45
 --- !u!114 &114123109819469288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2633,7 +2633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPrefab: {fileID: 20262033296123736, guid: 5b8d4ef291dd1ed4bb348b4610955427, type: 2}
   cam: {fileID: 0}
-  camOffset: {x: 1, y: 3, z: 3}
+  camOffset: {x: 1, y: 3, z: 1.75}
   camRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114669762924275862
 MonoBehaviour:
@@ -2750,8 +2750,8 @@ MonoBehaviour:
   - {fileID: 114932071336122592}
   - {fileID: 114838225558233264}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 4
-  instantiationId: 4
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!120 &120508235077153456
