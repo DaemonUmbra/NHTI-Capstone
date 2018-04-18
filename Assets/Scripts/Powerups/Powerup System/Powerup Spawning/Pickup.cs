@@ -30,7 +30,7 @@ public class Pickup : Photon.PunBehaviour
                 pSpawn.CollectPowerup();
 
                 // Destroy pickup
-                PhotonNetwork.Destroy(gameObject);
+                PhotonNetwork.Destroy(photonView);
             }
         }
     }

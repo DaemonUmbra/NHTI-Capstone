@@ -6,8 +6,7 @@ using UnityEngine;
 public class AnimatorSettings : Photon.MonoBehaviour
 {
 
-    Animator anim;
-    Animation an;
+    public Animator anim;
     
 
     // Use this for initialization
