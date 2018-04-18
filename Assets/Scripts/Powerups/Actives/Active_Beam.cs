@@ -122,7 +122,7 @@ namespace Powerups
             }
               
             yield return new WaitForSecondsRealtime(4);
-            modelManager.RemoveSubModel("Beam");
+           photonView.GetComponent<ModelManager>().RemoveSubModel("Beam");
             
         }
 
