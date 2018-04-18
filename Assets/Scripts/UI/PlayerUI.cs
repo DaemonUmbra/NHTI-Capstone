@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Powerups;
-public class PlayerUI : Photon.MonoBehaviour {
+using UnityEngine.SceneManagement;
+public class PlayerUI : Photon.PunBehaviour {
     
     GameObject player;
     private PlayerStats pstats;
@@ -19,17 +20,18 @@ public class PlayerUI : Photon.MonoBehaviour {
     private int maxActives = 4;
     private int maxPassives = 6;
 
-    // Use this for initialization
-    void Start()
+    public bool isSetup = false;
+
+    public void SetupUI()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         slotsActive = new AbilitySlot[maxActives];
         slotsPassive = new AbilitySlot[maxPassives];
-
+        Debug.Log(players.Length);
         // Find local player
-        foreach(GameObject p in players)
+        foreach (GameObject p in players)
         {
-            if(p.GetPhotonView().isMine)
+            if (p.GetPhotonView().isMine)
             {
                 player = p;
             }
@@ -37,7 +39,7 @@ public class PlayerUI : Photon.MonoBehaviour {
 
         pstats = player.GetComponent<PlayerStats>();
         abilityManager = player.GetComponent<AbilityManager>();
-        
+
         // Ability UI setup
         for (int i = 0; i < maxActives; i++)
         {
@@ -49,23 +51,27 @@ public class PlayerUI : Photon.MonoBehaviour {
             string slotName = "Passive_" + i;
             slotsPassive[i] = new AbilitySlot(GameObject.Find(slotName).GetComponent<Image>(), false);
         }
+        isSetup = true;
     }
 
     void LateUpdate()
     {
-        HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
-        //healthText.text = pstats.CurrentHp.ToString();
-        txtHealth.text = pstats.CurrentHp.ToString();
-        powerups.text = "";
-        List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
-        foreach (var power in abilityNames)
+        if (isSetup)
         {
-            powerups.text += power + "\n";
-        }
+            HealthBar.value = ((float)pstats.GetComponent<PlayerStats>().CurrentHp / (float)pstats.GetComponent<PlayerStats>().MaxHp);
+            //healthText.text = pstats.CurrentHp.ToString();
+            txtHealth.text = pstats.CurrentHp.ToString();
+            powerups.text = "";
+            List<string> abilityNames = new List<string>(abilityManager.AbilityList.Keys);
+            foreach (var power in abilityNames)
+            {
+                powerups.text += power + "\n";
+            }
 
-        UpdatePowerups();
+            UpdatePowerups();
+        }
     }
-     
+
 
     public void UpdatePowerups()
     {
