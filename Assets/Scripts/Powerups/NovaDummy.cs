@@ -66,7 +66,11 @@ public class NovaDummy : Photon.MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
+        if(gameObject != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
