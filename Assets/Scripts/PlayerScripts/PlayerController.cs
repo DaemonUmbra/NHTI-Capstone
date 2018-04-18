@@ -408,7 +408,7 @@ public class PlayerController : Photon.MonoBehaviour
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                Debug.Log(ter.distance);
+                //Debug.Log(ter.distance);
                 if (ter.distance < .78f)
                 {
                     wallDir = 'r';
