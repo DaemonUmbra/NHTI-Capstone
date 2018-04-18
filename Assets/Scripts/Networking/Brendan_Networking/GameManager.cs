@@ -93,16 +93,19 @@ public class GameManager : Photon.PunBehaviour {
     private void Awake()
     {
         UI = GameObject.Find("PlayerCanvas").GetComponent<GameStateUI>();
-
+    }
+    private void Start()
+    {
         if (PhotonNetwork.isMasterClient)
         {
             // Set the start time
             startTime = Time.time;
             ChangeGameState(GameState.Preparation);
         }
+
+        playersLeft = PhotonNetwork.playerList.Length;
     }
 
-  
 
     // Update is called once per frame
     void Update () {
@@ -151,7 +154,7 @@ public class GameManager : Photon.PunBehaviour {
     public void UpdateGameTime()
     {
         // Update game time
-        gameTime += Time.deltaTime;
+        gameTime = Time.time - startTime;
     }
 
     private void ToggleInvulnerability(bool inv)

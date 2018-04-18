@@ -26,8 +26,8 @@ public class LobbyManager : Photon.PunBehaviour {
         { "Map", 1 },
         { "StartTime", 0f },
         { "StateStartTime", 0f },
-        { "PrepTime", 30f },
-        { "BrawlTime", 120f },
+        { "PrepTime", 20f },
+        { "BrawlTime", 60f },
         { "RoyaleTime", 300f },
         { "PlayersLeft", 0 }
     };
@@ -171,6 +171,41 @@ public class LobbyManager : Photon.PunBehaviour {
         photonView.RPC("RPC_ChangeLevel", PhotonTargets.MasterClient);
         ChangeState(LobbyState.GAME);
     }
+
+    public void StartDeathmatch()
+    {
+        CustomProperties = new Hashtable() {
+        { "GameMode", GameMode.Brawl },
+        { "GameState", GameState.Preparation },
+        { "GameTime", 0f },
+        { "Map", 1 },
+        { "StartTime", 0f },
+        { "StateStartTime", 0f },
+        { "PrepTime", 10f },
+        { "BrawlTime", 300f },
+        { "RoyaleTime", 0f },
+        { "PlayersLeft", 0 }
+        };
+        PhotonNetwork.room.SetCustomProperties(CustomProperties);
+        StartGame();
+    }
+    public void StartRoyale()
+    {
+        CustomProperties = new Hashtable() {
+        { "GameMode", GameMode.Royale },
+        { "GameState", GameState.Preparation },
+        { "GameTime", 0f },
+        { "Map", 1 },
+        { "StartTime", 0f },
+        { "StateStartTime", 0f },
+        { "PrepTime", 10f },
+        { "BrawlTime", 60f },
+        { "RoyaleTime", 300f },
+        { "PlayersLeft", 0 }
+        };
+        PhotonNetwork.room.SetCustomProperties(CustomProperties);
+        StartGame();
+    }
     public void MapsMenu()
     {
         ChangeState(LobbyState.MAP);
@@ -197,14 +232,6 @@ public class LobbyManager : Photon.PunBehaviour {
     #endregion
 
     #region Click Events
-    public void OnClickStartSync()
-    {
-        StartGame();
-    }
-    public void OnClickStartDelayed()
-    {
-        StartGame();
-    }
     public void OnClickRoomState()
     {
         if (!PhotonNetwork.isMasterClient)

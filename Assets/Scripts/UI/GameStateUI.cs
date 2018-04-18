@@ -41,6 +41,7 @@ public class GameStateUI : MonoBehaviour {
     {
         UpdateTimeText();
         UpdateStateText();
+        UpdatePlayerText();
     }
 
     #region Public Methods

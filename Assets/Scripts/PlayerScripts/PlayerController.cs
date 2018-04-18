@@ -67,17 +67,17 @@ public class PlayerController : Photon.MonoBehaviour
     /// <summary>
     /// Horizontal look speed in degrees/second
     /// </summary>
-    public float hLookSpeed = 20;
+    public float hLookSpeed = 50;
     /// <summary>
     /// Vertical look speed in degrees/second
     /// </summary>
-    public float vLookSpeed = 20;
+    public float vLookSpeed = 50;
     /// <summary>
     /// Maximum vertical look angle in degrees. 90 means you can look completely up and down.
     /// </summary>
     public float maxVerticalLook = 80;
 
-    private float mLookSpeed = 20;
+    private float mLookSpeed = 50;
     private float jLookSpeed = 100;
 
     float hRot;
