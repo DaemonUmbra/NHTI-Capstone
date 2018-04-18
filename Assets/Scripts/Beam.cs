@@ -5,7 +5,7 @@ using UnityEngine;
 public class Beam : MonoBehaviour {
 
     float lastHitTime;
-    float hitDelay = 1f;
+    float hitDelay = .1f;
 
 	// Use this for initialization
 	void Awake () {
@@ -23,7 +23,7 @@ public class Beam : MonoBehaviour {
                 PlayerStats stats;
                 
                 stats = other.transform.GetComponent<PlayerStats>();
-                stats.TakeDamage(10, transform.parent.gameObject);
+                stats.TakeDamage(1, transform.parent.gameObject);
             }
             lastHitTime = Time.time;
         }
