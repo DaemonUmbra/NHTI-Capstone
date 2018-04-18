@@ -120,16 +120,18 @@ public class PlayerController : Photon.MonoBehaviour
         float yAxis = Input.GetAxis("Vertical");
         if (InvertY) yAxis *= -1;
 
-        rig.constraints = RigidbodyConstraints.None;
-        rig.constraints = RigidbodyConstraints.FreezeRotation;
+        //rig.constraints = RigidbodyConstraints.None;
+        //rig.constraints = RigidbodyConstraints.FreezeRotation;
 
         Vector2 input = new Vector2(xAxis, yAxis);
+        motor.SetInput(input);
+        /*
         if (input == Vector2.zero)
         {
             if(isGrounded && onRamp)
             {
                 
-                rig.constraints = RigidbodyConstraints.FreezePosition;
+                //rig.constraints = RigidbodyConstraints.FreezePosition;
             }
         }
         if (!OnWall)
@@ -185,8 +187,10 @@ public class PlayerController : Photon.MonoBehaviour
                 motor.SetInput(Vector3.zero);
             }       
             CCWearOff(Time.time, duration, false);
+           
             return;
         }
+        */
 
         // Check for jump
         if (Input.GetButtonDown("Jump"))

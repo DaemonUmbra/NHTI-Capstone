@@ -19,7 +19,7 @@ public class PlayerStats : Photon.MonoBehaviour
 
     // Jump Power
     [SerializeField]
-    public float JumpPower = 20000f;
+    public float JumpPower = 10f;
 
     // Health
     [SerializeField]
