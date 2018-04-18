@@ -104,15 +104,19 @@ public class Projectile : Photon.MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (photonView.isMine)
         {
-            onPlayerHit(other);
+            if (other.gameObject.tag == "Player")
+            {
+                onPlayerHit(other);
+            }
+            else
+            {
+                PhotonNetwork.Destroy(photonView);
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
-        else
-        {
-            PhotonNetwork.Destroy(photonView);
-            PhotonNetwork.Destroy(gameObject);
-        }
+        
            
         
     }
