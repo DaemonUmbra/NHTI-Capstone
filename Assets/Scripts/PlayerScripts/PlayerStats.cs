@@ -231,6 +231,12 @@ public class PlayerStats : Photon.MonoBehaviour
         }
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID, packagedEffects);
     }
+    public void TakeDamage(float amount, GameObject source, string effect)
+    {
+        print("In take damage function. Damage to be taken: " + amount);
+        photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID, effect);
+    }
+
 
     // Insta-kill player
     public void Kill()
@@ -510,7 +516,49 @@ public class PlayerStats : Photon.MonoBehaviour
             Debug.Log("Player hp: " + CurrentHp);
         }
     }
+    [PunRPC] // HACK
+    private void RPC_TakeDamage(float amount, int srcViewId, string effectType)
+    {
+        if(effectType == "burn")
+        {
+            BurnDamage burn = new BurnDamage(2, 5);
+            burn.ApplyEffect(gameObject);
+        } else if (effectType == "chill") {
+            SlowMovement chill = new SlowMovement();
+            chill.ApplyEffect(gameObject);
+        }
+        if (_invulnerable)
+        {
+            Debug.Log("Player is invulnerable");
+        }
+        else
+        {
+            // Find the source gameobject from it's view id
+            PhotonView srcView = PhotonView.Find(srcViewId);
+            GameObject srcObj = null;
+            if (srcView != null)
+                srcObj = srcView.gameObject;
 
+            // Validate the damage amount
+            if (amount < 0)
+            {
+                Debug.LogWarning("Cannot take negative damage.");
+                return;
+            }
+            // Reduce hp by amount
+            _currentHp -= amount;
+            // Kill if hp is zero or less
+            if (_currentHp <= 0)
+            {
+                Debug.Log(gameObject.name + " hp <= 0");
+                if (srcObj)
+                    Die(srcObj);
+                else
+                    Die();
+            }
+            Debug.Log("Player hp: " + CurrentHp);
+        }
+    }
     // Reset player stats
     [PunRPC] private void RPC_ResetStats()
     {
