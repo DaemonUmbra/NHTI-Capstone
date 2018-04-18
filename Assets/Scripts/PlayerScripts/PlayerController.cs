@@ -191,7 +191,6 @@ public class PlayerController : Photon.MonoBehaviour
         // Check for jump
         if (Input.GetButtonDown("Jump"))
         {
-            
             photonView.RPC("TryJump", PhotonTargets.All);
         }
         // Check for shooting
@@ -317,7 +316,7 @@ public class PlayerController : Photon.MonoBehaviour
             CrowdControlled = false;
         }
     }
-    [PunRPC]
+    
     private void TryJump()
     {
         //Debug.Log("tryjump! " + maxJumpCount);

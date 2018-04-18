@@ -14,20 +14,32 @@ public class PlayerShoot : Photon.MonoBehaviour
     public Transform OffsetPoint;
     public Transform AimPoint;
     
-    private void Awake()
+    
+    private void OnEnable()
     {
         shoot += DefaultShoot;
     }
+    private void OnDisable()
+    {
+        shoot -= DefaultShoot;
+    }
     private void Start()
     {
-        cam = GetComponent<CameraController>().cam;
-        AimPoint = Instantiate(OffsetPoint, cam.transform);
-        AimPoint.localPosition = new Vector3(0, 0, 50);
+        if(photonView.isMine)
+        {
+            cam = GetComponent<CameraController>().cam;
+            AimPoint = Instantiate(OffsetPoint, cam.transform);
+            AimPoint.localPosition = new Vector3(0, 0, 50);
+        }
     }
 
     private void Update()
     {
-        OffsetPoint.LookAt(AimPoint);
+        if(photonView.isMine)
+        {
+            OffsetPoint.LookAt(AimPoint);
+        }
+        
     }
     public void DefaultShoot()
     {
