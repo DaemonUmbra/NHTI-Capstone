@@ -801,7 +801,8 @@ Prefab:
       propertyPath: instantiationId
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114278076236755356, guid: 4a003fc51f847064a9da989d21c56e32, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4a003fc51f847064a9da989d21c56e32, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &424138858 stripped
@@ -1458,12 +1459,12 @@ Prefab:
     - target: {fileID: 224901764964477640, guid: 94f5c785b4b3bc942b4ebc172f319e75,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 463
+      value: 342
       objectReference: {fileID: 0}
     - target: {fileID: 224901764964477640, guid: 94f5c785b4b3bc942b4ebc172f319e75,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 227.5
+      value: 151.5
       objectReference: {fileID: 0}
     - target: {fileID: 224901764964477640, guid: 94f5c785b4b3bc942b4ebc172f319e75,
         type: 2}
