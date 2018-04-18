@@ -86,4 +86,5 @@ MonoBehaviour:
   - RPC_CanRespawn
   - RPC_SetInvulnerable
   - RPC_UpdateTimeUI
+  - RPC_ActivateRing
   DisableAutoOpenWizard: 1
