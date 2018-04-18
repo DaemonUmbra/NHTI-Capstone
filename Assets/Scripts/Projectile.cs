@@ -113,7 +113,6 @@ public class Projectile : Photon.MonoBehaviour
             else
             {
                 PhotonNetwork.Destroy(photonView);
-                PhotonNetwork.Destroy(gameObject);
             }
         }
         
@@ -137,7 +136,6 @@ public class Projectile : Photon.MonoBehaviour
                 hitStats.TakeDamage(damage, _shooter);
                 print("Player hit!");
                 PhotonNetwork.Destroy(photonView);
-                PhotonNetwork.Destroy(gameObject);
             }
         }
        

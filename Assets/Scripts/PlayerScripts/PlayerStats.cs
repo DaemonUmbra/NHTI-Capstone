@@ -844,8 +844,9 @@ public class PlayerStats : Photon.MonoBehaviour
 
     private void BecomeGhost(GameObject killer)
     {
+        Debug.Log("Becoming a ghost");
         // Register with manager
-        GameManager gm = GetComponent<GameManager>();
+        GameManager gm = FindObjectOfType<GameManager>();
         gm.RegisterDeath(gameObject, killer);
 
         GetComponent<CameraController>().FollowTransform(killer.transform);
@@ -853,8 +854,9 @@ public class PlayerStats : Photon.MonoBehaviour
     }
     private void BecomeGhost()
     {
+        Debug.Log("Becoming a ghost");
         // Register with manager
-        GameManager gm = GetComponent<GameManager>();
+        GameManager gm = FindObjectOfType<GameManager>();
         gm.RegisterDeath(gameObject);
 
         GetComponent<Collider>().enabled = false;
