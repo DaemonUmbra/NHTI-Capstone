@@ -383,36 +383,48 @@ public class PlayerController : Photon.MonoBehaviour
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                wallDir = 'f';
-                wall = hitObj;
-                return true;
+                if (ter.distance <.2f)
+                {
+                    wallDir = 'f';
+                    wall = hitObj;
+                    return true;
+                }
             }
         }
         if (Physics.Raycast(transform.position, bk, out ter, dist))
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                wallDir = 'b';
-                wall = hitObj;
-                return true;
+                if (ter.distance < .2f)
+                {
+                    wallDir = 'b';
+                    wall = hitObj;
+                    return true;
+                }
             }
         }
         if (Physics.Raycast(transform.position, rgt, out ter, dist))
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                wallDir = 'r';
-                wall = hitObj;
-                return true;
+                if (ter.distance < .2f)
+                {
+                    wallDir = 'r';
+                    wall = hitObj;
+                    return true;
+                }
             }
         }
         if (Physics.Raycast(transform.position, lft, out ter, dist))
         {
             if (ter.transform.gameObject == hitObj && ter.transform.gameObject.tag != "Ramp")
             {
-                wallDir = 'l';
-                wall = hitObj;
-                return true;
+                if (ter.distance < .2f)
+                {
+                    wallDir = 'l';
+                    wall = hitObj;
+                    return true;
+                }
             }
         }
         return false;
