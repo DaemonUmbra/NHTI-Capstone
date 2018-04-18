@@ -40,7 +40,7 @@ public class GameManager : Photon.PunBehaviour {
     }
     public float stateTime
     {
-        get { return Time.time - stateStartTime; }
+        get { return gameTime - stateStartTime; }
     }
     public float stateTimeLeft
     {
@@ -144,6 +144,8 @@ public class GameManager : Photon.PunBehaviour {
                 }
             }
         }
+
+        UpdateGameTime();
 	}
 
     public void UpdateGameTime()
@@ -185,7 +187,7 @@ public class GameManager : Photon.PunBehaviour {
     public void ChangeGameState(GameState newState)
     {
         gameState = newState;
-        stateStartTime = Time.time;
+        stateStartTime = gameTime;
 
         if(gameState == GameState.Preparation)
         {

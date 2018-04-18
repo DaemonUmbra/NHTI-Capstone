@@ -565,29 +565,38 @@ public class PlayerStats : Photon.MonoBehaviour
     [PunRPC] private void RPC_Die()
     {
         Debug.Log(gameObject.name + " has died.");
-
-        if (_canRespawn)
+        // Reset abilities
+        AbilityManager abilityManager = GetComponent<AbilityManager>();
+        abilityManager.ResetAbilities();
+        _currentHp = _maxHp; // Resets hp
+        
+        if (photonView.isMine)
         {
-            // Respawn Player
-            GameObject gameMng = FindObjectOfType<PlayerSpawning>().gameObject;
-            var Mng = gameMng.GetComponent<PlayerSpawning>();
-            Transform respawn = Mng.GetRandomSpawnPoint();
-            gameObject.transform.position = respawn.position;
-            // Reset abilities
-            AbilityManager abilityManager = GetComponent<AbilityManager>();
-            abilityManager.ResetAbilities();
-            _currentHp = _maxHp; // Resets hp
+            if (_canRespawn)
+            {
+                // Respawn Player
+                PlayerSpawning Mng = FindObjectOfType<PlayerSpawning>();
+                Transform respawn = Mng.GetRandomSpawnPoint();
+                gameObject.transform.position = respawn.position;
+                _dead = false;
+            }
+            else
+            {
+                if (!_dead)
+                {
+                    _dead = true;
+                    if (photonView.isMine)
+                    {
+                        BecomeGhost();
+                    }
+                }
+            }
         }
         else
         {
-            if(!_dead)
+            if(!_dead && !_canRespawn)
             {
                 _dead = true;
-                if(photonView.isMine)
-                {
-                    BecomeGhost();
-                }
-                
             }
         }
         
@@ -625,7 +634,6 @@ public class PlayerStats : Photon.MonoBehaviour
                 {
                     BecomeGhost(killer);
                 }
-
             }
         }
     }

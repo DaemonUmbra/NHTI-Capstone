@@ -29,7 +29,6 @@ public class ModelManager : Photon.MonoBehaviour
             if (subModelRegistry.TryGetValue(subModelName, out temp))
             {
                 photonView.RPC("MM_AddSubModel", PhotonTargets.All, subModelName);
-                activeSubModels.Add(subModelName);
             }
         }
     }
@@ -39,6 +38,7 @@ public class ModelManager : Photon.MonoBehaviour
     {
         Debug.Log(photonView.owner + " requests addition of " + subModelName + " to their model");
         Transform subModel = Instantiate(subModelRegistry[subModelName], transform);
+        activeSubModels.Add(subModelName);
         subModel.name = subModelName;
     }
 
@@ -59,6 +59,7 @@ public class ModelManager : Photon.MonoBehaviour
             Transform submodel = transform.Find(subModelName);
             if (submodel != null)
             {
+                activeSubModels.Remove(subModelName);
                 Destroy(submodel.gameObject);
             }
         }

@@ -110,10 +110,11 @@ namespace Powerups
             Collider col = beam.GetComponent<Collider>();
             
             RaycastHit[] hits = Physics.SphereCastAll(col.bounds.center, (col.bounds.size.x) / 2, Vector3.forward);
+            
             foreach(RaycastHit hit in hits)
             {
                 Debug.Log(hit.transform.gameObject.name);
-                if(!photonView.isMine && hit.transform.tag == "Player")
+                if(!hit.transform.gameObject.GetPhotonView().isMine && hit.transform.tag == "Player")
                 {
                     PlayerStats stats;
                     stats = hit.transform.GetComponent<PlayerStats>();
