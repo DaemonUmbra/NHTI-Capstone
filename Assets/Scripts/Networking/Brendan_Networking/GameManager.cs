@@ -187,6 +187,13 @@ public class GameManager : Photon.PunBehaviour {
     public void RegisterDeath(GameObject deadPlayer, GameObject killer)
     {
         playersLeft--;
+
+        PlayerStats ps = killer.GetComponent<PlayerStats>();
+
+        if(ps)
+        {
+            ps.RegisterKill();
+        }
     }
     public void RegisterDeath(GameObject deadPlayer)
     {
@@ -219,6 +226,59 @@ public class GameManager : Photon.PunBehaviour {
             ToggleInvulnerability(false);
             ToggleRespawn(false);
         }
+        else if(gameState == GameState.GameOver)
+        {
+            ToggleInvulnerability(true);
+            ToggleRespawn(false);
+
+            PlayerStats[] players = FindObjectsOfType<PlayerStats>();
+            PlayerStats winner = null;
+            if(gameMode == GameMode.Brawl)
+            {
+                // The winner is whoever has the highest killcount
+                int topKills = 0;
+                foreach(PlayerStats p in players)
+                {
+                    if(!p.Dead && p.Kills >= topKills)
+                    {
+                        winner = p;
+                    }
+                }
+            }
+            else if(gameMode == GameMode.Royale)
+            {
+                // Winner is last player alive
+                List<PlayerStats> alivePlayers = new List<PlayerStats>();
+                foreach(PlayerStats p in players)
+                {
+                    if(!p.Dead)
+                    {
+                        alivePlayers.Add(p);
+                    }
+                }
+                // If more than one are alive the winner is whoever has the most kills
+                int topKills = 0;
+                foreach (PlayerStats ap in alivePlayers)
+                {
+                    if(ap.Kills >= topKills)
+                    {
+                        winner = ap;
+                    }
+                }
+            }
+
+            foreach(PlayerStats p in players)
+            {
+                if(p == winner)
+                {
+                    p.RegisterWin();
+                }
+                else
+                {
+                    p.RegisterLoss();
+                }
+            }
+        }
 
         photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)newState); 
     }
@@ -229,6 +289,13 @@ public class GameManager : Photon.PunBehaviour {
     {
         // Update game state UI
         UI.UpdateStateText();
+
+
+    }
+    [PunRPC]
+    private void RPC_GameOver(int winnerID)
+    {
+
     }
     #endregion
 }

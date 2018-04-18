@@ -30,6 +30,7 @@ public class PlayerStats : Photon.MonoBehaviour
     bool _invulnerable;
     bool _canRespawn;
     bool _dead;
+    int kills = 0;
 
     // Damage
     [SerializeField]
@@ -55,6 +56,7 @@ public class PlayerStats : Photon.MonoBehaviour
     public bool Invulnerable { get { return _invulnerable; } set { photonView.RPC("RPC_SetInvulnerable", PhotonTargets.All, value); } }
     public bool CanRespawn { get { return _canRespawn; } set { photonView.RPC("RPC_CanRespawn", PhotonTargets.All, value); } }
     public bool Dead { get { return _dead; } }
+    public int Kills { get { return kills; } }
     #endregion Access Variables
 
 
@@ -237,7 +239,18 @@ public class PlayerStats : Photon.MonoBehaviour
         photonView.RPC("RPC_TakeDamage", PhotonTargets.All, amount, source.GetPhotonView().viewID, effect);
     }
 
-
+    public void RegisterKill()
+    {
+        photonView.RPC("RPC_RegisterKill", PhotonTargets.All);
+    }
+    public void RegisterWin()
+    {
+        photonView.RPC("RPC_RegisterWin", PhotonTargets.All);
+    }
+    public void RegisterLoss()
+    {
+        photonView.RPC("RPC_RegisterLoss", PhotonTargets.All);
+    }
     // Insta-kill player
     public void Kill()
     {
@@ -320,22 +333,6 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         photonView.RPC("RPC_RemoveScaleFactor", PhotonTargets.All, factorName);
     }
-    /* Changed the implementation of this to just scale the parent transform
-    public void AddTransform(Transform trans)
-    {
-        int pId = trans.gameObject.GetPhotonView().viewID;
-        photonView.RPC("RPC_AddTransform", PhotonTargets.All, pId);
-    }
-    public void RemoveTransform(Transform trans)
-    {
-        int pId = trans.gameObject.GetPhotonView().viewID;
-        photonView.RPC("RPC_RemoveTransform", PhotonTargets.All, pId);
-    }
-    public bool HasTransform(Transform trans)
-    {
-        return (_transformsToScale.Contains(trans));
-    }
-    */
 
     // Public Speed Modifiers
     public void AddSpeedMultipler(string multName, float multiplier)
@@ -376,6 +373,35 @@ public class PlayerStats : Photon.MonoBehaviour
 
 
     #region Photon RPCs
+    // Register kills
+    [PunRPC] private void RPC_RegisterKill()
+    {
+        kills++;
+
+        if(photonView.isMine)
+        {
+            GameStateUI ui = FindObjectOfType<GameStateUI>();
+            ui.UpdateKills(kills);
+        }
+    }
+
+    // Register win/loss
+    [PunRPC] private void RPC_RegisterWin()
+    {
+        if(photonView.isMine)
+        {
+            PlayerUI ui = FindObjectOfType<PlayerUI>();
+            ui.DisplayWin();
+        }
+    }
+    [PunRPC] private void RPC_RegisterLoss()
+    {
+        if (photonView.isMine)
+        {
+            PlayerUI ui = FindObjectOfType<PlayerUI>();
+            ui.DisplayLoss();
+        }
+    }
 
     // Damage RPCs
     [PunRPC] private void RPC_TakeDamage(float amount)
@@ -637,6 +663,7 @@ public class PlayerStats : Photon.MonoBehaviour
                     {
                         BecomeGhost();
                     }
+                    RegisterLoss();
                 }
             }
         }
@@ -682,6 +709,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 {
                     BecomeGhost(killer);
                 }
+                RegisterLoss();
             }
         }
     }

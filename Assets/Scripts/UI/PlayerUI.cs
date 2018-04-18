@@ -17,10 +17,16 @@ public class PlayerUI : Photon.PunBehaviour {
     public Sprite defaultActive;
     public Sprite defaultPassive;
 
+    // Win/loss screens
+    [SerializeField]
+    private GameObject winScreen;
+    [SerializeField]
+    private GameObject lossScreen;
+
     private int maxActives = 4;
     private int maxPassives = 6;
-
-    public bool isSetup = false;
+   
+    bool isSetup = false;
 
     public void SetupUI()
     {
@@ -114,6 +120,15 @@ public class PlayerUI : Photon.PunBehaviour {
             slotsPassive[i].Icon.sprite = defaultPassive;
             slotsPassive[i].Taken = false;
         }
+    }
+
+    public void DisplayWin()
+    {
+        winScreen.SetActive(true);
+    }
+    public void DisplayLoss()
+    {
+        lossScreen.SetActive(true);
     }
 }
 

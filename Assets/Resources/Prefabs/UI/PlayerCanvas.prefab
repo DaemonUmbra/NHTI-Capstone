@@ -458,7 +458,6 @@ GameObject:
   - component: {fileID: 224452255901966308}
   - component: {fileID: 222388235472663296}
   - component: {fileID: 114846305657138042}
-  - component: {fileID: 114158270564751976}
   m_Layer: 5
   m_Name: GameOverMessage
   m_TagString: Untagged
@@ -1750,7 +1749,8 @@ MonoBehaviour:
   slotsPassive: []
   defaultActive: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   defaultPassive: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  isSetup: 0
+  winScreen: {fileID: 1093522269073330}
+  lossScreen: {fileID: 1271750084456850}
 --- !u!114 &114113546504837002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1872,26 +1872,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114158270564751976
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1387211799810026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ce6c45ef359384aadbff66fcb2dd6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  txtGameState: {fileID: 0}
-  txtGameMode: {fileID: 0}
-  txtGameTime: {fileID: 0}
-  txtStateTime: {fileID: 0}
-  txtPlayersLeft: {fileID: 0}
-  txtKills: {fileID: 0}
-  fontMin: 18
-  fontMax: 27
 --- !u!114 &114161551701098388
 MonoBehaviour:
   m_ObjectHideFlags: 1
