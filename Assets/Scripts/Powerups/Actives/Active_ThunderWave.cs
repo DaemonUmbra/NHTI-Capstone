@@ -83,7 +83,9 @@ namespace Powerups
 
                         //hit.rigidbody.AddForce(transform.up * upforce);
                         //hit.rigidbody.AddForce(transform.forward * forwardforce);
-                        Debug.Log("I hit:" + hit.transform.gameObject.name);
+                        PlayerStats stats;
+                        stats = hit.transform.GetComponent<PlayerStats>();
+                        stats.TakeDamage(5, transform.parent.gameObject);
                     }
                 }
 
