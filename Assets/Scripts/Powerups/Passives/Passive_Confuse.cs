@@ -35,9 +35,6 @@ namespace Powerups
                 movement = GetComponent<PlayerController>();
                 movement.InvertX = false;
                 movement.InvertY = false;
-
-                AbilityManager manage = gameObject.GetComponent<AbilityManager>();
-               
             }
             
         }
@@ -47,7 +44,7 @@ namespace Powerups
             timer += Time.deltaTime;
             if (timer >= timeLimit)
             {
-                OnAbilityRemove();
+                //OnAbilityRemove();
                 AbilityManager.RemoveAbility(this);
             }
 
