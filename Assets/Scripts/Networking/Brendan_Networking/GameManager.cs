@@ -137,6 +137,10 @@ public class GameManager : Photon.PunBehaviour {
                 {
                     ChangeGameState(GameState.SuddenDeath);
                 }
+                else if(playersLeft <= 1)
+                {
+                    ChangeGameState(GameState.GameOver);
+                }
             }
             else if (currentState == GameState.SuddenDeath)
             {
