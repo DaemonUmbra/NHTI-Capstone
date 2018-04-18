@@ -83,4 +83,6 @@ MonoBehaviour:
   - RPC_Activate_Beam
   - RPC_Activate_HighJump
   - RPC_ChangeGameState
+  - RPC_CanRespawn
+  - RPC_SetInvulnerable
   DisableAutoOpenWizard: 1

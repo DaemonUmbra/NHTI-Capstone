@@ -22,7 +22,7 @@ public class PlayerShoot : Photon.MonoBehaviour
     {
         cam = GetComponent<CameraController>().cam;
         AimPoint = Instantiate(OffsetPoint, cam.transform);
-        AimPoint.localPosition = new Vector3(0, 0, 20);
+        AimPoint.localPosition = new Vector3(0, 0, 50);
     }
 
     private void Update()
