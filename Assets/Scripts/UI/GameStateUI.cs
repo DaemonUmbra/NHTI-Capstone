@@ -124,21 +124,19 @@ public class GameStateUI : Photon.MonoBehaviour {
     }
     public void UpdateTimeText()
     {
-        if (PhotonNetwork.isMasterClient)
+        float sTime = manager.stateTimeLeft;
+
+        txtStateTime.text = TimeToString(sTime);
+
+        if (sTime < 10)
         {
-            float sTime = manager.stateTimeLeft;
-
-            txtStateTime.text = TimeToString(sTime);
-
-            if(sTime < 10)
-            {
-                txtStateTime.color = Color.red;
-            }
-            else
-            {
-                txtStateTime.color = Color.black;
-            }
+            txtStateTime.color = Color.red;
         }
+        else
+        {
+            txtStateTime.color = Color.black;
+        }
+
     }
     public void UpdatePlayerText()
     {
