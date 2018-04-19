@@ -23,7 +23,8 @@ public class AnimatorSettings : Photon.MonoBehaviour
         {
             anim = GetComponent<Animator>();
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S)
+                || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
                 anim.SetBool("IsWalking", true);
             }
@@ -32,7 +33,7 @@ public class AnimatorSettings : Photon.MonoBehaviour
                 anim.SetBool("IsWalking", false);
             }
 
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0) || Input.GetButtonDown("Fire1"))
             {
                 anim.SetBool("IsAttacking", true);
             }
