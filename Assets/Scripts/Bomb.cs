@@ -42,13 +42,11 @@ public class Bomb : Projectile
             }
             if (other.tag == "Environment")
             {
-                RaycastHit hits;
-
-                if (Physics.SphereCast(gameObject.transform.position, 5.0f, transform.forward, out hits, 0))
-                {
-                    PlayerStats newHitStats = hits.transform.gameObject.GetComponent<PlayerStats>();
-                    newHitStats.TakeDamage((damage / 2.0f), _shooter);
-                }
+                GameObject boom = PhotonNetwork.Instantiate("NovaExplosion", transform.position, transform.rotation, 0);
+                NovaDummy stats = boom.GetComponent<NovaDummy>();
+                stats.ExplosionSize = 3.0f;
+                stats.ExplosionDamage = 15.0f;
+                stats.ExplosionForce = 4.5f;
 
                 PhotonNetwork.Destroy(photonView);
             }
