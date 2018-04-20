@@ -1,0 +1,275 @@
+fileFormatVersion: 2
+guid: 134317de4213cbf4aa19c071a48a2bf5
+timeCreated: 1524248335
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: BaseChar
+    100002: Belt
+    100004: Boot1
+    100006: Boot2
+    100008: Boots
+    100010: Chest
+    100012: ChestControl
+    100014: Hat
+    100016: Head
+    100018: HeadControl
+    100020: //RootNode
+    100022: LeftElbow
+    100024: LeftFingers
+    100026: LeftFingerTips
+    100028: LeftHand
+    100030: LeftHeel
+    100032: LeftHeel 1
+    100034: LeftHip
+    100036: LeftHipControl
+    100038: LeftKnee
+    100040: LeftKneeControl
+    100042: LeftShoulder
+    100044: LeftToes
+    100046: LeftWrist
+    100048: LeftWristControl
+    100050: LElbowControl
+    100052: LFingersControl
+    100054: LHandControl1
+    100056: LShoulderControl
+    100058: LThumb1
+    100060: LThumbBaseControl
+    100062: LThumbMid
+    100064: LThumbMidControl
+    100066: LThumpTip
+    100068: MasterControl
+    100070: Neck
+    100072: NeckControl
+    100074: RElbowControl
+    100076: RFingersControl
+    100078: RHandControl1
+    100080: RightElbow
+    100082: RightFingers
+    100084: RightFingerTips
+    100086: RightHand
+    100088: RightHeel
+    100090: RightHeel1
+    100092: RightHip
+    100094: RightHipControl
+    100096: RightKnee
+    100098: RightKneeControl
+    100100: RightShoulder1
+    100102: RightToes
+    100104: RightWrist
+    100106: RightWristControl
+    100108: RShoulderControl
+    100110: RThumb1
+    100112: RThumbBaseControl
+    100114: RThumbMid
+    100116: RThumbMidControl
+    100118: RThumbTip
+    100120: Shirt
+    100122: Spine1
+    100124: Spine1Control
+    100126: Spine2
+    100128: Spine2Control
+    100130: Spine3
+    100132: Spine3Control
+    100134: Waist
+    100136: WaistControl
+    400000: BaseChar
+    400002: Belt
+    400004: Boot1
+    400006: Boot2
+    400008: Boots
+    400010: Chest
+    400012: ChestControl
+    400014: Hat
+    400016: Head
+    400018: HeadControl
+    400020: //RootNode
+    400022: LeftElbow
+    400024: LeftFingers
+    400026: LeftFingerTips
+    400028: LeftHand
+    400030: LeftHeel
+    400032: LeftHeel 1
+    400034: LeftHip
+    400036: LeftHipControl
+    400038: LeftKnee
+    400040: LeftKneeControl
+    400042: LeftShoulder
+    400044: LeftToes
+    400046: LeftWrist
+    400048: LeftWristControl
+    400050: LElbowControl
+    400052: LFingersControl
+    400054: LHandControl1
+    400056: LShoulderControl
+    400058: LThumb1
+    400060: LThumbBaseControl
+    400062: LThumbMid
+    400064: LThumbMidControl
+    400066: LThumpTip
+    400068: MasterControl
+    400070: Neck
+    400072: NeckControl
+    400074: RElbowControl
+    400076: RFingersControl
+    400078: RHandControl1
+    400080: RightElbow
+    400082: RightFingers
+    400084: RightFingerTips
+    400086: RightHand
+    400088: RightHeel
+    400090: RightHeel1
+    400092: RightHip
+    400094: RightHipControl
+    400096: RightKnee
+    400098: RightKneeControl
+    400100: RightShoulder1
+    400102: RightToes
+    400104: RightWrist
+    400106: RightWristControl
+    400108: RShoulderControl
+    400110: RThumb1
+    400112: RThumbBaseControl
+    400114: RThumbMid
+    400116: RThumbMidControl
+    400118: RThumbTip
+    400120: Shirt
+    400122: Spine1
+    400124: Spine1Control
+    400126: Spine2
+    400128: Spine2Control
+    400130: Spine3
+    400132: Spine3Control
+    400134: Waist
+    400136: WaistControl
+    4300000: Shirt
+    4300002: Boot1
+    4300004: Boot2
+    4300006: Hat
+    4300008: Belt
+    4300010: BaseChar
+    7400000: JumpEnd_0.1
+    9500000: //RootNode
+    13700000: BaseChar
+    13700002: Belt
+    13700004: Boot1
+    13700006: Boot2
+    13700008: Hat
+    13700010: Shirt
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn2
+    second: {fileID: 2100000, guid: d8304ca5ec5113a45856e91977c70c45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 0018249e176beb544aab7fe52f52c2b3, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: JumpEnd_0.1
+      takeName: Take 001
+      firstFrame: 3
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
