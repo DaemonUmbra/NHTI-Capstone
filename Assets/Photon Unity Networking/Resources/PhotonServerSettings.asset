@@ -96,4 +96,6 @@ MonoBehaviour:
   - RPC_ShootFireball
   - RPC_ShootIceball
   - RPC_ChangeMaxHp
+  - RPC_RegisterDeath
+  - RPC_ShootProjectile
   DisableAutoOpenWizard: 1

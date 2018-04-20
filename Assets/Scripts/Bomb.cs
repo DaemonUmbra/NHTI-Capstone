@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bomb : Projectile
 {
-    protected override void onPlayerHit(Collider hitPlayer)
+    protected override void OnPlayerHit(Collider hitPlayer)
     {
         GameObject hit = hitPlayer.gameObject;
         PhotonView hitView = hit.GetPhotonView();
@@ -15,7 +15,7 @@ public class Bomb : Projectile
         if (hitView)
         {
             // Make sure the bullet isn't hitting it's own player
-            if (hitPlayer != _shooter && hitStats)
+            if (hitPlayer.gameObject != _shooter && hitStats)
             {
                 // Apply damage to the player
                 hitStats.TakeDamage(damage, _shooter);
@@ -34,22 +34,19 @@ public class Bomb : Projectile
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (PhotonNetwork.isMasterClient)
+        if(other.CompareTag("Player") || other.CompareTag("Environment"))
         {
-            if (other.gameObject.tag == "Player")
-            {
-                onPlayerHit(other);
-            }
-            if (other.tag == "Environment")
-            {
-                GameObject boom = PhotonNetwork.Instantiate("NovaExplosion", transform.position, transform.rotation, 0);
-                NovaDummy stats = boom.GetComponent<NovaDummy>();
-                stats.ExplosionSize = 3.0f;
-                stats.ExplosionDamage = 15.0f;
-                stats.ExplosionForce = 4.5f;
-
-                PhotonNetwork.Destroy(photonView);
-            }
+            Explode();
         }
+        base.OnTriggerEnter(other);
+    }
+
+    private void Explode()
+    {
+        GameObject boom = PhotonNetwork.Instantiate("NovaExplosion", transform.position, transform.rotation, 0);
+        NovaDummy stats = boom.GetComponent<NovaDummy>();
+        stats.ExplosionSize = 3.0f;
+        stats.ExplosionDamage = 15.0f;
+        stats.ExplosionForce = 4.5f;
     }
 }

@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 114669670588167690}
   - component: {fileID: 114838225558233264}
   - component: {fileID: 95032052263857242}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BasicPlayer w_o PlayerCanvas
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1393,7 +1393,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591509329833866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.82453, y: 47.74517, z: -28.246717}
+  m_LocalPosition: {x: -13.514162, y: 22.91874, z: -42.95064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4093670397209512}
@@ -1668,7 +1668,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230727257065568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 1.907, z: 0.621}
+  m_LocalPosition: {x: 0.536, y: 1.907, z: 0.498}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4227324288345048}
@@ -2433,10 +2433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20cff4f1e3b0ca4dbdf6d190d52f97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directory: Projectiles/
   projectile: {fileID: 114722332653809624, guid: d216057aafb3ae14c8db7f20c67f516f,
     type: 2}
-  OffsetPoint: {fileID: 4411293768615640}
-  AimPoint: {fileID: 0}
+  shootPoint: {fileID: 4411293768615640}
+  range: 100
 --- !u!114 &114275901328029248
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Bubbles : Projectile
 {
-    private new void Awake()
+    public float bubbleSpeed;
+
+    public override void Shoot(GameObject shooter)
     {
-        speed /= 5;
-        base.Awake();
+        speed = bubbleSpeed;
+        base.Shoot(shooter);
     }
+
     protected override void OnTriggerEnter(Collider other)
     {
-        if(PhotonNetwork.isMasterClient)
+        // If this hits a projectile, destroy both projectiles
+        if(other.CompareTag("Projectile"))
         {
-            if(other.gameObject.tag == "Bullet")
-            {
-                //PhotonNetwork.Destroy(other.gameObject.GetPhotonView());
-            }
+            Destroy(other);
+            Destroy(gameObject);
         }
+        base.OnTriggerEnter(other);
     }
 }

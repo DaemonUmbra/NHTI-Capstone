@@ -4,39 +4,24 @@ using UnityEngine;
 
 public class LightningBall : Projectile
 {
-    private new void Awake()
-    {
-        base.Awake();
-    }
+    public float chainRange = 8f;
+    public float chainDamage = 5f;
 
-    protected override void onPlayerHit(Collider hitPlayer)
+    protected override void OnPlayerHit(Collider hitPlayer)
     {
-        GameObject hit = hitPlayer.gameObject;
-        PhotonView hitView = hit.GetPhotonView();
-        PlayerStats hitStats = hit.GetComponent<PlayerStats>();
-        // Verify hit photon view
-        if (hitView)
+        RaycastHit[] hits;
+        hits = Physics.SphereCastAll(transform.position, chainRange, transform.forward);
+        
+        // Deal damage to each player hit with the spherecast
+        foreach(RaycastHit hit in hits)
         {
-            // Make sure the bullet isn't hitting it's own player
-            if (hitView.owner != photonView.owner && hitStats && photonView.isMine)
+            if(PhotonNetwork.isMasterClient)
             {
-                // Apply damage to the player
-                //List<Effect> onHits = _shooter.GetComponent<PlayerStats>().OnHitEffects;
-                hitStats.TakeDamage(damage, _shooter);
-                print("Player hit!");
-
-                RaycastHit otherHit;
-
-                if(Physics.Raycast(gameObject.transform.position, transform.forward, out otherHit))
-                {
-                    PlayerStats newHitStats = otherHit.transform.gameObject.GetComponent<PlayerStats>();
-                    newHitStats.TakeDamage(damage, _shooter);
-                }
-
-                PhotonNetwork.Destroy(photonView);
-                PhotonNetwork.Destroy(gameObject);
+                PlayerStats hitStats = hit.collider.gameObject.GetComponent<PlayerStats>();
+                hitStats.TakeDamage(chainDamage, _shooter);
             }
+            // *** Visual effect needed
         }
-
+        
     }
 }

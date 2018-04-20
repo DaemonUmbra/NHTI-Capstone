@@ -291,16 +291,13 @@ public class PlayerController : Photon.MonoBehaviour
         // Rotate player and set camera rotation
         transform.rotation = Quaternion.Euler(0, hRot, 0);
         camController.camRotation = Quaternion.Euler(vRot, hRot, 0);
-
-        // Rotate the player shoot point
-        pShoot.OffsetPoint.rotation = Quaternion.Euler(vRot, 0, 0);
     }
     [PunRPC]
     private void RPC_FirePrimary()
     {
         //HACK
         pShoot = gameObject.GetComponent<PlayerShoot>();
-        pShoot.shoot.Invoke();
+        pShoot.Shoot();
     }
 
     public void StopMomentum()

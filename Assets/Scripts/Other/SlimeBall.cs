@@ -1,24 +1,9 @@
 ﻿using UnityEngine;
 
-public class SlimeBall : Photon.MonoBehaviour
+public class SlimeBall : Projectile
 {
-    private float lifetime = 5f;
-    
-    GameObject plr;
     Vector3 direction;
-
-    // Use this for initialization
-    private void Start()
-    {
-        Destroy(gameObject, lifetime);
-        
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
+    GameObject plr;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -32,7 +17,12 @@ public class SlimeBall : Photon.MonoBehaviour
             Vector3 mult = Vector3.one;
             mult.y = 1f;
             mult.x = mult.z = .5f;
-            hitController.ApplyKnockBack(direction, 2, mult);
+
+            // Only knockback on master client, position is synced
+            if(PhotonNetwork.isMasterClient)
+            {
+                hitController.ApplyKnockBack(direction, 2, mult);
+            }
         }
     }
 }

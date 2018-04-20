@@ -5,58 +5,98 @@ public class PlayerShoot : Photon.MonoBehaviour
 {
     // Shooting delegate
     public delegate void DelShoot();
-    public DelShoot shoot;
-    public int shootMask = 1 << 11;
+    public DelShoot delShoot;
     Camera cam;
 
     public string directory = "Projectiles/";
     public Projectile projectile;
 
-    public Transform OffsetPoint;
-    public Transform DefaultAimPoint;
+    [SerializeField]
+    private Transform shootPoint;
+    private Transform DefaultAimPoint;
     public float range = 100;
-    
     
     private void OnEnable()
     {
         if(photonView.isMine)
-            shoot += DefaultShoot;
+            delShoot += DefaultShoot;
     }
     private void OnDisable()
     {
         if (photonView.isMine)
-            shoot -= DefaultShoot;
+            delShoot -= DefaultShoot;
     }
     private void Start()
     {
-    }
-
-    private void Update()
-    {
+        cam = GetComponent<CameraController>().cam;
         if(photonView.isMine)
-        OffsetPoint.LookAt(DefaultAimPoint);
+        {
+            // Create an aim point as a child of the camera
+            Vector3 newPoint = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, cam.pixelHeight, range));
+            DefaultAimPoint = Instantiate(shootPoint, cam.transform);
+        }
     }
-    public void DefaultShoot()
+    
+    private void DefaultShoot()
     {
-        photonView.RPC("RPC_Shoot", PhotonTargets.All, OffsetPoint.position, OffsetPoint.rotation.eulerAngles);
+        Shoot(projectile);
     }
 
-    public void Shoot(Projectile proj)
+    public void Shoot()
     {
         if(photonView.isMine)
         {
-            photonView.RPC("RPC_ShootProjectile", PhotonTargets.All, proj.name);
+            delShoot.Invoke();
+        }
+        
+    }
+    public void Shoot(Projectile proj)
+    {
+        // Only shoot on the controlled client because the others don't have a camera
+        if (photonView.isMine)
+        {
+            // Set default aimpoint
+            Vector3 aimPoint = DefaultAimPoint.position;
+
+            // Raycast from camera center
+            RaycastHit hit;
+            Ray ray = cam.ScreenPointToRay(new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0));
+            if (Physics.Raycast(ray, out hit, range))
+            {
+                // Set new aimpoint if hit
+                aimPoint = hit.point;
+            }
+            // Aim at the aiming point
+            shootPoint.LookAt(aimPoint);
+            // Call the shoot rpc
+            photonView.RPC("RPC_ShootProjectile", PhotonTargets.All, proj.name, shootPoint.position, shootPoint.rotation.eulerAngles);
         }
         else
         {
             Debug.LogWarning("Can only shoot on your client");
         }
     }
-    public void Shoot(string prefabName)
+    public void Shoot(string projName)
     {
+        // Only shoot on the controlled client because the others don't have a camera
         if (photonView.isMine)
         {
-            photonView.RPC("RPC_ShootProjectile", PhotonTargets.All, prefabName);
+            // Set default aimpoint
+            Vector3 aimPoint = DefaultAimPoint.position;
+
+            // Raycast from camera center
+            RaycastHit hit;
+            Ray ray = cam.ScreenPointToRay(new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0));
+            if (Physics.Raycast(ray, out hit, range))
+            {
+                // Set new aimpoint if hit
+                aimPoint = hit.point;
+                Debug.Log("Aiming at: " + hit.collider.name);
+            }
+            // Aim at the aiming point
+            shootPoint.LookAt(aimPoint);
+            // Call the shoot rpc
+            photonView.RPC("RPC_ShootProjectile", PhotonTargets.All, projName, shootPoint.position, shootPoint.rotation.eulerAngles);
         }
         else
         {
@@ -65,20 +105,13 @@ public class PlayerShoot : Photon.MonoBehaviour
     }
 
     [PunRPC]
-    private void RPC_ShootProjectile(string projPrefab)
+    private void RPC_ShootProjectile(string projPrefab, Vector3 shootPos, Vector3 shootRot)
     {
-        // Load projectile
-        Projectile proj = Resources.Load<Projectile>(directory + projPrefab);
-        // Set default aimpoint
-        Vector3 aimPoint = DefaultAimPoint.position;
-
-        // Raycast from camera center
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(new Vector3(cam.pixelWidth / 2, cam.pixelHeight / 2, 0));
-        if(Physics.Raycast(ray, out hit, range))
-        {
-            // Set new aimpoint if hit
-            aimPoint = hit.point;
-        }
+        // Load and instantiate projectile prefab
+        Projectile pref = Resources.Load<Projectile>(directory + projPrefab);
+        Projectile proj = Instantiate(pref, shootPos, Quaternion.Euler(shootRot));
+        // Call the projectile shoot function
+        proj.Shoot(gameObject);
     }
+    
 }

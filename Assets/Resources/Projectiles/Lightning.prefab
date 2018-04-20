@@ -145,7 +145,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687ee3bccb12a3a41a6bf41fc84fba6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 3
+  UsePlayerDamage: 0
+  damage: 15
+  bonusDmgMultiplier: 0
+  speed: 100
+  lifetime: 1
+  chainRange: 8
+  chainDamage: 5
 --- !u!114 &114280841016071854
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,7 +20,7 @@ namespace Powerups
             if (pShoot)
             {
                 Debug.Log("Single Shot Added to Shoot Delegate");
-                pShoot.shoot += TryActivate;
+                pShoot.delShoot += TryActivate;
             }
         }
 
@@ -29,7 +29,7 @@ namespace Powerups
             // Remove shoot delegate
             if (pShoot)
             {
-                pShoot.shoot -= TryActivate;
+                pShoot.delShoot -= TryActivate;
             }
             pShoot = null;
 

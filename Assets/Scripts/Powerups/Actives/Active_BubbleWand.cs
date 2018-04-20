@@ -6,11 +6,16 @@ namespace Powerups
     public class Active_BubbleWand : ActiveAbility
     {
         private PlayerShoot pShoot;
+        private PlayerStats pStats;
+        private Bubbles bubble;
+
+        private string prefab = "Bubble";
 
         private void Awake()
         {
             Name = "Bubble Wand";
             Icon = Resources.Load<Sprite>("Images/Bubble Wand");
+            bubble = Resources.Load<Bubbles>("Projectiles/" + prefab);
             Tier = PowerupTier.Uncommon;
         }
 
@@ -19,6 +24,8 @@ namespace Powerups
 
             Debug.Log(Name + " Added");
             pShoot = GetComponent<PlayerShoot>();
+            pStats = GetComponent<PlayerStats>();
+
             // Call base function
             base.OnAbilityAdd();
         }
@@ -31,10 +38,7 @@ namespace Powerups
 
         protected override void Activate()
         {
-            if (photonView.isMine)
-            {
-                GameObject _proj = PhotonNetwork.Instantiate("Bubble", pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation, 0);
-            }
+            pShoot.Shoot(prefab);
             base.Activate();
         }
     }

@@ -22,7 +22,7 @@ namespace Powerups
             audioSource = audioManager.GetNewAudioSource(Name);
             audioSource.playOnAwake = false;
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot += TryActivate;
+            pShoot.delShoot += TryActivate;
             base.OnAbilityAdd();
         }
 
@@ -30,7 +30,7 @@ namespace Powerups
         {
             audioManager.DeleteAudioSource(Name);
             PlayerShoot pShoot = gameObject.GetComponent<PlayerShoot>();
-            pShoot.shoot -= TryActivate;
+            pShoot.delShoot -= TryActivate;
             base.OnAbilityRemove();
         }
 

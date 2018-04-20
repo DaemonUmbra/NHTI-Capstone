@@ -9,11 +9,12 @@ namespace Powerups
         private PlayerShoot pShoot;
         private Ice iceball;
 
+        string prefab = "Ice";
         private void Awake()
         {
             Name = "Ice Ball";
             Icon = Resources.Load<Sprite>("Images/Ice Ball");
-            iceball = Resources.Load<Ice>("Iceball");
+            iceball = Resources.Load<Ice>("Projectiles/" + prefab);
             Tier = PowerupTier.Common;
             Cooldown = 2f;
         }
@@ -34,20 +35,8 @@ namespace Powerups
 
         protected override void Activate()
         {
-            if (photonView.isMine)
-            {
-                //GameObject _proj = PhotonNetwork.Instantiate("Iceball", pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation, 0);
-                photonView.RPC("RPC_ShootIceball", PhotonTargets.All, pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation.eulerAngles);
-            }
+            pShoot.Shoot(iceball);
             base.Activate();
-        }
-
-        [PunRPC]
-        private void RPC_ShootIceball(Vector3 position, Vector3 rotation)
-        {
-
-            Ice ice = Instantiate(iceball, position, Quaternion.Euler(rotation));
-            ice.Shoot(gameObject);
         }
     }
 }

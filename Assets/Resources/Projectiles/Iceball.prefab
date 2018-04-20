@@ -69,7 +69,7 @@ Transform:
   m_GameObject: {fileID: 1930332314063190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 1, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4735768450805636}
   m_Father: {fileID: 0}
@@ -142,7 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382dfe9e468d7954fbb1e54139791bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 2
+  UsePlayerDamage: 0
+  damage: 0
+  bonusDmgMultiplier: 0
+  speed: 100
+  lifetime: 1
 --- !u!135 &135218563817387618
 SphereCollider:
   m_ObjectHideFlags: 1

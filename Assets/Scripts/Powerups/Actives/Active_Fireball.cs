@@ -11,11 +11,13 @@ namespace Powerups
 
         public readonly Vector3 RotOffset = new Vector3(0, 0, 0);
 
+        string prefab = "Fireball";
+
         private void Awake()
         {
             Name = "Fireball";
             Icon = Resources.Load<Sprite>("Images/Fireball");
-            fireball = Resources.Load<Fireball>("Fireball");
+            fireball = Resources.Load<Fireball>("Projectiles/" + prefab);
             Tier = PowerupTier.Common;
             Cooldown = 2f;
         }
@@ -36,19 +38,8 @@ namespace Powerups
 
         protected override void Activate()
         {
-            if(photonView.isMine)
-            {
-                photonView.RPC("RPC_ShootFireball", PhotonTargets.All, pShoot.OffsetPoint.position, pShoot.OffsetPoint.rotation.eulerAngles);
-            }
+            pShoot.Shoot(fireball);
             base.Activate();
-        }
-
-        [PunRPC]
-        private void RPC_ShootFireball(Vector3 position, Vector3 rotation)
-        {
-
-            Fireball fb = Instantiate(fireball, position, Quaternion.Euler(rotation));
-            fb.Shoot(gameObject);
         }
     }
 }

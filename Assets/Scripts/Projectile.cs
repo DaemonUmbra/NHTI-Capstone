@@ -6,88 +6,100 @@ using System.Collections.Generic;
 //public enum ProjectileType { BULLET, LAZER };
 
 [RequireComponent(typeof(Rigidbody))]
-public class Projectile : Photon.MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     private Rigidbody rb;
     protected GameObject _shooter;
 
-    protected PlayerStats shooterStats;
+    protected PlayerStats pStats;
     protected PlayerShoot pShoot;
     
 
     //[SerializeField]
     //protected ProjectileType type;
-    protected List<Effect> onHitEffects;
+    protected List<Effect> onHitEffects = new List<Effect>();
     
-
+    // Projectile stats
+    [SerializeField]
+    protected bool UsePlayerDamage = false;
+    [SerializeField]
     protected float damage = 0f;
+    [SerializeField]
+    protected float bonusDmgMultiplier;
+    [SerializeField]
     protected float speed = 100f;
-
     [SerializeField]
     protected float lifetime = 3; // Seconds
-    private float startTime = 0f;
 
-    public void Awake()
+    protected Collider _collider;
+
+    private void Awake()
     {
-        //onHitEffects = new List<Effect>();
-        rb = GetComponent<Rigidbody>();
-
-        Destroy(gameObject, lifetime);
+        _collider = GetComponent<Collider>();
+        _collider.enabled = false;
     }
-    
-
-    public void Shoot(GameObject shooter)
+    public virtual void Shoot(GameObject shooter)
     {
+        Debug.Log("Inside Shoot");
         // Get shooter info
         _shooter = shooter;
-        shooterStats = shooter.GetComponent<PlayerStats>();
+        pStats = shooter.GetComponent<PlayerStats>();
         pShoot = _shooter.GetComponent<PlayerShoot>();
-        Physics.IgnoreCollision(shooter.GetComponent<Collider>(), GetComponent<Collider>());
-        damage = shooterStats.Damage;
-        // Set the start time of the bullet
-        startTime = Time.time;
+        CalculateDamage();
 
-        //Debug.Log(_shooter);
-        transform.rotation = pShoot.OffsetPoint.rotation;
-        // Apply velocity
         rb = GetComponent<Rigidbody>();
-        if(rb)
+        if (rb)
         rb.velocity = transform.forward * speed;
+
+        // Destroy after lifetime seconds
+        _collider.enabled = true;
+        Destroy(gameObject, lifetime);
     }
 
+    protected virtual void CalculateDamage()
+    {
+        if(UsePlayerDamage)
+        {
+            damage = pStats.Damage + damage;
+        }
+
+        damage += damage * bonusDmgMultiplier;
+    }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        // Only deal damage on the shooter client
-        if (_shooter.GetPhotonView().isMine)
+        Debug.Log("Trigger enter");
+        if (other.gameObject.tag == "Player")
         {
-            if (other.gameObject.tag == "Player")
-            {
-                onPlayerHit(other);
-            }
+            OnPlayerHit(other);
         }
         else
         {
+            // Destroy the projectile on other clients
             Destroy(gameObject);
-        }        
+        }
     }
 
-    protected virtual void onPlayerHit(Collider hitPlayer)
+    protected virtual void OnPlayerHit(Collider hitPlayer)
     {
         GameObject hit = hitPlayer.gameObject;
         PhotonView hitView = hit.GetPhotonView();
         PlayerStats hitStats = hit.GetComponent<PlayerStats>();
-        // Verify hit photon view
-        if (hitView)
+        
+        if (hitPlayer.gameObject != _shooter && hitStats)
         {
-            // Make sure the bullet isn't hitting it's own player
-            if (hitPlayer != _shooter && hitStats)
-            {
+            print("Player hit!");
+            // Only deal damage on shooter client
+            if(PhotonNetwork.isMasterClient)
                 hitStats.TakeDamage(damage, _shooter);
-                print("Player hit!");
-                Destroy(gameObject);
+            
+            // Apply status effects on all clients
+            foreach(Effect e in onHitEffects)
+            {
+                e.ApplyEffect(_shooter);
             }
+            Destroy(gameObject);
         }
-       
+        
     }
 }
