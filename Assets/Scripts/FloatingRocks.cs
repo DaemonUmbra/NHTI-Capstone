@@ -33,7 +33,7 @@ public class FloatingRocks : MonoBehaviour
 
             if (Time.time >= nextFire)
             {
-                randomDirection = new Vector3(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f);
+                randomDirection = new Vector3(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
                 axis = randomDirection;
             }
 
