@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class NovaDummy : Photon.MonoBehaviour
 {
-    private List<Transform> Affected = new List<Transform>();
     private Vector3 ScaleStepVector;
     private AudioSource audioSource;
     private AudioManager audioManager;
 
-    public float ExplosionSize = 15f;
+    private float soundStart;
+
+    public float ExplosionSize = 30f;
     public float ExplosionTime = 1f;
     public float ScaleStep = 1f;
     public float ExplosionForce = 17f;
@@ -19,8 +20,7 @@ public class NovaDummy : Photon.MonoBehaviour
     void Start()
     {
         audioManager = gameObject.GetComponent<AudioManager>();
-        audioSource = audioManager.GetNewAudioSource("Nova");
-        audioManager.PlayOneShot("Nova", "NovaExplosion",.5f);
+        soundStart = Time.time;
         ScaleStepVector = new Vector3(ScaleStep, ScaleStep, ScaleStep);
         transform.localScale = Vector3.zero;
         StartCoroutine(Explode(ExplosionSize));
@@ -34,61 +34,92 @@ public class NovaDummy : Photon.MonoBehaviour
 
     IEnumerator Explode(float size)
     {
+        audioSource = audioManager.GetNewAudioSource("Nova");
+        audioManager.PlayOneShot("Nova", "NovaExplosion", 1f);
+        ExplosionState NovaState = ExplosionState.Expanding;
+        bool soundPlaying = true;
         bool Exploding = true;
-        bool Stage1 = true;
         while (Exploding)
         {
-            if (transform.localScale.magnitude < size && Stage1)
+            soundPlaying = Time.time <= soundStart + audioManager.ClipRegistry["NovaExplosion"].length;
+            switch (NovaState)
             {
-                //Grow
-                transform.localScale += ScaleStepVector;
+                case ExplosionState.Expanding:
+                    {
+                        //Transformation
+                        transform.localScale += ScaleStepVector;
+                        //Check for next stage
+                        if (transform.localScale.magnitude >= size) { NovaState = ExplosionState.Shrinking; }
+                        break;
+                    }
+                case ExplosionState.Shrinking:
+                    {
+                        //Transformation
+                        transform.localScale -= ScaleStepVector;
+                        //Check for next stage
+                        if(transform.localScale.magnitude <= Vector3.zero.magnitude)
+                        {
+                            transform.localScale = Vector3.zero;
+                            NovaState = ExplosionState.Ending;
+                        }
+                        break;
+                    }
+                case ExplosionState.Ending:
+                    {
+                        if (!soundPlaying)
+                        {
+                            PhotonNetwork.Destroy(gameObject);
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
             }
-            else
-            {
-                if (transform.localScale == Vector3.zero)
-                {
-                    Affected.Clear();
-                    Exploding = false;
-                    StartCoroutine(WaitForSound());
-                }
-                if (transform.localScale.magnitude >= size) { Stage1 = false; }
-                //Shrink
-                transform.localScale -= ScaleStepVector;
-            }
+            //if (transform.localScale.magnitude < size && Stage1)
+            //{
+            //    //Grow
+            //    
+            //}
+            //else
+            //{
+            //    if (transform.localScale == Vector3.zero)
+            //    {
+            //        Affected.Clear();
+            //        Exploding = false;
+            //        StartCoroutine(WaitForSound());
+            //    }
+            //    
+            //    //Shrink
+            //    transform.localScale -= ScaleStepVector;
+            //}
             yield return new WaitForEndOfFrame();
         }
-    }
-
-    IEnumerator WaitForSound()
-    {
-        float StartTime = Time.time;
-        while(Time.time <= StartTime + audioManager.ClipRegistry["NovaExplosion"].length)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-            PhotonNetwork.Destroy(gameObject);
-        if(gameObject != null)
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (photonView.isMine)
         {
-            if (!Affected.Contains(other.transform))
+            if (other.GetComponent<PlayerStats>() != null)
             {
-                if (other.GetComponent<PlayerStats>() != null)
-                {
-                    other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, gameObject);
-                    Affected.Add(other.transform);
-                }
-                if (other.GetComponent<Rigidbody>() != null)
-                {
-                    other.GetComponent<Rigidbody>().AddExplosionForce(ExplosionForce, transform.position, ExplosionSize);
-                }
+                other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, gameObject);
+                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other);
+            }
+            if (other.GetComponent<Rigidbody>() != null)
+            {
+                other.GetComponent<Rigidbody>().AddExplosionForce(ExplosionForce, transform.position, ExplosionSize);
             }
         }
+    }
+
+    private enum ExplosionState
+    {
+        Invalid,
+        Expanding,
+        Shrinking,
+        Ending
     }
 }

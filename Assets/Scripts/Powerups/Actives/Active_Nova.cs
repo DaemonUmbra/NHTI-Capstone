@@ -9,6 +9,7 @@ namespace Powerups {
         private AbilityManager AbilityManager;
         private GameObject Explosion;
         private AudioSource audioSource;
+        private bool fired = false;
 
 
         // Awake is called when the script instance is being loaded
@@ -27,8 +28,9 @@ namespace Powerups {
         protected override void Activate()
         {
             base.Activate();
-            if (photonView.isMine)
+            if (photonView.isMine && fired == false)
             {
+                fired = true; //HACK: Should fix Cody's issue
                 photonView.RPC("RPC_Nova_Explosion", PhotonTargets.All);
             }
         }
