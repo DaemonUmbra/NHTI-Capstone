@@ -309,7 +309,7 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="multiplierName">Name of the multiplier</param>
     public void RemoveDmgMultiplier(string multiplierName)
     {
-        photonView.RPC("RPC_RemoveDmgMultiplier", PhotonTargets.All, multiplierName);
+        photonView.RPC("RPC_RemoveDamageMultiplier", PhotonTargets.All, multiplierName);
     }
     /// <summary>
     /// Remove a damage boost from the player. Use the name set when adding the boost.
@@ -317,7 +317,7 @@ public class PlayerStats : Photon.MonoBehaviour
     /// <param name="boostName">Name of the boost</param>
     public void RemoveDmgBoost(string boostName)
     {
-        photonView.RPC("RPC_RemoveDmgBoost", PhotonTargets.All, boostName);
+        photonView.RPC("RPC_RemoveDamageBoost", PhotonTargets.All, boostName);
     }
 
     // Public Scale Modifiers
@@ -625,7 +625,7 @@ public class PlayerStats : Photon.MonoBehaviour
             _currentHp += amount;
         }
     }
-    [PunRPC] private void RPC_ModifyMaxHp(float amount)
+    [PunRPC] private void RPC_ChangeMaxHp(float amount)
     {
         _maxHp += amount;
         // Check that the max hp isn't less than the current hp

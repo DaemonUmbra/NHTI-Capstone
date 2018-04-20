@@ -22,10 +22,11 @@ namespace Powerups
         {
             ps = GetComponentInParent<PlayerStats>();
 
-            ps.AddSpeedBoost(Name, 0.1f);
-            ps.JumpPower += 1.0f;
-            ps.AddDmgBoost(Name, 2.0f);
-            ps.ChangeMaxHp(10.0f);
+            ps.AddSpeedBoost(Name, 0.25f);
+            ps.JumpPower += 2.0f;
+            ps.AddDmgBoost(Name, 2.5f);
+            ps.ChangeMaxHp(20.0f);
+            ps.GainHp(20.0f);
 
             base.OnAbilityAdd();
         }
@@ -35,12 +36,11 @@ namespace Powerups
             ps = GetComponentInParent<PlayerStats>();
 
             ps.RemoveSpeedBoost(Name);
-            ps.JumpPower -= 1.0f;
+            ps.JumpPower -= 2.0f;
             ps.RemoveDmgBoost(Name);
-            ps.ChangeMaxHp(-10.0f);
-            
-            AbilityManager manage = gameObject.GetComponent<AbilityManager>();
-            manage.RemoveAbility<Passive_ThunderCloud>();
+            ps.ChangeMaxHp(-20.0f);
+
+            base.OnAbilityRemove();
         }
 
         public override void OnUpdate()
@@ -50,13 +50,10 @@ namespace Powerups
             {
                 //Take damage if player doesn't get rid of powerup in time
                 PlayerStats ps = gameObject.GetComponent<PlayerStats>();
-                ps.TakeDamage(20.0f);
+                ps.TakeDamage(40.0f);
 
-                AbilityManager manage = gameObject.GetComponent<AbilityManager>();
-                manage.RemoveAbility<Passive_ThunderCloud>();
+                OnAbilityRemove();
             }
-
-            base.OnUpdate();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -64,8 +61,7 @@ namespace Powerups
             AbilityManager manager = collision.gameObject.GetComponent<AbilityManager>();
             manager.AddAbility<Passive_ThunderCloud>();
 
-            AbilityManager manage = gameObject.GetComponent<AbilityManager>();
-            manage.RemoveAbility<Passive_ThunderCloud>();
+            OnAbilityRemove();
         }
     }
 }
