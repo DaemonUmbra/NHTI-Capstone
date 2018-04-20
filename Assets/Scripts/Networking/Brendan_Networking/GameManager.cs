@@ -108,7 +108,7 @@ public class GameManager : Photon.PunBehaviour {
 
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
 
         if (PhotonNetwork.isMasterClient)
         {
@@ -137,7 +137,7 @@ public class GameManager : Photon.PunBehaviour {
                 {
                     ChangeGameState(GameState.SuddenDeath);
                 }
-                else if(playersLeft <= 1)
+                else if (playersLeft <= 1)
                 {
                     ChangeGameState(GameState.GameOver);
                 }
@@ -153,12 +153,12 @@ public class GameManager : Photon.PunBehaviour {
         }
 
         UpdateGameTime();
-	}
+    }
 
     public void UpdateGameTime()
     {
         // Update game time
-        if(PhotonNetwork.isMasterClient)
+        if (PhotonNetwork.isMasterClient)
         {
             gameTime = Time.time - startTime;
         }
@@ -168,7 +168,7 @@ public class GameManager : Photon.PunBehaviour {
     {
         PlayerStats[] players = FindObjectsOfType<PlayerStats>();
 
-        foreach(PlayerStats ps in players)
+        foreach (PlayerStats ps in players)
         {
             ps.Invulnerable = inv;
         }
@@ -190,7 +190,7 @@ public class GameManager : Photon.PunBehaviour {
 
         PlayerStats ps = killer.GetComponent<PlayerStats>();
 
-        if(ps)
+        if (ps)
         {
             ps.RegisterKill();
         }
@@ -199,6 +199,8 @@ public class GameManager : Photon.PunBehaviour {
     {
         playersLeft--;
     }
+
+   
     
     // Change the current game state
     public void ChangeGameState(GameState newState)
@@ -296,6 +298,11 @@ public class GameManager : Photon.PunBehaviour {
     private void RPC_GameOver(int winnerID)
     {
 
+    }
+    [PunRPC]
+    private void RPC_RegisterDeath(int photonId, int playersLeft)
+    {
+        //playersLeft = 
     }
     #endregion
 }
