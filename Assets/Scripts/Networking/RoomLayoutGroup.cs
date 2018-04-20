@@ -20,6 +20,7 @@ public class RoomLayoutGroup : MonoBehaviour
             RefreshList();
             status = LobbyManager.HideFullRoom;
         }
+        OnReceivedRoomListUpdate();
     }
 
     [SerializeField]

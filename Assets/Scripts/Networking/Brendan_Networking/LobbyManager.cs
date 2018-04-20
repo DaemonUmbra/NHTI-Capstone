@@ -226,6 +226,7 @@ public class LobbyManager : Photon.PunBehaviour {
         PhotonNetwork.room.IsOpen = false;
         PhotonNetwork.room.IsVisible = false;
         PhotonNetwork.LoadLevel(level);
+       
 
 
     }
@@ -243,6 +244,7 @@ public class LobbyManager : Photon.PunBehaviour {
     public void OnClick_CreateRoom()
     {
         CreateRoom();
+        ChangeState(LobbyState.ROOM);
     }
     public void OnClickLeaveRoom()
     {
@@ -255,9 +257,7 @@ public class LobbyManager : Photon.PunBehaviour {
     #region Unity Callbacks
     private void Awake()
     {
-        // Connect to server
-        loginButton.interactable = false;
-        PhotonNetwork.ConnectUsingSettings("0.0.0");
+        
 
         // Find canvas manager if not set manually
         if (!_canvasManager)
@@ -270,19 +270,30 @@ public class LobbyManager : Photon.PunBehaviour {
         // Set the initial game state
         ChangeState(LobbyState.LOGIN);
     }
+    private void Update()
+    {
+        if (!PhotonNetwork.connected)
+        {
+            PhotonNetwork.ConnectUsingSettings("0.0.0");
+        }
+    }
     #endregion
-    
+
 
     #region Photon Callbacks
     public override void OnConnectedToMaster()
     {
-
         loginButton.interactable = true;
         connectingText.text = "Connected!";
         print("Connected to master.");
         PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.playerName = PlayerNetwork.Instance.PlayerName;
         base.OnConnectedToMaster();
+    }
+    public override void OnDisconnectedFromPhoton()
+    {
+        loginButton.interactable = true;
+        base.OnDisconnectedFromPhoton();
     }
     public override void OnJoinedLobby()
     {
@@ -293,16 +304,7 @@ public class LobbyManager : Photon.PunBehaviour {
     {
         print("Joined room.");
         _room = PhotonNetwork.room; 
-        ChangeState(LobbyState.ROOM);
         base.OnJoinedRoom();
-    }
-
-    private void OnDestroy()
-    {
-        if(PhotonNetwork.isMasterClient)
-        {
-            PhotonNetwork.Destroy(photonView);
-        }
     }
     #endregion
 }

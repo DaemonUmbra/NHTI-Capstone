@@ -116,6 +116,7 @@ namespace Powerups
         public override void OnAbilityRemove()
         {
             // Call base function
+            photonView.GetComponent<ModelManager>().RemoveSubModel("Beam");
             audioManager.DeleteAudioSource(Name);
             base.OnAbilityRemove();
         }
