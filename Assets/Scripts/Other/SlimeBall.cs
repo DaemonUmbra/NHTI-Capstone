@@ -30,8 +30,8 @@ public class SlimeBall : Photon.MonoBehaviour
             plr = collision.gameObject;
             PlayerController hitController = plr.GetComponent<PlayerController>();
             Vector3 mult = Vector3.one;
-            mult.y = .7f;
-            mult.x = mult.z = .3f;
+            mult.y = 1f;
+            mult.x = mult.z = .5f;
             hitController.ApplyKnockBack(direction, 2, mult);
         }
     }

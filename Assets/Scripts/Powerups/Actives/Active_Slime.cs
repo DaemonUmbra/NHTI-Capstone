@@ -20,7 +20,7 @@ namespace Powerups
         private float CDstart;
         private bool onCooldown = false, Active = false;
         private PlayerShoot pShoot;
-        private float force = 30f;
+        private float force = 20f;
         private float offset = 2, duration = 7f;
 
         // Awake is called when the script instance is being loaded
@@ -39,7 +39,7 @@ namespace Powerups
         {
             Cooldown = 7;
             Debug.Log(Name + " Added");
-            
+            pShoot = GetComponent<PlayerShoot>();
             base.OnAbilityAdd();
         }
 
@@ -64,14 +64,16 @@ namespace Powerups
             {
                 return;
             }
+            
             Vector3 mp = Input.mousePosition;
             Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
             Camera cam = transform.GetComponent<CameraController>().cam;
-            GameObject _slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + (transform.up * 2) + (transform.forward * 3), Quaternion.identity, 0);
-            _slime.transform.LookAt(mouseLocation);
+            Vector3 rot = pShoot.OffsetPoint.rotation.eulerAngles;
+            GameObject _slime = PhotonNetwork.Instantiate("SlimeBall", transform.position + (transform.up * 1.5f) + (transform.forward * 3), Quaternion.Euler(rot), 0);
+            //_slime.transform.LookAt(mouseLocation);
             Rigidbody rb = _slime.GetComponent<Rigidbody>();
 
-            rb.velocity = (-_slime.transform.forward + (_slime.transform.up / 4)) * force;
+            rb.velocity = (_slime.transform.forward + (_slime.transform.up / 4)) * force;
 
             base.Activate();
         }

@@ -12,7 +12,7 @@ public class PlayerController : Photon.MonoBehaviour
     Quaternion rotation;
 
     // Crowd control
-    private bool CrowdControlled = false;
+    private bool KnockBacked = false;
     private float CCStartTime, duration;
     // Layers
     [SerializeField]
@@ -317,7 +317,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
         if (currentTime >= CCStartTime + CCDuration)//static value
         {
-            CrowdControlled = false;
+            KnockBacked = false;
         }
     }
     
@@ -339,7 +339,7 @@ public class PlayerController : Photon.MonoBehaviour
     [PunRPC]
     public void RPC_KnockBack(Vector3 direction, float force, Vector3 velocityMultiplier)
     {
-        CrowdControlled = true;
+        KnockBacked = true;
         direction = direction.normalized;
         Rigidbody rb = transform.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(direction.x * velocityMultiplier.x, direction.y * velocityMultiplier.y, direction.z * velocityMultiplier.z);
@@ -351,11 +351,10 @@ public class PlayerController : Photon.MonoBehaviour
     }
     public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
     {
-        photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
-    }
-    public void ApplyCrowdControl(float start, float duration)
-    {
-
+        if (!KnockBacked)
+        {
+            photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
+        }
     }
     private void GroundCheck()
     {
@@ -482,7 +481,7 @@ public class PlayerController : Photon.MonoBehaviour
         }
         if (collision.gameObject.tag != "SlimeBall")
         {
-            CrowdControlled = false;
+            KnockBacked = false;
         }
         
     }
