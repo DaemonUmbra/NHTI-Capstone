@@ -50,13 +50,15 @@ namespace Powerups
             {
                 return;
             }
+            Debug.Log("Snipe Activated");
             CameraController cController = GetComponent<CameraController>();
             Camera c = cController.cam;
             Vector2 mPos = Input.mousePosition;
             worldPoint = c.ScreenToWorldPoint(mPos);
             RaycastHit hit;
             Physics.Raycast(transform.position, worldPoint, out hit);
-            Debug.DrawLine(transform.position, worldPoint);
+            Debug.Log(hit.transform.gameObject.name);
+            Debug.DrawLine(transform.position, worldPoint, Color.blue, 5);
             //StartCoroutine(SnipeRay());
             base.Activate();
         }
@@ -68,6 +70,7 @@ namespace Powerups
         }
         private void OnDrawGizmos()
         {
+            Debug.Log("hello");
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, worldPoint);
         }
