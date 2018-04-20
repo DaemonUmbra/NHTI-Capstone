@@ -59,9 +59,11 @@ namespace Powerups
         {
             Boosted = true;
             WalkSpeed = PS.WalkSpeed;
-            PS.AddSpeedMultipler(Name, 2);
+            if(photonView.isMine)
+                PS.AddSpeedMultipler(Name, 2);
             yield return new WaitForSecondsRealtime(1.0f);
-            PS.RemoveSpeedMultiplier(Name);
+            if (photonView.isMine)
+                PS.RemoveSpeedMultiplier(Name);
             yield return new WaitForSecondsRealtime(3.0f);
             Boosted = false;            
         }
