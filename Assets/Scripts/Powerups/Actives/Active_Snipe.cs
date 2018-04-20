@@ -21,6 +21,7 @@ namespace Powerups
         private bool CurrentlyActive = false;
         private PlayerShoot pShoot;
         ModelManager manager;
+        Vector3 worldPoint;
 
         private void Awake()
         {
@@ -49,8 +50,14 @@ namespace Powerups
             {
                 return;
             }
-
-            StartCoroutine(SnipeRay());
+            CameraController cController = GetComponent<CameraController>();
+            Camera c = cController.cam;
+            Vector2 mPos = Input.mousePosition;
+            worldPoint = c.ScreenToWorldPoint(mPos);
+            RaycastHit hit;
+            Physics.Raycast(transform.position, worldPoint, out hit);
+            Debug.DrawLine(transform.position, worldPoint);
+            //StartCoroutine(SnipeRay());
             base.Activate();
         }
         IEnumerator SnipeRay()
@@ -58,6 +65,11 @@ namespace Powerups
             manager.AddSubModel("Beam");
             yield return new WaitForSecondsRealtime(.5f);
             manager.RemoveSubModel("Beam");
+        }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, worldPoint);
         }
     }
 }

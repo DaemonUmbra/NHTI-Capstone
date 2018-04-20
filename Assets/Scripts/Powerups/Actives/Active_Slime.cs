@@ -73,7 +73,7 @@ namespace Powerups
             //_slime.transform.LookAt(mouseLocation);
             Rigidbody rb = _slime.GetComponent<Rigidbody>();
 
-            rb.velocity = (_slime.transform.forward + (_slime.transform.up / 4)) * force;
+            rb.velocity = (_slime.transform.forward + (_slime.transform.up / 5)) * force;
 
             base.Activate();
         }
