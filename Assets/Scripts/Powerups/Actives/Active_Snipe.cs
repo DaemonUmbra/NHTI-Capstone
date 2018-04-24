@@ -20,8 +20,11 @@ namespace Powerups
         //private float CDstart;
         private bool CurrentlyActive = false;
         private PlayerShoot pShoot;
+        float Damage = 40;
         ModelManager manager;
         Vector3 worldPoint;
+        GameObject visual;
+        CameraController camC;
 
         private void Awake()
         {
@@ -37,6 +40,8 @@ namespace Powerups
             //Powerup added
             Debug.Log(Name + " Added");
             manager = GetComponent<ModelManager>();
+            visual = Resources.Load<GameObject>("SnipeOrigin");
+            camC = GetComponent<CameraController>();
             base.OnAbilityAdd();
         }
 
@@ -51,28 +56,36 @@ namespace Powerups
                 return;
             }
             Debug.Log("Snipe Activated");
-            CameraController cController = GetComponent<CameraController>();
-            Camera c = cController.cam;
-            Vector2 mPos = Input.mousePosition;
-            worldPoint = c.ScreenToWorldPoint(mPos);
-            RaycastHit hit;
-            Physics.Raycast(transform.position, worldPoint, out hit);
-            Debug.Log(hit.transform.gameObject.name);
-            Debug.DrawLine(transform.position, worldPoint, Color.blue, 5);
-            //StartCoroutine(SnipeRay());
+            StartCoroutine(SnipeRay());
             base.Activate();
         }
         IEnumerator SnipeRay()
         {
-            manager.AddSubModel("Beam");
+            GameObject sp = transform.Find("ShootPoint").gameObject;
+            GameObject r = Instantiate(visual, sp.transform.position, Quaternion.identity);
+            Ray aim = camC.cam.ScreenPointToRay(Input.mousePosition);
+            aim.origin = sp.transform.position;
+            RaycastHit rHit;
+            if(Physics.Raycast(aim, out rHit))
+            {
+                r.transform.LookAt(rHit.point);
+                if(rHit.transform.gameObject.tag == "Player")
+                {
+                    ApplyDamage(rHit.transform.gameObject);
+                }
+            }
+            //r.transform.LookAt(aimPoint);
             yield return new WaitForSecondsRealtime(.5f);
-            manager.RemoveSubModel("Beam");
+            Destroy(r);
         }
-        private void OnDrawGizmos()
+        void ApplyDamage(GameObject target)
         {
-            Debug.Log("hello");
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, worldPoint);
+            PhotonView view = target.GetPhotonView();
+            PlayerStats stats = target.GetComponent<PlayerStats>();
+            if (PhotonNetwork.isMasterClient)
+            {
+                stats.TakeDamage(Damage);
+            }
         }
     }
 }
