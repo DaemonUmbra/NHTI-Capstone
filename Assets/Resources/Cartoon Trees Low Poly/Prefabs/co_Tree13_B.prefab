@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409144}
   - component: {fileID: 20509140}
+  - component: {fileID: 64011928126600328}
   m_Layer: 0
   m_Name: co_Tree13_B
   m_TagString: Untagged
@@ -83,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 66.6, y: 1.5, z: 56.4}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 409142}
@@ -205,3 +206,17 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 109144}
   m_IsPrefabParent: 1
+--- !u!64 &64011928126600328
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 109144}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: f59b93fd06e71c6459ea406dbab1c683, type: 3}
