@@ -7,6 +7,7 @@ public class AnimatorSettings : Photon.MonoBehaviour
 {
 
     public Animator anim;
+    public PlayerController controller;
     
 
     // Use this for initialization
@@ -22,6 +23,7 @@ public class AnimatorSettings : Photon.MonoBehaviour
         if (photonView.isMine)
         {
             anim = GetComponent<Animator>();
+            controller = GetComponent<PlayerController>();
 
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S)
                 || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
@@ -40,6 +42,23 @@ public class AnimatorSettings : Photon.MonoBehaviour
             else
             {
                 anim.SetBool("IsAttacking", false);
+            }
+
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                anim.SetBool("IsJumping", true);
+               
+                if (!controller.isGrounded)
+                {
+                    anim.SetBool("Grounded", false);
+                }
+                else
+                anim.SetBool("Grounded", true);
+            }
+            else
+            {
+                anim.SetBool("IsJumping", false);
+                
             }
         }
     }
