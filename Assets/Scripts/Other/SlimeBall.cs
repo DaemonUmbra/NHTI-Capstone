@@ -5,11 +5,29 @@ public class SlimeBall : Projectile
     Vector3 direction;
     GameObject plr;
     float force = 20;
+    float startTime;
+    Rigidbody rb;
     private void Start()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-
+        rb = GetComponent<Rigidbody>();
+        startTime = Time.time;
+        Physics.IgnoreLayerCollision(11, 12, true);
+        Debug.Log(Physics.GetIgnoreLayerCollision(11, 12));
         rb.velocity = (transform.forward + (transform.up / 5)) * force;
+        //rb.AddForce((transform.forward + (transform.up / 5)) * force);
+    }
+    private void Update()
+    {
+        //Debug.Log(Time.time + "  e: " + startTime);
+        if (Time.time >= startTime + 1)
+        {
+            Physics.IgnoreLayerCollision(11, 12, false);
+            Debug.Log(Physics.GetIgnoreLayerCollision(11, 12));
+        }
+    }
+    void ResetRB()
+    {
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
