@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour {
 
@@ -44,7 +45,7 @@ public class OptionsMenu : MonoBehaviour {
     public void Lobby()
     {
         PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LoadLevel(0);
+        SceneManager.LoadScene("LobbiesMenu");
     }
 
     public void Quit()
