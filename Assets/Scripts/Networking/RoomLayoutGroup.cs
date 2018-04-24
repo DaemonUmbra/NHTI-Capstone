@@ -20,7 +20,6 @@ public class RoomLayoutGroup : MonoBehaviour
             RefreshList();
             status = LobbyManager.HideFullRoom;
         }
-        OnReceivedRoomListUpdate();
     }
 
     [SerializeField]
@@ -40,7 +39,9 @@ public class RoomLayoutGroup : MonoBehaviour
 
     private void OnReceivedRoomListUpdate()
     {
+
         RoomInfo[] rooms = PhotonNetwork.GetRoomList();
+
 
         foreach (RoomInfo room in rooms)
         {

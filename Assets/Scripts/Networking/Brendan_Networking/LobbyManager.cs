@@ -156,13 +156,13 @@ public class LobbyManager : Photon.PunBehaviour {
         if (PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default))
         {
             Debug.Log("Room: " + roomName + " created!");
+            ChangeState(LobbyState.ROOM);
         }
         else
         {
             Debug.Log("Failed to create room!");
             ChangeState(LobbyState.LOBBY);
         }
-        ChangeState(LobbyState.ROOM);
     }
     public void StartGame()
     {
@@ -303,6 +303,7 @@ public class LobbyManager : Photon.PunBehaviour {
     public override void OnJoinedRoom()
     {
         print("Joined room.");
+        ChangeState(LobbyState.ROOM);
         _room = PhotonNetwork.room; 
         base.OnJoinedRoom();
     }

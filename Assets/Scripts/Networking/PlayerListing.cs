@@ -35,7 +35,7 @@ public class PlayerListing : MonoBehaviour
     {
         while (PhotonNetwork.connected)
         {
-            int ping = (int)PhotonPlayer.CustomProperties["Ping"];
+            int ping = PhotonNetwork.GetPing();
             m_playerPing.text = ping.ToString();
             yield return new WaitForSeconds(1f);
         }
