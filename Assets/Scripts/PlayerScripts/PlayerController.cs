@@ -12,7 +12,7 @@ public class PlayerController : Photon.MonoBehaviour
     Quaternion rotation;
 
     // Crowd control
-    private bool KnockBacked = false;
+    public bool KnockBacked = false;
     private float CCStartTime, duration;
     // Layers
     [SerializeField]
@@ -348,10 +348,9 @@ public class PlayerController : Photon.MonoBehaviour
     }
     public void ApplyKnockBack(Vector3 dir, float force, Vector3 mult)
     {
-        if (!KnockBacked)
-        {
-            photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, 20f, mult);
-        }
+        
+        photonView.RPC("RPC_KnockBack", PhotonTargets.All, dir, force, mult);
+        
     }
     private void GroundCheck()
     {
@@ -455,7 +454,6 @@ public class PlayerController : Photon.MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
         GameObject hit = collision.gameObject;
         //print("Collided with Object on layer: " + collision.gameObject.layer.ToString());
         Rigidbody rb = transform.GetComponent<Rigidbody>();
