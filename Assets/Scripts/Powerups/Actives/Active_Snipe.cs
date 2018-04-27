@@ -68,14 +68,17 @@ namespace Powerups
             RaycastHit rHit;
             if(Physics.Raycast(aim, out rHit))
             {
+                Debug.Log(rHit.distance);
                 r.transform.LookAt(rHit.point);
+                Transform laser = r.transform.GetChild(0);
+                laser.localScale = new Vector3(.1f, rHit.distance, .1f);
                 if(rHit.transform.gameObject.tag == "Player")
                 {
                     ApplyDamage(rHit.transform.gameObject);
                 }
             }
             //r.transform.LookAt(aimPoint);
-            yield return new WaitForSecondsRealtime(.5f);
+            yield return new WaitForSecondsRealtime(3f);
             Destroy(r);
         }
         void ApplyDamage(GameObject target)
