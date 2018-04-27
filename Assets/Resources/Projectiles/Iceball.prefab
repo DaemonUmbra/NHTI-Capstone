@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23112800944961952}
   - component: {fileID: 54660862702059528}
   - component: {fileID: 114295968751834338}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Iceball
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4735768450805636}
   - component: {fileID: 198595301783802508}
   - component: {fileID: 199650591205401832}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}

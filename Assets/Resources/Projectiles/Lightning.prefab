@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114466504456818184}
   - component: {fileID: 114280841016071854}
   - component: {fileID: 114063733469262294}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Lightning
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4939997741806698}
   - component: {fileID: 198911458459889968}
   - component: {fileID: 199304580113998454}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

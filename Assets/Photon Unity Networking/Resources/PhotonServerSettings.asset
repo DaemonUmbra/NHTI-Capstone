@@ -98,4 +98,5 @@ MonoBehaviour:
   - RPC_ChangeMaxHp
   - RPC_RegisterDeath
   - RPC_ShootProjectile
+  - RPC_SetKills
   DisableAutoOpenWizard: 1

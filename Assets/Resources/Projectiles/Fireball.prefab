@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4142721474143004}
   - component: {fileID: 198240056885586662}
   - component: {fileID: 199171151157775128}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fire Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4049379092703270}
   - component: {fileID: 108399528730045330}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 23112800944961952}
   - component: {fileID: 54660862702059528}
   - component: {fileID: 114214077850779512}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

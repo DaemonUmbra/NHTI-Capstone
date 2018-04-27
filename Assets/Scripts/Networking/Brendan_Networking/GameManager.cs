@@ -210,33 +210,34 @@ public class GameManager : Photon.PunBehaviour {
     [PunRPC]
     private void RPC_ChangeGameState(byte newState)
     {
+        GameState state = (GameState)newState;
         if(PhotonNetwork.isMasterClient)
         {
             gameState = (GameState)newState;
             stateStartTime = gameTime;
         }
 
-        if (gameState == GameState.Preparation)
+        if (state == GameState.Preparation)
         {
             ToggleInvulnerability(true);
             ToggleRespawn(true);
         }
-        else if (gameState == GameState.Brawl)
+        else if (state == GameState.Brawl)
         {
             ToggleInvulnerability(false);
             ToggleRespawn(true);
         }
-        else if (gameState == GameState.Royale)
+        else if (state == GameState.Royale)
         {
             ToggleInvulnerability(false);
             ToggleRespawn(false);
         }
-        else if (gameState == GameState.SuddenDeath)
+        else if (state == GameState.SuddenDeath)
         {
             ToggleInvulnerability(false);
             ToggleRespawn(false);
         }
-        else if (gameState == GameState.GameOver)
+        else if (state == GameState.GameOver)
         {
             ToggleInvulnerability(true);
             ToggleRespawn(false);

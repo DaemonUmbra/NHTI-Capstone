@@ -104,8 +104,7 @@ public class PlayerStats : Photon.MonoBehaviour
 
     #endregion Unity Callbacks
 
-
-
+    
     #region Public Methods
 
     // Add an effect to the player
@@ -375,8 +374,7 @@ public class PlayerStats : Photon.MonoBehaviour
     }
 
     #endregion Public Methods
-
-
+    
 
     #region Photon RPCs
     // Register kills
@@ -686,6 +684,12 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         GameObject killer = PhotonView.Find(srcId).gameObject;
 
+        // Reset abilities
+        AbilityManager abilityManager = GetComponent<AbilityManager>();
+        abilityManager.ResetAbilities();
+
+        _currentHp = _maxHp;
+
         if (killer != null)
         {
             Debug.Log(gameObject.name + " was killed by " + killer.name);
@@ -701,10 +705,7 @@ public class PlayerStats : Photon.MonoBehaviour
             PlayerSpawning Mng = FindObjectOfType<PlayerSpawning>();
             Transform respawn = Mng.GetRandomSpawnPoint();
             gameObject.transform.position = respawn.position;
-            // Reset abilities
-            AbilityManager abilityManager = GetComponent<AbilityManager>();
-            abilityManager.ResetAbilities();
-            _currentHp = _maxHp; // Resets hp
+            
         }
         else
         {
@@ -718,8 +719,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 RegisterLoss();
             }
         }
-
-
+        _currentHp = _maxHp; // Resets hp
     }
 
     // Damage Modifier RPCs
@@ -854,8 +854,7 @@ public class PlayerStats : Photon.MonoBehaviour
     }
 
     #endregion Photon RPCs
-
-
+    
 
     #region Private Methods
     // Kill the player

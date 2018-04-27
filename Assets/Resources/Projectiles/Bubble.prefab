@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4899528132005522}
   - component: {fileID: 198900264609624492}
   - component: {fileID: 199754189136256768}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bubbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 23112800944961952}
   - component: {fileID: 54660862702059528}
   - component: {fileID: 114226798764661786}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bubble
   m_TagString: Bullet
   m_Icon: {fileID: 0}
