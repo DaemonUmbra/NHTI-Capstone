@@ -29,7 +29,7 @@ namespace Powerups
         private void Awake()
         {
             // Set name
-            Cooldown = 5f;
+            Cooldown = .5f;
             Name = "Snipe";
             //Set Sprite
             Icon = Resources.Load<Sprite>("Images/Sniper");
@@ -62,23 +62,29 @@ namespace Powerups
         IEnumerator SnipeRay()
         {
             GameObject sp = transform.Find("ShootPoint").gameObject;
-            GameObject r = Instantiate(visual, sp.transform.position, Quaternion.identity);
+            
             Ray aim = camC.cam.ScreenPointToRay(Input.mousePosition);
-            aim.origin = sp.transform.position;
+            //aim.origin = sp.transform.position;
             RaycastHit rHit;
-            if(Physics.Raycast(aim, out rHit))
-            {
-                Debug.Log(rHit.distance);
-                r.transform.LookAt(rHit.point);
-                Transform laser = r.transform.GetChild(0);
-                laser.localScale = new Vector3(.1f, rHit.distance, .1f);
-                if(rHit.transform.gameObject.tag == "Player")
-                {
-                    ApplyDamage(rHit.transform.gameObject);
-                }
+            Vector3 dest = Vector3.zero;
+            if (Physics.Raycast(sp.transform.position, aim.direction, out rHit))
+            {                
+                Debug.Log("cast: " + rHit.transform.gameObject.name);
             }
-            //r.transform.LookAt(aimPoint);
-            yield return new WaitForSecondsRealtime(3f);
+            GameObject r = Instantiate(visual, sp.transform.position, Quaternion.identity);
+            Transform laser = r.transform.GetChild(0);
+            GameObject hitObject = rHit.transform.gameObject;
+            float dist = Vector3.Distance(rHit.point, sp.transform.position);
+            Ray visualRay = new Ray(sp.transform.position, rHit.point);
+            
+            laser.localScale = new Vector3(.1f, dist/2, .1f);
+            laser.localPosition = new Vector3(0, 0, dist / 2);
+            r.transform.LookAt(rHit.point);
+            if (hitObject.tag == "Player")
+            {
+                ApplyDamage(rHit.transform.gameObject);
+            }
+            yield return new WaitForSecondsRealtime(10f);
             Destroy(r);
         }
         void ApplyDamage(GameObject target)
