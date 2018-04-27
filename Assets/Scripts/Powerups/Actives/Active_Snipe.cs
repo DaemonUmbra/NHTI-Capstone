@@ -86,7 +86,7 @@ namespace Powerups
                 ApplyDamage(rHit.transform.gameObject);
             }
             yield return new WaitForSecondsRealtime(.2f);
-            Destroy(r);
+            PhotonNetwork.Destroy(r);
         }
         void ApplyDamage(GameObject target)
         {
