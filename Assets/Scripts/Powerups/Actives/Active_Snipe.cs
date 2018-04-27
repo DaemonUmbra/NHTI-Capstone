@@ -71,7 +71,8 @@ namespace Powerups
             {                
                 Debug.Log("cast: " + rHit.transform.gameObject.name);
             }
-            GameObject r = Instantiate(visual, sp.transform.position, Quaternion.identity);
+            GameObject r = PhotonNetwork.Instantiate("SnipeOrigin", sp.transform.position, Quaternion.identity, 0);
+            //GameObject r = Instantiate(visual, sp.transform.position, Quaternion.identity);
             Transform laser = r.transform.GetChild(0);
             GameObject hitObject = rHit.transform.gameObject;
             float dist = Vector3.Distance(rHit.point, sp.transform.position);
@@ -84,7 +85,7 @@ namespace Powerups
             {
                 ApplyDamage(rHit.transform.gameObject);
             }
-            yield return new WaitForSecondsRealtime(10f);
+            yield return new WaitForSecondsRealtime(.2f);
             Destroy(r);
         }
         void ApplyDamage(GameObject target)
