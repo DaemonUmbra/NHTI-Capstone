@@ -69,7 +69,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger enter");
+        Debug.Log("Projectile hit: " + other.name);
         if (other.gameObject.tag == "Player")
         {
             OnPlayerHit(other);

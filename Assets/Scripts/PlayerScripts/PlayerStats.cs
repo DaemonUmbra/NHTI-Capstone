@@ -241,7 +241,8 @@ public class PlayerStats : Photon.MonoBehaviour
 
     public void RegisterKill()
     {
-        photonView.RPC("RPC_RegisterKill", PhotonTargets.All);
+        kills++;
+        photonView.RPC("RPC_SetKills", PhotonTargets.All, kills);
     }
     public void RegisterWin()
     {
@@ -254,10 +255,15 @@ public class PlayerStats : Photon.MonoBehaviour
     // Insta-kill player
     public void Kill()
     {
+       
         photonView.RPC("RPC_Die", PhotonTargets.All);
     }
     public void Kill(GameObject source)
-    {
+    { 
+        // Register with manager
+        GameManager gm = FindObjectOfType<GameManager>();
+        gm.RegisterDeath(gameObject, source);
+
         int id = source.GetPhotonView().viewID;
 
         photonView.RPC("RPC_Die", PhotonTargets.All, id);
@@ -374,11 +380,11 @@ public class PlayerStats : Photon.MonoBehaviour
 
     #region Photon RPCs
     // Register kills
-    [PunRPC] private void RPC_RegisterKill()
+    [PunRPC] private void RPC_SetKills(int k)
     {
-        kills++;
+        kills = k;
 
-        if(photonView.isMine)
+        if (photonView.isMine)
         {
             GameStateUI ui = FindObjectOfType<GameStateUI>();
             ui.UpdateKills(kills);
@@ -712,6 +718,8 @@ public class PlayerStats : Photon.MonoBehaviour
                 RegisterLoss();
             }
         }
+
+
     }
 
     // Damage Modifier RPCs
@@ -857,6 +865,10 @@ public class PlayerStats : Photon.MonoBehaviour
     }
     private void Die(GameObject killer)
     {
+        // Register with manager
+        GameManager gm = FindObjectOfType<GameManager>();
+        gm.RegisterDeath(gameObject, killer);
+
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
     // Apply new scale modifier
@@ -929,9 +941,6 @@ public class PlayerStats : Photon.MonoBehaviour
     private void BecomeGhost(GameObject killer)
     {
         Debug.Log("Becoming a ghost");
-        // Register with manager
-        GameManager gm = FindObjectOfType<GameManager>();
-        gm.RegisterDeath(gameObject, killer);
 
         GetComponent<CameraController>().FollowTransform(killer.transform);
         GetComponent<Collider>().enabled = false;
@@ -939,9 +948,6 @@ public class PlayerStats : Photon.MonoBehaviour
     private void BecomeGhost()
     {
         Debug.Log("Becoming a ghost");
-        // Register with manager
-        GameManager gm = FindObjectOfType<GameManager>();
-        gm.RegisterDeath(gameObject);
 
         GetComponent<Collider>().enabled = false;
     }

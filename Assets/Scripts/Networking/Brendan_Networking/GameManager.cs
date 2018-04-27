@@ -100,7 +100,7 @@ public class GameManager : Photon.PunBehaviour {
         {
             // Set the start time
             startTime = Time.time;
-            ChangeGameState(GameState.Preparation);
+            photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.Preparation);
         }
 
         playersLeft = PhotonNetwork.playerList.Length;
@@ -119,7 +119,7 @@ public class GameManager : Photon.PunBehaviour {
                 // Check if prep phase ended
                 if (stateTime > prepTime)
                 {
-                    ChangeGameState(GameState.Brawl);
+                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.Brawl);
                 }
             }
             else if (currentState == GameState.Brawl)
@@ -127,7 +127,7 @@ public class GameManager : Photon.PunBehaviour {
                 // Check if brawl phase ended
                 if (stateTime > brawlTime)
                 {
-                    ChangeGameState(GameState.Royale);
+                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.Royale);
                 }
             }
             else if (currentState == GameState.Royale)
@@ -135,11 +135,11 @@ public class GameManager : Photon.PunBehaviour {
                 // Check if royale phase ended
                 if (stateTime > royaleTime)
                 {
-                    ChangeGameState(GameState.SuddenDeath);
+                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.SuddenDeath);
                 }
                 else if (playersLeft <= 1)
                 {
-                    ChangeGameState(GameState.GameOver);
+                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.GameOver);
                 }
             }
             else if (currentState == GameState.SuddenDeath)
@@ -147,12 +147,29 @@ public class GameManager : Photon.PunBehaviour {
                 // Check if there is only 1 player left
                 if (playersLeft == 1)
                 {
-                    ChangeGameState(GameState.GameOver);
+                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.GameOver);
                 }
             }
+            UpdateGameTime();
+            playersLeft = RemainingPlayers();
         }
 
-        UpdateGameTime();
+        
+
+    }
+    public int RemainingPlayers()
+    {
+        PlayerStats[] players = FindObjectsOfType<PlayerStats>();
+
+        int alive = 0;
+        foreach(PlayerStats pl in players)
+        {
+            if(!pl.Dead)
+            {
+                alive++;
+            }
+        }
+        return alive;
     }
 
     public void UpdateGameTime()
@@ -186,74 +203,65 @@ public class GameManager : Photon.PunBehaviour {
 
     public void RegisterDeath(GameObject deadPlayer, GameObject killer)
     {
-        playersLeft--;
-
-        PlayerStats ps = killer.GetComponent<PlayerStats>();
-
-        if (ps)
-        {
-            ps.RegisterKill();
-        }
+        photonView.RPC("RPC_RegisterDeath", PhotonTargets.All, deadPlayer.GetPhotonView().viewID, killer.GetPhotonView().viewID);
     }
-    public void RegisterDeath(GameObject deadPlayer)
-    {
-        playersLeft--;
-    }
-
-   
+    #region Photon RPCs
     
-    // Change the current game state
-    public void ChangeGameState(GameState newState)
+    [PunRPC]
+    private void RPC_ChangeGameState(byte newState)
     {
-        gameState = newState;
-        stateStartTime = gameTime;
+        if(PhotonNetwork.isMasterClient)
+        {
+            gameState = (GameState)newState;
+            stateStartTime = gameTime;
+        }
 
-        if(gameState == GameState.Preparation)
+        if (gameState == GameState.Preparation)
         {
             ToggleInvulnerability(true);
             ToggleRespawn(true);
         }
-        else if(gameState == GameState.Brawl)
+        else if (gameState == GameState.Brawl)
         {
             ToggleInvulnerability(false);
             ToggleRespawn(true);
         }
-        else if(gameState == GameState.Royale)
+        else if (gameState == GameState.Royale)
         {
             ToggleInvulnerability(false);
             ToggleRespawn(false);
         }
-        else if(gameState == GameState.SuddenDeath)
+        else if (gameState == GameState.SuddenDeath)
         {
             ToggleInvulnerability(false);
             ToggleRespawn(false);
         }
-        else if(gameState == GameState.GameOver)
+        else if (gameState == GameState.GameOver)
         {
             ToggleInvulnerability(true);
             ToggleRespawn(false);
 
             PlayerStats[] players = FindObjectsOfType<PlayerStats>();
             PlayerStats winner = null;
-            if(gameMode == GameMode.Brawl)
+            if (gameMode == GameMode.Brawl)
             {
                 // The winner is whoever has the highest killcount
                 int topKills = 0;
-                foreach(PlayerStats p in players)
+                foreach (PlayerStats p in players)
                 {
-                    if(!p.Dead && p.Kills >= topKills)
+                    if (!p.Dead && p.Kills >= topKills)
                     {
                         winner = p;
                     }
                 }
             }
-            else if(gameMode == GameMode.Royale)
+            else if (gameMode == GameMode.Royale)
             {
                 // Winner is last player alive
                 List<PlayerStats> alivePlayers = new List<PlayerStats>();
-                foreach(PlayerStats p in players)
+                foreach (PlayerStats p in players)
                 {
-                    if(!p.Dead)
+                    if (!p.Dead)
                     {
                         alivePlayers.Add(p);
                     }
@@ -262,16 +270,16 @@ public class GameManager : Photon.PunBehaviour {
                 int topKills = 0;
                 foreach (PlayerStats ap in alivePlayers)
                 {
-                    if(ap.Kills >= topKills)
+                    if (ap.Kills >= topKills)
                     {
                         winner = ap;
                     }
                 }
             }
 
-            foreach(PlayerStats p in players)
+            foreach (PlayerStats p in players)
             {
-                if(p == winner)
+                if (p == winner)
                 {
                     p.RegisterWin();
                 }
@@ -281,18 +289,9 @@ public class GameManager : Photon.PunBehaviour {
                 }
             }
         }
-
-        photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)newState); 
-    }
-
-    #region Photon RPCs
-    [PunRPC]
-    private void RPC_ChangeGameState(byte newState)
-    {
         // Update game state UI
         UI.UpdateStateText();
-
-
+        
     }
     [PunRPC]
     private void RPC_GameOver(int winnerID)
@@ -300,9 +299,12 @@ public class GameManager : Photon.PunBehaviour {
 
     }
     [PunRPC]
-    private void RPC_RegisterDeath(int photonId, int playersLeft)
+    private void RPC_RegisterDeath(int deadId, int killerId)
     {
-        //playersLeft = 
+        PlayerStats dead = PhotonView.Find(deadId).GetComponent<PlayerStats>();
+        PlayerStats killer = PhotonView.Find(killerId).GetComponent<PlayerStats>();
+
+        killer.RegisterKill();
     }
     #endregion
 }

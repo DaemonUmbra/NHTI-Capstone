@@ -31,6 +31,33 @@ public class LobbyManager : Photon.PunBehaviour {
         { "RoyaleTime", 300f },
         { "PlayersLeft", 0 }
     };
+    // Deathmatch Settings
+    public Hashtable DeathmatchSettings = new Hashtable()
+    {
+        { "GameMode", GameMode.Brawl },
+        { "GameState", GameState.Preparation },
+        { "GameTime", 0f },
+        { "Map", 1 },
+        { "StartTime", 0f },
+        { "StateStartTime", 0f },
+        { "PrepTime", 10f },
+        { "BrawlTime", 300f },
+        { "RoyaleTime", 0f },
+        { "PlayersLeft", 0 }
+    };
+    // Royale Settings
+    public Hashtable RoyaleSettings = new Hashtable() {
+        { "GameMode", GameMode.Royale },
+        { "GameState", GameState.Preparation },
+        { "GameTime", 0f },
+        { "Map", 1 },
+        { "StartTime", 0f },
+        { "StateStartTime", 0f },
+        { "PrepTime", 10f },
+        { "BrawlTime", 30f },
+        { "RoyaleTime", 300f },
+        { "PlayersLeft", 0 }
+        };
 
     // Text fields
     public Text connectingText;
@@ -174,35 +201,13 @@ public class LobbyManager : Photon.PunBehaviour {
 
     public void StartDeathmatch()
     {
-        CustomProperties = new Hashtable() {
-        { "GameMode", GameMode.Brawl },
-        { "GameState", GameState.Preparation },
-        { "GameTime", 0f },
-        { "Map", 1 },
-        { "StartTime", 0f },
-        { "StateStartTime", 0f },
-        { "PrepTime", 10f },
-        { "BrawlTime", 300f },
-        { "RoyaleTime", 0f },
-        { "PlayersLeft", 0 }
-        };
+        CustomProperties = DeathmatchSettings;
         PhotonNetwork.room.SetCustomProperties(CustomProperties);
         StartGame();
     }
     public void StartRoyale()
     {
-        CustomProperties = new Hashtable() {
-        { "GameMode", GameMode.Royale },
-        { "GameState", GameState.Preparation },
-        { "GameTime", 0f },
-        { "Map", 1 },
-        { "StartTime", 0f },
-        { "StateStartTime", 0f },
-        { "PrepTime", 10f },
-        { "BrawlTime", 60f },
-        { "RoyaleTime", 300f },
-        { "PlayersLeft", 0 }
-        };
+        CustomProperties = RoyaleSettings;
         PhotonNetwork.room.SetCustomProperties(CustomProperties);
         StartGame();
     }
