@@ -20,7 +20,7 @@ public class SlimeBall : Projectile
     {
         
         //Debug.Log(Time.time + "  e: " + startTime);
-        if (Time.time >= startTime + 1)
+        if (Time.time >= startTime + 1f)
         {
             Physics.IgnoreLayerCollision(11, 12, false);
             //Debug.Log(Physics.GetIgnoreLayerCollision(11, 12));
@@ -32,7 +32,7 @@ public class SlimeBall : Projectile
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Physics.IgnoreLayerCollision(11, 12, false);
+        //Physics.IgnoreLayerCollision(11, 12, false);
         if (collision.gameObject.tag == "Player")
         {
             direction = (collision.transform.position - transform.position);
