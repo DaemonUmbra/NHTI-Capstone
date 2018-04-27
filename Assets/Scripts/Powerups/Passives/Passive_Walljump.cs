@@ -32,11 +32,6 @@ namespace Powerups
             base.OnAbilityAdd();
         }
 
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-        }
-
         public override void OnAbilityRemove()
         {
             PlayerController pc = gameObject.GetComponent<PlayerController>();

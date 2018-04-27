@@ -34,12 +34,7 @@ namespace Powerups
         {
             base.OnAbilityRemove();
         }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-        }
-
+        
         protected override void Activate()
         {
             Debug.LogWarning("Stick");

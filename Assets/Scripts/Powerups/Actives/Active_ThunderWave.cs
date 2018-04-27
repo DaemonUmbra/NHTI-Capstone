@@ -98,12 +98,6 @@ namespace Powerups
             }
         }
 
-        public override void OnUpdate()
-        {
-            // Call base function
-            base.OnUpdate();
-        }
-
         /// <summary>
         /// Called when an ability is removed from the player
         /// </summary>

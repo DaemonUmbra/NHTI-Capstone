@@ -37,11 +37,14 @@ namespace Powerups
             base.OnAbilityAdd();
         }
 
-        public override void OnUpdate()
+        private void Update()
         {
-            if (Input.GetKey(KeyCode.Space) && pCon.isGrounded == true)
+            if (active)
             {
-                photonView.RPC("RPC_Activate_HighJump", PhotonTargets.All);
+                if (Input.GetKey(KeyCode.Space) && pCon.isGrounded == true)
+                {
+                    photonView.RPC("RPC_Activate_HighJump", PhotonTargets.All);
+                }
             }
         }
 

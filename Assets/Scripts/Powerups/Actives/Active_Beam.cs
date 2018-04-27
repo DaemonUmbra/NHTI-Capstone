@@ -55,49 +55,7 @@ namespace Powerups
             
             base.Activate();
         }
-        
-        public override void OnUpdate()
-        {
-            //if (Input.GetMouseButtonUp(0))
-            //{
-            //    CurrentlyActive = false;
-            //    LineRenderer Laser = GetLaser(rayOrigin);
-            //    Laser.enabled = false;
-            //}
-            //if (CurrentlyActive)
-            //{
-            //    foreach (Transform child in transform)
-            //    {
-            //        if (child.name == "Gun")
-            //        {
-            //            rayOrigin = child.gameObject;
-            //        }
-            //    }
-            //    Vector3 mp = Input.mousePosition;
-            //    mp.z = 999;
-            //    Vector3 mouseLocation = Camera.main.ScreenToWorldPoint(mp);
-            //    Vector3 targetVector = mouseLocation;
 
-            //    Ray snipeRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            //    RaycastHit endPoint;
-
-            //    if (Physics.Raycast(snipeRay, out endPoint))
-            //    {
-            //        Debug.Log(endPoint.transform.gameObject.name);
-            //        targetVector = endPoint.point;
-            //    }
-            //    else
-            //    {
-            //        Debug.Log("no object was hit");
-            //    }
-
-            //    VisualizeRaycast(rayOrigin, targetVector);
-            //}
-
-            // Call base function
-            base.OnUpdate();
-        }
         IEnumerator Beam()
         {
             photonView.RPC("RPC_Activate_Beam", PhotonTargets.All);

@@ -29,15 +29,7 @@ namespace Powerups
             // Call base function
             base.OnAbilityAdd();
         }
-
-        public override void OnUpdate()
-        {
-            if(Healing == false)
-            {
-                StartCoroutine(Regen());
-            }
-            base.OnUpdate();
-        }
+        
 
 
         public override void OnAbilityRemove()

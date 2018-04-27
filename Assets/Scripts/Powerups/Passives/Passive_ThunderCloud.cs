@@ -43,16 +43,19 @@ namespace Powerups
             base.OnAbilityRemove();
         }
 
-        public override void OnUpdate()
+        private void Update()
         {
-            timer += Time.deltaTime;
-            if (timer >= timeLimit)
+            if (active)
             {
-                //Take damage if player doesn't get rid of powerup in time
-                PlayerStats ps = gameObject.GetComponent<PlayerStats>();
-                ps.TakeDamage(40.0f);
+                timer += Time.deltaTime;
+                if (timer >= timeLimit)
+                {
+                    //Take damage if player doesn't get rid of powerup in time
+                    PlayerStats ps = gameObject.GetComponent<PlayerStats>();
+                    ps.TakeDamage(40.0f);
 
-                OnAbilityRemove();
+                    OnAbilityRemove();
+                }
             }
         }
 

@@ -17,6 +17,7 @@ namespace Powerups
             Icon = Resources.Load<Sprite>("Images/Bubble Wand");
             bubble = Resources.Load<Bubbles>("Projectiles/" + prefab);
             Tier = PowerupTier.Uncommon;
+            Cooldown = 0.3f;
         }
 
         public override void OnAbilityAdd()

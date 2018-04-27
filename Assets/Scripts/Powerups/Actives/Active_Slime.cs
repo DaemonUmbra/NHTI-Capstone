@@ -44,18 +44,7 @@ namespace Powerups
             pShoot = GetComponent<PlayerShoot>();
             base.OnAbilityAdd();
         }
-
-        public override void OnUpdate()
-        {
-            /*** You only need to do this check when you are changing player stats
-             *   Or doing something else that is already networked. -BN
-            if (!photonView.isMine)
-            {
-                return;
-            }
-            */
-            base.OnUpdate();
-        }
+        
 
         public override void OnAbilityRemove()
         {

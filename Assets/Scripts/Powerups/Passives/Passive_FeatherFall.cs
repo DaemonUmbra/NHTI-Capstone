@@ -21,17 +21,18 @@ namespace Powerups
         }
 
         // Update is called once per frame
-        public override void OnUpdate()
+        private void Update()
         {
-            if (rb.velocity.y < -maxSpeed)  // Check that the y vel is less than neg maxSpeed
+            if(active)
             {
-                Vector3 ogVelocity = rb.velocity;
+                if (rb.velocity.y < -maxSpeed)  // Check that the y vel is less than neg maxSpeed
+                {
+                    Vector3 ogVelocity = rb.velocity;
 
-                Vector3 clamp = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
-                rb.velocity = new Vector3(ogVelocity.x, clamp.y, ogVelocity.z);
+                    Vector3 clamp = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+                    rb.velocity = new Vector3(ogVelocity.x, clamp.y, ogVelocity.z);
+                }
             }
-            // Call base function
-            base.OnUpdate();
         }
     }
 }

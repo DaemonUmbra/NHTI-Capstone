@@ -50,30 +50,6 @@ namespace Powerups
             }
             base.OnAbilityAdd();
         }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-            //This whole thing is something I'm not sure we'll be using
-            ////If moving
-            //if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
-            //{
-            //    //If not playing
-            //    if (!AudioSource.isPlaying)
-            //    {
-            //        AudioSource.Play();
-            //    }
-            //}
-            ////If standing still
-            //else
-            //{
-            //    //If playing
-            //    if (AudioSource.isPlaying)
-            //    {
-            //        AudioSource.Stop();
-            //    }
-            //}
-        }
         
         public override void OnAbilityRemove()
         {

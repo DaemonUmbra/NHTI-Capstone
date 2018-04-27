@@ -26,14 +26,7 @@ namespace Powerups
             // Call base function
             base.OnAbilityAdd();
         }
-
-        // Called every frame
-        public override void OnUpdate()
-        {
-            // Call base function
-            base.OnUpdate();
-        }
-
+        
         public override void OnAbilityRemove()
         {
             // Call base function

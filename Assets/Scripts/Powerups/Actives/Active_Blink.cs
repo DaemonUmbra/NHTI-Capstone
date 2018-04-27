@@ -47,13 +47,6 @@ namespace Powerups
             // Call base function
             base.OnAbilityRemove();
         }
-
-        public override void OnUpdate()
-        {
-            // Call base function
-            base.OnUpdate();
-        }
-
         protected override void Activate()
         {
             base.Activate();

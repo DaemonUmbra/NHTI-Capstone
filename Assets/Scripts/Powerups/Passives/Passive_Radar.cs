@@ -40,10 +40,5 @@ namespace Powerups
         {
             base.OnAbilityRemove();
         }
-
-        public override void OnUpdate() // Update function
-        { 
-            base.OnUpdate();
-        }
     }
 }

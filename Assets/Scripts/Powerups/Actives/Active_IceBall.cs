@@ -9,7 +9,7 @@ namespace Powerups
         private PlayerShoot pShoot;
         private Ice iceball;
 
-        string prefab = "Ice";
+        string prefab = "Iceball";
         private void Awake()
         {
             Name = "Ice Ball";

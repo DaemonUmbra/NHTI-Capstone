@@ -1393,7 +1393,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1591509329833866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.514162, y: 22.91874, z: -42.95064}
+  m_LocalPosition: {x: -20.539925, y: 18.118093, z: -36.24378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4093670397209512}
@@ -1668,7 +1668,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230727257065568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.536, y: 1.907, z: 0.498}
+  m_LocalPosition: {x: 0.536, y: 1.907, z: 1.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4227324288345048}
@@ -2412,6 +2412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ae476a77dde2c46a241375fb611f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KnockBacked: 0
   groundLayer: 8
   jumpCooldown: 0
   maxJumpCount: 1
@@ -2574,7 +2575,7 @@ MonoBehaviour:
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 10
+    InterpolateLerpSpeed: 40
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
     InterpolateSpeedCurve:
@@ -2635,7 +2636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camPrefab: {fileID: 20262033296123736, guid: 5b8d4ef291dd1ed4bb348b4610955427, type: 2}
   cam: {fileID: 0}
-  camOffset: {x: 1, y: 3, z: 1.75}
+  camOffset: {x: 0.6, y: 2.5, z: 2}
   camRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114669762924275862
 MonoBehaviour:
@@ -2672,6 +2673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 95032052263857242}
+  controller: {fileID: 0}
 --- !u!114 &114838225558233264
 MonoBehaviour:
   m_ObjectHideFlags: 1

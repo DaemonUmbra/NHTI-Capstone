@@ -20,29 +20,7 @@ namespace Powerups
             //TODO: Coconuts Icon
             Tier = PowerupTier.Uncommon;
         }
-        public override void OnUpdate()
-        {
-            ////If moving
-            //if (Mathf.Abs(Input.GetAxis("Horizontal")) > DeadZone || Mathf.Abs(Input.GetAxis("Vertical")) > DeadZone)
-            //{
-            //    //If nto playing
-            //    if (!AudioSource.isPlaying)
-            //    {
-            //        AudioSource.Play();
-            //    }
-            //}
-            ////If standing still
-            //else
-            //{
-            //    //If playing
-            //    if (AudioSource.isPlaying)
-            //    {
-            //        AudioSource.Stop();
-            //    }
-            //}
-            //base.OnUpdate();
-        }
-
+        
         public override void OnAbilityAdd()
         {
             Name = "A Lovely Pair of Coconuts";

@@ -39,16 +39,16 @@ namespace Powerups
             
         }
 
-        public override void OnUpdate()
+        private void Update()
         {
-            timer += Time.deltaTime;
-            if (timer >= timeLimit)
+            if (active)
             {
-                //OnAbilityRemove();
-                AbilityManager.RemoveAbility(this);
+                timer += Time.deltaTime;
+                if (timer >= timeLimit)
+                {
+                    AbilityManager.RemoveAbility(this);
+                }
             }
-
-            base.OnUpdate();
         }
     }
 }

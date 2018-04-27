@@ -41,34 +41,35 @@ namespace Powerups
             base.OnAbilityRemove(); // Remove the ability
         }
 
-        public override void OnUpdate()
+        private void Update()
         {
-            if (PS.CurrentHp < Health) // If player is damaged
+            if (active)
             {
-                Health = PS.CurrentHp; // Health variable is set to player's current health
-                if (Instances == 0)
+                if (PS.CurrentHp < Health) // If player is damaged
                 {
-                    WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
-                }
-                if(photonView.isMine)
-                PS.AddSpeedBoost(Name, 6); 
-                Instances = Instances + 1; // Adds 1 to instances
-                if (Instances == 1)
-                {
-                    StartCoroutine(PanicTime()); // Begin coroutine for timer
-                }
+                    Health = PS.CurrentHp; // Health variable is set to player's current health
+                    if (Instances == 0)
+                    {
+                        WalkSpeed = PS.WalkSpeed; // WalkSpeed is set to the player's WalkSpeed at the time of being damaged
+                    }
+                    if (photonView.isMine)
+                        PS.AddSpeedBoost(Name, 6);
+                    Instances = Instances + 1; // Adds 1 to instances
+                    if (Instances == 1)
+                    {
+                        StartCoroutine(PanicTime()); // Begin coroutine for timer
+                    }
 
-                if (Instances > 3)
+                    if (Instances > 3)
+                    {
+                        Instances = 3;
+                    }
+                }
+                else if (PS.CurrentHp > Health) // If player gains health
                 {
-                    Instances = 3;
+                    Health = PS.CurrentHp; // Health variable is set to player's current health
                 }
             }
-            else if (PS.CurrentHp > Health) // If player gains health
-            {
-                Health = PS.CurrentHp; // Health variable is set to player's current health
-            }
-
-            base.OnUpdate();
         }
 
         private IEnumerator PanicTime() // Timer for running

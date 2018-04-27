@@ -51,16 +51,6 @@ namespace Powerups
         {
             active = true;
         }
-
-        /// <summary>
-        /// Called by the ability manager on each update step.
-        /// Use this instead of Unity's Update()
-        /// </summary>
-        public virtual void OnUpdate()
-        {
-            // Nothing in base class update yet. Still call it in your overrides.
-        }
-
         /// <summary>
         /// Called when an ability is removed from the player
         /// </summary>

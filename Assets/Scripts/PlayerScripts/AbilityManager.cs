@@ -34,24 +34,6 @@ public class AbilityManager : Photon.MonoBehaviour
         _activeAbilities = new List<ActiveAbility>();
         _passiveAbilities = new List<PassiveAbility>();
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        _abilityStrings.Clear();
-        foreach(string str in _abilities.Keys)
-        {
-            _abilityStrings.Add(str);
-        }
-        // Call BaseAbility Updates for owned abilities
-        foreach (BaseAbility a in _abilities.Values)
-        {
-            if (a.IsActive)
-            {
-                a.OnUpdate();
-            }
-        }
-    }
     #endregion
 
 

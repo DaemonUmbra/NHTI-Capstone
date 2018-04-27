@@ -28,6 +28,12 @@ public class PlayerShoot : Photon.MonoBehaviour
     }
     private void Start()
     {
+        // Ignore raycasts ONLY on the local client
+        if(photonView.isMine)
+        {
+            gameObject.layer = 2;
+        }
+        
         cam = GetComponent<CameraController>().cam;
         if(photonView.isMine)
         {

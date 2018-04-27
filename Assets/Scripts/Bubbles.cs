@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Bubbles : Projectile
 {
-    public float bubbleSpeed;
-
     public override void Shoot(GameObject shooter)
     {
-        speed = bubbleSpeed;
         base.Shoot(shooter);
     }
 

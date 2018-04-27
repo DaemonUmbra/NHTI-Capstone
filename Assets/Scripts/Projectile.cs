@@ -52,6 +52,7 @@ public class Projectile : MonoBehaviour
         rb.velocity = transform.forward * speed;
 
         // Destroy after lifetime seconds
+        if(_collider)
         _collider.enabled = true;
         Destroy(gameObject, lifetime);
     }
