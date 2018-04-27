@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 33730616531158902}
   - component: {fileID: 136907464322535618}
   - component: {fileID: 23273498836938218}
-  - component: {fileID: 114727589622258190}
   m_Layer: 0
   m_Name: Snipe
   m_TagString: Untagged
@@ -197,17 +196,6 @@ MonoBehaviour:
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
---- !u!114 &114727589622258190
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1810265781402730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8715bbf15c301d84c9598f3409902026, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114753577997038458
 MonoBehaviour:
   m_ObjectHideFlags: 1
