@@ -25,6 +25,7 @@ namespace Powerups
         Vector3 worldPoint;
         GameObject visual;
         CameraController camC;
+        GameObject r;
 
         private void Awake()
         {
@@ -47,6 +48,7 @@ namespace Powerups
 
         public override void OnAbilityRemove()
         {
+            PhotonNetwork.Destroy(r);
             base.OnAbilityRemove();
         }
         protected override void Activate()
@@ -66,27 +68,38 @@ namespace Powerups
             Ray aim = camC.cam.ScreenPointToRay(Input.mousePosition);
             //aim.origin = sp.transform.position;
             RaycastHit rHit;
-            Vector3 dest = Vector3.zero;
+            Vector3 dest = aim.direction;
+            GameObject hitObject = null;
             if (Physics.Raycast(sp.transform.position, aim.direction, out rHit))
             {                
                 Debug.Log("cast: " + rHit.transform.gameObject.name);
+                dest = rHit.point;
+                hitObject = rHit.transform.gameObject;
             }
-            GameObject r = PhotonNetwork.Instantiate("SnipeOrigin", sp.transform.position, Quaternion.identity, 0);
+            r = PhotonNetwork.Instantiate("SnipeOrigin", sp.transform.position, Quaternion.identity, 0);
             //GameObject r = Instantiate(visual, sp.transform.position, Quaternion.identity);
             Transform laser = r.transform.GetChild(0);
-            GameObject hitObject = rHit.transform.gameObject;
+            
             float dist = Vector3.Distance(rHit.point, sp.transform.position);
             Ray visualRay = new Ray(sp.transform.position, rHit.point);
             
             laser.localScale = new Vector3(.1f, dist/2, .1f);
-            laser.localPosition = new Vector3(0, 0, dist / 2);
-            r.transform.LookAt(rHit.point);
-            if (hitObject.tag == "Player")
+            laser.localPosition = new Vector3(-.2f, 0, (dist / 2) - 1);
+            r.transform.LookAt(dest);
+            if (hitObject != null)
             {
-                ApplyDamage(rHit.transform.gameObject);
+                if (hitObject.tag == "Player")
+                {
+                    ApplyDamage(rHit.transform.gameObject);
+                }
+                yield return new WaitForSecondsRealtime(.2f);
+                PhotonNetwork.Destroy(r);
             }
-            yield return new WaitForSecondsRealtime(.2f);
-            PhotonNetwork.Destroy(r);
+            else
+            {
+                yield return new WaitForSecondsRealtime(.2f);
+                PhotonNetwork.Destroy(r);
+            }
         }
         void ApplyDamage(GameObject target)
         {
