@@ -21,12 +21,7 @@ public class Bomb : Projectile
                 hitStats.TakeDamage(damage, _shooter);
                 print("Player hit!");
 
-                boom = PhotonNetwork.Instantiate("NovaExplosion", transform.position, transform.rotation, 0);
-                NovaDummy stats = boom.GetComponent<NovaDummy>();
-                stats.ExplosionSize = 3.0f;
-                stats.ExplosionDamage = 15.0f;
-                stats.ExplosionForce = 4.5f;
-
+                Explode();
                 Destroy(gameObject);
             }
         }
@@ -34,7 +29,7 @@ public class Bomb : Projectile
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") || other.CompareTag("Environment"))
+        if(other.CompareTag("Environment"))
         {
             Explode();
         }
@@ -48,5 +43,6 @@ public class Bomb : Projectile
         stats.ExplosionSize = 3.0f;
         stats.ExplosionDamage = 15.0f;
         stats.ExplosionForce = 4.5f;
+        stats.SetOwner(_shooter);
     }
 }

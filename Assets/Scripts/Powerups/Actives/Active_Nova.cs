@@ -32,7 +32,7 @@ namespace Powerups {
             {
                 fired = true; //HACK: Should fix Cody's issue
                 Explosion = PhotonNetwork.Instantiate("NovaExplosion", transform.position, transform.rotation, 0);
-                Explosion.GetComponent<NovaDummy>().ownerStats = GetComponent<PlayerStats>();
+                Explosion.GetComponent<NovaDummy>().SetOwner(gameObject);
             }
         }
 

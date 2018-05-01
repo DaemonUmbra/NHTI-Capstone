@@ -20,17 +20,21 @@ public class NovaDummy : Photon.MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        audioManager = gameObject.GetComponent<AudioManager>();
+        
         soundStart = Time.time;
         ScaleStepVector = new Vector3(ScaleStep, ScaleStep, ScaleStep);
         transform.localScale = Vector3.zero;
         StartCoroutine(Explode(ExplosionSize));
     }
-
+    public void SetOwner(GameObject owner)
+    {
+        ownerStats = owner.GetComponent<PlayerStats>();
+        audioManager = owner.GetComponent<AudioManager>();
+    }
     IEnumerator Explode(float size)
     {
         audioSource = audioManager.GetNewAudioSource("Nova");
-        audioManager.PlayOneShot("Nova", "NovaExplosion", 1f);
+        //audioManager.PlayOneShot("Nova", "NovaExplosion", 1f);
         ExplosionState NovaState = ExplosionState.Expanding;
         bool soundPlaying = true;
         bool Exploding = true;
