@@ -30,7 +30,7 @@ namespace Powerups
         private void Awake()
         {
             // Set name
-            Cooldown = .5f;
+            Cooldown = 5f;
             Name = "Snipe";
             //Set Sprite
             Icon = Resources.Load<Sprite>("Images/Sniper");
