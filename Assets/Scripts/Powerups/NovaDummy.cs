@@ -7,6 +7,7 @@ public class NovaDummy : Photon.MonoBehaviour
     private Vector3 ScaleStepVector;
     private AudioSource audioSource;
     private AudioManager audioManager;
+    public PlayerStats ownerStats;
 
     private float soundStart;
 
@@ -24,12 +25,6 @@ public class NovaDummy : Photon.MonoBehaviour
         ScaleStepVector = new Vector3(ScaleStep, ScaleStep, ScaleStep);
         transform.localScale = Vector3.zero;
         StartCoroutine(Explode(ExplosionSize));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator Explode(float size)
@@ -101,12 +96,12 @@ public class NovaDummy : Photon.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.isMine)
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other);
+        if (PhotonNetwork.isMasterClient)
         {
             if (other.GetComponent<PlayerStats>() != null)
             {
                 other.GetComponent<PlayerStats>().TakeDamage(ExplosionDamage, gameObject);
-                Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), other);
             }
             if (other.GetComponent<Rigidbody>() != null)
             {

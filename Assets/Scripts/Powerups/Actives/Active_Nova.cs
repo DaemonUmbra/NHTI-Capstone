@@ -28,18 +28,12 @@ namespace Powerups {
         protected override void Activate()
         {
             base.Activate();
-            if (photonView.isMine && fired == false)
+            if (fired == false)
             {
                 fired = true; //HACK: Should fix Cody's issue
-                photonView.RPC("RPC_Nova_Explosion", PhotonTargets.All);
+                Explosion = PhotonNetwork.Instantiate("NovaExplosion", transform.position, transform.rotation, 0);
+                Explosion.GetComponent<NovaDummy>().ownerStats = GetComponent<PlayerStats>();
             }
-        }
-
-        [PunRPC]
-        public void RPC_Nova_Explosion()
-        {
-            Explosion = PhotonNetwork.Instantiate("NovaExplosion",transform.position,transform.rotation,0);
-            AbilityManager.RemoveAbility(this);
         }
 
         public override void OnAbilityRemove()
