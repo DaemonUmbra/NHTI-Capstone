@@ -86,7 +86,7 @@ public class GameManager : Photon.PunBehaviour {
     }
     public int playersLeft
     {
-        get { return (int)PhotonNetwork.room.CustomProperties["PlayersLeft"]; }
+        get { if (PhotonNetwork.inRoom) { return (int)PhotonNetwork.room.CustomProperties["PlayersLeft"]; } else { return 0; } }
         private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "PlayersLeft", value } }); }
     }
     #endregion
