@@ -66,7 +66,7 @@ public class PlayerSpawning : Photon.PunBehaviour {
     private void RPC_CreatePlayer()
     {
         var spawnPoint = GetRandomSpawnPoint();
-        localPlayer = PhotonNetwork.Instantiate("BasicPlayer w_o PlayerCanvas", spawnPoint.position, spawnPoint.rotation, 0);
+        localPlayer = PhotonNetwork.Instantiate("Player", spawnPoint.position, spawnPoint.rotation, 0);
         Debug.Log(localPlayer.GetPhotonView().owner);
         
         // Setup UI

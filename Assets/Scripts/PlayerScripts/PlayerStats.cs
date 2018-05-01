@@ -242,6 +242,8 @@ public class PlayerStats : Photon.MonoBehaviour
     public void RegisterKill()
     {
         kills++;
+        Debug.Log(name + " got a kill.");
+        Debug.Log("Total Kills: " + kills);
         photonView.RPC("RPC_SetKills", PhotonTargets.All, kills);
     }
     public void RegisterWin()
@@ -382,7 +384,7 @@ public class PlayerStats : Photon.MonoBehaviour
     [PunRPC] private void RPC_SetKills(int k)
     {
         kills = k;
-
+        Debug.Log("Kills for " + name + " set to: " + kills);
         if (photonView.isMine)
         {
             GameStateUI ui = FindObjectOfType<GameStateUI>();
