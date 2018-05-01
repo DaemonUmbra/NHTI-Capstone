@@ -20,7 +20,8 @@ public class GameManager : Photon.PunBehaviour {
         private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "GameMode", value } }); }
     }
     public GameState gameState {
-        get { return (GameState)PhotonNetwork.room.CustomProperties["GameState"]; }
+
+        get { if (PhotonNetwork.inRoom){ return (GameState)PhotonNetwork.room.CustomProperties["GameState"]; } else { return GameState.GameOver; } }
         private set { PhotonNetwork.room.SetCustomProperties(new Hashtable() { { "GameState", value } }); }
     }
     public float gameTime
