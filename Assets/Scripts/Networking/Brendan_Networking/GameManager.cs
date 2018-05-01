@@ -105,53 +105,55 @@ public class GameManager : Photon.PunBehaviour {
 
         playersLeft = PhotonNetwork.playerList.Length;
     }
-
-
+    
     // Update is called once per frame
     void Update() {
 
         if (PhotonNetwork.isMasterClient)
         {
             // State specific update logic
-            GameState currentState = gameState;
-            if (currentState == GameState.Preparation)
+            if (PhotonNetwork.inRoom)
             {
-                // Check if prep phase ended
-                if (stateTime > prepTime)
+                GameState currentState = gameState;
+                if (currentState == GameState.Preparation)
                 {
-                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.Brawl);
+                    // Check if prep phase ended
+                    if (stateTime > prepTime)
+                    {
+                        photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.Brawl);
+                    }
                 }
+                else if (currentState == GameState.Brawl)
+                {
+                    // Check if brawl phase ended
+                    if (stateTime > brawlTime)
+                    {
+                        photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.Royale);
+                    }
+                }
+                else if (currentState == GameState.Royale)
+                {
+                    // Check if royale phase ended
+                    if (stateTime > royaleTime)
+                    {
+                        photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.SuddenDeath);
+                    }
+                    else if (playersLeft <= 1)
+                    {
+                        photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.GameOver);
+                    }
+                }
+                else if (currentState == GameState.SuddenDeath)
+                {
+                    // Check if there is only 1 player left
+                    if (playersLeft == 1)
+                    {
+                        photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.GameOver);
+                    }
+                }
+                UpdateGameTime();
+                playersLeft = RemainingPlayers();
             }
-            else if (currentState == GameState.Brawl)
-            {
-                // Check if brawl phase ended
-                if (stateTime > brawlTime)
-                {
-                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.Royale);
-                }
-            }
-            else if (currentState == GameState.Royale)
-            {
-                // Check if royale phase ended
-                if (stateTime > royaleTime)
-                {
-                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.SuddenDeath);
-                }
-                else if (playersLeft <= 1)
-                {
-                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.GameOver);
-                }
-            }
-            else if (currentState == GameState.SuddenDeath)
-            {
-                // Check if there is only 1 player left
-                if (playersLeft == 1)
-                {
-                    photonView.RPC("RPC_ChangeGameState", PhotonTargets.All, (byte)GameState.GameOver);
-                }
-            }
-            UpdateGameTime();
-            playersLeft = RemainingPlayers();
         }
 
         

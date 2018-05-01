@@ -30,7 +30,7 @@ public class PlayerStats : Photon.MonoBehaviour
     bool _invulnerable;
     bool _canRespawn;
     bool _dead;
-    int kills = 0;
+    public int kills = 0;
 
     // Damage
     [SerializeField]
@@ -836,7 +836,7 @@ public class PlayerStats : Photon.MonoBehaviour
         {
             if(boostPair.Key == boostName)
             {
-                _speedBoosts.Remove(boostPair);
+                _healthBoosts.Remove(boostPair);
                 break;
             }
         }

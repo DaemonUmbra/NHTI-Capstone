@@ -202,7 +202,7 @@ public class AbilityManager : Photon.MonoBehaviour
     [PunRPC] private void RPC_RemoveAbility(string abilityType)
     {
         // Get ability type from string and retrieve the attached ability
-        Type t = ReflectionUtil.GetAbilityTypeFromName(abilityType);
+        Type t = Type.GetType(abilityType);
         BaseAbility ability = (BaseAbility)GetComponent(t);
 
         if (ability)
