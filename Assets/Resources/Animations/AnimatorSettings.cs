@@ -48,18 +48,20 @@ public class AnimatorSettings : Photon.MonoBehaviour
             {
                 anim.SetBool("IsJumping", true);
                
-                if (!controller.isGrounded)
-                {
-                    anim.SetBool("Grounded", false);
-                }
-                else
-                anim.SetBool("Grounded", true);
+                
             }
             else
             {
                 anim.SetBool("IsJumping", false);
                 
             }
+
+            if (!controller.isGrounded)
+            {
+                anim.SetBool("Grounded", false);
+            }
+            else
+                anim.SetBool("Grounded", true);
         }
     }
 }
