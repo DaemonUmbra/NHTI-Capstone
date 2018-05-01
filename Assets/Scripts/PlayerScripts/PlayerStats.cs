@@ -26,6 +26,7 @@ public class PlayerStats : Photon.MonoBehaviour
     private float _baseMaxHp = 100f;
     List<KeyValuePair<string, float>> _healthBoosts;
     private float _maxHp;
+    [SerializeField]
     private float _currentHp;
     bool _invulnerable;
     bool _canRespawn;
@@ -458,7 +459,7 @@ public class PlayerStats : Photon.MonoBehaviour
             // Kill if hp is zero or less
             if (_currentHp <= 0)
             {
-                Debug.Log(gameObject.name + " hp <= 0");
+                Debug.LogWarning(name + " has died! " + "remaining health: " + _currentHp);
                 if (srcObj)
                     Die(srcObj);
                 else
@@ -646,7 +647,6 @@ public class PlayerStats : Photon.MonoBehaviour
         // Reset abilities
         AbilityManager abilityManager = GetComponent<AbilityManager>();
         abilityManager.ResetAbilities();
-        _currentHp = _maxHp; // Resets hp
         
         if (photonView.isMine)
         {
@@ -678,7 +678,7 @@ public class PlayerStats : Photon.MonoBehaviour
                 _dead = true;
             }
         }
-        
+        _currentHp = _maxHp; // Resets hp
     }
     [PunRPC] private void RPC_Die(int srcId)
     {
@@ -698,27 +698,38 @@ public class PlayerStats : Photon.MonoBehaviour
         {
             Debug.Log(gameObject.name + " has died of mysterious causes.");
         }
-
-        if (_canRespawn)
+        if(photonView.isMine)
         {
-            // Respawn Player
-            PlayerSpawning Mng = FindObjectOfType<PlayerSpawning>();
-            Transform respawn = Mng.GetRandomSpawnPoint();
-            gameObject.transform.position = respawn.position;
-            
+            if (_canRespawn)
+            {
+                // Respawn Player
+                PlayerSpawning Mng = FindObjectOfType<PlayerSpawning>();
+                Transform respawn = Mng.GetRandomSpawnPoint();
+                gameObject.transform.position = respawn.position;
+                _dead = false;
+            }
+            else
+            {
+                if (!_dead)
+                {
+                    _dead = true;
+                    if (photonView.isMine)
+                    {
+                        BecomeGhost(killer);
+                        killer.GetComponent<PlayerStats>().RegisterKill();
+                    }
+                    RegisterLoss();
+                }
+            }
         }
         else
         {
-            if (!_dead)
+            if (!_dead && !_canRespawn)
             {
                 _dead = true;
-                if (photonView.isMine)
-                {
-                    BecomeGhost(killer);
-                }
-                RegisterLoss();
             }
         }
+
         _currentHp = _maxHp; // Resets hp
     }
 
@@ -866,8 +877,6 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         // Register with manager
         GameManager gm = FindObjectOfType<GameManager>();
-        gm.RegisterDeath(gameObject, killer);
-
         photonView.RPC("RPC_Die", PhotonTargets.All, killer.GetPhotonView().viewID);
     }
     // Apply new scale modifier
