@@ -163,7 +163,12 @@ public class AbilityManager : Photon.MonoBehaviour
     // Remove all abilities
     public void ResetAbilities()
     {
+        List<BaseAbility> toRemove = new List<BaseAbility>();
         foreach(BaseAbility a in _abilities.Values)
+        {
+            toRemove.Add(a);
+        }
+        foreach(BaseAbility a in toRemove)
         {
             RemoveAbility(a);
         }
