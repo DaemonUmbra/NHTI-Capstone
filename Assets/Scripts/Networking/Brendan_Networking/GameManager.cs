@@ -302,14 +302,7 @@ public class GameManager : Photon.PunBehaviour {
     {
 
     }
-    [PunRPC]
-    private void RPC_RegisterDeath(int deadId, int killerId)
-    {
-        PlayerStats dead = PhotonView.Find(deadId).GetComponent<PlayerStats>();
-        PlayerStats killer = PhotonView.Find(killerId).GetComponent<PlayerStats>();
-
-        killer.RegisterKill();
-    }
+   
     #endregion
 }
 

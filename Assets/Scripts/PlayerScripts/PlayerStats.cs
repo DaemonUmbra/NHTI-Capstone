@@ -264,7 +264,8 @@ public class PlayerStats : Photon.MonoBehaviour
     { 
         // Register with manager
         GameManager gm = FindObjectOfType<GameManager>();
-        gm.RegisterDeath(gameObject, source);
+        PlayerStats ps = source.GetComponent<PlayerStats>();
+        if (ps) ps.RegisterKill();
 
         int id = source.GetPhotonView().viewID;
 
@@ -647,8 +648,11 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         Debug.Log(gameObject.name + " has died.");
         // Reset abilities
-        AbilityManager abilityManager = GetComponent<AbilityManager>();
-        abilityManager.ResetAbilities();
+        if(PhotonNetwork.isMasterClient)
+        {
+            AbilityManager abilityManager = GetComponent<AbilityManager>();
+            abilityManager.ResetAbilities();
+        }
         
         if (photonView.isMine)
         {
@@ -662,20 +666,17 @@ public class PlayerStats : Photon.MonoBehaviour
             }
             else
             {
-                if (!_dead)
+                _dead = true;
+                if (photonView.isMine)
                 {
-                    _dead = true;
-                    if (photonView.isMine)
-                    {
-                        BecomeGhost();
-                    }
-                    RegisterLoss();
+                    BecomeGhost();
                 }
+                RegisterLoss();
             }
         }
         else
         {
-            if(!_dead && !_canRespawn)
+            if(!_canRespawn)
             {
                 _dead = true;
             }
@@ -684,13 +685,15 @@ public class PlayerStats : Photon.MonoBehaviour
     }
     [PunRPC] private void RPC_Die(int srcId)
     {
-        GameObject killer = PhotonView.Find(srcId).gameObject;
+        GameObject killer = PhotonView.Find(srcId).gameObject;            
 
         // Reset abilities
-        AbilityManager abilityManager = GetComponent<AbilityManager>();
-        abilityManager.ResetAbilities();
-
-        _currentHp = _maxHp;
+        if (PhotonNetwork.isMasterClient)
+        {
+            killer.GetComponent<PlayerStats>().RegisterKill();
+            AbilityManager abilityManager = GetComponent<AbilityManager>();
+            abilityManager.ResetAbilities();
+        }
 
         if (killer != null)
         {
@@ -718,7 +721,6 @@ public class PlayerStats : Photon.MonoBehaviour
                     if (photonView.isMine)
                     {
                         BecomeGhost(killer);
-                        killer.GetComponent<PlayerStats>().RegisterKill();
                     }
                     RegisterLoss();
                 }
