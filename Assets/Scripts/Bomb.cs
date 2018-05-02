@@ -4,27 +4,17 @@ using UnityEngine;
 
 public class Bomb : Projectile
 {
-    protected override void OnPlayerHit(Collider hitPlayer)
+    protected override void OnPlayerHit(PlayerStats hitPlayer)
     {
-        GameObject hit = hitPlayer.gameObject;
-        PhotonView hitView = hit.GetPhotonView();
-        PlayerStats hitStats = hit.GetComponent<PlayerStats>();
-        GameObject boom;
+        PhotonView hitView = hitPlayer.gameObject.GetPhotonView();
 
-        // Verify hit photon view
-        if (hitView)
+        // Make sure the bullet isn't hitting it's own player
+        if (hitPlayer.gameObject != _shooter)
         {
-            // Make sure the bullet isn't hitting it's own player
-            if (hitPlayer.gameObject != _shooter && hitStats)
-            {
-                // Apply damage to the player
-                hitStats.TakeDamage(damage, _shooter);
-                print("Player hit!");
-
-                Explode();
-                Destroy(gameObject);
-            }
+            Explode();
+            Destroy(gameObject);
         }
+
     }
 
     protected override void OnTriggerEnter(Collider other)

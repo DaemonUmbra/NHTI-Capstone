@@ -241,10 +241,7 @@ public class PlayerStats : Photon.MonoBehaviour
 
     public void RegisterKill()
     {
-        kills++;
-        Debug.Log(name + " got a kill.");
-        Debug.Log("Total Kills: " + kills);
-        photonView.RPC("RPC_SetKills", PhotonTargets.All, kills);
+        photonView.RPC("RPC_RegisterKill", PhotonTargets.All);
     }
     public void RegisterWin()
     {
@@ -257,19 +254,7 @@ public class PlayerStats : Photon.MonoBehaviour
     // Insta-kill player
     public void Kill()
     {
-       
         photonView.RPC("RPC_Die", PhotonTargets.All);
-    }
-    public void Kill(GameObject source)
-    { 
-        // Register with manager
-        GameManager gm = FindObjectOfType<GameManager>();
-        PlayerStats ps = source.GetComponent<PlayerStats>();
-        if (ps) ps.RegisterKill();
-
-        int id = source.GetPhotonView().viewID;
-
-        photonView.RPC("RPC_Die", PhotonTargets.All, id);
     }
 
     // Reset all stats
@@ -382,9 +367,9 @@ public class PlayerStats : Photon.MonoBehaviour
 
     #region Photon RPCs
     // Register kills
-    [PunRPC] private void RPC_SetKills(int k)
+    [PunRPC] private void RPC_RegisterKill()
     {
-        kills = k;
+        kills++;
         Debug.Log("Kills for " + name + " set to: " + kills);
         if (photonView.isMine)
         {
@@ -432,7 +417,11 @@ public class PlayerStats : Photon.MonoBehaviour
             if (_currentHp <= 0)
             {
                 Debug.Log(gameObject.name + " hp <= 0");
-                Die();
+                if(photonView.isMine)
+                {
+                    Die();
+                }
+                
             }
             Debug.Log("Player hp: " + CurrentHp);
         }
@@ -463,10 +452,14 @@ public class PlayerStats : Photon.MonoBehaviour
             if (_currentHp <= 0)
             {
                 Debug.LogWarning(name + " has died! " + "remaining health: " + _currentHp);
-                if (srcObj)
-                    Die(srcObj);
-                else
-                    Die();
+                if(photonView.isMine)
+                {
+                    if (srcObj)
+                        Die(srcObj);
+                    else
+                        Die();
+                }
+                
             }
             Debug.Log("Player hp: " + CurrentHp);
         }
@@ -501,7 +494,8 @@ public class PlayerStats : Photon.MonoBehaviour
             if (_currentHp <= 0)
             {
                 Debug.Log(gameObject.name + " hp <= 0");
-                Die();
+                if(photonView.isMine)
+                    Die();
             }
             Debug.Log("Player hp: " + CurrentHp);
         }
@@ -542,10 +536,14 @@ public class PlayerStats : Photon.MonoBehaviour
             if (_currentHp <= 0)
             {
                 Debug.Log(gameObject.name + " hp <= 0");
-                if (srcObj)
-                    Die(srcObj);
-                else
-                    Die();
+                if(photonView.isMine)
+                {
+                    if (srcObj)
+                        Die(srcObj);
+                    else
+                        Die();
+                }
+                
             }
             Debug.Log("Player hp: " + CurrentHp);
         }
@@ -647,7 +645,7 @@ public class PlayerStats : Photon.MonoBehaviour
     [PunRPC] private void RPC_Die()
     {
         Debug.Log(gameObject.name + " has died.");
-        // Reset abilities
+        // Reset abilities on master
         if(PhotonNetwork.isMasterClient)
         {
             AbilityManager abilityManager = GetComponent<AbilityManager>();
@@ -687,9 +685,10 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         GameObject killer = PhotonView.Find(srcId).gameObject;            
 
-        // Reset abilities
+        // Reset abilities on master
         if (PhotonNetwork.isMasterClient)
         {
+            // Register kill
             killer.GetComponent<PlayerStats>().RegisterKill();
             AbilityManager abilityManager = GetComponent<AbilityManager>();
             abilityManager.ResetAbilities();

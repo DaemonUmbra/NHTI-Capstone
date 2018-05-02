@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 
     protected PlayerStats pStats;
     protected PlayerShoot pShoot;
+    bool fired = false;
     
 
     //[SerializeField]
@@ -37,6 +38,11 @@ public class Projectile : MonoBehaviour
     {
         _collider = GetComponent<Collider>();
         _collider.enabled = false;
+        
+    }
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
     }
     public virtual void Shoot(GameObject shooter)
     {
@@ -46,17 +52,17 @@ public class Projectile : MonoBehaviour
         pStats = shooter.GetComponent<PlayerStats>();
         pShoot = _shooter.GetComponent<PlayerShoot>();
         CalculateDamage();
-
-        rb = GetComponent<Rigidbody>();
-        if (rb)
-        rb.velocity = transform.forward * speed;
-
+        
         // Destroy after lifetime seconds
         if(_collider)
         _collider.enabled = true;
         Destroy(gameObject, lifetime);
     }
 
+    private void FixedUpdate()
+    {
+        rb.MovePosition(transform.localPosition + transform.forward * speed * Time.deltaTime);
+    }
     protected virtual void CalculateDamage()
     {
         if(UsePlayerDamage)
@@ -69,19 +75,22 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Projectile hit: " + other.name);
-        if (other.gameObject.tag == "Player")
+        // Environmental Check
+        if(other.CompareTag("Environment"))
         {
-            OnPlayerHit(other);
-        }
-        else
-        {
-            // Destroy the projectile on other clients
             Destroy(gameObject);
+            return;
+        }
+
+        Debug.Log("Projectile hit: " + other.name);
+        PlayerStats hitStats = other.gameObject.GetComponent<PlayerStats>();
+        if(hitStats)
+        {
+            OnPlayerHit(hitStats);
         }
     }
 
-    protected virtual void OnPlayerHit(Collider hitPlayer)
+    protected virtual void OnPlayerHit(PlayerStats hitPlayer)
     {
         GameObject hit = hitPlayer.gameObject;
         PhotonView hitView = hit.GetPhotonView();

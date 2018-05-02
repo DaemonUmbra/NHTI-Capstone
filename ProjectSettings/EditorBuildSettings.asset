@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/IceWorld.unity
     guid: c7a92234d8b33324186be568e1a637d9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/BlockFort.unity
     guid: 3b7f0a8ecc7fec74ca737315ce36a00f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/TempleMap.unity
     guid: f165166a3d702fd41b670161a04e7150
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/MainGameScene.unity
     guid: b2fb35b78663ce54b9349ab10518726a
   - enabled: 0

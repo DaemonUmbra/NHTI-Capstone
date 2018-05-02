@@ -7,7 +7,7 @@ public class LightningBall : Projectile
     public float chainRange = 8f;
     public float chainDamage = 5f;
 
-    protected override void OnPlayerHit(Collider hitPlayer)
+    protected override void OnPlayerHit(PlayerStats hitPlayer)
     {
         RaycastHit[] hits;
         hits = Physics.SphereCastAll(transform.position, chainRange, transform.forward);
